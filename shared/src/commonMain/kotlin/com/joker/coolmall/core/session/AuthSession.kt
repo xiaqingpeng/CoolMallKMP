@@ -1,0 +1,27 @@
+package com.joker.coolmall.core.session
+
+/**
+ * 进程内当前登录 token，供 Ktor Authorization 头读取。
+ * 持久化由 [com.joker.coolmall.core.data.local.AuthPreferences] 负责，
+ * 启动时通过 [com.joker.coolmall.core.data.repository.AuthRepository.restoreSession] 恢复。
+ */
+object AuthSession {
+    private var _token: String = ""
+    private var _refreshToken: String = ""
+
+    val token: String
+        get() = _token
+
+    val refreshToken: String
+        get() = _refreshToken
+
+    fun update(token: String, refreshToken: String = "") {
+        _token = token
+        _refreshToken = refreshToken
+    }
+
+    fun clear() {
+        _token = ""
+        _refreshToken = ""
+    }
+}
