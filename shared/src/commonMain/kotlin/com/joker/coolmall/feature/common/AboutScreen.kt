@@ -33,6 +33,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -88,8 +89,6 @@ import myapplication.shared.generated.resources.about_version_code
 import myapplication.shared.generated.resources.about_wechat_group
 import myapplication.shared.generated.resources.app_name
 import myapplication.shared.generated.resources.avatar
-import myapplication.shared.generated.resources.common_no
-import myapplication.shared.generated.resources.common_yes
 import myapplication.shared.generated.resources.ic_logo
 import myapplication.shared.generated.resources.me_about
 import org.jetbrains.compose.resources.painterResource
@@ -109,7 +108,9 @@ fun AboutRoute(
         delay(100)
         ready = true
     }
-    val scrollFraction = (scrollState.value / 220f).coerceIn(0f, 1f)
+    val scrollFraction by remember {
+        derivedStateOf { (scrollState.value / 220f).coerceIn(0f, 1f) }
+    }
     val heroAlpha by animateFloatAsState(
         targetValue = if (ready) 1f - scrollFraction else 0f,
         animationSpec = tween(800),
@@ -374,6 +375,3 @@ private fun AboutInfoRow(label: String, value: String, showDivider: Boolean) {
     }
 }
 
-@Composable
-private fun yesNoLabel(value: Boolean): String =
-    if (value) stringResource(Res.string.common_yes) else stringResource(Res.string.common_no)
