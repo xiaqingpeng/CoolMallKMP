@@ -348,6 +348,7 @@ fun CoolMallApp() {
                 onUserAgreementClick = navController::navigateToUserAgreement,
                 onPrivacyPolicyClick = navController::navigateToPrivacyPolicy,
                 onContributorsClick = navController::navigateToContributors,
+                onWebClick = { url, title -> navController.navigateToWeb(url = url, title = title) },
             )
             settingsScreen(
                 onBack = { navController.popBackStack() },

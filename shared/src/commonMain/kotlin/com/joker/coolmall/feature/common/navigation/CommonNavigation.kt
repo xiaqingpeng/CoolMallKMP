@@ -65,6 +65,7 @@ fun NavGraphBuilder.aboutScreen(
     onUserAgreementClick: () -> Unit = {},
     onPrivacyPolicyClick: () -> Unit = {},
     onContributorsClick: () -> Unit = {},
+    onWebClick: (String, String) -> Unit = { _, _ -> },
 ) {
     composable<AboutRouteArgs> {
         AboutRoute(
@@ -72,6 +73,7 @@ fun NavGraphBuilder.aboutScreen(
             onUserAgreementClick = onUserAgreementClick,
             onPrivacyPolicyClick = onPrivacyPolicyClick,
             onContributorsClick = onContributorsClick,
+            onWebClick = onWebClick,
         )
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CoolMall</string>
+    <string name="app_name">青商城</string>
     <string name="me_title">我的</string>
     <string name="me_settings">设置</string>
     <string name="me_feedback">意见反馈</string>
@@ -417,7 +417,7 @@
     <string name="feedback_type">反馈类型</string>
     <string name="feedback_contact">联系方式（选填）</string>
     <string name="feedback_content">反馈内容</string>
-    <string name="feedback_content_hint">描述你遇到的问题或建议…</string>
+    <string name="feedback_content_hint">请尽量详细描述遇到的问题，操作步骤，并附上相关页面截图，以便更好定位问题</string>
     <string name="feedback_images">配图（选填）</string>
     <string name="feedback_add_image">添加图片</string>
     <string name="feedback_contact_section">联系方式（选填）</string>
@@ -436,6 +436,42 @@
     <string name="about_alipay">支付宝</string>
     <string name="about_wechat_pay">微信支付</string>
     <string name="about_ios_note">iOS 端明确不做 QQ / 微信 / 支付宝相关能力。</string>
+    <string name="about_section_project">项目地址</string>
+    <string name="about_github">GitHub</string>
+    <string name="about_github_url">https://github.com/Joker-x-dev/CoolMallKotlin</string>
+    <string name="about_gitee">Gitee</string>
+    <string name="about_gitee_url">https://gitee.com/Joker-x-dev/CoolMallKotlin</string>
+    <string name="about_section_resources">相关资源</string>
+    <string name="about_api_doc">API 文档</string>
+    <string name="about_api_doc_desc">查看项目后端接口的详细定义</string>
+    <string name="about_demo_download">Demo 下载</string>
+    <string name="about_demo_download_desc">不定时更新，可能不会同步最新代码变更</string>
+    <string name="about_icon_source">图标来源</string>
+    <string name="about_icon_source_desc">项目使用的图标库来自图鸟 Icon</string>
+    <string name="about_section_discussion">讨论</string>
+    <string name="about_github_discussion">GitHub 讨论区</string>
+    <string name="about_github_discussion_desc">在 GitHub 上参与项目讨论</string>
+    <string name="about_section_support">支持与帮助</string>
+    <string name="about_translation">翻译</string>
+    <string name="about_translation_desc">帮助我将应用翻译为您的语言</string>
+    <string name="about_support">支持</string>
+    <string name="about_support_desc">您可以在此赞助以支持我</string>
+    <string name="about_help">帮助</string>
+    <string name="about_help_desc">有任何问题或建议，欢迎提交 Issue</string>
+    <string name="about_section_other">其他</string>
+    <string name="about_citation">引用</string>
+    <string name="about_citation_desc">项目中使用的第三方库和资源致谢</string>
+    <string name="about_open_source_license">开源许可</string>
+    <string name="about_app_name">应用名称</string>
+    <string name="about_version_code">版本代码</string>
+    <string name="about_developer">开发者</string>
+    <string name="about_developer_name">Joker.X</string>
+    <string name="about_developer_email">joker.x.dev@gmail.com</string>
+    <string name="about_qq_group">QQ 交流群</string>
+    <string name="about_wechat_group">微信交流群</string>
+    <string name="about_user_agreement">用户协议</string>
+    <string name="about_privacy_policy">隐私政策</string>
+    <string name="about_copyright">© 2025 Joker.X &amp; CoolMallKotlin Contributors</string>
     <string name="category_empty">暂无分类</string>
     <string name="home_search_hint">搜索商品</string>
 

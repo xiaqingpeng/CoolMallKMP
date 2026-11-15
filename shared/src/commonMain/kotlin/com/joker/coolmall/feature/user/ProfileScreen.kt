@@ -130,8 +130,7 @@ fun ProfileRoute(
             user = user,
             isLoggedIn = isLoggedIn,
             onLogoutClick = {
-                viewModel.logout()
-                onLoggedOut()
+                viewModel.logout(onCompleted = onLoggedOut)
             },
             onChangePasswordClick = { showChangePassword = true },
             onDeleteAccountClick = { showDeleteAccount = true },

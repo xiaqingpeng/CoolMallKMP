@@ -33,9 +33,10 @@ class ProfileViewModel(
         }
     }
 
-    fun logout() {
+    fun logout(onCompleted: () -> Unit = {}) {
         viewModelScope.launch {
             authRepository.logout()
+            onCompleted()
         }
     }
 

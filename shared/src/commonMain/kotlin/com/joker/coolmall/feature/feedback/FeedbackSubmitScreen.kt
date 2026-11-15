@@ -1,8 +1,10 @@
 package com.joker.coolmall.feature.feedback
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -15,7 +17,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -47,8 +51,10 @@ import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -80,6 +86,8 @@ import com.joker.coolmall.core.ui.resolveUiMessage
 import myapplication.shared.generated.resources.feedback_type_suggestion
 import myapplication.shared.generated.resources.feedback_type_experience
 import myapplication.shared.generated.resources.feedback_type_other
+import com.joker.coolmall.core.ui.theme.SpacePaddingMedium
+import com.joker.coolmall.core.ui.theme.SpaceVerticalMedium
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -131,18 +139,20 @@ fun FeedbackSubmitRoute(
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         bottomBar = {
-            AppButton(
-                text = stringResource(Res.string.common_submit),
-                onClick = viewModel::submit,
-                enabled = content.isNotBlank() && selectedType != null && !isSubmitting,
-                loading = isSubmitting,
-                size = AppButtonSize.MEDIUM,
-                style = AppButtonStyle.GRADIENT,
-                fullWidth = true,
-                modifier = Modifier
-                    .padding(16.dp)
-                    .imePadding(),
-            )
+            if (typesState is FeedbackTypesUiState.Success) {
+                AppButton(
+                    text = stringResource(Res.string.common_submit),
+                    onClick = viewModel::submit,
+                    enabled = content.isNotBlank() && selectedType != null && !isSubmitting,
+                    loading = isSubmitting,
+                    size = AppButtonSize.MEDIUM,
+                    style = AppButtonStyle.GRADIENT,
+                    fullWidth = true,
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .imePadding(),
+                )
+            }
         },
     ) { padding ->
         Column(
@@ -150,8 +160,8 @@ fun FeedbackSubmitRoute(
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+                .padding(SpacePaddingMedium),
+            verticalArrangement = Arrangement.spacedBy(SpaceVerticalMedium),
         ) {
             FeedbackSection(stringResource(Res.string.feedback_type)) {
                 when (val state = typesState) {
@@ -190,9 +200,9 @@ fun FeedbackSubmitRoute(
                     value = content,
                     onValueChange = viewModel::updateContent,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(128.dp),
+                        .fillMaxWidth(),
                     placeholder = { Text(stringResource(Res.string.feedback_content_hint)) },
+                    minLines = 3,
                     maxLines = 5,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -240,9 +250,8 @@ private fun FeedbackSection(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
     ) {
-        Column(Modifier.padding(16.dp)) {
-            Text(title, style = MaterialTheme.typography.titleLarge)
-            Spacer(Modifier.height(8.dp))
+        Column(Modifier.padding(SpacePaddingMedium)) {
+            TitleWithLine(title)
             content()
         }
     }
@@ -255,62 +264,132 @@ private fun FeedbackImageGrid(
     onAdd: () -> Unit,
     onRemove: (String) -> Unit,
 ) {
-    FlowRow(
+    val items = pendingImages.map { image -> image to false } +
+        if (canAddMore) listOf(null to true) else emptyList()
+
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        maxItemsInEachRow = 3,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(SpaceVerticalMedium),
     ) {
-        pendingImages.forEach { image ->
-            Box {
-                AsyncImage(
-                    model = image.uri,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(96.dp)
-                        .clip(RoundedCornerShape(8.dp)),
-                    contentScale = ContentScale.Crop,
-                )
-                IconButton(
-                    onClick = { onRemove(image.uri) },
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .size(24.dp),
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Close,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp),
-                    )
-                }
-            }
-        }
-        if (canAddMore) {
-            Box(
-                modifier = Modifier
-                    .size(96.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.outlineVariant,
-                        shape = RoundedCornerShape(8.dp),
-                    )
-                    .clickable(onClick = onAdd),
-                contentAlignment = Alignment.Center,
+        items.chunked(3).forEach { rowItems ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(SpaceVerticalMedium),
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(
-                        imageVector = Icons.Filled.Add,
-                        contentDescription = stringResource(Res.string.feedback_add_image),
-                    )
-                    Text(
-                        text = stringResource(Res.string.feedback_add_image),
-                        style = MaterialTheme.typography.labelSmall,
-                    )
+                rowItems.forEach { (image, isAddButton) ->
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .aspectRatio(1f),
+                    ) {
+                        if (isAddButton) {
+                            AddFeedbackImageButton(onClick = onAdd)
+                        } else if (image != null) {
+                            FeedbackImageItem(
+                                image = image,
+                                onRemove = { onRemove(image.uri) },
+                            )
+                        }
+                    }
+                }
+                repeat(3 - rowItems.size) {
+                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
         }
     }
+}
+
+@Composable
+private fun FeedbackImageItem(
+    image: PickedImage,
+    onRemove: () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(4.dp))
+            .background(MaterialTheme.colorScheme.surfaceVariant),
+    ) {
+        AsyncImage(
+            model = image.uri,
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop,
+        )
+        Box(
+            modifier = Modifier
+                .padding(4.dp)
+                .align(Alignment.TopEnd)
+                .size(22.dp)
+                .clip(CircleShape)
+                .background(Color.Black.copy(alpha = 0.6f))
+                .clickable(onClick = onRemove),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Close,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(13.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun AddFeedbackImageButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(4.dp))
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.outline,
+                shape = RoundedCornerShape(4.dp),
+            )
+            .background(MaterialTheme.colorScheme.surface)
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = stringResource(Res.string.feedback_add_image),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                modifier = Modifier.size(32.dp),
+            )
+            Text(
+                text = stringResource(Res.string.feedback_add_image),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+    }
+}
+
+@Composable
+private fun TitleWithLine(text: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            modifier = Modifier
+                .size(width = 4.dp, height = 20.dp)
+                .clip(RoundedCornerShape(2.dp))
+                .background(MaterialTheme.colorScheme.primary),
+        )
+        Spacer(Modifier.width(8.dp))
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.SemiBold,
+        )
+    }
+    Spacer(Modifier.height(8.dp))
 }
 
 @Composable
