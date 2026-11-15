@@ -101,7 +101,7 @@ private fun SplashScreen() {
         Image(
             painter = painterResource(Res.drawable.ic_logo),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize().blur(100.dp).alpha(0.8f),
+            modifier = Modifier.size(240.dp).blur(100.dp).alpha(0.8f),
         )
         Column(
             modifier = Modifier.fillMaxSize(),

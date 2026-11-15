@@ -42,6 +42,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -188,6 +189,7 @@ private fun ProfileContent(
                     ProfileAvatar(user = user, isLoggedIn = isLoggedIn)
                 },
                 showDivider = true,
+                verticalPadding = SpaceVerticalSmall,
             )
             ProfileRow(
                 title = stringResource(Res.string.profile_nickname),
@@ -302,13 +304,14 @@ private fun ProfileRow(
     trailing: (@Composable () -> Unit)? = null,
     showDivider: Boolean,
     onClick: (() -> Unit)? = null,
+    verticalPadding: Dp = SpaceVerticalLarge,
 ) {
     Column {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
-                .padding(horizontal = SpaceHorizontalLarge, vertical = SpaceVerticalLarge),
+                .padding(horizontal = SpaceHorizontalLarge, vertical = verticalPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(

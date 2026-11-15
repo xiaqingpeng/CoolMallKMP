@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -44,7 +45,6 @@ import androidx.compose.material.icons.filled.ViewList
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -167,7 +167,9 @@ fun GoodsCategoryRoute(
 
     Scaffold(
         topBar = {
-            Column(modifier = Modifier.statusBarsPadding()) {
+            Column(
+                modifier = Modifier.statusBarsPadding(),
+            ) {
                 TopAppBar(
                     windowInsets = WindowInsets(0, 0, 0, 0),
                     title = {
@@ -255,29 +257,28 @@ fun GoodsCategoryRoute(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                FilterChip(
+                CategoryFilterButton(
                     selected = filtersVisible,
                     onClick = viewModel::showFilters,
-                    label = { Text("筛选") },
-                    leadingIcon = { Icon(Icons.Default.FilterList, null) },
+                    leadingIcon = { Icon(Icons.Default.FilterList, null, modifier = Modifier.size(14.dp)) },
                 )
                 Spacer(Modifier.width(8.dp))
-                FilterChip(
+                CategoryFilterButton(
                     selected = sortType == GoodsSortType.COMPREHENSIVE,
                     onClick = { viewModel.cycleSort(GoodsSortType.COMPREHENSIVE) },
-                    label = { Text("综合") },
+                    label = "综合",
                 )
                 Spacer(Modifier.width(8.dp))
-                FilterChip(
+                CategoryFilterButton(
                     selected = sortType == GoodsSortType.SALES,
                     onClick = { viewModel.cycleSort(GoodsSortType.SALES) },
-                    label = { Text("销量${sortStateLabel(sortType, sortState)}") },
+                    label = "销量${sortStateLabel(sortType, sortState)}",
                 )
                 Spacer(Modifier.width(8.dp))
-                FilterChip(
+                CategoryFilterButton(
                     selected = sortType == GoodsSortType.PRICE,
                     onClick = { viewModel.cycleSort(GoodsSortType.PRICE) },
-                    label = { Text("价格${sortStateLabel(sortType, sortState)}") },
+                    label = "价格${sortStateLabel(sortType, sortState)}",
                 )
                 Spacer(Modifier.weight(1f))
                 IconButton(onClick = { isGrid = !isGrid }) {
@@ -399,6 +400,38 @@ private fun LoadMoreFooter(
 private fun sortStateLabel(type: GoodsSortType, state: GoodsSortState): String =
     if (type == GoodsSortType.COMPREHENSIVE || state == GoodsSortState.NONE) "" else if (state == GoodsSortState.ASC) " ↑" else " ↓"
 
+@Composable
+private fun CategoryFilterButton(
+    selected: Boolean,
+    onClick: () -> Unit,
+    label: String = "筛选",
+    leadingIcon: (@Composable () -> Unit)? = null,
+) {
+    Row(
+        modifier = Modifier
+            .clip(CircleShape)
+            .background(
+                if (selected) {
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.10f)
+                } else {
+                    MaterialTheme.colorScheme.background
+                },
+            )
+            .clickable(onClick = onClick)
+            .height(32.dp)
+            .padding(horizontal = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        leadingIcon?.invoke()
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+        )
+    }
+}
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun FilterDialog(
@@ -459,19 +492,17 @@ private fun FilterDialog(
                                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
-                                OutlinedTextField(
+                                PriceInputField(
                                     value = min,
+                                    placeholder = "最低价格",
                                     onValueChange = { min = it.filter(Char::isDigit).take(8) },
-                                    placeholder = { Text("最低价格") },
-                                    singleLine = true,
                                     modifier = Modifier.weight(1f),
                                 )
                                 Text("-", color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                OutlinedTextField(
+                                PriceInputField(
                                     value = max,
+                                    placeholder = "最高价格",
                                     onValueChange = { max = it.filter(Char::isDigit).take(8) },
-                                    placeholder = { Text("最高价格") },
-                                    singleLine = true,
                                     modifier = Modifier.weight(1f),
                                 )
                             }
@@ -571,7 +602,8 @@ private fun FilterDialog(
                         .padding(12.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
-                    Button(
+                    com.joker.coolmall.core.ui.component.AppButtonBordered(
+                        text = "重置",
                         onClick = {
                             selected = selectedCategoryIds
                             min = ""
@@ -579,15 +611,57 @@ private fun FilterDialog(
                             onReset()
                         },
                         modifier = Modifier.weight(1f),
-                        colors = ButtonDefaults.outlinedButtonColors(),
-                    ) { Text("重置") }
-                    Button(
+                        size = com.joker.coolmall.core.ui.component.AppButtonSize.MINI,
+                        fullWidth = true,
+                    )
+                    com.joker.coolmall.core.ui.component.AppButton(
+                        text = "确定",
                         onClick = { onApply(selected, min, max) },
                         modifier = Modifier.weight(1f),
-                    ) { Text("确定") }
+                        size = com.joker.coolmall.core.ui.component.AppButtonSize.MINI,
+                        style = com.joker.coolmall.core.ui.component.AppButtonStyle.GRADIENT,
+                        fullWidth = true,
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun PriceInputField(
+    value: String,
+    placeholder: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.outline,
+                shape = CircleShape,
+            )
+            .clip(CircleShape)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+    ) {
+        BasicTextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Number),
+            singleLine = true,
+            decorationBox = { innerTextField ->
+                if (value.isEmpty()) {
+                    Text(
+                        text = placeholder,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+                innerTextField()
+            },
+        )
     }
 }
 
@@ -597,9 +671,24 @@ private fun CategoryFilterChip(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    FilterChip(
-        selected = selected,
-        onClick = onClick,
-        label = { Text(name) },
-    )
+    Row(
+        modifier = Modifier
+            .clip(CircleShape)
+            .background(
+                if (selected) {
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                } else {
+                    MaterialTheme.colorScheme.surfaceVariant
+                },
+            )
+            .clickable(onClick = onClick)
+            .padding(horizontal = 14.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = name,
+            style = MaterialTheme.typography.bodyMedium,
+            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+        )
+    }
 }

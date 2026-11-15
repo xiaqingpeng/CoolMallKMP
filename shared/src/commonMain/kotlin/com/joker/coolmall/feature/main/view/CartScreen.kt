@@ -1,5 +1,9 @@
 package com.joker.coolmall.feature.main.view
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,7 +32,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -67,6 +74,8 @@ import myapplication.shared.generated.resources.common_complete
 import myapplication.shared.generated.resources.common_delete
 import myapplication.shared.generated.resources.common_edit
 import org.jetbrains.compose.resources.stringResource
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun CartRoute(
@@ -86,6 +95,8 @@ fun CartRoute(
     val isAllSelected by viewModel.isAllSelected.collectAsState()
     val selectedCount by viewModel.selectedCount.collectAsState()
     val selectedAmount by viewModel.selectedAmount.collectAsState()
+    var deletingItems by remember { mutableStateOf(emptySet<String>()) }
+    val deleteScope = rememberCoroutineScope()
 
     CommonScaffold(
         topBar = {
@@ -174,16 +185,34 @@ fun CartRoute(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 items(flatItems, key = { (cart, spec) -> "${cart.goodsId}_${spec.id}" }) { (cart, spec) ->
-                    CartItemCard(
-                        cart = cart,
-                        spec = spec,
-                        onIncrease = { viewModel.increase(cart.goodsId, spec.id, spec.count) },
-                        onDecrease = { viewModel.decrease(cart.goodsId, spec.id, spec.count) },
-                        onRemove = { viewModel.remove(cart.goodsId, spec.id) },
-                        selected = selectedItems[cart.goodsId]?.contains(spec.id) == true,
-                        onSelectionChanged = { viewModel.toggleSelection(cart.goodsId, spec.id) },
-                        onGoodsClick = { onGoodsClick(cart.goodsId) },
-                    )
+                    val itemKey = "${cart.goodsId}_${spec.id}"
+                    AnimatedVisibility(
+                        visible = itemKey !in deletingItems,
+                        exit = slideOutHorizontally(
+                            targetOffsetX = { -it },
+                            animationSpec = tween(300),
+                        ) + fadeOut(animationSpec = tween(300)),
+                    ) {
+                        CartItemCard(
+                            cart = cart,
+                            spec = spec,
+                            onIncrease = { viewModel.increase(cart.goodsId, spec.id, spec.count) },
+                            onDecrease = { viewModel.decrease(cart.goodsId, spec.id, spec.count) },
+                            onRemove = {
+                                if (itemKey !in deletingItems) {
+                                    deletingItems = deletingItems + itemKey
+                                    deleteScope.launch {
+                                        delay(300)
+                                        viewModel.remove(cart.goodsId, spec.id)
+                                        deletingItems = deletingItems - itemKey
+                                    }
+                                }
+                            },
+                            selected = selectedItems[cart.goodsId]?.contains(spec.id) == true,
+                            onSelectionChanged = { viewModel.toggleSelection(cart.goodsId, spec.id) },
+                            onGoodsClick = { onGoodsClick(cart.goodsId) },
+                        )
+                    }
                 }
             }
         }

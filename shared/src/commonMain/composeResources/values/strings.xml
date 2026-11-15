@@ -207,6 +207,7 @@
     <string name="search_history">搜索历史</string>
     <string name="search_history_clear">清空</string>
     <string name="search_history_empty">暂无搜索记录</string>
+    <string name="search_recommended">推荐搜索</string>
     <string name="coupon_valid_until">有效期至 %1$s</string>
     <string name="coupon_conditions">满%1$d可用</string>
     <string name="coupon_usage_instructions">使用说明</string>

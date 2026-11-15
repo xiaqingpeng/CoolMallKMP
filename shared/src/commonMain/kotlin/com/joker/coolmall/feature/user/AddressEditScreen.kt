@@ -147,7 +147,7 @@ fun AddressEditRoute(
     }
     RegionPickerModal(
         visible = showRegionPicker,
-        regions = RegionData.provinces,
+        regions = RegionData.getProvinces(),
         initialValue = "${form.province} ${form.city} ${form.district}",
         onDismiss = { showRegionPicker = false },
         onSelected = { province, city, district ->

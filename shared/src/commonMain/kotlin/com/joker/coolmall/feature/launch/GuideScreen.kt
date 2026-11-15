@@ -33,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
@@ -154,7 +155,7 @@ private fun GuideScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 48.dp),
+            .padding(horizontal = 24.dp, vertical = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
@@ -183,8 +184,8 @@ private fun GuideScreen(
                     Spacer(modifier = Modifier.height(32.dp))
                     Text(
                         text = titles.getOrElse(page) { "" },
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.SemiBold,
+                        style = MaterialTheme.typography.displaySmall,
+                        fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
                     )
                     Spacer(modifier = Modifier.height(12.dp))
@@ -193,6 +194,8 @@ private fun GuideScreen(
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
+                        lineHeight = 24.sp,
+                        modifier = Modifier.padding(horizontal = 24.dp),
                     )
                 }
             }
@@ -206,7 +209,7 @@ private fun GuideScreen(
                     Box(
                         modifier = Modifier
                             .height(8.dp)
-                            .width(if (selected) 20.dp else 8.dp)
+                        .width(if (selected) 24.dp else 8.dp)
                             .background(
                                 color = if (selected) {
                                     MaterialTheme.colorScheme.primary
@@ -222,7 +225,7 @@ private fun GuideScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             val buttonWidth by animateDpAsState(
-                targetValue = if (isLastPage) 168.dp else 128.dp,
+                targetValue = if (isLastPage) 160.dp else 120.dp,
                 animationSpec = tween(300),
                 label = "guide_btn_width",
             )

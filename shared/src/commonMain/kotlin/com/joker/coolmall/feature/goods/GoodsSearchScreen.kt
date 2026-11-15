@@ -23,6 +23,8 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -56,8 +58,8 @@ import myapplication.shared.generated.resources.common_search
 import myapplication.shared.generated.resources.search_hint
 import myapplication.shared.generated.resources.search_history
 import myapplication.shared.generated.resources.search_history_clear
-import myapplication.shared.generated.resources.search_hot
 import myapplication.shared.generated.resources.search_no_keywords
+import myapplication.shared.generated.resources.search_recommended
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -147,7 +149,8 @@ fun GoodsSearchRoute(
                                 .clip(CircleShape)
                                 .background(MaterialTheme.colorScheme.primary)
                                 .clickable(enabled = canSearch, onClick = { performSearch() })
-                                .padding(horizontal = 18.dp, vertical = 9.dp),
+                                .height(34.dp)
+                                .padding(horizontal = 24.dp),
                         )
                     }
                 },
@@ -206,7 +209,7 @@ fun GoodsSearchRoute(
 
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = stringResource(Res.string.search_hot),
+                text = stringResource(Res.string.search_recommended),
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
             )
@@ -261,13 +264,20 @@ private fun SearchKeywordTag(
     text: String,
     onClick: () -> Unit,
 ) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.bodyMedium,
+    Card(
         modifier = Modifier
             .clip(RoundedCornerShape(50))
-            .background(MaterialTheme.colorScheme.surfaceContainerHighest)
-            .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 9.dp),
-    )
+            .clickable(onClick = onClick),
+        shape = RoundedCornerShape(50),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        )
+    }
 }

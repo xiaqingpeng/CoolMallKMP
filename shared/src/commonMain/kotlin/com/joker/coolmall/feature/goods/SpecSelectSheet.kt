@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -129,6 +130,7 @@ fun SpecSelectSheet(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = SpacePaddingLarge)
+                .navigationBarsPadding()
                 .padding(bottom = SpaceVerticalLarge),
         ) {
             Row(
@@ -226,15 +228,15 @@ fun SpecSelectSheet(
                             AnimatedContent(
                                 targetState = isGridMode,
                                 transitionSpec = {
-                                    (fadeIn(animationSpec = tween(250, easing = LinearEasing)) +
+                                    (fadeIn(animationSpec = tween(300, easing = LinearEasing)) +
                                         scaleIn(
-                                            initialScale = 0.94f,
-                                            animationSpec = tween(250, easing = LinearEasing),
+                                            initialScale = 0.92f,
+                                            animationSpec = tween(300, easing = LinearEasing),
                                         )) togetherWith
-                                        (fadeOut(animationSpec = tween(250, easing = LinearEasing)) +
+                                        (fadeOut(animationSpec = tween(300, easing = LinearEasing)) +
                                             scaleOut(
-                                                targetScale = 0.94f,
-                                                animationSpec = tween(250, easing = LinearEasing),
+                                                targetScale = 0.92f,
+                                                animationSpec = tween(300, easing = LinearEasing),
                                             ))
                                 },
                                 label = "spec_view_mode",

@@ -180,8 +180,8 @@ fun SettingsRoute(
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+                .padding(horizontal = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             SettingsCard {
                 SettingsLinkRow(
@@ -265,7 +265,7 @@ fun SettingsRoute(
 private fun SettingsSectionTitle(text: String) {
     TitleWithLine(
         text = text,
-        modifier = Modifier.padding(start = 4.dp, top = 8.dp, bottom = 2.dp),
+        modifier = Modifier.padding(top = 4.dp),
     )
 }
 
@@ -436,9 +436,9 @@ private fun themeColorLabel(color: ThemeColor): String = when (color) {
 }
 
 private fun themeColorValue(color: ThemeColor): Color = when (color) {
-    ThemeColor.DEFAULT -> Color(0xFF9B82D9)
-    ThemeColor.PURPLE -> Color(0xFF7E57C2)
-    ThemeColor.GREEN -> Color(0xFF43A047)
-    ThemeColor.ORANGE -> Color(0xFFFB8C00)
-    ThemeColor.RED -> Color(0xFFE53935)
+    ThemeColor.DEFAULT -> Color(0xFF465CFF)
+    ThemeColor.PURPLE -> Color(0xFF6831FF)
+    ThemeColor.GREEN -> Color(0xFF09BE4F)
+    ThemeColor.ORANGE -> Color(0xFFFFB703)
+    ThemeColor.RED -> Color(0xFFFF2B2B)
 }

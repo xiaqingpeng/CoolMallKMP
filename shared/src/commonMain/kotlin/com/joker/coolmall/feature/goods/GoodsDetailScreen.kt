@@ -1,6 +1,7 @@
 package com.joker.coolmall.feature.goods
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,9 +12,13 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -25,17 +30,21 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -61,6 +70,8 @@ import com.joker.coolmall.core.ui.component.PriceTextLarge
 import com.joker.coolmall.core.ui.component.TitleWithLine
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
 import com.joker.coolmall.core.ui.component.DetailSkeleton
+import com.joker.coolmall.core.ui.component.CouponCard
+import com.joker.coolmall.core.ui.component.CouponCardMode
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
 import com.joker.coolmall.core.ui.theme.ColorDanger
 import com.joker.coolmall.core.ui.theme.SpaceHorizontalMedium
@@ -113,6 +124,7 @@ fun GoodsDetailRoute(
     val specsUiState by viewModel.specsUiState.collectAsState()
     val selectedSpec by viewModel.selectedSpec.collectAsState()
     val quantity by viewModel.quantity.collectAsState()
+    var couponsVisible by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
@@ -180,6 +192,7 @@ fun GoodsDetailRoute(
                     detail = state.data,
                     selectedSpec = selectedSpec,
                     onShowSpecModal = viewModel::showSpecModal,
+                    onShowCouponModal = { couponsVisible = true },
                     onCommentsClick = { onCommentsClick(goodsId) },
                     modifier = Modifier.padding(padding),
                 )
@@ -203,6 +216,41 @@ fun GoodsDetailRoute(
                         },
                     )
                 }
+                if (couponsVisible) {
+                    ModalBottomSheet(
+                        onDismissRequest = { couponsVisible = false },
+                        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .navigationBarsPadding()
+                                .padding(horizontal = 16.dp),
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.goods_available_coupons),
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.SemiBold,
+                            )
+                            Spacer(Modifier.height(12.dp))
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .heightIn(max = 500.dp),
+                                contentPadding = PaddingValues(bottom = 24.dp),
+                                verticalArrangement = Arrangement.spacedBy(12.dp),
+                            ) {
+                                items(state.data.coupon, key = { it.id }) { coupon ->
+                                    CouponCard(
+                                        coupon = coupon,
+                                        mode = CouponCardMode.RECEIVE,
+                                        onActionClick = {},
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -213,6 +261,7 @@ private fun GoodsDetailScreen(
     detail: GoodsDetail,
     selectedSpec: com.joker.coolmall.core.model.entity.GoodsSpec?,
     onShowSpecModal: () -> Unit,
+    onShowCouponModal: () -> Unit,
     onCommentsClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -258,7 +307,10 @@ private fun GoodsDetailScreen(
         }
         if (detail.coupon.isNotEmpty()) {
             item {
-                TitleWithLine(text = stringResource(Res.string.goods_available_coupons))
+                    TitleWithLine(
+                        text = stringResource(Res.string.goods_available_coupons),
+                        modifier = Modifier.clickable(onClick = onShowCouponModal),
+                    )
             }
             items(detail.coupon, key = { it.id }) { coupon ->
                 Card(modifier = Modifier.fillMaxWidth()) {
@@ -341,17 +393,46 @@ private fun GoodsGallery(goods: Goods) {
         }
         return
     }
-    LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        items(pics) { pic ->
+    val pagerState = rememberPagerState(pageCount = { pics.size })
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp)),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f),
+        ) { page ->
             AsyncImage(
-                model = pic,
+                model = pics[page],
                 contentDescription = goods.title,
-                modifier = Modifier
-                    .width(280.dp)
-                    .aspectRatio(1f)
-                    .clip(RoundedCornerShape(12.dp)),
+                modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
             )
+        }
+        if (pics.size > 1) {
+            Row(
+                modifier = Modifier.padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                repeat(pics.size) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(if (index == pagerState.currentPage) 8.dp else 6.dp)
+                            .clip(CircleShape)
+                            .background(
+                                if (index == pagerState.currentPage) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.outlineVariant
+                                },
+                            ),
+                    )
+                }
+            }
         }
     }
 }

@@ -207,6 +207,7 @@
     <string name="search_history">Search history</string>
     <string name="search_history_clear">Clear</string>
     <string name="search_history_empty">No search history</string>
+    <string name="search_recommended">Recommended search</string>
     <string name="coupon_valid_until">Valid until %1$s</string>
     <string name="coupon_conditions">Min. spend %1$d</string>
     <string name="coupon_usage_instructions">Instructions</string>
