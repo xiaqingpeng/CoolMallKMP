@@ -3,6 +3,8 @@ package com.joker.coolmall.core.network
 import com.joker.coolmall.core.model.common.Id
 import com.joker.coolmall.core.model.common.Ids
 import com.joker.coolmall.core.model.entity.Address
+import com.joker.coolmall.core.model.request.PageRequest
+import com.joker.coolmall.core.model.response.NetworkPageData
 import com.joker.coolmall.core.model.response.NetworkResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -19,6 +21,15 @@ import io.ktor.http.contentType
 class KtorAddressNetworkDataSource(
     private val client: HttpClient,
 ) {
+    /** 分页查询地址，和原项目地址列表的 RefreshLayout 对齐。 */
+    suspend fun getAddressPage(
+        request: PageRequest,
+    ): NetworkResponse<NetworkPageData<Address>> =
+        client.post("user/address/page") {
+            contentType(ContentType.Application.Json)
+            setBody(request)
+        }.body()
+
     /** 查询地址列表 */
     suspend fun getAddressList(): NetworkResponse<List<Address>> =
         client.post("user/address/list") {

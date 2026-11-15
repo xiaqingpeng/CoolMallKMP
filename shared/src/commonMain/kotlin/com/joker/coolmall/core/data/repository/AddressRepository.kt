@@ -2,6 +2,8 @@ package com.joker.coolmall.core.data.repository
 
 import com.joker.coolmall.core.model.common.Id
 import com.joker.coolmall.core.model.entity.Address
+import com.joker.coolmall.core.model.request.PageRequest
+import com.joker.coolmall.core.model.response.NetworkPageData
 import com.joker.coolmall.core.model.response.NetworkResponse
 import com.joker.coolmall.core.network.KtorAddressNetworkDataSource
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +22,12 @@ class AddressRepository(
      */
     private val _revision = MutableStateFlow(0)
     val revision: StateFlow<Int> = _revision.asStateFlow()
+
+    suspend fun getAddressPage(
+        request: PageRequest,
+    ): NetworkResponse<NetworkPageData<Address>> = withContext(Dispatchers.IO) {
+        dataSource.getAddressPage(request)
+    }
 
     suspend fun getAddressList(): NetworkResponse<List<Address>> = withContext(Dispatchers.IO) {
         dataSource.getAddressList()

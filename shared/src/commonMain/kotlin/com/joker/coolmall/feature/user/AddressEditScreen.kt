@@ -16,7 +16,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,6 +49,7 @@ import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
+import com.joker.coolmall.core.ui.resolveMessageCode
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
 import com.joker.coolmall.feature.user.component.RegionPickerModal
 import com.joker.coolmall.feature.user.data.RegionData
@@ -142,7 +145,25 @@ fun AddressEditRoute(
                 .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            AddressFormFields(form = form, viewModel = viewModel, onRegionClick = { showRegionPicker = true })
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    AddressFormFields(
+                        form = form,
+                        viewModel = viewModel,
+                        onRegionClick = { showRegionPicker = true },
+                        includeDefaultSwitch = false,
+                    )
+                }
+            }
+            Card(modifier = Modifier.fillMaxWidth()) {
+                DefaultAddressRow(
+                    checked = form.isDefault,
+                    onCheckedChange = viewModel::updateIsDefault,
+                )
+            }
         }
     }
     RegionPickerModal(
@@ -163,6 +184,7 @@ private fun AddressFormFields(
     form: AddressForm,
     viewModel: AddressEditViewModel,
     onRegionClick: () -> Unit,
+    includeDefaultSwitch: Boolean = true,
 ) {
     OutlinedTextField(
         value = form.contact,
@@ -206,6 +228,13 @@ private fun AddressFormFields(
                         stringResource(Res.string.address_district),
                 )
             },
+            trailingIcon = {
+                androidx.compose.material3.Icon(
+                    imageVector = Icons.Filled.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             readOnly = true,
@@ -215,11 +244,35 @@ private fun AddressFormFields(
         value = form.address,
         onValueChange = viewModel::updateAddress,
         label = { Text(stringResource(Res.string.address_detail)) },
-        minLines = 2,
+        minLines = 3,
+        maxLines = 5,
         modifier = Modifier.fillMaxWidth(),
     )
+    if (includeDefaultSwitch) {
+        DefaultAddressRow(
+            checked = form.isDefault,
+            onCheckedChange = viewModel::updateIsDefault,
+        )
+    }
+    val error = form.validationError
+    if (error != null) {
+        Text(
+            text = resolveMessageCode(error),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.error,
+        )
+    }
+}
+
+@Composable
+private fun DefaultAddressRow(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(modifier = Modifier.weight(1f)) {
@@ -234,16 +287,8 @@ private fun AddressFormFields(
             )
         }
         Switch(
-            checked = form.isDefault,
-            onCheckedChange = viewModel::updateIsDefault,
-        )
-    }
-    val error = form.validationError
-    if (error != null) {
-        Text(
-            text = "$error",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.error,
+            checked = checked,
+            onCheckedChange = onCheckedChange,
         )
     }
 }
