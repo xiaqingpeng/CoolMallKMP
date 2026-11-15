@@ -72,85 +72,91 @@ fun LoginRoute(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(horizontal = 24.dp, vertical = 32.dp),
+                .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Image(
                 painter = painterResource(Res.drawable.ic_logo),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
-                modifier = Modifier.size(96.dp),
+                modifier = Modifier
+                    .padding(top = 80.dp, bottom = 30.dp)
+                    .size(120.dp),
             )
-            Spacer(Modifier.height(36.dp))
-            AppButton(
-                text = stringResource(Res.string.auth_sms_login),
-                onClick = onSmsLoginClick,
-                size = AppButtonSize.MEDIUM,
-                style = AppButtonStyle.GRADIENT,
-                fullWidth = true,
-            )
-            Spacer(Modifier.height(12.dp))
-            AppButton(
-                text = stringResource(Res.string.auth_account_login),
-                onClick = onAccountLoginClick,
-                size = AppButtonSize.MEDIUM,
-                style = AppButtonStyle.OUTLINED,
-                fullWidth = true,
-            )
-            if (hasThirdParty) {
-                Spacer(Modifier.height(28.dp))
-                Text(
-                    text = stringResource(Res.string.auth_third_party_section),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodySmall,
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                AppButton(
+                    text = stringResource(Res.string.auth_sms_login),
+                    onClick = onSmsLoginClick,
+                    size = AppButtonSize.MEDIUM,
+                    style = AppButtonStyle.GRADIENT,
+                    fullWidth = true,
                 )
-                Spacer(Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    if (ThirdPartyCapabilities.supportsWeChatLogin) {
-                        OutlinedButton(
-                            onClick = onWeChatLoginClick,
-                            modifier = Modifier.weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(Res.drawable.ic_wechat),
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp),
-                            )
-                            Text(stringResource(Res.string.auth_wechat_login))
+                Spacer(Modifier.height(20.dp))
+                AppButton(
+                    text = stringResource(Res.string.auth_account_login),
+                    onClick = onAccountLoginClick,
+                    size = AppButtonSize.MEDIUM,
+                    style = AppButtonStyle.OUTLINED,
+                    fullWidth = true,
+                )
+                if (hasThirdParty) {
+                    Spacer(Modifier.height(48.dp))
+                    Text(
+                        text = stringResource(Res.string.auth_third_party_section),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                    Spacer(Modifier.height(16.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(32.dp),
+                    ) {
+                        if (ThirdPartyCapabilities.supportsWeChatLogin) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                IconButton(onClick = onWeChatLoginClick) {
+                                    Image(
+                                        painter = painterResource(Res.drawable.ic_wechat),
+                                        contentDescription = stringResource(Res.string.auth_wechat_login),
+                                        modifier = Modifier.size(32.dp),
+                                    )
+                                }
+                                Text(
+                                    stringResource(Res.string.auth_wechat_login),
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                            }
                         }
-                    }
-                    if (ThirdPartyCapabilities.supportsQqLogin) {
-                        OutlinedButton(
-                            onClick = onQqLoginClick,
-                            modifier = Modifier.weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(Res.drawable.ic_qq),
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp),
-                            )
-                            Text(stringResource(Res.string.auth_qq_login))
+                        if (ThirdPartyCapabilities.supportsQqLogin) {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                IconButton(onClick = onQqLoginClick) {
+                                    Image(
+                                        painter = painterResource(Res.drawable.ic_qq),
+                                        contentDescription = stringResource(Res.string.auth_qq_login),
+                                        modifier = Modifier.size(32.dp),
+                                    )
+                                }
+                                Text(
+                                    stringResource(Res.string.auth_qq_login),
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                            }
                         }
                     }
                 }
-            } else {
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    text = stringResource(Res.string.auth_ios_no_third_party),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodySmall,
+                UserAgreementLinks(
+                    prefix = stringResource(Res.string.auth_login_agree_prefix),
+                    onUserAgreementClick = onUserAgreementClick,
+                    onPrivacyPolicyClick = onPrivacyPolicyClick,
+                    modifier = Modifier.padding(top = 32.dp),
                 )
             }
-            Spacer(Modifier.height(24.dp))
-            UserAgreementLinks(
-                prefix = stringResource(Res.string.auth_login_agree_prefix),
-                onUserAgreementClick = onUserAgreementClick,
-                onPrivacyPolicyClick = onPrivacyPolicyClick,
-            )
         }
     }
 }

@@ -43,6 +43,10 @@ import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
 import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.ui.resolveUiMessage
+import com.joker.coolmall.feature.auth.component.AuthBottomLinks
+import com.joker.coolmall.feature.auth.component.AuthPage
+import com.joker.coolmall.feature.auth.component.AuthPasswordField
+import com.joker.coolmall.feature.auth.component.AuthPhoneField
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.auth_account_login
 import myapplication.shared.generated.resources.auth_forgot_password
@@ -56,6 +60,7 @@ import myapplication.shared.generated.resources.auth_register
 import myapplication.shared.generated.resources.auth_sms_login
 import myapplication.shared.generated.resources.auth_third_party_section
 import myapplication.shared.generated.resources.auth_wechat_login
+import myapplication.shared.generated.resources.auth_welcome_login
 import myapplication.shared.generated.resources.common_back
 import myapplication.shared.generated.resources.ic_qq
 import myapplication.shared.generated.resources.ic_wechat
@@ -90,52 +95,33 @@ fun AccountLoginRoute(
         }
     }
 
-    Scaffold(
-        topBar = {
-            CenterTopAppBar(
-                title = stringResource(Res.string.auth_account_login),
-                showBackIcon = true,
-                onBackClick = onBack,
-            )
-        }
-    ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(horizontal = 24.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            OutlinedTextField(
+    AuthPage(
+        title = stringResource(Res.string.auth_welcome_login),
+        onBack = onBack,
+    ) {
+            AuthPhoneField(
                 value = uiState.phone,
                 onValueChange = viewModel::updatePhone,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(stringResource(Res.string.auth_phone)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                enabled = !uiState.isLoading,
+                placeholder = stringResource(Res.string.auth_phone),
             )
-            Spacer(modifier = Modifier.height(12.dp))
-            OutlinedTextField(
+            Spacer(Modifier.height(42.dp))
+            AuthPasswordField(
                 value = uiState.password,
                 onValueChange = viewModel::updatePassword,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(stringResource(Res.string.auth_password)) },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                enabled = !uiState.isLoading,
+                placeholder = stringResource(Res.string.auth_password),
             )
             uiState.errorMessage?.let { message ->
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = resolveUiMessage(message),
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall,
-                )
+                Spacer(Modifier.height(8.dp))
+                Text(resolveUiMessage(message), color = MaterialTheme.colorScheme.error)
             }
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(Modifier.height(12.dp))
+            UserAgreementLinks(
+                prefix = stringResource(Res.string.auth_login_agree_prefix),
+                onUserAgreementClick = onUserAgreementClick,
+                onPrivacyPolicyClick = onPrivacyPolicyClick,
+                centerAlignment = false,
+            )
+            Spacer(Modifier.height(24.dp))
             AppButton(
                 text = stringResource(Res.string.auth_login),
                 onClick = viewModel::login,
@@ -145,88 +131,31 @@ fun AccountLoginRoute(
                 style = AppButtonStyle.GRADIENT,
                 fullWidth = true,
             )
-            Spacer(modifier = Modifier.height(12.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                TextButton(
-                    onClick = onSmsLoginClick,
-                    enabled = !uiState.isLoading,
-                ) {
-                    Text(stringResource(Res.string.auth_sms_login))
-                }
-                TextButton(
-                    onClick = onRegisterClick,
-                    enabled = !uiState.isLoading,
-                ) {
-                    Text(stringResource(Res.string.auth_register))
-                }
-            }
-            TextButton(
-                onClick = onForgotPasswordClick,
-                enabled = !uiState.isLoading,
-                modifier = Modifier.align(Alignment.End),
-            ) {
-                Text(stringResource(Res.string.auth_forgot_password))
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            UserAgreementLinks(
-                prefix = stringResource(Res.string.auth_login_agree_prefix),
-                onUserAgreementClick = onUserAgreementClick,
-                onPrivacyPolicyClick = onPrivacyPolicyClick,
+            AuthBottomLinks(
+                leftText = stringResource(Res.string.auth_register),
+                rightText = stringResource(Res.string.auth_forgot_password),
+                onLeftClick = onRegisterClick,
+                onRightClick = onForgotPasswordClick,
+                divider = true,
             )
             if (showQq || showWeChat) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(Res.string.auth_third_party_section),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(Modifier.height(16.dp))
+                Text(stringResource(Res.string.auth_third_party_section), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     if (showQq) {
-                        OutlinedButton(
-                            onClick = viewModel::loginWithQq,
-                            enabled = !uiState.isLoading,
-                            modifier = Modifier.weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(Res.drawable.ic_qq),
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp),
-                            )
-                            Spacer(modifier = Modifier.width(6.dp))
+                        OutlinedButton(onClick = viewModel::loginWithQq, modifier = Modifier.weight(1f)) {
                             Text(stringResource(Res.string.auth_qq_login))
                         }
                     }
                     if (showWeChat) {
-                        OutlinedButton(
-                            onClick = viewModel::loginWithWeChat,
-                            enabled = !uiState.isLoading,
-                            modifier = Modifier.weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(Res.drawable.ic_wechat),
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp),
-                            )
-                            Spacer(modifier = Modifier.width(6.dp))
+                        OutlinedButton(onClick = viewModel::loginWithWeChat, modifier = Modifier.weight(1f)) {
                             Text(stringResource(Res.string.auth_wechat_login))
                         }
                     }
                 }
-            } else {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = stringResource(Res.string.auth_ios_no_third_party),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
             }
         }
-    }
 }

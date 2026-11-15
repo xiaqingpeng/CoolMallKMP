@@ -222,6 +222,8 @@
     <string name="spec_toggle_list">列表展示</string>
     <string name="spec_toggle_grid">网格展示</string>
     <string name="auth_account_login">账号登录</string>
+    <string name="auth_welcome_login">你好，\n欢迎登录青商城</string>
+    <string name="auth_welcome_register">你好，\n欢迎注册青商城</string>
     <string name="auth_phone">手机号</string>
     <string name="auth_password">密码</string>
     <string name="auth_login">登录</string>
@@ -249,6 +251,10 @@
     <string name="auth_confirm_password">确认密码</string>
     <string name="auth_register_and_login">注册并登录</string>
     <string name="auth_register_agree_prefix">注册即代表您已阅读并同意</string>
+    <string name="auth_have_account">已有账号？</string>
+    <string name="auth_go_login">去登录</string>
+    <string name="auth_sms_not_available">短信不可用？</string>
+    <string name="auth_use_third_party_login">使用三方登录</string>
     <string name="auth_reset_title">重置密码</string>
     <string name="auth_new_password">新密码</string>
     <string name="auth_reset_submit">重置密码</string>

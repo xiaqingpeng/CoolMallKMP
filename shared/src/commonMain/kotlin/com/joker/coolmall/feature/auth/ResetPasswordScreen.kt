@@ -1,47 +1,22 @@
 package com.joker.coolmall.feature.auth
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
@@ -50,6 +25,10 @@ import com.joker.coolmall.core.ui.resolveMessageCode
 import com.joker.coolmall.core.ui.resolveUiMessage
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
 import com.joker.coolmall.feature.auth.component.ImageCaptchaDialog
+import com.joker.coolmall.feature.auth.component.AuthCodeField
+import com.joker.coolmall.feature.auth.component.AuthPage
+import com.joker.coolmall.feature.auth.component.AuthPasswordField
+import com.joker.coolmall.feature.auth.component.AuthPhoneField
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.auth_confirm_password
 import myapplication.shared.generated.resources.auth_get_code
@@ -58,10 +37,8 @@ import myapplication.shared.generated.resources.auth_phone
 import myapplication.shared.generated.resources.auth_reset_submit
 import myapplication.shared.generated.resources.auth_reset_title
 import myapplication.shared.generated.resources.auth_sms_code
-import myapplication.shared.generated.resources.common_back
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResetPasswordRoute(
     onBack: () -> Unit,
@@ -82,89 +59,44 @@ fun ResetPasswordRoute(
         }
     }
 
-    Scaffold(
-        topBar = {
-            CenterTopAppBar(
-                title = stringResource(Res.string.auth_reset_title),
-                showBackIcon = true,
-                onBackClick = onBack,
-            )
-        },
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-    ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(horizontal = 24.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+    AuthPage(
+        title = stringResource(Res.string.auth_reset_title),
+        onBack = onBack,
+        snackbarHost = { androidx.compose.material3.SnackbarHost(snackbarHostState) },
+    ) {
             Text(
                 text = resolveMessageCode(MessageCode.ResetPasswordTip),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.fillMaxWidth(),
             )
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
+            Spacer(modifier = Modifier.height(30.dp))
+            AuthPhoneField(
                 value = uiState.phone,
                 onValueChange = viewModel::updatePhone,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(stringResource(Res.string.auth_phone)) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                enabled = !uiState.isLoading,
+                placeholder = stringResource(Res.string.auth_phone),
             )
-            Spacer(modifier = Modifier.height(12.dp))
-            Row(
+            Spacer(modifier = Modifier.height(30.dp))
+            AuthCodeField(
+                value = uiState.smsCode,
+                onValueChange = viewModel::updateSmsCode,
+                placeholder = stringResource(Res.string.auth_sms_code),
+                actionLabel = if (uiState.countdown > 0) "${uiState.countdown}s" else stringResource(Res.string.auth_get_code),
+                actionEnabled = uiState.canSendCode,
+                onAction = viewModel::sendCode,
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                OutlinedTextField(
-                    value = uiState.smsCode,
-                    onValueChange = viewModel::updateSmsCode,
-                    modifier = Modifier.weight(1f),
-                    label = { Text(stringResource(Res.string.auth_sms_code)) },
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    enabled = !uiState.isLoading,
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                OutlinedButton(
-                    onClick = viewModel::sendCode,
-                    enabled = uiState.canSendCode,
-                ) {
-                    val codeLabel = if (uiState.countdown > 0) {
-                        "${uiState.countdown}s"
-                    } else {
-                        stringResource(Res.string.auth_get_code)
-                    }
-                    Text(text = codeLabel)
-                }
-            }
-            Spacer(modifier = Modifier.height(12.dp))
-            OutlinedTextField(
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            AuthPasswordField(
                 value = uiState.newPassword,
                 onValueChange = viewModel::updateNewPassword,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(stringResource(Res.string.auth_new_password)) },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                enabled = !uiState.isLoading,
+                placeholder = stringResource(Res.string.auth_new_password),
             )
-            Spacer(modifier = Modifier.height(12.dp))
-            OutlinedTextField(
+            Spacer(modifier = Modifier.height(30.dp))
+            AuthPasswordField(
                 value = uiState.confirmPassword,
                 onValueChange = viewModel::updateConfirmPassword,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(stringResource(Res.string.auth_confirm_password)) },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                enabled = !uiState.isLoading,
+                placeholder = stringResource(Res.string.auth_confirm_password),
             )
             uiState.errorMessage?.let { message ->
                 Spacer(modifier = Modifier.height(8.dp))
@@ -184,7 +116,6 @@ fun ResetPasswordRoute(
                 style = AppButtonStyle.GRADIENT,
                 fullWidth = true,
             )
-        }
     }
     ImageCaptchaDialog(
         visible = uiState.showCaptchaDialog,
