@@ -26,6 +26,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -101,7 +102,7 @@ fun ProfileRoute(
     val isLoggedIn by viewModel.isLoggedIn.collectAsState()
     var showChangePassword by remember { mutableStateOf(false) }
     var showDeleteAccount by remember { mutableStateOf(false) }
-    val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
+    val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
         viewModel.message.collect { snackbarHostState.showSnackbar(resolveUiMessageSuspend(it)) }

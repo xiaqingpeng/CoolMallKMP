@@ -37,6 +37,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.clickable
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.TextButton
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -255,7 +257,7 @@ private fun AuthLineField(
             }
         }
         Spacer(Modifier.height(8.dp))
-        androidx.compose.material3.HorizontalDivider(
+        HorizontalDivider(
             color = if (focused) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant,
             thickness = if (focused) 2.dp else 1.dp,
         )
@@ -277,7 +279,7 @@ fun AuthBottomLinks(
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         if (divider) {
-            androidx.compose.material3.TextButton(onClick = onLeftClick) {
+            TextButton(onClick = onLeftClick) {
                 Text(leftText, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         } else {
@@ -294,7 +296,7 @@ fun AuthBottomLinks(
                 modifier = Modifier.padding(horizontal = 8.dp),
             )
         }
-        androidx.compose.material3.TextButton(onClick = onRightClick) {
+        TextButton(onClick = onRightClick) {
             Text(
                 rightText,
                 color = MaterialTheme.colorScheme.primary,

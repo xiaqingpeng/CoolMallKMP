@@ -83,6 +83,7 @@ import com.joker.coolmall.feature.order.navigation.orderRefundScreen
 import com.joker.coolmall.feature.order.navigation.orderResultScreen
 import com.joker.coolmall.feature.user.navigation.addressEditScreen
 import com.joker.coolmall.feature.user.navigation.addressListScreen
+import com.joker.coolmall.feature.user.navigation.AddressSelectionStore
 import com.joker.coolmall.feature.user.navigation.footprintScreen
 import com.joker.coolmall.feature.user.navigation.navigateToAddressEdit
 import com.joker.coolmall.feature.user.navigation.navigateToAddressList
@@ -235,12 +236,17 @@ fun CoolMallApp() {
                 onBack = { navController.popBackStack() },
                 onAddClick = { navController.navigateToAddressEdit(0) },
                 onEditClick = { id -> navController.navigateToAddressEdit(id) },
+                onAddressSelected = { address ->
+                    AddressSelectionStore.publish(address)
+                    navController.popBackStack()
+                },
             )
             addressEditScreen(
                 onBack = { navController.popBackStack() },
             )
             orderConfirmScreen(
                 onBack = { navController.popBackStack() },
+                onSelectAddress = { navController.navigateToAddressList(isSelectMode = true) },
                 onOrderCreated = { orderId, orderNum, amount ->
                     navController.popBackStack()
                     navController.navigateToOrderResult(

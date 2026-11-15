@@ -7,12 +7,33 @@ import androidx.navigation.toRoute
 import com.joker.coolmall.core.model.entity.Address
 import com.joker.coolmall.feature.user.AddressEditRoute
 import com.joker.coolmall.feature.user.AddressListRoute
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class AddressListRouteArgs(
     val isSelectMode: Boolean = false,
 )
+
+/**
+ * 地址选择结果的跨页面暂存，供订单确认页从地址列表返回时消费。
+ */
+object AddressSelectionStore {
+    private val _selectedAddress = MutableStateFlow<Address?>(null)
+    val selectedAddress: StateFlow<Address?> = _selectedAddress.asStateFlow()
+
+    fun publish(address: Address) {
+        _selectedAddress.value = address
+    }
+
+    fun consume(): Address? {
+        val result = _selectedAddress.value
+        _selectedAddress.value = null
+        return result
+    }
+}
 
 @Serializable
 data class AddressEditRouteArgs(

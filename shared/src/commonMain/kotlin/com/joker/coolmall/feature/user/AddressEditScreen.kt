@@ -229,7 +229,7 @@ private fun AddressFormFields(
                 )
             },
             trailingIcon = {
-                androidx.compose.material3.Icon(
+                Icon(
                     imageVector = Icons.Filled.ChevronRight,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,

@@ -100,11 +100,13 @@ fun NavController.navigateToOrderPay(
 
 fun NavGraphBuilder.orderConfirmScreen(
     onBack: () -> Unit,
+    onSelectAddress: () -> Unit = {},
     onOrderCreated: (orderId: Long, orderNum: String, amount: Int) -> Unit,
 ) {
     composable<OrderConfirmRouteArgs> {
         OrderConfirmRoute(
             onBack = onBack,
+            onSelectAddress = onSelectAddress,
             onOrderCreated = { order ->
                 onOrderCreated(order.id, order.orderNum, order.payableAmount)
             },

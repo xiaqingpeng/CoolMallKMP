@@ -88,7 +88,7 @@ fun DictSelectModal(
 
     // 监听弹窗展开状态，在完全展开后触发回调
     androidx.compose.runtime.LaunchedEffect(sheetState.currentValue) {
-        if (sheetState.currentValue == androidx.compose.material3.SheetValue.Expanded && visible) {
+        if (sheetState.currentValue == SheetValue.Expanded && visible) {
             onExpanded()
         }
     }

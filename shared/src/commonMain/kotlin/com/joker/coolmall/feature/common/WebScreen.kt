@@ -14,6 +14,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -91,7 +92,7 @@ fun WebRoute(
             modifier = Modifier.fillMaxSize().padding(padding),
         ) {
             if (progress in 1..99) {
-                androidx.compose.material3.LinearProgressIndicator(
+                LinearProgressIndicator(
                     progress = { progress / 100f },
                     modifier = Modifier.fillMaxWidth(),
                 )

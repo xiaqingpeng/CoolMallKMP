@@ -1,6 +1,7 @@
 package com.joker.coolmall.feature.order
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -78,6 +79,7 @@ import com.joker.coolmall.core.ui.resolveUiMessageSuspend
 @Composable
 fun OrderConfirmRoute(
     onBack: () -> Unit,
+    onSelectAddress: () -> Unit = {},
     onOrderCreated: (Order) -> Unit,
     viewModel: OrderConfirmViewModel = viewModel(
         factory = viewModelFactory {
@@ -97,12 +99,21 @@ fun OrderConfirmRoute(
     val remark by viewModel.remark.collectAsState()
     val isSubmitting by viewModel.isSubmitting.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val selectedAddressResult by
+        com.joker.coolmall.feature.user.navigation.AddressSelectionStore.selectedAddress
+            .collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.message.collect { snackbarHostState.showSnackbar(resolveUiMessageSuspend(it)) }
     }
     LaunchedEffect(Unit) {
         viewModel.createdOrder.collect { onOrderCreated(it) }
+    }
+    LaunchedEffect(selectedAddressResult) {
+        selectedAddressResult?.let {
+            viewModel.selectAddress(it)
+            com.joker.coolmall.feature.user.navigation.AddressSelectionStore.consume()
+        }
     }
 
     Scaffold(
@@ -168,6 +179,7 @@ fun OrderConfirmRoute(
                 OrderConfirmContent(
                     page = state.page,
                     address = selectedAddress,
+                    onAddressClick = onSelectAddress,
                     carts = viewModel.carts,
                     remark = remark,
                     onRemarkChange = viewModel::updateRemark,
@@ -182,6 +194,7 @@ fun OrderConfirmRoute(
 private fun OrderConfirmContent(
     page: ConfirmOrder,
     address: Address?,
+    onAddressClick: () -> Unit,
     carts: List<Cart>,
     remark: String,
     onRemarkChange: (String) -> Unit,
@@ -193,7 +206,10 @@ private fun OrderConfirmContent(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            AddressCard(address = address ?: page.defaultAddress)
+            AddressCard(
+                address = address ?: page.defaultAddress,
+                onClick = onAddressClick,
+            )
         }
         items(carts, key = { "${it.goodsId}_${it.spec.hashCode()}" }) { cart ->
             CartSummaryCard(cart = cart)
@@ -218,8 +234,15 @@ private fun OrderConfirmContent(
 }
 
 @Composable
-private fun AddressCard(address: Address?) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+private fun AddressCard(
+    address: Address?,
+    onClick: () -> Unit = {},
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+    ) {
         Row(
             modifier = Modifier.padding(14.dp),
             verticalAlignment = Alignment.CenterVertically,
