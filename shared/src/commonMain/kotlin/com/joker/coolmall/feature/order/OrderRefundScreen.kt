@@ -54,6 +54,7 @@ import com.joker.coolmall.core.ui.component.PriceTextSmall
 import myapplication.shared.generated.resources.price_times_count
 import coil3.compose.AsyncImage
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.model.entity.DictItem
 import com.joker.coolmall.core.model.entity.Order
 import com.joker.coolmall.core.model.entity.OrderGoods
@@ -110,16 +111,10 @@ fun OrderRefundRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.order_refund_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.order_refund_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },

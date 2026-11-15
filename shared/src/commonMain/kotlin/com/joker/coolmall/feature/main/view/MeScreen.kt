@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -70,6 +71,8 @@ import com.joker.coolmall.core.ui.theme.SpaceVerticalXSmall
 import com.joker.coolmall.feature.main.component.CommonScaffold
 import com.joker.coolmall.feature.main.viewmodel.MeViewModel
 import myapplication.shared.generated.resources.Res
+import myapplication.shared.generated.resources.app_name
+import myapplication.shared.generated.resources.ic_logo
 import myapplication.shared.generated.resources.ic_coupon_fill
 import myapplication.shared.generated.resources.ic_creative_fill
 import myapplication.shared.generated.resources.ic_footprint_fill
@@ -278,14 +281,11 @@ private fun UserInfoSection(
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(
-                    text = if (isLoggedIn) {
-                        user?.nickName?.firstOrNull()?.toString() ?: "我"
-                    } else {
-                        "?"
-                    },
-                    style = MaterialTheme.typography.headlineSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                Icon(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = stringResource(Res.string.me_not_logged_in),
+                    modifier = Modifier.size(36.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.55f),
                 )
             }
         }

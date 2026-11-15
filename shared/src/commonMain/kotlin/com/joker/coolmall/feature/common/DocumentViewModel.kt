@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 sealed interface DocumentUiState {
     data object Loading : DocumentUiState
-    data class Success(val text: String) : DocumentUiState
+    data class Success(val html: String) : DocumentUiState
     data class Error(val message: UiMessage) : DocumentUiState
 }
 
@@ -36,11 +36,10 @@ class DocumentViewModel(
             }.onSuccess { response ->
                 when {
                     response.isSucceeded && !response.data.isNullOrBlank() -> {
-                        val plain = htmlToPlainText(response.data)
-                        _uiState.value = if (plain.isBlank()) {
+                        _uiState.value = if (htmlToPlainText(response.data).isBlank()) {
                             DocumentUiState.Error(UiMessage.Code(MessageCode.DocEmpty))
                         } else {
-                            DocumentUiState.Success(plain)
+                            DocumentUiState.Success(response.data)
                         }
                     }
                     response.isSucceeded -> {

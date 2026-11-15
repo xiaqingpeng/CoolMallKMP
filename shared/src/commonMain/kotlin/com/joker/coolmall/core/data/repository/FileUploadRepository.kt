@@ -7,10 +7,12 @@ import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.isSuccess
+import com.joker.coolmall.core.session.networkAuthLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
@@ -28,8 +30,13 @@ class FileUploadRepository(
             if (images.isEmpty()) {
                 return@withContext NetworkResponse(data = emptyList(), code = 1000, message = "ok")
             }
+            networkAuthLog("feedback image upload start count=${images.size}")
             val credentialsResponse = commonRepository.getUploadCredentials()
             if (!credentialsResponse.isSucceeded || credentialsResponse.data == null) {
+                networkAuthLog(
+                    "feedback image credentials failed code=${credentialsResponse.code} " +
+                        "message=${credentialsResponse.message.orEmpty()}",
+                )
                 return@withContext NetworkResponse(
                     data = null,
                     code = credentialsResponse.code,
@@ -40,6 +47,7 @@ class FileUploadRepository(
             val credentials = oss.credentials
             val uploadUrl = oss.url
             if (credentials == null || uploadUrl.isNullOrBlank()) {
+                networkAuthLog("feedback image credentials invalid")
                 return@withContext NetworkResponse(
                     data = null,
                     code = 400,
@@ -48,6 +56,10 @@ class FileUploadRepository(
             }
             val urls = mutableListOf<String>()
             for (image in images) {
+                networkAuthLog(
+                    "feedback image read uriType=${image.uri.substringBefore(':', "path")} " +
+                        "fileName=${image.fileName} mime=${image.mimeType}",
+                )
                 val single = uploadOne(
                     image = image,
                     uploadUrl = uploadUrl,
@@ -56,6 +68,10 @@ class FileUploadRepository(
                     sessionToken = credentials.sessionToken.orEmpty(),
                 )
                 if (!single.isSucceeded || single.data == null) {
+                    networkAuthLog(
+                        "feedback image upload failed code=${single.code} " +
+                            "message=${single.message.orEmpty()}",
+                    )
                     return@withContext NetworkResponse(
                         data = null,
                         code = single.code,
@@ -64,6 +80,7 @@ class FileUploadRepository(
                 }
                 urls += single.data
             }
+            networkAuthLog("feedback image upload success count=${urls.size}")
             NetworkResponse(data = urls, code = 1000, message = "批量上传成功")
         }
 
@@ -76,10 +93,9 @@ class FileUploadRepository(
     ): NetworkResponse<String> {
         val bytes = readImageBytes(image.uri)
             ?: return NetworkResponse(data = null, code = 400, message = "无法读取图片")
-        val fileName = image.fileName.ifBlank {
-            "${Random.nextLong(0, Long.MAX_VALUE)}_image.jpg"
-        }
+        val fileName = randomUploadFileName(image.mimeType)
         val key = "app/base/$fileName"
+        networkAuthLog("feedback image bytes=${bytes.size} key=$key")
         return try {
             val response: HttpResponse = Network.imageHttpClient.post(uploadUrl) {
                 setBody(
@@ -105,21 +121,33 @@ class FileUploadRepository(
                 )
             }
             if (response.status.isSuccess()) {
+                response.bodyAsText()
                 NetworkResponse(
                     data = "$uploadUrl/$key",
                     code = 1000,
                     message = "上传成功",
                 )
             } else {
+                val responseBody = response.bodyAsText().take(300)
                 NetworkResponse(
                     data = null,
                     code = response.status.value,
-                    message = "上传失败: ${response.status}",
+                    message = "上传失败: ${response.status} $responseBody",
                 )
             }
         } catch (e: Exception) {
             NetworkResponse(data = null, code = 500, message = e.message ?: "上传异常")
         }
+    }
+
+    private fun randomUploadFileName(mimeType: String): String {
+        val extension = when {
+            mimeType.contains("png", ignoreCase = true) -> "png"
+            mimeType.contains("webp", ignoreCase = true) -> "webp"
+            mimeType.contains("gif", ignoreCase = true) -> "gif"
+            else -> "jpg"
+        }
+        return "${Random.nextLong(0, Long.MAX_VALUE)}_image.$extension"
     }
 }
 

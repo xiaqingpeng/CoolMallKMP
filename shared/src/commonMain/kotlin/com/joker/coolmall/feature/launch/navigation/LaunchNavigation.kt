@@ -10,7 +10,7 @@ import com.joker.coolmall.ui.navigation.Routes
 fun NavController.navigateToGuide() {
     navigate(Routes.GUIDE) {
         launchSingleTop = true
-        popUpTo(Routes.SPLASH) { inclusive = true }
+        popUpTo(Routes.MAIN) { inclusive = true }
     }
 }
 
@@ -18,6 +18,13 @@ fun NavController.navigateToMain() {
     navigate(Routes.MAIN) {
         launchSingleTop = true
         popUpTo(Routes.SPLASH) { inclusive = true }
+    }
+}
+
+fun NavController.navigateFromGuideToMain() {
+    navigate(Routes.MAIN) {
+        launchSingleTop = true
+        popUpTo(Routes.GUIDE) { inclusive = true }
     }
 }
 

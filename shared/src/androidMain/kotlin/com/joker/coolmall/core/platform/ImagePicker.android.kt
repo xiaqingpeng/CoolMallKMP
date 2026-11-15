@@ -17,18 +17,29 @@ actual fun rememberPlatformImagePicker(
     val context = LocalContext.current
     val limit = maxCount.coerceAtLeast(1)
 
-    // 统一用多选 API；limit=1 时系统仍只允许选一张
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = limit),
+    val singleLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+    ) { uri ->
+        onResult(
+            uri?.let { listOf(it.toPickedImage(context.contentResolver)) }.orEmpty(),
+        )
+    }
+    val multipleLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickMultipleVisualMedia(
+            maxItems = limit.coerceAtLeast(2),
+        ),
     ) { uris ->
         onResult(uris.map { it.toPickedImage(context.contentResolver) })
     }
 
-    return remember(launcher, limit) {
+    return remember(singleLauncher, multipleLauncher, limit) {
         {
-            launcher.launch(
-                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-            )
+            val request = PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+            if (limit == 1) {
+                singleLauncher.launch(request)
+            } else {
+                multipleLauncher.launch(request)
+            }
         }
     }
 }

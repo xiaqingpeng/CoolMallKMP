@@ -43,7 +43,9 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
+            implementation(libs.lottie.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.chucker)
             implementation(libs.androidx.activity.compose)
             implementation(libs.alipaysdk.android)
         }

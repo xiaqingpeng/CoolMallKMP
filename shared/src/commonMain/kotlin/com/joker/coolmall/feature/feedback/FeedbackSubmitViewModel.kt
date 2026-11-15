@@ -5,9 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.joker.coolmall.core.data.repository.CommonRepository
 import com.joker.coolmall.core.data.repository.FeedbackRepository
 import com.joker.coolmall.core.data.repository.FileUploadRepository
+import com.joker.coolmall.core.data.repository.AuthRepository
 import com.joker.coolmall.core.model.entity.DictItem
 import com.joker.coolmall.core.model.request.FeedbackSubmitRequest
 import com.joker.coolmall.core.platform.PickedImage
+import com.joker.coolmall.core.session.AuthSession
+import com.joker.coolmall.core.session.networkAuthLog
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -29,9 +32,21 @@ class FeedbackSubmitViewModel(
     private val feedbackRepository: FeedbackRepository,
     private val commonRepository: CommonRepository,
     private val fileUploadRepository: FileUploadRepository,
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
 
     private val maxImages = 9
+
+    private fun fallbackTypes(): List<DictItem> = listOf(
+        DictItem(name = "崩溃与错误", value = 0),
+        DictItem(name = "支付问题", value = 1),
+        DictItem(name = "体验不佳", value = 2),
+        DictItem(name = "功能建议", value = 3),
+        DictItem(name = "商品建议", value = 4),
+        DictItem(name = "活动建议", value = 5),
+        DictItem(name = "物流售后", value = 6),
+        DictItem(name = "其他", value = -1),
+    )
 
     private val _typesState =
         MutableStateFlow<FeedbackTypesUiState>(FeedbackTypesUiState.Loading)
@@ -69,28 +84,20 @@ class FeedbackSubmitViewModel(
                 commonRepository.getFeedbackTypes()
             }.onSuccess { response ->
                 if (response.isSucceeded) {
-                    val types = response.data.orEmpty()
+                    val types = response.data.orEmpty().ifEmpty { fallbackTypes() }
                     _typesState.value = FeedbackTypesUiState.Success(types)
                     if (_selectedType.value == null) {
                         _selectedType.value = types.firstOrNull()
                     }
                 } else {
                     // 字典失败时提供兜底类型，仍可提交
-                    val fallback = listOf(
-                        DictItem(name = "suggestion", value = 1),
-                        DictItem(name = "experience", value = 2),
-                        DictItem(name = "other", value = 0),
-                    )
+                    val fallback = fallbackTypes()
                     _typesState.value = FeedbackTypesUiState.Success(fallback)
                     _selectedType.value = fallback.first()
                     _message.emit(UiMessage.rawOrCode(response.message, MessageCode.FeedbackTypeLoadFailed))
                 }
             }.onFailure {
-                val fallback = listOf(
-                    DictItem(name = "suggestion", value = 1),
-                    DictItem(name = "experience", value = 2),
-                    DictItem(name = "other", value = 0),
-                )
+                val fallback = fallbackTypes()
                 _typesState.value = FeedbackTypesUiState.Success(fallback)
                 _selectedType.value = fallback.first()
             }
@@ -142,12 +149,22 @@ class FeedbackSubmitViewModel(
         }
         viewModelScope.launch {
             _isSubmitting.value = true
+            if (AuthSession.token.isBlank()) {
+                networkAuthLog("feedback submit token empty, restoring session")
+                authRepository.restoreSession()
+            }
+            networkAuthLog("feedback submit start token=${AuthSession.tokenSummary()}")
             val pending = _pendingImages.value
             val uploadedUrls = if (pending.isNotEmpty()) {
                 val uploadResult = fileUploadRepository.uploadImages(pending)
                 if (!uploadResult.isSucceeded || uploadResult.data == null) {
                     _isSubmitting.value = false
-                    _message.emit(UiMessage.rawOrCode(uploadResult.message, MessageCode.OrderCommentPicUploadFailed))
+                    _message.emit(
+                        UiMessage.rawOrCode(
+                            uploadResult.message,
+                            MessageCode.OrderCommentPicUploadFailed,
+                        ),
+                    )
                     return@launch
                 }
                 uploadResult.data

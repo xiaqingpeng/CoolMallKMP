@@ -3,8 +3,10 @@ package com.joker.coolmall.feature.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joker.coolmall.core.data.repository.AuthRepository
+import com.joker.coolmall.core.model.entity.Captcha
 import com.joker.coolmall.core.ui.MessageCode
 import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmall.core.platform.notifyVerificationCode
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,6 +25,9 @@ data class ResetPasswordUiState(
     val confirmPassword: String = "",
     val isLoading: Boolean = false,
     val countdown: Int = 0,
+    val captcha: Captcha = Captcha(),
+    val imageCode: String = "",
+    val showCaptchaDialog: Boolean = false,
     val errorMessage: UiMessage? = null,
 ) {
     val canSendCode: Boolean
@@ -71,16 +76,59 @@ class ResetPasswordViewModel(
         _uiState.update { it.copy(confirmPassword = value, errorMessage = null) }
     }
 
+    fun updateImageCode(value: String) {
+        _uiState.update { it.copy(imageCode = value.filter(Char::isDigit).take(4)) }
+    }
+
+    fun dismissCaptcha() {
+        _uiState.update { it.copy(showCaptchaDialog = false, imageCode = "") }
+    }
+
+    fun refreshCaptcha() {
+        viewModelScope.launch {
+            runCatching { authRepository.getCaptcha() }.onSuccess { response ->
+                if (response.isSucceeded && response.data != null) {
+                    _uiState.update { it.copy(captcha = response.data, imageCode = "") }
+                }
+            }
+        }
+    }
+
     fun sendCode() {
         val state = _uiState.value
         if (!state.canSendCode) return
+        if (state.captcha.captchaId.isBlank() || state.captcha.data.isBlank()) {
+            _uiState.update { it.copy(showCaptchaDialog = true) }
+            refreshCaptcha()
+            return
+        }
+        if (state.imageCode.length != 4) {
+            _uiState.update { it.copy(showCaptchaDialog = true) }
+            return
+        }
+        sendCodeWithCaptcha(state)
+    }
+
+    fun confirmCaptcha() {
+        if (_uiState.value.imageCode.length != 4) return
+        val state = _uiState.value
+        dismissCaptcha()
+        sendCodeWithCaptcha(state)
+    }
+
+    private fun sendCodeWithCaptcha(state: ResetPasswordUiState) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             runCatching {
-                authRepository.sendSmsCode(state.phone)
+                authRepository.sendSmsCode(
+                    phone = state.phone,
+                    captchaId = state.captcha.captchaId,
+                    code = state.imageCode,
+                )
             }.onSuccess { response ->
                 _uiState.update { it.copy(isLoading = false) }
                 if (response.isSucceeded) {
+                    response.data?.takeIf { it.isNotBlank() }?.let(::notifyVerificationCode)
                     _message.emit(UiMessage.Code(MessageCode.CodeSent))
                     startCountdown()
                 } else {

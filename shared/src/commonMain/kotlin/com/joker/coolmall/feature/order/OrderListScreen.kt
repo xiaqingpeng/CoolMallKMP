@@ -61,6 +61,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.model.entity.Order
 import com.joker.coolmall.core.platform.ThirdPartyCapabilities
 import com.joker.coolmall.feature.order.model.OrderStatus
@@ -137,16 +138,10 @@ fun OrderListRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.order_list_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.order_list_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -225,9 +220,7 @@ private fun OrderTabPage(
 
     when (val state = uiState) {
         OrderListUiState.Loading -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
+            OrderListLoadingSkeleton()
         }
 
         is OrderListUiState.Error -> {

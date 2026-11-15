@@ -22,7 +22,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -49,6 +48,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.model.entity.Comment
 import com.joker.coolmall.core.model.entity.Goods
 import com.joker.coolmall.core.model.entity.GoodsDetail
@@ -60,6 +60,7 @@ import com.joker.coolmall.core.ui.component.AppButtonStyle
 import com.joker.coolmall.core.ui.component.PriceTextLarge
 import com.joker.coolmall.core.ui.component.TitleWithLine
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
+import com.joker.coolmall.core.ui.component.DetailSkeleton
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
 import com.joker.coolmall.core.ui.theme.ColorDanger
 import com.joker.coolmall.core.ui.theme.SpaceHorizontalMedium
@@ -79,6 +80,7 @@ import myapplication.shared.generated.resources.goods_select_spec
 import myapplication.shared.generated.resources.goods_sold
 import myapplication.shared.generated.resources.goods_spec
 import myapplication.shared.generated.resources.goods_user_comments
+import myapplication.shared.generated.resources.goods_view_all_comments
 import myapplication.shared.generated.resources.me_user_fallback
 import org.jetbrains.compose.resources.stringResource
 
@@ -88,6 +90,7 @@ fun GoodsDetailRoute(
     goodsId: Long,
     onBack: () -> Unit,
     onBuyNow: () -> Unit = {},
+    onCommentsClick: (Long) -> Unit = {},
     viewModel: GoodsDetailViewModel = viewModel(
         key = "goods_detail_$goodsId",
         factory = viewModelFactory {
@@ -120,16 +123,10 @@ fun GoodsDetailRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.goods_detail_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.goods_detail_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -167,14 +164,7 @@ fun GoodsDetailRoute(
     ) { padding ->
         when (val state = uiState) {
             GoodsDetailUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+                DetailSkeleton(Modifier.padding(padding))
             }
             is GoodsDetailUiState.Error -> {
                 EmptyUiMessage(
@@ -190,6 +180,7 @@ fun GoodsDetailRoute(
                     detail = state.data,
                     selectedSpec = selectedSpec,
                     onShowSpecModal = viewModel::showSpecModal,
+                    onCommentsClick = { onCommentsClick(goodsId) },
                     modifier = Modifier.padding(padding),
                 )
                 if (specModalVisible) {
@@ -222,6 +213,7 @@ private fun GoodsDetailScreen(
     detail: GoodsDetail,
     selectedSpec: com.joker.coolmall.core.model.entity.GoodsSpec?,
     onShowSpecModal: () -> Unit,
+    onCommentsClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val goods = detail.goodsInfo
@@ -291,7 +283,22 @@ private fun GoodsDetailScreen(
         }
         if (detail.comment.isNotEmpty()) {
             item {
-                TitleWithLine(text = stringResource(Res.string.goods_user_comments))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(onClick = onCommentsClick),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    TitleWithLine(
+                        text = stringResource(Res.string.goods_user_comments),
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(
+                        text = stringResource(Res.string.goods_view_all_comments),
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.labelLarge,
+                    )
+                }
             }
             items(detail.comment, key = { it.id }) { comment ->
                 CommentItem(comment = comment)

@@ -3,10 +3,12 @@ package com.joker.coolmall.feature.launch
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joker.coolmall.core.data.local.GuidePreferences
+import com.joker.coolmall.core.data.local.SplashPreferences
 import com.joker.coolmall.core.data.repository.AuthRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -18,6 +20,7 @@ sealed interface SplashDestination {
 class SplashViewModel(
     private val guidePreferences: GuidePreferences,
     private val authRepository: AuthRepository,
+    private val splashPreferences: SplashPreferences? = null,
 ) : ViewModel() {
 
     private val _destination = MutableStateFlow<SplashDestination?>(null)
@@ -26,7 +29,9 @@ class SplashViewModel(
     init {
         viewModelScope.launch {
             runCatching { authRepository.restoreSession() }
-            delay(1200)
+            if (splashPreferences?.showSplash?.first() != false) {
+                delay(1200)
+            }
             _destination.value = if (guidePreferences.isGuideShown()) {
                 SplashDestination.Main
             } else {

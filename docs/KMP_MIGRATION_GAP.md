@@ -1,6 +1,6 @@
 # CoolMallKotlin → CoolMallKMP 对齐差距与迁移计划
 
-> 更新时间：2026-10-28  
+> 更新时间：2026-11-14
 > 参考样板：`/Applications/qingpengxia/development-playground/android/kmp/netcloudmusic`  
 > 目标：Android + iOS 双端；**iOS 不做 QQ / 微信 / 支付宝**
 
@@ -8,13 +8,13 @@
 
 | 维度 | 状态 | 说明 |
 |------|------|------|
-| Screen 文件名 | ✅ 已对齐 | CoolMallKotlin / CoolMallKMP 各 37 个 `*Screen*.kt`，名称一致 |
-| feature / core 目录 | ⚠️ dump 隔离 | 未改造源码在 `shared/migration/android-dump/`，不参与编译 |
-| 真正 KMP 化 | 🔄 进行中 | 底座 + 主链路已 KMP；其余 feature 仍在 dump |
-| 可运行双端业务 | ✅ 主链路 | Splash→Guide→Main + 登录/购物车/商详/确认订单 双端可编译 |
-| iOS QQ/微信/支付宝 | 🚫 不做 | `ThirdPartyCapabilities`；iOS UI 不暴露入口 |
+| Screen 文件名 | ✅ 主页面已对齐 | 主业务 Screen 已迁入 `commonMain`，并补齐登录首页、商品评价、贡献者分页页面；部分平台容器仍是降级实现 |
+| feature / core 目录 | ✅ 已隔离 | 尚未迁移的旧 Android 源码保留在 `shared/migration/android-dump/`，不参与编译 |
+| 真正 KMP 化 | ✅ 主链路完成 | 网络、存储、导航、主要业务页面均使用共享代码；平台能力通过 `expect/actual` |
+| 可运行双端业务 | ✅ 已验证 | `:shared:compileKotlinIosSimulatorArm64` 与 `:androidApp:assembleDebug` 均成功（2026-11-14） |
+| iOS QQ/微信/支付 | 🚫 按范围暂不做 | iOS 使用能力 stub，UI 不暴露不支持的入口 |
 
-**一句话**：P0/P1 底座与主购链路（浏览→加购→登录→确认下单）已双端可跑；订单全链路/地址 CRUD/Room3 购物车/搜索/优惠券/重置密码 UI 已切片。
+**一句话**：主购链路、订单售后、客服、反馈、足迹、优惠券、评价、贡献者和认证主链路已经进入共享 KMP；当前仍有地址地区选择、HTML/Web 容器、设置项和用户资料结构等行为差异。
 
 ## 2. CoolMallKotlin 功能清单 vs KMP
 
@@ -31,31 +31,27 @@
 - **common**：About / Web / Settings / UserAgreement / PrivacyPolicy / Contributors  
 - **launch**：Splash / Guide  
 
-### 2.2 未真正跨平台对齐的能力（缺口）
+### 2.2 当前仍未完整跨平台对齐的能力（缺口）
 
 | 能力 | CoolMallKotlin | CoolMallKMP 现状 | iOS 目标 |
 |------|----------------|------------------|----------|
-| 网络 | Retrofit + OkHttp | 原样在 commonMain | Ktor + Darwin |
-| DI | Hilt | 118+ 处 Hilt/`@Inject` | 手动 `AppContainer`（同 netcloud） |
-| 本地 KV | MMKV | Android-only | DataStore Preferences |
-| DB | Room | Android Room | Room3 KMP + BundledSQLite |
-| 图片 | Coil2 | 未接 KMP Coil | Coil3 + ktor3 |
-| 导航 | Navigation3 / 模块导航 | 未接 CMP Navigation | Navigation Compose |
-| 资源 | `R.string` / `painterResource(id=)` | Android R | composeResources |
-| 支付支付宝 | PayTask SDK | 在 commonMain | **不做**（Android actual） |
-| QQ 登录 | Tencent SDK | 在 commonMain | **不做** |
-| 微信相关 UI/支付 | 有入口 | 在 commonMain | **不做** |
-| Toast / 权限 / 通知 | Android API | 在 commonMain | expect/actual 或 Snackbar |
-| 文件上传 / Uri | `android.net.Uri` | `FileUploadRepository` + `PickedImage`；Picker actual 空 | multiplatform 文件抽象 |
+| 支付宝/微信支付 | Android SDK | Android 支付链路保留，真实 SDK 扩展按本次范围暂缓；iOS 不提供 | 后续按平台 SDK 接入 |
+| QQ/微信登录 | Tencent/微信 SDK | Android 当前为 optional stub，能力开关默认关闭；iOS 为 stub | 后续按平台 SDK 接入 |
+| 内嵌 WebView | Android WebView | 已补协议 HTML 容器和可导航的通用 `WebRoute`，支持动态标题、加载进度、刷新、更多菜单和外部浏览器 | Android WebView + iOS WKWebView |
+| 图片验证码 | `Captcha` + `ImageCaptchaDialog` | 已迁移共享模型、Base64 图片显示和发送短信前校验；重置密码尚未接入 | 双端共用 |
+| 地址省市区 | `RegionPickerModal` 三级选择 | 已补共享三级选择弹窗、编辑回显和 commonMain 地区树；当前内置的是常用省市区数据，完整行政区资源仍可继续扩充 | 迁入 commonMain 数据与选择弹窗 |
+| 登录首页 | `LoginScreen` | 已补共享登录首页和导航；真实 QQ/微信/支付宝 SDK 仍按范围暂缓 | iOS 隐藏未配置入口 |
+| 设置项 | 主题模式、主题色、账号安全、引导开关 | 已补主题模式、主题色持久化、账号安全入口、重看引导入口和语言展示入口；语言切换仍未实现 | 补齐共享设置模型与持久化 |
+| 个人资料结构 | 社交绑定、安全区、注销账号 | KMP 目前只有头像、昵称、手机号、账号 ID、退出 | SDK/后端不可用项显示明确未支持 |
+| 权限/通知/分享 | Android API | 关键流程使用共享 UI 或平台 stub，完整能力尚未统一抽象 | expect/actual |
+| 缓存清理/统一日志 | Android 工具类 | 尚未形成跨平台统一接口 | 后续补平台抽象 |
+| 完整 DesignSystem | Android 原组件 | 已有主题、按钮、价格、空态等共享组件，仍有视觉细节差异 | 持续收敛 |
 
-### 2.3 技术债量化（commonMain）
+### 2.3 迁移隔离区现状
 
-- `import android.*`：**39** 个文件  
-- Hilt / `@Inject` / `hiltViewModel`：**118** 个文件  
-- Retrofit / OkHttp：**21** 个文件  
-- MMKV / Room：**21** 个文件  
-- 支付 / QQ / Tencent 相关：**19** 个文件  
-- 嵌套 `src/main/java` 目录：**21** 处  
+- 尚未迁移的旧 Android 源码集中在 `shared/migration/android-dump/`，不参与 `commonMain` 编译。
+- 当前共享源码中的平台差异主要集中在 `androidMain` / `iosMain` 的 actual 实现和明确暂缓的 SDK 能力。
+- 因此旧 dump 中的 Android/Hilt/Retrofit 数量不能直接当作当前 KMP 未迁移数量。
 
 ### 2.4 相对 netcloudmusic 缺失的依赖
 
@@ -122,19 +118,20 @@ CoolMallKMP `libs.versions.toml` / `shared/build.gradle.kts` 目前几乎只有 
 - [x] 订单评价：`POST goods/comment/submit` + 星级/文案 + 多商品选择 + 配图（`FileUploadRepository` + 系统相册选图）  
 - [x] 商品搜索：热词 `goods/search/keyword` + 搜索页 → 分类列表 keyword  
 - [x] 优惠券：领取/列表 API + 「我的」入口  
-- [x] 重置密码：UI + 发短信/校验（原 CoolMallKotlin 与后端均无确认 reset API，**不伪造成功提交**）  
+- [ ] 重置密码：UI + 图形验证码 + 发短信已迁移；最终 reset API 尚未确认，**不伪造成功提交**
 - [x] 上传底座：`POST base/comm/upload` 凭证 + multipart 腾讯云；`readImageBytes` expect/actual  
 
 
 - [x] 支付：Android `order/pay/alipayAppPay` + `PayTask.payV2`；iOS 不提供  
-- [x] 短信验证码登录：`user/login/smsCode` + `user/login/phone` + 60 秒倒计时  
-- [x] 用户注册：`user/login/register` + 密码一致性校验 + 注册后直接登录  
+- [x] 短信验证码登录：`user/login/captcha` + `user/login/smsCode` + `user/login/phone` + 图形验证码弹窗 + 60 秒倒计时  
+- [x] 用户注册：`user/login/register` + 图形验证码弹窗 + 密码一致性校验 + 注册后直接登录  
+- [x] 登录首页：短信登录 / 账号密码登录入口；QQ/微信按平台能力开关显示  
 - [x] 浏览足迹：Room `footprints` + 商详写入 + 列表/清空（「我的」入口）  
 - [x] 意见反馈：`feedback/page` + `feedback/submit` + 字典类型 + 列表/提交页  
 - [x] 关于我们：版本/平台/三方能力说明 + 协议入口  
 - [x] 系统相册选图：`rememberPlatformImagePicker`（Android Photo Picker / iOS PHPicker）  
-- [x] 设置：主题模式（SYSTEM/LIGHT/DARK，DataStore）+ 协议/关于入口  
-- [x] 用户协议 / 隐私政策：`getParam` + 纯文本渲染（不做 WebView）  
+- [x] 设置：主题模式、主题色（DataStore）+ 协议/关于/账号安全/重看引导/语言展示入口
+- [x] 用户协议 / 隐私政策：`getParam` 已迁移，使用 Android WebView + iOS WKWebView 共享平台容器展示 HTML
 - [x] 客服 Chat：`cs/session/create` + 消息分页 + Socket.IO WebSocket（Ktor）  
 - [x] 客服发图：相册选图 + OSS 上传 + WS `type=image`  
 - [x] 反馈配图：相册选图 + OSS 上传 + `feedback/submit` images  
@@ -149,10 +146,15 @@ CoolMallKMP `libs.versions.toml` / `shared/build.gradle.kts` 目前几乎只有 
 - [x] feature VM 错误载体 `UiMessage`（含 Document/Coupon/Feedback/Chat messageEvent 等）  
 
 ### P3 — 平台专有 & 收敛
-- [x] Android：支付宝 actual；QQ/微信 optional stub（真 SDK 待接）  
+- [x] Android：支付调用链与支付宝 actual；QQ/微信 optional stub（真 SDK 待接）
 - [x] iOS：支付与三方登录隐藏 / NotConfigured stub  
 - [ ] Android 真 QQ / 微信 SDK 接入（当前 `ThirdPartyLogin` stub，能力开关默认关）  
-- [ ] 重置密码后端 API 确认并接线（UI 已有，不伪造成功）  
+- [x] 地址三级省市区选择器：共享 `RegionPickerModal`、编辑回显和地区数据已迁移；完整行政区数据仍需补全
+- [x] 通用 `WebScreen`：动态标题、加载进度、刷新、更多菜单、外部浏览器和导航入口已迁移
+- [x] 协议/隐私 HTML 容器：Android WebView + iOS WKWebView 的 `expect/actual` 已实现
+- [x] 设置页主题色、账号安全入口、重新查看引导、语言展示入口
+- [x] 个人资料页微信/QQ 绑定、安全区、注销账号等可见结构
+- [ ] 重置密码最终后端 API 确认并接线（UI、图形验证码、发短信已迁移，不伪造成功）
 - [x] 最小设计 token：`core/ui/theme`（Primary `#465CFF` / Danger `#FF2B2B` / 间距 4·8·12·16）+ `CoolMallApp` MaterialTheme  
 - [x] SpecSelectSheet 视觉对齐 dump（100dp header、网格卡片、选中后数量、加购+立即购买）+ `buyNow`→CheckoutDraft  
 - [x] OrderStatus Tab 文案资源化；售后筛选 `[5,6]`；选中 Tab 主色强调  
@@ -174,12 +176,13 @@ CoolMallKMP `libs.versions.toml` / `shared/build.gradle.kts` 目前几乎只有 
 - [x] Me 专用 dump 矢量迁入 composeResources（order/pay/receipt/logistics/message/footprint/location/service/creative/tip/set/coupon_fill）并接入 MeScreen  
 - [x] Profile 个人资料页（只读头像/昵称/手机/账号 + 退出登录；iOS 无 QQ/微信绑定区）+ Me 头像区已登录跳转  
 - [x] Home 页视觉/结构对齐 CoolMallKotlin：顶栏 Logo+搜索+GitHub → Banner 轮播 → 优惠券横条+领取弹层 → 分类 5 列网格 → 限时精选横滑 → 推荐列表 → 全部商品双列网格+分页；去掉大标题/简易 LazyRow  
-- [ ] 完整 designsystem 模块 / 其余视觉余量  
+- [ ] 完整 designsystem 模块 / 其余视觉余量
 
 
 
 
-- [ ] 权限 / 外链 / 分享 / 缓存清理 expect/actual  
+- [x] 外链打开 expect/actual（Android Intent / iOS UIApplication）
+- [ ] 权限 / 分享 / 缓存清理 expect/actual
 - [ ] 统一日志；删除无效 appleMain/nativeMain 空壳  
 
 ## 5. iOS 明确不做的模块

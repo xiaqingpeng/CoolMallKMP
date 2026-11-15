@@ -110,6 +110,7 @@ fun HomeRoute(
     onCategoryClick: (Long, String) -> Unit = { _, _ -> },
     onSearchClick: () -> Unit = {},
     onAboutClick: () -> Unit = {},
+    onGithubClick: () -> Unit = {},
     onFeaturedClick: () -> Unit = {},
     onLoginRequired: () -> Unit = {},
     viewModel: HomeViewModel = viewModel(
@@ -148,12 +149,7 @@ fun HomeRoute(
 
     when (val state = uiState) {
         HomeUiState.Loading -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center,
-            ) {
-                CircularProgressIndicator()
-            }
+            HomeLoadingSkeleton()
         }
 
         is HomeUiState.Error -> {
@@ -177,6 +173,7 @@ fun HomeRoute(
                 onCategoryClick = onCategoryClick,
                 onSearchClick = onSearchClick,
                 onAboutClick = onAboutClick,
+                onGithubClick = onGithubClick,
                 onFeaturedClick = onFeaturedClick,
                 onRefresh = viewModel::onRefresh,
                 onLoadMore = viewModel::onLoadMore,
@@ -202,6 +199,7 @@ private fun HomeScreen(
     onCategoryClick: (Long, String) -> Unit,
     onSearchClick: () -> Unit,
     onAboutClick: () -> Unit,
+    onGithubClick: () -> Unit,
     onFeaturedClick: () -> Unit,
     onRefresh: () -> Unit,
     onLoadMore: () -> Unit,
@@ -236,6 +234,7 @@ private fun HomeScreen(
                     scrollBehavior = scrollBehavior,
                     onSearchClick = onSearchClick,
                     onAboutClick = onAboutClick,
+                    onGithubClick = onGithubClick,
                 )
             },
             scrollBehavior = scrollBehavior,
@@ -380,6 +379,7 @@ private fun HomeTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
     onSearchClick: () -> Unit,
     onAboutClick: () -> Unit,
+    onGithubClick: () -> Unit,
 ) {
     TopAppBar(
         scrollBehavior = scrollBehavior,
@@ -426,7 +426,7 @@ private fun HomeTopAppBar(
             }
         },
         actions = {
-            IconButton(onClick = onAboutClick) {
+            IconButton(onClick = onGithubClick) {
                 Icon(
                     painter = painterResource(Res.drawable.ic_github),
                     contentDescription = "GitHub",

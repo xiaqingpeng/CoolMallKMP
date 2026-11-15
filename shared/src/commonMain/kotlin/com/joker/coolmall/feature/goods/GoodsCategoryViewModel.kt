@@ -4,7 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joker.coolmall.core.data.repository.GoodsRepository
 import com.joker.coolmall.core.model.entity.Goods
+import com.joker.coolmall.core.model.entity.Category
 import com.joker.coolmall.core.model.request.GoodsSearchRequest
+import com.joker.coolmall.core.model.response.NetworkPageData
+import com.joker.coolmall.core.model.response.NetworkPageMeta
+import com.joker.coolmall.core.model.response.NetworkResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +24,24 @@ sealed interface GoodsCategoryUiState {
     ) : GoodsCategoryUiState
 
     data class Error(val message: UiMessage) : GoodsCategoryUiState
+}
+
+sealed interface GoodsCategoryFilterUiState {
+    data object Loading : GoodsCategoryFilterUiState
+    data class Success(val categories: List<Category>) : GoodsCategoryFilterUiState
+    data class Error(val message: UiMessage) : GoodsCategoryFilterUiState
+}
+
+enum class GoodsSortType {
+    COMPREHENSIVE,
+    SALES,
+    PRICE,
+}
+
+enum class GoodsSortState {
+    NONE,
+    ASC,
+    DESC,
 }
 
 class GoodsCategoryViewModel(
@@ -47,6 +69,24 @@ class GoodsCategoryViewModel(
     private val pageSize = 20
     private val loadedGoods = mutableListOf<Goods>()
     private var hasMore = true
+    private val _selectedCategoryIds = MutableStateFlow(typeId?.let(::listOf).orEmpty())
+    val selectedCategoryIds: StateFlow<List<Long>> = _selectedCategoryIds.asStateFlow()
+    private val _categories = MutableStateFlow<List<Category>>(emptyList())
+    val categories: StateFlow<List<Category>> = _categories.asStateFlow()
+    private val _filterUiState = MutableStateFlow<GoodsCategoryFilterUiState>(
+        GoodsCategoryFilterUiState.Loading,
+    )
+    val filterUiState: StateFlow<GoodsCategoryFilterUiState> = _filterUiState.asStateFlow()
+    private val _minPrice = MutableStateFlow("")
+    val minPrice: StateFlow<String> = _minPrice.asStateFlow()
+    private val _maxPrice = MutableStateFlow("")
+    val maxPrice: StateFlow<String> = _maxPrice.asStateFlow()
+    private val _sortType = MutableStateFlow(GoodsSortType.COMPREHENSIVE)
+    val sortType: StateFlow<GoodsSortType> = _sortType.asStateFlow()
+    private val _sortState = MutableStateFlow(GoodsSortState.NONE)
+    val sortState: StateFlow<GoodsSortState> = _sortState.asStateFlow()
+    private val _filtersVisible = MutableStateFlow(false)
+    val filtersVisible: StateFlow<Boolean> = _filtersVisible.asStateFlow()
 
     init {
         refresh()
@@ -57,6 +97,79 @@ class GoodsCategoryViewModel(
         hasMore = true
         loadedGoods.clear()
         loadPage(isRefresh = true)
+    }
+
+    fun showFilters() {
+        _filtersVisible.value = true
+        if (_categories.value.isEmpty()) {
+            _filterUiState.value = GoodsCategoryFilterUiState.Loading
+            viewModelScope.launch {
+                runCatching { goodsRepository.getGoodsTypeList() }
+                    .onSuccess { response ->
+                        if (response.isSucceeded) {
+                            val categories = response.data.orEmpty()
+                            _categories.value = categories
+                            _filterUiState.value = GoodsCategoryFilterUiState.Success(categories)
+                        } else {
+                            _filterUiState.value = GoodsCategoryFilterUiState.Error(
+                                UiMessage.loadFailed(response.message, response.code),
+                            )
+                        }
+                    }
+                    .onFailure { error ->
+                        _filterUiState.value = GoodsCategoryFilterUiState.Error(
+                            UiMessage.network(error.message),
+                        )
+                    }
+            }
+        } else {
+            _filterUiState.value = GoodsCategoryFilterUiState.Success(_categories.value)
+        }
+    }
+
+    fun retryFilters() {
+        _categories.value = emptyList()
+        showFilters()
+    }
+
+    fun hideFilters() {
+        _filtersVisible.value = false
+    }
+
+    fun applyFilters(categoryIds: List<Long>, minPrice: String, maxPrice: String) {
+        _selectedCategoryIds.value = categoryIds
+        _minPrice.value = minPrice.trim()
+        _maxPrice.value = maxPrice.trim()
+        hideFilters()
+        refresh()
+    }
+
+    fun resetFilters() {
+        _selectedCategoryIds.value = typeId?.let(::listOf).orEmpty()
+        _minPrice.value = ""
+        _maxPrice.value = ""
+        hideFilters()
+        refresh()
+    }
+
+    fun cycleSort(type: GoodsSortType) {
+        if (type == GoodsSortType.COMPREHENSIVE) {
+            _sortType.value = type
+            _sortState.value = GoodsSortState.NONE
+        } else if (_sortType.value != type) {
+            _sortType.value = type
+            _sortState.value = GoodsSortState.ASC
+        } else {
+            _sortState.value = when (_sortState.value) {
+                GoodsSortState.NONE -> GoodsSortState.ASC
+                GoodsSortState.ASC -> GoodsSortState.DESC
+                GoodsSortState.DESC -> {
+                    _sortType.value = GoodsSortType.COMPREHENSIVE
+                    GoodsSortState.NONE
+                }
+            }
+        }
+        refresh()
     }
 
     fun loadMore() {
@@ -76,16 +189,101 @@ class GoodsCategoryViewModel(
             }
 
             runCatching {
-                goodsRepository.getGoodsPage(
-                    GoodsSearchRequest(
-                        page = currentPage,
-                        size = pageSize,
-                        typeId = typeId?.let { listOf(it) },
-                        featured = featured,
-                        recommend = recommend,
-                        keyWord = keyword?.takeIf { it.isNotBlank() },
-                    )
+                val request = GoodsSearchRequest(
+                    page = currentPage,
+                    size = pageSize,
+                    typeId = _selectedCategoryIds.value.takeIf { it.isNotEmpty() },
+                    minPrice = _minPrice.value.takeIf { it.isNotBlank() },
+                    maxPrice = _maxPrice.value.takeIf { it.isNotBlank() },
+                    order = when (_sortType.value) {
+                        GoodsSortType.COMPREHENSIVE -> null
+                        GoodsSortType.SALES -> "sold"
+                        GoodsSortType.PRICE -> "price"
+                    },
+                    sort = when (_sortState.value) {
+                        GoodsSortState.NONE -> null
+                        GoodsSortState.ASC -> "asc"
+                        GoodsSortState.DESC -> "desc"
+                    },
+                    featured = featured,
+                    recommend = recommend,
+                    keyWord = keyword?.takeIf { it.isNotBlank() },
                 )
+                val response = goodsRepository.getGoodsPage(request)
+                if (
+                    response.isSucceeded &&
+                    response.data?.list.isNullOrEmpty() &&
+                    !keyword.isNullOrBlank() &&
+                    typeId == null &&
+                    !featured &&
+                    !recommend
+                ) {
+                    val splitMatches = keyword
+                        .trim()
+                        .split(Regex("\\s+"))
+                        .map { it.trim() }
+                        .flatMap(::searchTokens)
+                        .filter { !it.equals(keyword.trim(), ignoreCase = true) }
+                        .distinct()
+                        .flatMap { token ->
+                            goodsRepository.getGoodsPage(
+                                request.copy(
+                                    keyWord = token,
+                                    size = pageSize,
+                                ),
+                            ).data?.list.orEmpty()
+                        }
+                        .distinctBy { it.id }
+                    if (splitMatches.isNotEmpty()) {
+                        NetworkResponse(
+                            data = NetworkPageData(
+                                list = splitMatches,
+                                pagination = NetworkPageMeta(
+                                    total = splitMatches.size,
+                                    size = splitMatches.size,
+                                    page = 1,
+                                ),
+                            ),
+                            code = response.code,
+                            message = response.message,
+                        )
+                    } else {
+                        val matchedTypeIds = goodsRepository.getGoodsTypeList()
+                            .data
+                            .orEmpty()
+                            .let { categories ->
+                                val matchedRoots = categories
+                                    .filter { category ->
+                                        category.name.contains(keyword, ignoreCase = true) ||
+                                            keyword.contains(category.name, ignoreCase = true)
+                                    }
+                                    .map { it.id }
+                                    .toSet()
+                                if (matchedRoots.isEmpty()) {
+                                    emptyList()
+                                } else {
+                                    categories
+                                        .filter { category ->
+                                            category.id in matchedRoots ||
+                                                category.parentId?.toLong() in matchedRoots
+                                        }
+                                        .map { it.id }
+                                }
+                            }
+                        if (matchedTypeIds.isNotEmpty()) {
+                            goodsRepository.getGoodsPage(
+                                request.copy(
+                                    typeId = matchedTypeIds,
+                                    keyWord = null,
+                                ),
+                            )
+                        } else {
+                            response
+                        }
+                    }
+                } else {
+                    response
+                }
             }.onSuccess { response ->
                 _isLoadingMore.value = false
                 if (!response.isSucceeded) {
@@ -124,5 +322,18 @@ class GoodsCategoryViewModel(
                 }
             }
         }
+    }
+
+    private fun searchTokens(token: String): List<String> {
+        if (token.length < 2) return emptyList()
+        if (token.none { it in '\u4e00'..'\u9fff' }) return listOf(token)
+
+        val tokens = linkedSetOf(token)
+        for (length in 2..minOf(4, token.length)) {
+            for (start in 0..token.length - length) {
+                tokens += token.substring(start, start + length)
+            }
+        }
+        return tokens.toList()
     }
 }

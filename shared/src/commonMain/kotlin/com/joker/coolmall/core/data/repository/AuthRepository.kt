@@ -2,6 +2,7 @@ package com.joker.coolmall.core.data.repository
 
 import com.joker.coolmall.core.data.local.AuthPreferences
 import com.joker.coolmall.core.model.entity.Auth
+import com.joker.coolmall.core.model.entity.Captcha
 import com.joker.coolmall.core.model.response.NetworkResponse
 import com.joker.coolmall.core.network.KtorAuthNetworkDataSource
 import com.joker.coolmall.core.session.AuthSession
@@ -94,8 +95,22 @@ class AuthRepository(
     /**
      * 发送短信验证码。
      */
-    suspend fun sendSmsCode(phone: String): NetworkResponse<String> = withContext(Dispatchers.IO) {
-        dataSource.getSmsCode(mapOf("phone" to phone))
+    suspend fun sendSmsCode(
+        phone: String,
+        captchaId: String = "",
+        code: String = "",
+    ): NetworkResponse<String> = withContext(Dispatchers.IO) {
+        dataSource.getSmsCode(
+            buildMap {
+                put("phone", phone)
+                if (captchaId.isNotBlank()) put("captchaId", captchaId)
+                if (code.isNotBlank()) put("code", code)
+            }
+        )
+    }
+
+    suspend fun getCaptcha(): NetworkResponse<Captcha> = withContext(Dispatchers.IO) {
+        dataSource.getCaptcha()
     }
 
     /**

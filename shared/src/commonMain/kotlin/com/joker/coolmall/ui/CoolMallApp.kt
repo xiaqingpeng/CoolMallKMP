@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import coil3.ImageLoader
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.network.ktor3.KtorNetworkFetcherFactory
+import com.joker.coolmall.core.data.local.ThemeColor
 import com.joker.coolmall.core.data.local.ThemeMode
 import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.core.network.Network
@@ -19,6 +20,8 @@ import com.joker.coolmall.core.ui.theme.coolMallDarkColorScheme
 import com.joker.coolmall.core.ui.theme.coolMallLightColorScheme
 import com.joker.coolmall.feature.auth.navigation.accountLoginScreen
 import com.joker.coolmall.feature.auth.navigation.navigateToAccountLogin
+import com.joker.coolmall.feature.auth.navigation.navigateToLogin
+import com.joker.coolmall.feature.auth.navigation.loginScreen
 import com.joker.coolmall.feature.auth.navigation.navigateToRegister
 import com.joker.coolmall.feature.auth.navigation.navigateToResetPassword
 import com.joker.coolmall.feature.auth.navigation.navigateToSmsLogin
@@ -28,11 +31,15 @@ import com.joker.coolmall.feature.auth.navigation.smsLoginScreen
 import com.joker.coolmall.feature.common.navigation.aboutScreen
 import com.joker.coolmall.feature.common.navigation.navigateToAbout
 import com.joker.coolmall.feature.common.navigation.navigateToPrivacyPolicy
+import com.joker.coolmall.feature.common.navigation.navigateToContributors
 import com.joker.coolmall.feature.common.navigation.navigateToSettings
 import com.joker.coolmall.feature.common.navigation.navigateToUserAgreement
+import com.joker.coolmall.feature.common.navigation.navigateToWeb
 import com.joker.coolmall.feature.common.navigation.privacyPolicyScreen
+import com.joker.coolmall.feature.common.navigation.contributorsScreen
 import com.joker.coolmall.feature.common.navigation.settingsScreen
 import com.joker.coolmall.feature.common.navigation.userAgreementScreen
+import com.joker.coolmall.feature.common.navigation.webScreen
 import com.joker.coolmall.feature.cs.navigation.chatScreen
 import com.joker.coolmall.feature.cs.navigation.navigateToChat
 import com.joker.coolmall.feature.feedback.navigation.feedbackListScreen
@@ -41,12 +48,17 @@ import com.joker.coolmall.feature.feedback.navigation.navigateToFeedbackList
 import com.joker.coolmall.feature.feedback.navigation.navigateToFeedbackSubmit
 import com.joker.coolmall.feature.goods.navigation.goodsCategoryScreen
 import com.joker.coolmall.feature.goods.navigation.goodsDetailScreen
+import com.joker.coolmall.feature.goods.navigation.goodsCommentScreen
 import com.joker.coolmall.feature.goods.navigation.goodsSearchScreen
+import com.joker.coolmall.feature.goods.navigation.GoodsCategoryRouteArgs
 import com.joker.coolmall.feature.goods.navigation.navigateToGoodsCategory
+import com.joker.coolmall.feature.goods.navigation.GoodsSearchRouteArgs
 import com.joker.coolmall.feature.goods.navigation.navigateToGoodsDetail
+import com.joker.coolmall.feature.goods.navigation.navigateToGoodsComments
 import com.joker.coolmall.feature.goods.navigation.navigateToGoodsSearch
 import com.joker.coolmall.feature.launch.navigation.guideScreen
 import com.joker.coolmall.feature.launch.navigation.navigateToGuide
+import com.joker.coolmall.feature.launch.navigation.navigateFromGuideToMain
 import com.joker.coolmall.feature.launch.navigation.navigateToMain
 import com.joker.coolmall.feature.launch.navigation.splashScreen
 import com.joker.coolmall.feature.main.navigation.mainScreen
@@ -96,15 +108,24 @@ fun CoolMallApp() {
 
     val themeMode by AppContainerProvider.instance.themePreferences.themeMode
         .collectAsState(initial = ThemeMode.SYSTEM)
+    val themeColor by AppContainerProvider.instance.themePreferences.themeColor
+        .collectAsState(initial = ThemeColor.DEFAULT)
     val darkTheme = when (themeMode) {
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
+    val primary = when (themeColor) {
+        ThemeColor.DEFAULT -> com.joker.coolmall.core.ui.theme.PrimaryDefault
+        ThemeColor.PURPLE -> com.joker.coolmall.core.ui.theme.ColorPurple
+        ThemeColor.GREEN -> com.joker.coolmall.core.ui.theme.ColorSuccess
+        ThemeColor.ORANGE -> androidx.compose.ui.graphics.Color(0xFFFF8A00)
+        ThemeColor.RED -> com.joker.coolmall.core.ui.theme.ColorDanger
+    }
     val colorScheme = if (darkTheme) {
-        coolMallDarkColorScheme()
+        coolMallDarkColorScheme(primary)
     } else {
-        coolMallLightColorScheme()
+        coolMallLightColorScheme(primary)
     }
 
     MaterialTheme(colorScheme = colorScheme) {
@@ -122,7 +143,7 @@ fun CoolMallApp() {
                 toMain = navController::navigateToMain,
             )
             guideScreen(
-                toMain = navController::navigateToMain,
+                toMain = navController::navigateFromGuideToMain,
             )
             mainScreen(
                 onGoodsClick = navController::navigateToGoodsDetail,
@@ -132,31 +153,50 @@ fun CoolMallApp() {
                         title = title,
                     )
                 },
-                onLoginClick = navController::navigateToAccountLogin,
+                onLoginClick = navController::navigateToLogin,
                 onProfileClick = navController::navigateToProfile,
                 onAddressClick = navController::navigateToAddressList,
                 onCheckoutClick = navController::navigateToOrderConfirm,
                 onOrderListClick = { tabIndex -> navController.navigateToOrderList(tabIndex) },
                 onSearchClick = navController::navigateToGoodsSearch,
+                onGithubClick = {
+                    navController.navigateToWeb(
+                        url = "https://github.com/Joker-x-dev/CoolMallKotlin",
+                        title = "GitHub",
+                    )
+                },
                 onFeaturedClick = {
                     navController.navigateToGoodsCategory(featured = true)
                 },
                 onCouponClick = navController::navigateToCouponList,
                 onFootprintClick = navController::navigateToFootprint,
-                onFeedbackClick = navController::navigateToFeedbackList,
+                onFeedbackClick = {
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToFeedbackList()
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
                 onAboutClick = navController::navigateToAbout,
                 onSettingsClick = navController::navigateToSettings,
                 onCustomerServiceClick = {
                     if (AuthSession.token.isNotBlank()) {
                         navController.navigateToChat()
                     } else {
-                        navController.navigateToAccountLogin()
+                        navController.navigateToLogin()
                     }
                 },
             )
             profileScreen(
                 onBack = { navController.popBackStack() },
                 onLoggedOut = { navController.popBackStack() },
+            )
+            loginScreen(
+                onBack = { navController.popBackStack() },
+                onSmsLoginClick = navController::navigateToSmsLogin,
+                onAccountLoginClick = navController::navigateToAccountLogin,
+                onUserAgreementClick = navController::navigateToUserAgreement,
+                onPrivacyPolicyClick = navController::navigateToPrivacyPolicy,
             )
             accountLoginScreen(
                 onBack = { navController.popBackStack() },
@@ -276,11 +316,14 @@ fun CoolMallApp() {
             goodsSearchScreen(
                 onBack = { navController.popBackStack() },
                 onSearch = { keyword ->
-                    navController.popBackStack()
-                    navController.navigateToGoodsCategory(
-                        title = keyword,
-                        keyword = keyword,
-                    )
+                    navController.navigate(
+                        GoodsCategoryRouteArgs(
+                            title = keyword,
+                            keyword = keyword,
+                        ),
+                    ) {
+                        popUpTo<GoodsSearchRouteArgs> { inclusive = true }
+                    }
                 },
             )
             couponListScreen(
@@ -304,12 +347,22 @@ fun CoolMallApp() {
                 onBack = { navController.popBackStack() },
                 onUserAgreementClick = navController::navigateToUserAgreement,
                 onPrivacyPolicyClick = navController::navigateToPrivacyPolicy,
+                onContributorsClick = navController::navigateToContributors,
             )
             settingsScreen(
                 onBack = { navController.popBackStack() },
                 onUserAgreementClick = navController::navigateToUserAgreement,
                 onPrivacyPolicyClick = navController::navigateToPrivacyPolicy,
                 onAboutClick = navController::navigateToAbout,
+                onAccountSecurityClick = navController::navigateToProfile,
+                onReplayGuideClick = navController::navigateToGuide,
+                onFeedbackClick = {
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToFeedbackList()
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
             )
             userAgreementScreen(
                 onBack = { navController.popBackStack() },
@@ -317,15 +370,34 @@ fun CoolMallApp() {
             privacyPolicyScreen(
                 onBack = { navController.popBackStack() },
             )
+            contributorsScreen(
+                onBack = { navController.popBackStack() },
+            )
+            webScreen(
+                onBack = { navController.popBackStack() },
+            )
             goodsCategoryScreen(
                 onBack = { navController.popBackStack() },
                 onGoodsClick = navController::navigateToGoodsDetail,
+                onSearch = { args, keyword ->
+                    navController.navigateToGoodsCategory(
+                        typeId = args.typeId.takeIf { it > 0 },
+                        title = args.title,
+                        featured = args.featured,
+                        recommend = args.recommend,
+                        keyword = keyword,
+                    )
+                },
             )
             goodsDetailScreen(
                 onBack = { navController.popBackStack() },
                 onBuyNow = {
                     navController.navigateToOrderConfirm()
                 },
+                onCommentsClick = navController::navigateToGoodsComments,
+            )
+            goodsCommentScreen(
+                onBack = { navController.popBackStack() },
             )
         }
     }

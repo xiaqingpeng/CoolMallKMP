@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.ui.component.CouponCard
 import com.joker.coolmall.core.ui.component.CouponCardMode
 import com.joker.coolmall.core.ui.empty.EmptyData
@@ -52,29 +52,16 @@ fun CouponListRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.coupon_list_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.coupon_list_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         }
     ) { padding ->
         when (val state = uiState) {
             CouponListUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+                CouponListLoadingSkeleton(Modifier.padding(padding))
             }
 
             is CouponListUiState.Error -> {

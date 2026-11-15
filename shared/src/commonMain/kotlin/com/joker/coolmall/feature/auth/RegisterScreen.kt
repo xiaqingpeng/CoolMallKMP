@@ -36,9 +36,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.auth.component.ImageCaptchaDialog
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.ui.resolveUiMessage
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.auth_confirm_password
@@ -75,16 +77,10 @@ fun RegisterRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.auth_register_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.auth_register_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         }
     ) { padding ->
@@ -196,4 +192,13 @@ fun RegisterRoute(
             )
         }
     }
+    ImageCaptchaDialog(
+        visible = uiState.showCaptchaDialog,
+        captcha = uiState.captcha,
+        imageCode = uiState.imageCode,
+        onImageCodeChange = viewModel::updateImageCode,
+        onDismiss = viewModel::dismissCaptcha,
+        onConfirm = viewModel::confirmCaptcha,
+        onRefresh = viewModel::refreshCaptcha,
+    )
 }

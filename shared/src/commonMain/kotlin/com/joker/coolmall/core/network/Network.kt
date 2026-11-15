@@ -2,11 +2,13 @@ package com.joker.coolmall.core.network
 
 import com.joker.coolmall.core.config.AppConfig
 import com.joker.coolmall.core.session.AuthSession
+import com.joker.coolmall.core.session.networkAuthLog
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.header
+import io.ktor.http.HttpHeaders
 import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -33,10 +35,13 @@ expect fun platformHttpClient(config: HttpClientConfig<*>.() -> Unit): HttpClien
 private fun createHttpClient(): HttpClient = platformHttpClient {
     install(DefaultRequest) {
         url.takeFrom(AppConfig.baseUrl)
-        val token = AuthSession.token
+        val token = AuthSession.token.trim()
         if (token.isNotBlank()) {
-            header("Authorization", token)
+            headers[HttpHeaders.Authorization] = token
         }
+        networkAuthLog(
+            "default request baseUrl=${AppConfig.baseUrl} authorization=${AuthSession.tokenSummary()}",
+        )
     }
     install(ContentNegotiation) {
         json(NetworkJson)

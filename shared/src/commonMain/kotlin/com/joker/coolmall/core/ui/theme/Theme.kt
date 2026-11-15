@@ -24,6 +24,13 @@ fun coolMallLightColorScheme(primary: Color = PrimaryDefault): ColorScheme =
         onError = TextWhite,
         outline = BorderLight,
         surfaceVariant = BgContentLight,
+        surfaceBright = BgWhiteLight,
+        surfaceDim = BgGreyLight,
+        surfaceContainerLowest = BgWhiteLight,
+        surfaceContainerLow = BgWhiteLight,
+        surfaceContainer = BgWhiteLight,
+        surfaceContainerHigh = BgWhiteLight,
+        surfaceContainerHighest = BgWhiteLight,
         surfaceTint = primary,
     )
 
@@ -43,5 +50,12 @@ fun coolMallDarkColorScheme(primary: Color = PrimaryDefault): ColorScheme =
         onError = TextWhite,
         outline = BorderDark,
         surfaceVariant = BgContentDark,
+        surfaceBright = BgWhiteDark,
+        surfaceDim = BgGreyDark,
+        surfaceContainerLowest = BgWhiteDark,
+        surfaceContainerLow = BgWhiteDark,
+        surfaceContainer = BgWhiteDark,
+        surfaceContainerHigh = BgWhiteDark,
+        surfaceContainerHighest = BgWhiteDark,
         surfaceTint = primary,
     )

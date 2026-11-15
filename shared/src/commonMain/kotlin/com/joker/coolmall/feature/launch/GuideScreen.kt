@@ -2,6 +2,7 @@ package com.joker.coolmall.feature.launch
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,10 +50,18 @@ import myapplication.shared.generated.resources.guide_page2_desc
 import myapplication.shared.generated.resources.guide_page2_title
 import myapplication.shared.generated.resources.guide_page3_desc
 import myapplication.shared.generated.resources.guide_page3_title
+import myapplication.shared.generated.resources.guide_page4_desc
+import myapplication.shared.generated.resources.guide_page4_title
 import myapplication.shared.generated.resources.guide_skip
 import myapplication.shared.generated.resources.guide_start
+import myapplication.shared.generated.resources.ic_add_to_cart
+import myapplication.shared.generated.resources.ic_book_writer
+import myapplication.shared.generated.resources.ic_dev_productivity
+import myapplication.shared.generated.resources.ic_home_screen
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+@Suppress("ParamsComparedByRef")
 @Composable
 fun GuideRoute(
     toMain: () -> Unit,
@@ -107,11 +116,19 @@ private fun GuideScreen(
         stringResource(Res.string.guide_page1_title),
         stringResource(Res.string.guide_page2_title),
         stringResource(Res.string.guide_page3_title),
+        stringResource(Res.string.guide_page4_title),
     )
     val descs = listOf(
         stringResource(Res.string.guide_page1_desc),
         stringResource(Res.string.guide_page2_desc),
         stringResource(Res.string.guide_page3_desc),
+        stringResource(Res.string.guide_page4_desc),
+    )
+    val illustrations = listOf(
+        Res.drawable.ic_book_writer,
+        Res.drawable.ic_home_screen,
+        Res.drawable.ic_add_to_cart,
+        Res.drawable.ic_dev_productivity,
     )
 
     Box(
@@ -156,22 +173,13 @@ private fun GuideScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .size(160.dp)
-                            .background(
-                                color = MaterialTheme.colorScheme.primaryContainer,
-                                shape = RoundedCornerShape(24.dp),
-                            ),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text(
-                            text = "${page + 1}",
-                            style = MaterialTheme.typography.displayMedium,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    }
+                    Image(
+                        painter = painterResource(
+                            illustrations.getOrElse(page) { Res.drawable.ic_book_writer },
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier.size(240.dp),
+                    )
                     Spacer(modifier = Modifier.height(32.dp))
                     Text(
                         text = titles.getOrElse(page) { "" },

@@ -21,7 +21,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -48,6 +47,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.core.model.entity.Address
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.address_add
 import myapplication.shared.generated.resources.address_delete_confirm
@@ -92,16 +92,10 @@ fun AddressListRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.address_list_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                },
+            CenterTopAppBar(
+                title = stringResource(Res.string.address_list_title),
+                showBackIcon = true,
+                onBackClick = onBack,
                 actions = {
                     IconButton(onClick = onAddClick) {
                         Icon(
@@ -116,14 +110,7 @@ fun AddressListRoute(
     ) { padding ->
         when (val state = uiState) {
             AddressListUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+                AddressListLoadingSkeleton(Modifier.padding(padding))
             }
 
             is AddressListUiState.Error -> {

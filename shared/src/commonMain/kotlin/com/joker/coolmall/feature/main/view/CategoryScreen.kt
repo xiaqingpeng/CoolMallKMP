@@ -1,5 +1,10 @@
 package com.joker.coolmall.feature.main.view
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,20 +21,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,17 +54,16 @@ import com.joker.coolmall.core.model.entity.CategoryTree
 import com.joker.coolmall.core.ui.empty.EmptyData
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
 import com.joker.coolmall.feature.main.component.CommonScaffold
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.feature.main.viewmodel.CategoryUiState
 import com.joker.coolmall.feature.main.viewmodel.CategoryViewModel
+import kotlinx.coroutines.launch
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.category_empty
 import myapplication.shared.generated.resources.category_no_children
 import myapplication.shared.generated.resources.category_title
 import org.jetbrains.compose.resources.stringResource
 
-/**
- * 分类 Tab 路由（对齐 CoolMallKotlin：CommonScaffold + 顶栏，自处理 statusBars）
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryRoute(
@@ -65,69 +71,137 @@ fun CategoryRoute(
     viewModel: CategoryViewModel = viewModel(
         factory = viewModelFactory {
             initializer {
-                CategoryViewModel(
-                    goodsRepository = AppContainerProvider.instance.goodsRepository,
-                )
+                CategoryViewModel(AppContainerProvider.instance.goodsRepository)
             }
-        }
+        },
     ),
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val selectedIndex by viewModel.selectedIndex.collectAsState()
 
-    // MainRoute 已 exclude statusBars；本页用 CommonScaffold/TopAppBar 自行吃状态栏 inset
     CommonScaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.category_title)) },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.background,
-                ),
-            )
+            CenterTopAppBar(title = stringResource(Res.string.category_title))
         },
     ) { padding ->
         when (val state = uiState) {
-            CategoryUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
+            CategoryUiState.Loading -> CategoryLoadingSkeleton()
 
-            is CategoryUiState.Error -> {
-                EmptyUiMessage(
-                    message = state.message,
+            is CategoryUiState.Error -> EmptyUiMessage(
+                message = state.message,
+                onRetryClick = viewModel::loadCategories,
+                modifier = Modifier.fillMaxSize().padding(padding),
+            )
+
+            is CategoryUiState.Success -> if (state.categories.isEmpty()) {
+                EmptyData(
+                    message = stringResource(Res.string.category_empty),
                     onRetryClick = viewModel::loadCategories,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
+                    modifier = Modifier.fillMaxSize().padding(padding),
+                )
+            } else {
+                CategoryContent(
+                    categories = state.categories,
+                    selectedIndex = selectedIndex.coerceIn(0, state.categories.lastIndex),
+                    onCategorySelected = viewModel::selectCategory,
+                    onCategoryClick = onCategoryClick,
+                    modifier = Modifier.fillMaxSize().padding(padding),
                 )
             }
+        }
+    }
+}
 
-            is CategoryUiState.Success -> {
-                if (state.categories.isEmpty()) {
-                    EmptyData(
-                        message = stringResource(Res.string.category_empty),
-                        onRetryClick = viewModel::loadCategories,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(padding),
-                    )
-                } else {
-                    CategoryScreen(
-                        categories = state.categories,
-                        selectedIndex = selectedIndex.coerceIn(0, state.categories.lastIndex),
-                        onCategorySelected = viewModel::selectCategory,
-                        onCategoryClick = onCategoryClick,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(padding),
-                    )
+@Composable
+private fun CategoryContent(
+    categories: List<CategoryTree>,
+    selectedIndex: Int,
+    onCategorySelected: (Int) -> Unit,
+    onCategoryClick: (Long, String) -> Unit,
+    modifier: Modifier,
+) {
+    val rightListState = rememberLazyListState()
+    val scope = rememberCoroutineScope()
+    var syncingFromLeft by remember { mutableStateOf(false) }
+
+    LaunchedEffect(rightListState.firstVisibleItemIndex) {
+        if (!syncingFromLeft) {
+            onCategorySelected(rightListState.firstVisibleItemIndex.coerceIn(0, categories.lastIndex))
+        }
+    }
+    LaunchedEffect(selectedIndex) {
+        if (selectedIndex != rightListState.firstVisibleItemIndex) {
+            syncingFromLeft = true
+            rightListState.animateScrollToItem(selectedIndex)
+            syncingFromLeft = false
+        }
+    }
+
+    Row(modifier) {
+        LazyColumn(
+            modifier = Modifier
+                .width(100.dp)
+                .fillMaxHeight()
+                .background(MaterialTheme.colorScheme.background),
+        ) {
+            itemsIndexed(categories, key = { index, item -> "${item.id}_$index" }) { index, category ->
+                CategoryMenuItem(
+                    name = category.name,
+                    selected = index == selectedIndex,
+                    first = index == 0,
+                    previous = index == selectedIndex - 1,
+                    next = index == selectedIndex + 1,
+                    onClick = {
+                        onCategorySelected(index)
+                        scope.launch {
+                            syncingFromLeft = true
+                            rightListState.animateScrollToItem(index)
+                            syncingFromLeft = false
+                        }
+                    },
+                )
+            }
+            item { Spacer(Modifier.height(50.dp)) }
+        }
+
+        LazyColumn(
+            state = rightListState,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
+                .background(MaterialTheme.colorScheme.surface)
+                .padding(horizontal = 8.dp),
+            contentPadding = PaddingValues(vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp),
+        ) {
+            items(categories, key = { it.id }) { category ->
+                Column(
+                    Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                ) {
+                    CategoryTitle(category.name)
+                    Spacer(Modifier.height(8.dp))
+                    category.children.chunked(3).forEach { row ->
+                        Row(
+                            Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            row.forEach { child ->
+                                CategoryChildItem(
+                                    category = child,
+                                    onClick = { onCategoryClick(child.id, child.name) },
+                                    modifier = Modifier.weight(1f),
+                                )
+                            }
+                            repeat(3 - row.size) { Spacer(Modifier.weight(1f)) }
+                        }
+                    }
+                    if (category.children.isEmpty()) {
+                        Text(
+                            text = stringResource(Res.string.category_no_children),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
             }
         }
@@ -135,102 +209,77 @@ fun CategoryRoute(
 }
 
 @Composable
-private fun CategoryScreen(
-    categories: List<CategoryTree>,
-    selectedIndex: Int,
-    onCategorySelected: (Int) -> Unit,
-    onCategoryClick: (Long, String) -> Unit,
-    modifier: Modifier = Modifier,
+private fun CategoryTitle(text: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Box(
+            Modifier.width(3.dp).height(16.dp).background(MaterialTheme.colorScheme.primary),
+        )
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(start = 8.dp),
+        )
+    }
+}
+
+@Composable
+private fun CategoryMenuItem(
+    name: String,
+    selected: Boolean,
+    first: Boolean,
+    previous: Boolean,
+    next: Boolean,
+    onClick: () -> Unit,
 ) {
-    val selected = categories.getOrNull(selectedIndex) ?: categories.first()
-    val children = selected.children
+    val shape = when {
+        selected -> RoundedCornerShape(0.dp)
+        first || next -> RoundedCornerShape(topEnd = 16.dp)
+        previous -> RoundedCornerShape(bottomEnd = 16.dp)
+        else -> RoundedCornerShape(0.dp)
+    }
+    val textColor by animateColorAsState(
+        if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+        animationSpec = tween(300),
+        label = "categoryMenuTextColor",
+    )
+    val indicatorWidth by animateDpAsState(
+        if (selected) 3.dp else 0.dp,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioLowBouncy,
+            stiffness = Spring.StiffnessMedium,
+        ),
+        label = "categoryMenuIndicator",
+    )
 
-    Row(modifier = modifier) {
-        LazyColumn(
-            modifier = Modifier
-                .width(96.dp)
-                .fillMaxHeight()
-                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
-        ) {
-            itemsIndexed(
-                items = categories,
-                key = { index, item -> "${item.id}_$index" },
-            ) { index, item ->
-                val selectedItem = index == selectedIndex
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(
-                            if (selectedItem) {
-                                MaterialTheme.colorScheme.surface
-                            } else {
-                                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
-                            },
-                        )
-                        .clickable { onCategorySelected(index) }
-                        .padding(vertical = 14.dp, horizontal = 8.dp),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    if (selectedItem) {
-                        Box(
-                            modifier = Modifier
-                                .align(Alignment.CenterStart)
-                                .width(3.dp)
-                                .height(18.dp)
-                                .background(MaterialTheme.colorScheme.primary),
-                        )
-                    }
-                    Text(
-                        text = item.name,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = if (selectedItem) FontWeight.SemiBold else FontWeight.Normal,
-                        color = if (selectedItem) {
-                            MaterialTheme.colorScheme.primary
-                        } else {
-                            MaterialTheme.colorScheme.onSurfaceVariant
-                        },
-                        textAlign = TextAlign.Center,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                }
-            }
-        }
-
-        if (children.isEmpty()) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .background(
+                if (selected) MaterialTheme.colorScheme.surface
+                else MaterialTheme.colorScheme.background,
+                shape,
+            )
+            .clickable(enabled = !selected, onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        if (indicatorWidth > 0.dp) {
             Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .background(MaterialTheme.colorScheme.surface),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = stringResource(Res.string.category_no_children),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-        } else {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(3),
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .background(MaterialTheme.colorScheme.surface),
-                contentPadding = PaddingValues(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                items(children, key = { it.id }) { child ->
-                    CategoryChildItem(
-                        category = child,
-                        onClick = { onCategoryClick(child.id, child.name) },
-                    )
-                }
-            }
+                Modifier.width(indicatorWidth).height(24.dp)
+                    .background(MaterialTheme.colorScheme.primary)
+                    .align(Alignment.CenterStart),
+            )
         }
+        Text(
+            text = name,
+            color = textColor,
+            fontWeight = if (selected) FontWeight.ExtraBold else FontWeight.Normal,
+            textAlign = TextAlign.Center,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+        )
     }
 }
 
@@ -238,13 +287,14 @@ private fun CategoryScreen(
 private fun CategoryChildItem(
     category: CategoryTree,
     onClick: () -> Unit,
+    modifier: Modifier,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
+            .padding(8.dp)
             .clip(RoundedCornerShape(8.dp))
-            .clickable(onClick = onClick)
-            .padding(4.dp),
+            .clickable(onClick = onClick),
     ) {
         AsyncImage(
             model = category.pic,
@@ -255,13 +305,13 @@ private fun CategoryChildItem(
                 .clip(RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Crop,
         )
-        Spacer(modifier = Modifier.height(6.dp))
         Text(
             text = category.name,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.bodySmall,
+            textAlign = TextAlign.Center,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 4.dp),
         )
     }
 }

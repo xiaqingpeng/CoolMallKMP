@@ -6,6 +6,7 @@ import com.joker.coolmall.core.config.AppConfig
 import com.joker.coolmall.core.data.local.AuthPreferences
 import com.joker.coolmall.core.data.local.GuidePreferences
 import com.joker.coolmall.core.data.local.SearchHistoryPreferences
+import com.joker.coolmall.core.data.local.SplashPreferences
 import com.joker.coolmall.core.data.local.ThemePreferences
 import com.joker.coolmall.core.data.local.UserPreferences
 import com.joker.coolmall.core.data.local.createDataStore
@@ -22,6 +23,7 @@ import com.joker.coolmall.core.data.repository.GoodsRepository
 import com.joker.coolmall.core.data.repository.OrderRepository
 import com.joker.coolmall.core.data.repository.PageRepository
 import com.joker.coolmall.core.data.repository.UserRepository
+import com.joker.coolmall.core.data.repository.UserContributorRepository
 import com.joker.coolmall.core.database.createAppDatabase
 import com.joker.coolmall.core.network.KtorAddressNetworkDataSource
 import com.joker.coolmall.core.network.KtorAuthNetworkDataSource
@@ -33,6 +35,7 @@ import com.joker.coolmall.core.network.KtorGoodsNetworkDataSource
 import com.joker.coolmall.core.network.KtorOrderNetworkDataSource
 import com.joker.coolmall.core.network.KtorPageNetworkDataSource
 import com.joker.coolmall.core.network.KtorUserNetworkDataSource
+import com.joker.coolmall.core.network.KtorUserContributorNetworkDataSource
 import com.joker.coolmall.core.network.Network
 import com.joker.coolmall.core.platform.appVersionCode
 import com.joker.coolmall.core.platform.appVersionName
@@ -57,6 +60,8 @@ class AppContainer(
     private val feedbackNetworkDataSource = KtorFeedbackNetworkDataSource(Network.httpClient)
     private val customerServiceNetworkDataSource =
         KtorCustomerServiceNetworkDataSource(Network.httpClient)
+    private val userContributorNetworkDataSource =
+        KtorUserContributorNetworkDataSource(Network.httpClient)
 
     val authPreferences: AuthPreferences = AuthPreferences(dataStore)
     val userPreferences: UserPreferences = UserPreferences(dataStore)
@@ -64,6 +69,10 @@ class AppContainer(
     val userRepository: UserRepository = UserRepository(
         dataSource = userNetworkDataSource,
         userPreferences = userPreferences,
+    )
+
+    val userContributorRepository: UserContributorRepository = UserContributorRepository(
+        dataSource = userContributorNetworkDataSource,
     )
 
     val authRepository: AuthRepository = AuthRepository(
@@ -120,6 +129,8 @@ class AppContainer(
     val themePreferences: ThemePreferences = ThemePreferences(dataStore)
 
     val searchHistoryPreferences: SearchHistoryPreferences = SearchHistoryPreferences(dataStore)
+
+    val splashPreferences: SplashPreferences = SplashPreferences(dataStore)
 }
 
 object AppContainerProvider {

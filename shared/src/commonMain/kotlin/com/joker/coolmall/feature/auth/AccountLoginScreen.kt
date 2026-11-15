@@ -41,6 +41,7 @@ import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.ui.resolveUiMessage
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.auth_account_login
@@ -91,16 +92,10 @@ fun AccountLoginRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.auth_account_login)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.auth_account_login),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         }
     ) { padding ->

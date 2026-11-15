@@ -16,12 +16,23 @@ object AuthSession {
         get() = _refreshToken
 
     fun update(token: String, refreshToken: String = "") {
-        _token = token
-        _refreshToken = refreshToken
+        _token = token.trim()
+        _refreshToken = refreshToken.trim()
+        networkAuthLog(
+            "session updated token=${maskToken(_token)} refreshToken=${maskToken(_refreshToken)}",
+        )
     }
 
     fun clear() {
         _token = ""
         _refreshToken = ""
+        networkAuthLog("session cleared")
     }
+
+    fun tokenSummary(): String = maskToken(_token)
+
+    private fun maskToken(value: String): String =
+        if (value.isBlank()) "<empty>" else "len=${value.length},prefix=${value.take(8)}***"
 }
+
+expect fun networkAuthLog(message: String)

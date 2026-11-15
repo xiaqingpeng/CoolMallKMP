@@ -20,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,6 +39,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.model.entity.Logistics
 import com.joker.coolmall.core.model.entity.LogisticsItem
 import myapplication.shared.generated.resources.Res
@@ -77,29 +77,16 @@ fun OrderLogisticsRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.order_logistics_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.order_logistics_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         }
     ) { padding ->
         when (val state = uiState) {
             OrderLogisticsUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+                OrderLogisticsLoadingSkeleton(Modifier.padding(padding))
             }
 
             is OrderLogisticsUiState.Error -> {

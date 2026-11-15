@@ -150,14 +150,7 @@ fun ChatRoute(
     ) { padding ->
         when (val state = uiState) {
             ChatUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+                ChatLoadingSkeleton(Modifier.padding(padding))
             }
             is ChatUiState.Error -> {
                 EmptyUiMessage(

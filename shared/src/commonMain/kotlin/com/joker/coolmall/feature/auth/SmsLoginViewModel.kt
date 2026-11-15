@@ -3,8 +3,10 @@ package com.joker.coolmall.feature.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joker.coolmall.core.data.repository.AuthRepository
+import com.joker.coolmall.core.model.entity.Captcha
 import com.joker.coolmall.core.ui.MessageCode
 import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmall.core.platform.notifyVerificationCode
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,6 +24,9 @@ data class SmsLoginUiState(
     val isSendingCode: Boolean = false,
     val countdown: Int = 0,
     val isLoading: Boolean = false,
+    val captcha: Captcha = Captcha(),
+    val imageCode: String = "",
+    val showCaptchaDialog: Boolean = false,
     val errorMessage: UiMessage? = null,
 ) {
     val isPhoneValid: Boolean get() = phone.length == 11 && phone.all { it.isDigit() }
@@ -58,6 +63,42 @@ class SmsLoginViewModel(
         _uiState.update { it.copy(smsCode = value.filter { c -> c.isDigit() }.take(6), errorMessage = null) }
     }
 
+    fun updateImageCode(value: String) {
+        _uiState.update { it.copy(imageCode = value.filter { c -> c.isDigit() }.take(4), errorMessage = null) }
+    }
+
+    fun dismissCaptcha() {
+        _uiState.update { it.copy(showCaptchaDialog = false, imageCode = "") }
+    }
+
+    fun refreshCaptcha() {
+        viewModelScope.launch {
+            runCatching { authRepository.getCaptcha() }
+                .onSuccess { response ->
+                    if (response.isSucceeded && response.data != null) {
+                        _uiState.update {
+                            it.copy(captcha = response.data, imageCode = "", errorMessage = null)
+                        }
+                    } else {
+                        _uiState.update {
+                            it.copy(
+                                errorMessage = response.message?.let(UiMessage::Raw)
+                                    ?: UiMessage.Code(MessageCode.NetworkError),
+                            )
+                        }
+                    }
+                }
+                .onFailure { error ->
+                    _uiState.update {
+                        it.copy(
+                            errorMessage = error.message?.let(UiMessage::Raw)
+                                ?: UiMessage.Code(MessageCode.NetworkError),
+                        )
+                    }
+                }
+        }
+    }
+
     /**
      * 发送短信验证码，成功后启动 60 秒倒计时。
      */
@@ -68,19 +109,54 @@ class SmsLoginViewModel(
             return
         }
         if (state.countdown > 0) return
+        if (state.captcha.captchaId.isBlank() || state.captcha.data.isBlank()) {
+            _uiState.update { it.copy(showCaptchaDialog = true, imageCode = "") }
+            refreshCaptcha()
+            return
+        }
+        if (state.imageCode.length != 4) {
+            _uiState.update { it.copy(showCaptchaDialog = true) }
+            return
+        }
+        sendSmsCodeWithCaptcha(state)
+    }
+
+    fun confirmCaptcha() {
+        val state = _uiState.value
+        if (state.imageCode.length != 4) return
+        dismissCaptcha()
+        sendSmsCodeWithCaptcha(state)
+    }
+
+    private fun sendSmsCodeWithCaptcha(state: SmsLoginUiState) {
         viewModelScope.launch {
             _uiState.update { it.copy(isSendingCode = true, errorMessage = null) }
             runCatching {
-                authRepository.sendSmsCode(state.phone)
+                authRepository.sendSmsCode(
+                    phone = state.phone,
+                    captchaId = state.captcha.captchaId,
+                    code = state.imageCode,
+                )
             }.onSuccess { response ->
                 _uiState.update { it.copy(isSendingCode = false) }
                 if (response.isSucceeded) {
+                    response.data?.takeIf { it.isNotBlank() }?.let { code ->
+                        // Chucker publishes its response notification asynchronously. Keep
+                        // the same order as the Android reference app: network activity first,
+                        // then the verification-code notification.
+                        viewModelScope.launch {
+                            delay(350)
+                            notifyVerificationCode(code)
+                        }
+                    }
                     startCountdown()
                 } else {
                     _uiState.update {
                         it.copy(
                             errorMessage = response.message?.let { UiMessage.Raw(it) }
                                 ?: UiMessage.Code(MessageCode.SendCodeFailed, response.code.toString()),
+                            captcha = Captcha(),
+                            imageCode = "",
                         )
                     }
                 }
@@ -90,6 +166,8 @@ class SmsLoginViewModel(
                         isSendingCode = false,
                         errorMessage = error.message?.let { msg -> UiMessage.Raw(msg) }
                             ?: UiMessage.Code(MessageCode.NetworkError),
+                        captcha = Captcha(),
+                        imageCode = "",
                     )
                 }
             }

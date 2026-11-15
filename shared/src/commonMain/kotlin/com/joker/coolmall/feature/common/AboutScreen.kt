@@ -1,7 +1,9 @@
 package com.joker.coolmall.feature.common
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,8 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
@@ -24,6 +29,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.core.platform.ThirdPartyCapabilities
 import com.joker.coolmall.getPlatform
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.about_alipay
 import myapplication.shared.generated.resources.about_build
@@ -45,13 +54,16 @@ import myapplication.shared.generated.resources.about_version
 import myapplication.shared.generated.resources.about_wechat_login
 import myapplication.shared.generated.resources.about_wechat_pay
 import myapplication.shared.generated.resources.app_name
+import myapplication.shared.generated.resources.ic_logo
 import myapplication.shared.generated.resources.common_back
 import myapplication.shared.generated.resources.common_no
 import myapplication.shared.generated.resources.common_yes
+import myapplication.shared.generated.resources.contributors_title
 import myapplication.shared.generated.resources.me_about
 import myapplication.shared.generated.resources.privacy_policy
 import myapplication.shared.generated.resources.user_agreement
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,19 +71,14 @@ fun AboutRoute(
     onBack: () -> Unit,
     onUserAgreementClick: () -> Unit = {},
     onPrivacyPolicyClick: () -> Unit = {},
+    onContributorsClick: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.me_about)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                },
+            CenterTopAppBar(
+                title = stringResource(Res.string.me_about),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
     ) { padding ->
@@ -84,17 +91,7 @@ fun AboutRoute(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Text(
-                text = stringResource(Res.string.app_name),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-            )
-            Text(
-                text = stringResource(Res.string.about_subtitle),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-            )
+            AboutHero()
 
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -172,8 +169,54 @@ fun AboutRoute(
                         title = stringResource(Res.string.privacy_policy),
                         onClick = onPrivacyPolicyClick,
                     )
+                    AboutLinkRow(
+                        title = stringResource(Res.string.contributors_title),
+                        onClick = onContributorsClick,
+                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun AboutHero() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(250.dp)
+            .clip(RoundedCornerShape(28.dp))
+            .background(
+                Brush.linearGradient(
+                    colors = listOf(
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.82f),
+                        Color(0xFF5C6BC0).copy(alpha = 0.62f),
+                        Color(0xFFEC77AB).copy(alpha = 0.58f),
+                    ),
+                ),
+            ),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(Res.drawable.ic_logo),
+                contentDescription = stringResource(Res.string.app_name),
+                modifier = Modifier.size(92.dp),
+            )
+            Spacer(Modifier.height(14.dp))
+            Text(
+                text = stringResource(Res.string.app_name),
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
+                text = stringResource(Res.string.about_subtitle),
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White.copy(alpha = 0.86f),
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }

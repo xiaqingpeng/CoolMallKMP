@@ -2,9 +2,11 @@ package com.joker.coolmall.core.data.repository
 
 import com.joker.coolmall.core.model.entity.Category
 import com.joker.coolmall.core.model.entity.CategoryTree
+import com.joker.coolmall.core.model.entity.Comment
 import com.joker.coolmall.core.model.entity.Goods
 import com.joker.coolmall.core.model.entity.GoodsSearchKeyword
 import com.joker.coolmall.core.model.entity.GoodsSpec
+import com.joker.coolmall.core.model.request.GoodsCommentPageRequest
 import com.joker.coolmall.core.model.request.GoodsCommentSubmitRequest
 import com.joker.coolmall.core.model.request.GoodsSearchRequest
 import com.joker.coolmall.core.model.response.NetworkPageData
@@ -50,5 +52,11 @@ class GoodsRepository(
         request: GoodsCommentSubmitRequest,
     ): NetworkResponse<Boolean> = withContext(Dispatchers.IO) {
         dataSource.submitGoodsComment(request)
+    }
+
+    suspend fun getGoodsCommentPage(
+        request: GoodsCommentPageRequest,
+    ): NetworkResponse<NetworkPageData<Comment>> = withContext(Dispatchers.IO) {
+        dataSource.getGoodsCommentPage(request)
     }
 }

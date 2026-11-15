@@ -56,6 +56,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.model.entity.OrderGoods
 import com.joker.coolmall.core.platform.PickedImage
 import com.joker.coolmall.core.platform.rememberPlatformImagePicker
@@ -129,16 +130,10 @@ fun OrderCommentRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.order_comment_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.order_comment_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },

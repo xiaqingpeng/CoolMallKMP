@@ -41,6 +41,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
@@ -48,6 +49,7 @@ import com.joker.coolmall.core.ui.MessageCode
 import com.joker.coolmall.core.ui.resolveMessageCode
 import com.joker.coolmall.core.ui.resolveUiMessage
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
+import com.joker.coolmall.feature.auth.component.ImageCaptchaDialog
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.auth_confirm_password
 import myapplication.shared.generated.resources.auth_get_code
@@ -82,16 +84,10 @@ fun ResetPasswordRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.auth_reset_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(Res.string.auth_reset_title),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -190,4 +186,13 @@ fun ResetPasswordRoute(
             )
         }
     }
+    ImageCaptchaDialog(
+        visible = uiState.showCaptchaDialog,
+        captcha = uiState.captcha,
+        imageCode = uiState.imageCode,
+        onImageCodeChange = viewModel::updateImageCode,
+        onDismiss = viewModel::dismissCaptcha,
+        onConfirm = viewModel::confirmCaptcha,
+        onRefresh = viewModel::refreshCaptcha,
+    )
 }

@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.joker.coolmall.feature.goods.GoodsDetailRoute
+import com.joker.coolmall.feature.goods.GoodsCommentRoute
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,9 +15,17 @@ fun NavController.navigateToGoodsDetail(goodsId: Long) {
     navigate(GoodsDetailRouteArgs(goodsId))
 }
 
+@Serializable
+data class GoodsCommentRouteArgs(val goodsId: Long)
+
+fun NavController.navigateToGoodsComments(goodsId: Long) {
+    navigate(GoodsCommentRouteArgs(goodsId))
+}
+
 fun NavGraphBuilder.goodsDetailScreen(
     onBack: () -> Unit,
     onBuyNow: () -> Unit = {},
+    onCommentsClick: (Long) -> Unit = {},
 ) {
     composable<GoodsDetailRouteArgs> { entry ->
         val args = entry.toRoute<GoodsDetailRouteArgs>()
@@ -24,6 +33,16 @@ fun NavGraphBuilder.goodsDetailScreen(
             goodsId = args.goodsId,
             onBack = onBack,
             onBuyNow = onBuyNow,
+            onCommentsClick = onCommentsClick,
         )
+    }
+}
+
+fun NavGraphBuilder.goodsCommentScreen(
+    onBack: () -> Unit,
+) {
+    composable<GoodsCommentRouteArgs> { entry ->
+        val args = entry.toRoute<GoodsCommentRouteArgs>()
+        GoodsCommentRoute(goodsId = args.goodsId, onBack = onBack)
     }
 }

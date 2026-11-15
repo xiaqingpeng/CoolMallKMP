@@ -32,6 +32,22 @@ class UserRepository(
         }
     }
 
+    suspend fun updatePassword(
+        oldPassword: String,
+        newPassword: String,
+    ): NetworkResponse<Unit> = withContext(Dispatchers.IO) {
+        dataSource.updatePassword(
+            mapOf(
+                "oldPassword" to oldPassword,
+                "newPassword" to newPassword,
+            ),
+        )
+    }
+
+    suspend fun logoff(): NetworkResponse<Unit> = withContext(Dispatchers.IO) {
+        dataSource.logoff()
+    }
+
     suspend fun clear() {
         userPreferences.clearUser()
         _user.value = null

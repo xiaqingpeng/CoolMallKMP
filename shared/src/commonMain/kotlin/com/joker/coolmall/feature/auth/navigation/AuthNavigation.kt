@@ -4,10 +4,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.joker.coolmall.feature.auth.AccountLoginRoute
+import com.joker.coolmall.feature.auth.LoginRoute
 import com.joker.coolmall.feature.auth.RegisterRoute
 import com.joker.coolmall.feature.auth.ResetPasswordRoute
 import com.joker.coolmall.feature.auth.SmsLoginRoute
 import kotlinx.serialization.Serializable
+
+@Serializable
+data object LoginRouteArgs
 
 @Serializable
 data object AccountLoginRouteArgs
@@ -21,8 +25,34 @@ data object RegisterRouteArgs
 @Serializable
 data object ResetPasswordRouteArgs
 
+fun NavController.navigateToLogin() {
+    navigate(LoginRouteArgs)
+}
+
 fun NavController.navigateToAccountLogin() {
     navigate(AccountLoginRouteArgs)
+}
+
+fun NavGraphBuilder.loginScreen(
+    onBack: () -> Unit,
+    onSmsLoginClick: () -> Unit,
+    onAccountLoginClick: () -> Unit,
+    onQqLoginClick: () -> Unit = {},
+    onWeChatLoginClick: () -> Unit = {},
+    onUserAgreementClick: () -> Unit = {},
+    onPrivacyPolicyClick: () -> Unit = {},
+) {
+    composable<LoginRouteArgs> {
+        LoginRoute(
+            onBack = onBack,
+            onSmsLoginClick = onSmsLoginClick,
+            onAccountLoginClick = onAccountLoginClick,
+            onQqLoginClick = onQqLoginClick,
+            onWeChatLoginClick = onWeChatLoginClick,
+            onUserAgreementClick = onUserAgreementClick,
+            onPrivacyPolicyClick = onPrivacyPolicyClick,
+        )
+    }
 }
 
 fun NavController.navigateToSmsLogin() {

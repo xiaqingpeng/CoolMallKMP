@@ -29,7 +29,7 @@ fun NavController.navigateToGoodsCategory(
             title = title,
             featured = featured,
             recommend = recommend,
-            keyword = keyword.orEmpty(),
+            keyword = keyword?.trim().orEmpty(),
         )
     )
 }
@@ -37,6 +37,7 @@ fun NavController.navigateToGoodsCategory(
 fun NavGraphBuilder.goodsCategoryScreen(
     onBack: () -> Unit,
     onGoodsClick: (Long) -> Unit,
+    onSearch: (GoodsCategoryRouteArgs, String) -> Unit = { _, _ -> },
 ) {
     composable<GoodsCategoryRouteArgs> { entry ->
         val args = entry.toRoute<GoodsCategoryRouteArgs>()
@@ -48,6 +49,7 @@ fun NavGraphBuilder.goodsCategoryScreen(
             keyword = args.keyword.takeIf { it.isNotBlank() },
             onBack = onBack,
             onGoodsClick = onGoodsClick,
+            onSearch = { keyword -> onSearch(args, keyword) },
         )
     }
 }

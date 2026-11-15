@@ -26,7 +26,7 @@ class SearchHistoryPreferences(
         else runCatching { json.decodeFromString(serializer, raw) }.getOrDefault(emptyList())
     }
 
-    suspend fun addKeyword(keyword: String, limit: Int = 12) {
+    suspend fun addKeyword(keyword: String, limit: Int = 10) {
         val trimmed = keyword.trim()
         if (trimmed.isEmpty()) return
         dataStore.edit { prefs ->

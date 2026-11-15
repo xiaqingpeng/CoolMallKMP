@@ -8,12 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,13 +29,14 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.common_back
 import myapplication.shared.generated.resources.common_retry
 import org.jetbrains.compose.resources.stringResource
 
 /**
- * 用户协议 / 隐私政策：拉取 base/comm/param，KMP 首版用纯文本展示（去 HTML 标签）。
+ * 用户协议 / 隐私政策：拉取 base/comm/param，Android/iOS 分别使用原生 HTML 容器展示。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,29 +60,16 @@ fun DocumentRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(title) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                },
+            CenterTopAppBar(
+                title = title,
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
     ) { padding ->
         when (val state = uiState) {
             DocumentUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
+                DocumentLoadingSkeleton(Modifier.padding(padding))
             }
 
             is DocumentUiState.Error -> {
@@ -98,19 +83,12 @@ fun DocumentRoute(
             }
 
             is DocumentUiState.Success -> {
-                Column(
+                PlatformHtmlDocument(
+                    html = state.html,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(padding)
-                        .verticalScroll(rememberScrollState())
-                        .padding(16.dp),
-                ) {
-                    Text(
-                        text = state.text,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                }
+                        .padding(padding),
+                )
             }
         }
     }

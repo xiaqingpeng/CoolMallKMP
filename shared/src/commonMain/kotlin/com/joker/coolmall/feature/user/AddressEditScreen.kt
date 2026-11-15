@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -31,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,10 +43,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
+import com.joker.coolmall.feature.user.component.RegionPickerModal
+import com.joker.coolmall.feature.user.data.RegionData
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.address_add
 import myapplication.shared.generated.resources.address_city
@@ -81,6 +86,7 @@ fun AddressEditRoute(
     val isLoading by viewModel.isLoading.collectAsState()
     val isSubmitting by viewModel.isSubmitting.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+    var showRegionPicker by remember { androidx.compose.runtime.mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.message.collect { msg ->
@@ -93,24 +99,12 @@ fun AddressEditRoute(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        if (form.isEditMode) {
-                            stringResource(Res.string.address_edit)
-                        } else {
-                            stringResource(Res.string.address_add)
-                        }
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.common_back),
-                        )
-                    }
-                }
+            CenterTopAppBar(
+                title = stringResource(
+                    if (form.isEditMode) Res.string.address_edit else Res.string.address_add,
+                ),
+                showBackIcon = true,
+                onBackClick = onBack,
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -148,15 +142,27 @@ fun AddressEditRoute(
                 .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            AddressFormFields(form = form, viewModel = viewModel)
+            AddressFormFields(form = form, viewModel = viewModel, onRegionClick = { showRegionPicker = true })
         }
     }
+    RegionPickerModal(
+        visible = showRegionPicker,
+        regions = RegionData.provinces,
+        initialValue = "${form.province} ${form.city} ${form.district}",
+        onDismiss = { showRegionPicker = false },
+        onSelected = { province, city, district ->
+            viewModel.updateProvince(province)
+            viewModel.updateCity(city)
+            viewModel.updateDistrict(district)
+        },
+    )
 }
 
 @Composable
 private fun AddressFormFields(
     form: AddressForm,
     viewModel: AddressEditViewModel,
+    onRegionClick: () -> Unit,
 ) {
     OutlinedTextField(
         value = form.contact,
@@ -176,30 +182,33 @@ private fun AddressFormFields(
         ),
         modifier = Modifier.fillMaxWidth(),
     )
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onRegionClick),
     ) {
         OutlinedTextField(
-            value = form.province,
-            onValueChange = viewModel::updateProvince,
+            value = if (
+                form.province.isNotBlank() &&
+                form.city.isNotBlank() &&
+                form.district.isNotBlank()
+            ) {
+                "${form.province} ${form.city} ${form.district}"
+            } else {
+                ""
+            },
+            onValueChange = {},
             label = { Text(stringResource(Res.string.address_province)) },
+            placeholder = {
+                Text(
+                    "${stringResource(Res.string.address_province)} / " +
+                        "${stringResource(Res.string.address_city)} / " +
+                        stringResource(Res.string.address_district),
+                )
+            },
             singleLine = true,
-            modifier = Modifier.weight(1f),
-        )
-        OutlinedTextField(
-            value = form.city,
-            onValueChange = viewModel::updateCity,
-            label = { Text(stringResource(Res.string.address_city)) },
-            singleLine = true,
-            modifier = Modifier.weight(1f),
-        )
-        OutlinedTextField(
-            value = form.district,
-            onValueChange = viewModel::updateDistrict,
-            label = { Text(stringResource(Res.string.address_district)) },
-            singleLine = true,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.fillMaxWidth(),
+            readOnly = true,
         )
     }
     OutlinedTextField(

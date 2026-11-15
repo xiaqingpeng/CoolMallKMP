@@ -15,7 +15,7 @@ class GuideViewModel(
     private val guidePreferences: GuidePreferences,
 ) : ViewModel() {
 
-    val pageCount: Int = 3
+    val pageCount: Int = 4
 
     private val _currentPage = MutableStateFlow(0)
     val currentPage: StateFlow<Int> = _currentPage.asStateFlow()
