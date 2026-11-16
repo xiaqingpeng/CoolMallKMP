@@ -145,6 +145,7 @@ fun CoolMallApp() {
             )
             guideScreen(
                 toMain = navController::navigateFromGuideToMain,
+                onBack = { navController.popBackStack() },
             )
             mainScreen(
                 onGoodsClick = navController::navigateToGoodsDetail,
@@ -398,7 +399,7 @@ fun CoolMallApp() {
                         navController.navigateToLogin()
                     }
                 },
-                onReplayGuideClick = navController::navigateToGuide,
+                onReplayGuideClick = { navController.navigateToGuide(fromSettings = true) },
                 onFeedbackClick = {
                     if (AuthSession.token.isNotBlank()) {
                         navController.navigateToFeedbackList()

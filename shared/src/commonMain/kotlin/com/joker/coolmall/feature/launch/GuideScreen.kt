@@ -65,7 +65,9 @@ import org.jetbrains.compose.resources.stringResource
 @Suppress("ParamsComparedByRef")
 @Composable
 fun GuideRoute(
+    fromSettings: Boolean = false,
     toMain: () -> Unit,
+    onBack: () -> Unit,
     viewModel: GuideViewModel = viewModel(
         factory = viewModelFactory {
             initializer {
@@ -79,7 +81,9 @@ fun GuideRoute(
     val pagerState = rememberPagerState(pageCount = { viewModel.pageCount })
 
     LaunchedEffect(Unit) {
-        viewModel.navigateToMain.collect { toMain() }
+        viewModel.navigateToMain.collect {
+            if (fromSettings) onBack() else toMain()
+        }
     }
 
     LaunchedEffect(pagerState) {
@@ -141,7 +145,7 @@ private fun GuideScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.TopEnd)
-                .padding(8.dp),
+                .padding(16.dp),
             horizontalArrangement = Arrangement.End,
         ) {
             TextButton(onClick = onSkip) {
@@ -155,11 +159,12 @@ private fun GuideScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-            .padding(horizontal = 24.dp, vertical = 32.dp),
+            .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             HorizontalPager(
                 state = pagerState,
@@ -222,7 +227,7 @@ private fun GuideScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             val buttonWidth by animateDpAsState(
                 targetValue = if (isLastPage) 160.dp else 120.dp,
@@ -242,7 +247,7 @@ private fun GuideScreen(
                 modifier = Modifier.width(buttonWidth),
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }

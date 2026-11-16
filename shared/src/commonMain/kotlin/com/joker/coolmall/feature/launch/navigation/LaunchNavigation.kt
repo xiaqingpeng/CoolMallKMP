@@ -2,15 +2,19 @@ package com.joker.coolmallkmp.feature.launch.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.joker.coolmallkmp.feature.launch.GuideRoute
 import com.joker.coolmallkmp.feature.launch.SplashRoute
 import com.joker.coolmallkmp.ui.navigation.Routes
 
-fun NavController.navigateToGuide() {
-    navigate(Routes.GUIDE) {
+fun NavController.navigateToGuide(fromSettings: Boolean = false) {
+    navigate("guide?fromSettings=$fromSettings") {
         launchSingleTop = true
-        popUpTo(Routes.MAIN) { inclusive = true }
+        if (!fromSettings) {
+            popUpTo(Routes.SPLASH) { inclusive = true }
+        }
     }
 }
 
@@ -39,8 +43,21 @@ fun NavGraphBuilder.splashScreen(
 
 fun NavGraphBuilder.guideScreen(
     toMain: () -> Unit,
+    onBack: () -> Unit,
 ) {
-    composable(Routes.GUIDE) {
-        GuideRoute(toMain = toMain)
+    composable(
+        route = Routes.GUIDE,
+        arguments = listOf(
+            navArgument("fromSettings") {
+                type = NavType.StringType
+                defaultValue = "false"
+            },
+        ),
+    ) { entry ->
+        GuideRoute(
+            fromSettings = entry.arguments?.getString("fromSettings") == "true",
+            toMain = toMain,
+            onBack = onBack,
+        )
     }
 }
