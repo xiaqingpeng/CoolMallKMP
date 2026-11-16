@@ -1,0 +1,204 @@
+package com.joker.coolmallkmp.feature.feedback.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.joker.coolmallkmp.core.data.repository.CommonRepository
+import com.joker.coolmallkmp.core.data.repository.FeedbackRepository
+import com.joker.coolmallkmp.core.data.repository.FileUploadRepository
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.request.FeedbackSubmitRequest
+import com.joker.coolmallkmp.core.platform.PickedImage
+import com.joker.coolmallkmp.core.session.AuthSession
+import com.joker.coolmallkmp.core.session.networkAuthLog
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
+
+sealed interface FeedbackTypesUiState {
+    data object Loading : FeedbackTypesUiState
+    data class Success(val types: List<DictItem>) : FeedbackTypesUiState
+    data class Error(val message: UiMessage) : FeedbackTypesUiState
+}
+
+class FeedbackSubmitViewModel(
+    private val feedbackRepository: FeedbackRepository,
+    private val commonRepository: CommonRepository,
+    private val fileUploadRepository: FileUploadRepository,
+    private val authRepository: AuthRepository,
+) : ViewModel() {
+
+    private val maxImages = 9
+
+    private fun fallbackTypes(): List<DictItem> = listOf(
+        DictItem(name = "崩溃与错误", value = 0),
+        DictItem(name = "支付问题", value = 1),
+        DictItem(name = "体验不佳", value = 2),
+        DictItem(name = "功能建议", value = 3),
+        DictItem(name = "商品建议", value = 4),
+        DictItem(name = "活动建议", value = 5),
+        DictItem(name = "物流售后", value = 6),
+        DictItem(name = "其他", value = -1),
+    )
+
+    private val _typesState =
+        MutableStateFlow<FeedbackTypesUiState>(FeedbackTypesUiState.Loading)
+    val typesState: StateFlow<FeedbackTypesUiState> = _typesState.asStateFlow()
+
+    private val _selectedType = MutableStateFlow<DictItem?>(null)
+    val selectedType: StateFlow<DictItem?> = _selectedType.asStateFlow()
+
+    private val _contact = MutableStateFlow("")
+    val contact: StateFlow<String> = _contact.asStateFlow()
+
+    private val _content = MutableStateFlow("")
+    val content: StateFlow<String> = _content.asStateFlow()
+
+    private val _pendingImages = MutableStateFlow<List<PickedImage>>(emptyList())
+    val pendingImages: StateFlow<List<PickedImage>> = _pendingImages.asStateFlow()
+
+    private val _isSubmitting = MutableStateFlow(false)
+    val isSubmitting: StateFlow<Boolean> = _isSubmitting.asStateFlow()
+
+    private val _message = MutableSharedFlow<UiMessage>(extraBufferCapacity = 1)
+    val message: SharedFlow<UiMessage> = _message.asSharedFlow()
+
+    private val _submitted = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val submitted: SharedFlow<Unit> = _submitted.asSharedFlow()
+
+    init {
+        loadTypes()
+    }
+
+    fun loadTypes() {
+        viewModelScope.launch {
+            _typesState.value = FeedbackTypesUiState.Loading
+            runCatching {
+                commonRepository.getFeedbackTypes()
+            }.onSuccess { response ->
+                if (response.isSucceeded) {
+                    val types = response.data.orEmpty().ifEmpty { fallbackTypes() }
+                    _typesState.value = FeedbackTypesUiState.Success(types)
+                    if (_selectedType.value == null) {
+                        _selectedType.value = types.firstOrNull()
+                    }
+                } else {
+                    // 字典失败时提供兜底类型，仍可提交
+                    val fallback = fallbackTypes()
+                    _typesState.value = FeedbackTypesUiState.Success(fallback)
+                    _selectedType.value = fallback.first()
+                    _message.emit(UiMessage.rawOrCode(response.message, MessageCode.FeedbackTypeLoadFailed))
+                }
+            }.onFailure {
+                val fallback = fallbackTypes()
+                _typesState.value = FeedbackTypesUiState.Success(fallback)
+                _selectedType.value = fallback.first()
+            }
+        }
+    }
+
+    fun selectType(item: DictItem) {
+        _selectedType.value = item
+    }
+
+    fun updateContact(value: String) {
+        _contact.value = value
+    }
+
+    fun updateContent(value: String) {
+        _content.value = value
+    }
+
+    fun remainingImageSlots(): Int =
+        (maxImages - _pendingImages.value.size).coerceAtLeast(0)
+
+    fun onImagesPicked(picked: List<PickedImage>) {
+        if (picked.isEmpty()) return
+        val remaining = remainingImageSlots()
+        if (remaining <= 0) {
+            viewModelScope.launch { _message.emit(UiMessage.Code(MessageCode.FeedbackMaxImages, maxImages.toString())) }
+            return
+        }
+        _pendingImages.update { current ->
+            (current + picked).distinctBy { it.uri }.take(maxImages)
+        }
+    }
+
+    fun removePendingImage(uri: String) {
+        _pendingImages.update { list -> list.filterNot { it.uri == uri } }
+    }
+
+    fun submit() {
+        if (_isSubmitting.value) return
+        val type = _selectedType.value
+        val text = _content.value.trim()
+        if (type == null) {
+            viewModelScope.launch { _message.emit(UiMessage.Code(MessageCode.FeedbackNeedType)) }
+            return
+        }
+        if (text.isEmpty()) {
+            viewModelScope.launch { _message.emit(UiMessage.Code(MessageCode.FeedbackNeedContent)) }
+            return
+        }
+        viewModelScope.launch {
+            _isSubmitting.value = true
+            if (AuthSession.token.isBlank()) {
+                networkAuthLog("feedback submit token empty, restoring session")
+                authRepository.restoreSession()
+            }
+            networkAuthLog("feedback submit start token=${AuthSession.tokenSummary()}")
+            val pending = _pendingImages.value
+            val uploadedUrls = if (pending.isNotEmpty()) {
+                val uploadResult = fileUploadRepository.uploadImages(pending)
+                if (!uploadResult.isSucceeded || uploadResult.data == null) {
+                    _isSubmitting.value = false
+                    _message.emit(
+                        UiMessage.rawOrCode(
+                            uploadResult.message,
+                            MessageCode.OrderCommentPicUploadFailed,
+                        ),
+                    )
+                    return@launch
+                }
+                uploadResult.data
+            } else {
+                emptyList()
+            }
+            val request = FeedbackSubmitRequest(
+                // CoolMallKotlin always sends this field, and the submit API accepts
+                // an empty string when the user does not provide contact information.
+                contact = _contact.value.trim(),
+                type = type.value ?: 0,
+                content = text,
+                images = uploadedUrls.ifEmpty { null },
+            )
+            networkAuthLog(
+                "feedback submit request type=${request.type} " +
+                    "contentLength=${request.content.length} " +
+                    "contactPresent=${request.contact.isNotEmpty()} " +
+                    "imageCount=${request.images?.size ?: 0}",
+            )
+            runCatching {
+                feedbackRepository.submitFeedback(request)
+            }.onSuccess { response ->
+                _isSubmitting.value = false
+                if (response.isSucceeded) {
+                    _message.emit(UiMessage.Code(MessageCode.FeedbackSubmitSuccess))
+                    _submitted.emit(Unit)
+                } else {
+                    _message.emit(UiMessage.rawOrCode(response.message, MessageCode.FeedbackSubmitFailed, response.code.toString()))
+                }
+            }.onFailure { error ->
+                _isSubmitting.value = false
+                _message.emit(UiMessage.network(error.message))
+            }
+        }
+    }
+}

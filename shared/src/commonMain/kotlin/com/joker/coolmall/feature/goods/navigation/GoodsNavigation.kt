@@ -4,8 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.joker.coolmallkmp.feature.goods.GoodsDetailRoute
-import com.joker.coolmallkmp.feature.goods.GoodsCommentRoute
+import com.joker.coolmallkmp.feature.goods.view.screen.GoodsDetailRoute
+import com.joker.coolmallkmp.feature.goods.view.screen.GoodsCommentRoute
 import kotlinx.serialization.Serializable
 
 @Serializable

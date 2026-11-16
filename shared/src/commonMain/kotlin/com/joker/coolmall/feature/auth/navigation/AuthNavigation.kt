@@ -3,11 +3,11 @@ package com.joker.coolmallkmp.feature.auth.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.joker.coolmallkmp.feature.auth.AccountLoginRoute
-import com.joker.coolmallkmp.feature.auth.LoginRoute
-import com.joker.coolmallkmp.feature.auth.RegisterRoute
-import com.joker.coolmallkmp.feature.auth.ResetPasswordRoute
-import com.joker.coolmallkmp.feature.auth.SmsLoginRoute
+import com.joker.coolmallkmp.feature.auth.view.screen.AccountLoginRoute
+import com.joker.coolmallkmp.feature.auth.view.screen.LoginRoute
+import com.joker.coolmallkmp.feature.auth.view.screen.RegisterRoute
+import com.joker.coolmallkmp.feature.auth.view.screen.ResetPasswordRoute
+import com.joker.coolmallkmp.feature.auth.view.screen.SmsLoginRoute
 import kotlinx.serialization.Serializable
 
 @Serializable

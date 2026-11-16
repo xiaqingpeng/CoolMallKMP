@@ -4,14 +4,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.joker.coolmallkmp.feature.order.OrderCommentRoute
-import com.joker.coolmallkmp.feature.order.OrderConfirmRoute
-import com.joker.coolmallkmp.feature.order.OrderDetailRoute
-import com.joker.coolmallkmp.feature.order.OrderListRoute
-import com.joker.coolmallkmp.feature.order.OrderLogisticsRoute
-import com.joker.coolmallkmp.feature.order.OrderPayRoute
-import com.joker.coolmallkmp.feature.order.OrderRefundRoute
-import com.joker.coolmallkmp.feature.order.OrderResultScreen
+import com.joker.coolmallkmp.feature.order.view.screen.OrderCommentRoute
+import com.joker.coolmallkmp.feature.order.view.screen.OrderConfirmRoute
+import com.joker.coolmallkmp.feature.order.view.screen.OrderDetailRoute
+import com.joker.coolmallkmp.feature.order.view.screen.OrderListRoute
+import com.joker.coolmallkmp.feature.order.view.screen.OrderLogisticsRoute
+import com.joker.coolmallkmp.feature.order.view.screen.OrderPayRoute
+import com.joker.coolmallkmp.feature.order.view.screen.OrderRefundRoute
+import com.joker.coolmallkmp.feature.order.view.screen.OrderResultScreen
 import com.joker.coolmallkmp.ui.navigation.Routes
 import kotlinx.serialization.Serializable
 

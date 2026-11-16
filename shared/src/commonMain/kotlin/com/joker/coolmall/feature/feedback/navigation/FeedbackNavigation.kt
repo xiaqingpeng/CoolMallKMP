@@ -3,8 +3,8 @@ package com.joker.coolmallkmp.feature.feedback.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.joker.coolmallkmp.feature.feedback.FeedbackListRoute
-import com.joker.coolmallkmp.feature.feedback.FeedbackSubmitRoute
+import com.joker.coolmallkmp.feature.feedback.view.screen.FeedbackListRoute
+import com.joker.coolmallkmp.feature.feedback.view.screen.FeedbackSubmitRoute
 import kotlinx.serialization.Serializable
 
 @Serializable

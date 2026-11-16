@@ -45,7 +45,7 @@ class FileUploadRepository(
             }
             val oss = credentialsResponse.data
             val credentials = oss.credentials
-            val uploadUrl = oss.url
+            val uploadUrl = oss.url?.trim()?.trimEnd('/')
             if (credentials == null || uploadUrl.isNullOrBlank()) {
                 networkAuthLog("feedback image credentials invalid")
                 return@withContext NetworkResponse(
@@ -121,14 +121,24 @@ class FileUploadRepository(
                 )
             }
             if (response.status.isSuccess()) {
-                response.bodyAsText()
+                val responseBody = response.bodyAsText().take(300)
+                networkAuthLog(
+                    "feedback image upload response http=${response.status.value} " +
+                        "body=${responseBody.ifBlank { "<empty>" }}",
+                )
                 NetworkResponse(
+                    // Keep the public URL format identical to CoolMallKotlin:
+                    // <credential url>/app/base/<generated file name>.
                     data = "$uploadUrl/$key",
                     code = 1000,
                     message = "上传成功",
                 )
             } else {
                 val responseBody = response.bodyAsText().take(300)
+                networkAuthLog(
+                    "feedback image upload response http=${response.status.value} " +
+                        "body=${responseBody.ifBlank { "<empty>" }}",
+                )
                 NetworkResponse(
                     data = null,
                     code = response.status.value,

@@ -2,7 +2,7 @@ package com.joker.coolmallkmp.feature.main.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.joker.coolmallkmp.feature.main.view.MainRoute
+import com.joker.coolmallkmp.feature.main.view.screen.MainRoute
 import com.joker.coolmallkmp.ui.navigation.Routes
 
 fun NavGraphBuilder.mainScreen(

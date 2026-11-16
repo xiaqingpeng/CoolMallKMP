@@ -1,5 +1,6 @@
 package com.joker.coolmallkmp.core.network
 
+import com.joker.coolmallkmp.core.config.AppConfig
 import com.joker.coolmallkmp.core.model.entity.OssUpload
 import com.joker.coolmallkmp.core.model.request.DictDataRequest
 import com.joker.coolmallkmp.core.model.response.DictDataResponse
@@ -42,16 +43,15 @@ class KtorCommonNetworkDataSource(
         val token = AuthSession.token.trim()
         networkAuthLog(
             "upload credentials request method=POST path=base/comm/upload " +
-                "token=${AuthSession.tokenSummary()} body=none contentType=<none>",
+                "token=${AuthSession.tokenSummary()} body=empty-multipart contentType=multipart/form-data",
         )
         return runCatching {
-            val response = client.post("base/comm/upload") {
-                // CoolMallKotlin's Retrofit @POST has no request body or JSON content type.
-                headers.remove(HttpHeaders.Authorization)
-                headers[HttpHeaders.Authorization] = token
-                headers.remove(HttpHeaders.ContentType)
-            }
-            val responseText = response.bodyAsText()
+            val response = requestUploadCredentials(
+                client = client,
+                url = AppConfig.baseUrl + "base/comm/upload",
+                token = token,
+            )
+            val responseText = response.body
             val safeResponseText = responseText
                 .replace(
                     Regex("\"tmpSecretKey\"\\s*:\\s*\"[^\"]*\""),
@@ -66,9 +66,9 @@ class KtorCommonNetworkDataSource(
                     "\"sessionToken\":\"<redacted>\"",
                 )
             networkAuthLog(
-                "upload credentials response http=${response.status.value} " +
+                "upload credentials response http=${response.statusCode} " +
                     "path=base/comm/upload " +
-                    "contentType=${response.headers[HttpHeaders.ContentType].orEmpty()} " +
+                    "contentType=${response.contentType} " +
                     "body=${safeResponseText.take(1000)}",
             )
             NetworkJson.decodeFromString<NetworkResponse<OssUpload>>(responseText)
@@ -81,3 +81,15 @@ class KtorCommonNetworkDataSource(
         }
     }
 }
+
+data class UploadCredentialsHttpResponse(
+    val statusCode: Int,
+    val contentType: String,
+    val body: String,
+)
+
+expect suspend fun requestUploadCredentials(
+    client: HttpClient,
+    url: String,
+    token: String,
+): UploadCredentialsHttpResponse

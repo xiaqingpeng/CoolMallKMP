@@ -3,7 +3,7 @@ package com.joker.coolmallkmp.feature.goods.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.joker.coolmallkmp.feature.goods.GoodsSearchRoute
+import com.joker.coolmallkmp.feature.goods.view.screen.GoodsSearchRoute
 import kotlinx.serialization.Serializable
 
 @Serializable

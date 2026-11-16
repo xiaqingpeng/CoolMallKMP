@@ -4,11 +4,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.joker.coolmallkmp.feature.common.AboutRoute
-import com.joker.coolmallkmp.feature.common.ContributorsRoute
-import com.joker.coolmallkmp.feature.common.DocumentRoute
-import com.joker.coolmallkmp.feature.common.SettingsRoute
-import com.joker.coolmallkmp.feature.common.WebRoute
+import com.joker.coolmallkmp.feature.common.view.screen.AboutRoute
+import com.joker.coolmallkmp.feature.common.view.screen.ContributorsRoute
+import com.joker.coolmallkmp.feature.common.view.screen.DocumentRoute
+import com.joker.coolmallkmp.feature.common.view.screen.SettingsRoute
+import com.joker.coolmallkmp.feature.common.view.screen.WebRoute
 import kotlinx.serialization.Serializable
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.privacy_policy

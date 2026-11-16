@@ -5,8 +5,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.joker.coolmallkmp.core.model.entity.Address
-import com.joker.coolmallkmp.feature.user.AddressEditRoute
-import com.joker.coolmallkmp.feature.user.AddressListRoute
+import com.joker.coolmallkmp.feature.user.view.screen.AddressEditRoute
+import com.joker.coolmallkmp.feature.user.view.screen.AddressListRoute
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

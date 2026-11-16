@@ -5,8 +5,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.joker.coolmallkmp.feature.launch.GuideRoute
-import com.joker.coolmallkmp.feature.launch.SplashRoute
+import com.joker.coolmallkmp.feature.launch.view.screen.GuideRoute
+import com.joker.coolmallkmp.feature.launch.view.screen.SplashRoute
+
 import com.joker.coolmallkmp.ui.navigation.Routes
 
 fun NavController.navigateToGuide(fromSettings: Boolean = false) {

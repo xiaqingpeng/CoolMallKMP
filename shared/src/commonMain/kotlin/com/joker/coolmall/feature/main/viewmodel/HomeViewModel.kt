@@ -1,4 +1,4 @@
-package com.joker.coolmallkmp.feature.main
+package com.joker.coolmallkmp.feature.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

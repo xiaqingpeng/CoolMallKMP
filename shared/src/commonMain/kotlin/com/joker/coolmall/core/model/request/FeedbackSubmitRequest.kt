@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class FeedbackSubmitRequest(
-    val contact: String? = "",
+    val contact: String = "",
     val type: Int,
     val content: String,
     val images: List<String>? = null,
