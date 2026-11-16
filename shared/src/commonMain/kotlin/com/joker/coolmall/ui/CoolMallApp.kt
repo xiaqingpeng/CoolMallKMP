@@ -155,10 +155,28 @@ fun CoolMallApp() {
                     )
                 },
                 onLoginClick = navController::navigateToLogin,
-                onProfileClick = navController::navigateToProfile,
-                onAddressClick = navController::navigateToAddressList,
+                onProfileClick = {
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToProfile()
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
+                onAddressClick = {
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToAddressList()
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
                 onCheckoutClick = navController::navigateToOrderConfirm,
-                onOrderListClick = { tabIndex -> navController.navigateToOrderList(tabIndex) },
+                onOrderListClick = { tabIndex ->
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToOrderList(tabIndex)
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
                 onSearchClick = navController::navigateToGoodsSearch,
                 onGithubClick = {
                     navController.navigateToWeb(
@@ -169,8 +187,20 @@ fun CoolMallApp() {
                 onFeaturedClick = {
                     navController.navigateToGoodsCategory(featured = true)
                 },
-                onCouponClick = navController::navigateToCouponList,
-                onFootprintClick = navController::navigateToFootprint,
+                onCouponClick = {
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToCouponList()
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
+                onFootprintClick = {
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToFootprint()
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
                 onFeedbackClick = {
                     if (AuthSession.token.isNotBlank()) {
                         navController.navigateToFeedbackList()
@@ -361,7 +391,13 @@ fun CoolMallApp() {
                 onUserAgreementClick = navController::navigateToUserAgreement,
                 onPrivacyPolicyClick = navController::navigateToPrivacyPolicy,
                 onAboutClick = navController::navigateToAbout,
-                onAccountSecurityClick = navController::navigateToProfile,
+                onAccountSecurityClick = {
+                    if (AuthSession.token.isNotBlank()) {
+                        navController.navigateToProfile()
+                    } else {
+                        navController.navigateToLogin()
+                    }
+                },
                 onReplayGuideClick = navController::navigateToGuide,
                 onFeedbackClick = {
                     if (AuthSession.token.isNotBlank()) {

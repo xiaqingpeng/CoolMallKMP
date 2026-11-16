@@ -189,21 +189,16 @@ fun AddressListRoute(
                                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                         AddressActionButton(
                                             enabled = !isActing,
-                                            onClick = {
-                                                if (isSelectMode) onAddressSelected(address)
-                                                else onEditClick(address.id)
-                                            },
+                                            onClick = { onEditClick(address.id) },
                                             icon = Icons.Filled.Edit,
                                             contentDescription = stringResource(Res.string.common_edit),
                                         )
-                                        if (!isSelectMode) {
-                                            AddressActionButton(
-                                                enabled = !isActing,
-                                                onClick = { pendingDelete = address },
-                                                icon = Icons.Filled.Delete,
-                                                contentDescription = stringResource(Res.string.address_delete_title),
-                                            )
-                                        }
+                                        AddressActionButton(
+                                            enabled = !isActing,
+                                            onClick = { pendingDelete = address },
+                                            icon = Icons.Filled.Delete,
+                                            contentDescription = stringResource(Res.string.address_delete_title),
+                                        )
                                     }
                                 },
                             )
