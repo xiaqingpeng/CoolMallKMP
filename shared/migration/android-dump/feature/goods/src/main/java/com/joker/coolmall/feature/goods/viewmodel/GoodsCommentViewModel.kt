@@ -1,12 +1,12 @@
-package com.joker.coolmall.feature.goods.viewmodel
+package com.joker.coolmallkmp.feature.goods.viewmodel
 
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkListViewModel
-import com.joker.coolmall.core.data.repository.GoodsRepository
-import com.joker.coolmall.core.model.entity.Comment
-import com.joker.coolmall.core.model.request.GoodsCommentPageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.navigation.goods.GoodsRoutes
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkListViewModel
+import com.joker.coolmallkmp.core.data.repository.GoodsRepository
+import com.joker.coolmallkmp.core.model.entity.Comment
+import com.joker.coolmallkmp.core.model.request.GoodsCommentPageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.navigation.goods.GoodsRoutes
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

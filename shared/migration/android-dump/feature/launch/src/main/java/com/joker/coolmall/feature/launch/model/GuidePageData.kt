@@ -1,7 +1,7 @@
-package com.joker.coolmall.feature.launch.model
+package com.joker.coolmallkmp.feature.launch.model
 
 import android.content.Context
-import com.joker.coolmall.feature.launch.R
+import com.joker.coolmallkmp.feature.launch.R
 
 /**
  * 引导页页面数据

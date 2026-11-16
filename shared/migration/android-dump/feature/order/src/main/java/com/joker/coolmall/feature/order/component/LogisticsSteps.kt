@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order.component
+package com.joker.coolmallkmp.feature.order.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,12 +15,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.model.entity.LogisticsItem
-import com.joker.coolmall.core.model.preview.previewLogisticsItemList
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.model.entity.LogisticsItem
+import com.joker.coolmallkmp.core.model.preview.previewLogisticsItemList
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
 
 /**
  * 物流步骤条组件

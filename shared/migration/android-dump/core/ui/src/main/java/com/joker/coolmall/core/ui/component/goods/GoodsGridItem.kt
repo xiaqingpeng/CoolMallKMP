@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.goods
+package com.joker.coolmallkmp.core.ui.component.goods
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,16 +17,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.designsystem.theme.TextTertiaryLight
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.core.model.preview.previewGoods
-import com.joker.coolmall.core.ui.R
-import com.joker.coolmall.core.ui.component.image.NetWorkImage
-import com.joker.coolmall.core.ui.component.text.PriceText
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.TextTertiaryLight
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.core.model.preview.previewGoods
+import com.joker.coolmallkmp.core.ui.R
+import com.joker.coolmallkmp.core.ui.component.image.NetWorkImage
+import com.joker.coolmallkmp.core.ui.component.text.PriceText
 
 /**
  * 商品网格卡片

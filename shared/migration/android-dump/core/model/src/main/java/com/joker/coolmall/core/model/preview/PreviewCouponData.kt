@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.Condition
-import com.joker.coolmall.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.model.entity.Condition
+import com.joker.coolmallkmp.core.model.entity.Coupon
 
 /**
  * 可领取的优惠券列表（不包含useStatus字段）

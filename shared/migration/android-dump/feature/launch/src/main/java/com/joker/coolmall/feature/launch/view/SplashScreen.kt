@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.launch.view
+package com.joker.coolmallkmp.feature.launch.view
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -30,15 +30,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.LogoIcon
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXXLarge
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.launch.R
-import com.joker.coolmall.feature.launch.viewmodel.SplashViewModel
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.LogoIcon
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXXLarge
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.launch.R
+import com.joker.coolmallkmp.feature.launch.viewmodel.SplashViewModel
 import kotlinx.coroutines.delay
 
 /**

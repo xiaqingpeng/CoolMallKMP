@@ -1,7 +1,7 @@
-package com.joker.coolmall.feature.main.component
+package com.joker.coolmallkmp.feature.main.component
 
 import androidx.compose.runtime.Composable
-import com.joker.coolmall.feature.main.model.TopLevelDestination
+import com.joker.coolmallkmp.feature.main.model.TopLevelDestination
 
 @Composable
 expect fun PlatformBottomNavIcon(

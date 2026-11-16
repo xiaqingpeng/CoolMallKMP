@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.database.dao
+package com.joker.coolmallkmp.core.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.joker.coolmall.core.database.entity.FootprintEntity
+import com.joker.coolmallkmp.core.database.entity.FootprintEntity
 import kotlinx.coroutines.flow.Flow
 
 /**

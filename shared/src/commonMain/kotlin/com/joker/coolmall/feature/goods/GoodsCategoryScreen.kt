@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods
+package com.joker.coolmallkmp.feature.goods
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -82,23 +82,23 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.ui.component.GoodsGridItem
-import com.joker.coolmall.core.ui.component.GoodsListItem
-import com.joker.coolmall.core.ui.component.GoodsGridSkeleton
-import com.joker.coolmall.core.ui.component.RefreshGridLayout
-import com.joker.coolmall.core.ui.component.RefreshLayout
-import com.joker.coolmall.core.ui.component.SkeletonBlock
-import com.joker.coolmall.core.ui.empty.EmptyData
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_no_more
-import myapplication.shared.generated.resources.goods_list_default
-import myapplication.shared.generated.resources.goods_list_empty
-import myapplication.shared.generated.resources.goods_list_flash
-import myapplication.shared.generated.resources.goods_list_recommend
-import myapplication.shared.generated.resources.goods_list_search_prefix
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.ui.component.GoodsGridItem
+import com.joker.coolmallkmp.core.ui.component.GoodsListItem
+import com.joker.coolmallkmp.core.ui.component.GoodsGridSkeleton
+import com.joker.coolmallkmp.core.ui.component.RefreshGridLayout
+import com.joker.coolmallkmp.core.ui.component.RefreshLayout
+import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_no_more
+import coolmallkmp.shared.generated.resources.goods_list_default
+import coolmallkmp.shared.generated.resources.goods_list_empty
+import coolmallkmp.shared.generated.resources.goods_list_flash
+import coolmallkmp.shared.generated.resources.goods_list_recommend
+import coolmallkmp.shared.generated.resources.goods_list_search_prefix
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -439,7 +439,7 @@ private fun CategoryFilterButton(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun FilterDialog(
-    categories: List<com.joker.coolmall.core.model.entity.Category>,
+    categories: List<com.joker.coolmallkmp.core.model.entity.Category>,
     filterUiState: GoodsCategoryFilterUiState,
     selectedCategoryIds: List<Long>,
     minPrice: String,
@@ -625,7 +625,7 @@ private fun FilterDialog(
                             .padding(12.dp),
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                     ) {
-                    com.joker.coolmall.core.ui.component.AppButtonBordered(
+                    com.joker.coolmallkmp.core.ui.component.AppButtonBordered(
                         text = "重置",
                         onClick = {
                             selected = selectedCategoryIds
@@ -634,15 +634,15 @@ private fun FilterDialog(
                             onReset()
                         },
                         modifier = Modifier.weight(1f),
-                        size = com.joker.coolmall.core.ui.component.AppButtonSize.MINI,
+                        size = com.joker.coolmallkmp.core.ui.component.AppButtonSize.MINI,
                         fullWidth = true,
                     )
-                    com.joker.coolmall.core.ui.component.AppButton(
+                    com.joker.coolmallkmp.core.ui.component.AppButton(
                         text = "确定",
                         onClick = { onApply(selected, min, max) },
                         modifier = Modifier.weight(1f),
-                        size = com.joker.coolmall.core.ui.component.AppButtonSize.MINI,
-                        style = com.joker.coolmall.core.ui.component.AppButtonStyle.GRADIENT,
+                        size = com.joker.coolmallkmp.core.ui.component.AppButtonSize.MINI,
+                        style = com.joker.coolmallkmp.core.ui.component.AppButtonStyle.GRADIENT,
                         fullWidth = true,
                     )
                     }

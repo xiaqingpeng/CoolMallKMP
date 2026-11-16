@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 /**
  * 三方登录 / 支付能力开关。

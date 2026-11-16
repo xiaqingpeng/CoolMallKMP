@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.view
+package com.joker.coolmallkmp.feature.auth.view
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -14,20 +14,20 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXLarge
-import com.joker.coolmall.navigation.auth.AuthNavigator
-import com.joker.coolmall.navigation.common.CommonNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.button.AppButton
-import com.joker.coolmall.feature.auth.R
-import com.joker.coolmall.feature.auth.component.AnimatedAuthPage
-import com.joker.coolmall.feature.auth.component.BottomNavigationRow
-import com.joker.coolmall.feature.auth.component.PasswordInputField
-import com.joker.coolmall.feature.auth.component.PhoneInputField
-import com.joker.coolmall.feature.auth.component.UserAgreement
-import com.joker.coolmall.feature.auth.viewmodel.AccountLoginViewModel
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXLarge
+import com.joker.coolmallkmp.navigation.auth.AuthNavigator
+import com.joker.coolmallkmp.navigation.common.CommonNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.button.AppButton
+import com.joker.coolmallkmp.feature.auth.R
+import com.joker.coolmallkmp.feature.auth.component.AnimatedAuthPage
+import com.joker.coolmallkmp.feature.auth.component.BottomNavigationRow
+import com.joker.coolmallkmp.feature.auth.component.PasswordInputField
+import com.joker.coolmallkmp.feature.auth.component.PhoneInputField
+import com.joker.coolmallkmp.feature.auth.component.UserAgreement
+import com.joker.coolmallkmp.feature.auth.viewmodel.AccountLoginViewModel
 
 /**
  * 账号密码登录路由

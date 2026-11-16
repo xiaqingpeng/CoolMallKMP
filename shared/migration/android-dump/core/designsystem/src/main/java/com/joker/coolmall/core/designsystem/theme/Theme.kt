@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.designsystem.theme
+package com.joker.coolmallkmp.core.designsystem.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

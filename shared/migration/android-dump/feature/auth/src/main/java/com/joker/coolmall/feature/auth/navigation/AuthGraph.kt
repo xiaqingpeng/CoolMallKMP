@@ -1,13 +1,13 @@
-package com.joker.coolmall.feature.auth.navigation
+package com.joker.coolmallkmp.feature.auth.navigation
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
-import com.joker.coolmall.navigation.auth.AuthRoutes
-import com.joker.coolmall.feature.auth.view.AccountLoginRoute
-import com.joker.coolmall.feature.auth.view.LoginRoute
-import com.joker.coolmall.feature.auth.view.RegisterRoute
-import com.joker.coolmall.feature.auth.view.ResetPasswordRoute
-import com.joker.coolmall.feature.auth.view.SmsLoginRoute
+import com.joker.coolmallkmp.navigation.auth.AuthRoutes
+import com.joker.coolmallkmp.feature.auth.view.AccountLoginRoute
+import com.joker.coolmallkmp.feature.auth.view.LoginRoute
+import com.joker.coolmallkmp.feature.auth.view.RegisterRoute
+import com.joker.coolmallkmp.feature.auth.view.ResetPasswordRoute
+import com.joker.coolmallkmp.feature.auth.view.SmsLoginRoute
 
 /**
  * 认证模块导航图

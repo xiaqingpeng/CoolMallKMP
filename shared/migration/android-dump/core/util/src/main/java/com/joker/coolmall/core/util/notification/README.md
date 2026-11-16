@@ -17,7 +17,7 @@
 建议在应用启动时（如在 Application 类中）初始化通知渠道：
 
 ```kotlin
-class MyApplication : Application() {
+class CoolMallKMP : Application() {
     override fun onCreate() {
         super.onCreate()
         // 初始化通知渠道

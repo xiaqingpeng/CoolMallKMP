@@ -99,13 +99,13 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 | 能力 | 路径 |
 |------|------|
-| 依赖容器（替代 Hilt） | `shared/src/commonMain/kotlin/com/joker/coolmall/core/di/AppContainer.kt` |
-| Ktor 网络 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/network/` |
-| DataStore 存储 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/data/local/` |
-| Room3 数据库 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/database/` |
-| 业务仓库 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/data/repository/` |
-| 导航根 | `shared/src/commonMain/kotlin/com/joker/coolmall/ui/CoolMallApp.kt` |
-| 设计 token / 主题 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/ui/theme/` |
-| 价格 / 区块标题 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/ui/component/PriceText.kt`、`TitleWithLine.kt` |
-| 主按钮 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/ui/component/AppButton.kt` |
-| 空态组件 | `shared/src/commonMain/kotlin/com/joker/coolmall/core/ui/empty/` |
+| 依赖容器（替代 Hilt） | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/di/AppContainer.kt` |
+| Ktor 网络 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/network/` |
+| DataStore 存储 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/data/local/` |
+| Room3 数据库 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/database/` |
+| 业务仓库 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/data/repository/` |
+| 导航根 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/ui/CoolMallApp.kt` |
+| 设计 token / 主题 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/ui/theme/` |
+| 价格 / 区块标题 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/ui/component/PriceText.kt`、`TitleWithLine.kt` |
+| 主按钮 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/ui/component/AppButton.kt` |
+| 空态组件 | `shared/src/commonMain/kotlin/com/joker/coolmallkmp/core/ui/empty/` |

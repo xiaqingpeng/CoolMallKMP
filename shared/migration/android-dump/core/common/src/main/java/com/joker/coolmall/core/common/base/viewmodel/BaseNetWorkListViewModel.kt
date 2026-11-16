@@ -1,16 +1,16 @@
-package com.joker.coolmall.core.common.base.viewmodel
+package com.joker.coolmallkmp.core.common.base.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.navigation.NavigationResultKey
-import com.joker.coolmall.navigation.RefreshResult
-import com.joker.coolmall.navigation.RefreshResultKey
-import com.joker.coolmall.navigation.resultEvents
-import com.joker.coolmall.result.ResultHandler
-import com.joker.coolmall.result.asResult
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.navigation.NavigationResultKey
+import com.joker.coolmallkmp.navigation.RefreshResult
+import com.joker.coolmallkmp.navigation.RefreshResultKey
+import com.joker.coolmallkmp.navigation.resultEvents
+import com.joker.coolmallkmp.result.ResultHandler
+import com.joker.coolmallkmp.result.asResult
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
-import com.joker.coolmall.core.model.entity.Auth
-import com.joker.coolmall.core.model.entity.Captcha
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.Auth
+import com.joker.coolmallkmp.core.model.entity.Captcha
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -10,7 +10,7 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import com.joker.coolmall.core.session.networkAuthLog
+import com.joker.coolmallkmp.core.session.networkAuthLog
 
 /**
  * 认证相关 API（从 CoolMallKotlin AuthService 迁移为 Ktor）。
@@ -80,7 +80,7 @@ private suspend fun <T> logged(
 ): NetworkResponse<T> {
     networkAuthLog(
         "auth request method=POST path=$path bodyKeys=${params.keys.sorted()} " +
-            "token=${com.joker.coolmall.core.session.AuthSession.tokenSummary()}",
+            "token=${com.joker.coolmallkmp.core.session.AuthSession.tokenSummary()}",
     )
     return try {
         block().also { response ->

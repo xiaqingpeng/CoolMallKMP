@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util.storage
+package com.joker.coolmallkmp.core.util.storage
 
 import android.app.Application
 import android.os.Parcelable

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs.component
+package com.joker.coolmallkmp.feature.cs.component
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingXSmall
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingXSmall
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
 
 /**
  * 表情选择器组件

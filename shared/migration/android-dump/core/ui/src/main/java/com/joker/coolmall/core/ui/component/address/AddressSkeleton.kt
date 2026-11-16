@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.address
+package com.joker.coolmallkmp.core.ui.component.address
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,15 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.ui.component.divider.WeDivider
-import com.joker.coolmall.core.ui.component.skeleton.SkeletonBlock
-import com.joker.coolmall.core.ui.component.skeleton.SkeletonCircle
-import com.joker.coolmall.core.ui.component.skeleton.SkeletonTextLine
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.ui.component.divider.WeDivider
+import com.joker.coolmallkmp.core.ui.component.skeleton.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.component.skeleton.SkeletonCircle
+import com.joker.coolmallkmp.core.ui.component.skeleton.SkeletonTextLine
 
 /**
  * 收货地址卡片骨架屏

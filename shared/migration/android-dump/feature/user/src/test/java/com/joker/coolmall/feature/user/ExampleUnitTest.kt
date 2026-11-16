@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user
+package com.joker.coolmallkmp.feature.user
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

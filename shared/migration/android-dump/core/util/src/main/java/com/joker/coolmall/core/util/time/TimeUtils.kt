@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util.time
+package com.joker.coolmallkmp.core.util.time
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -147,7 +147,7 @@ object TimeUtils {
      * @author Joker.X
      */
     fun shouldShowTimeHeaderInList(
-        messages: List<com.joker.coolmall.core.model.entity.CsMsg>,
+        messages: List<com.joker.coolmallkmp.core.model.entity.CsMsg>,
         currentIndex: Int
     ): Boolean {
         // 如果消息列表为空或索引无效，不显示时间头部

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.feedback
+package com.joker.coolmallkmp.feature.feedback
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -53,34 +53,34 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.model.entity.Feedback
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.model.entity.Feedback
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
 import coil3.compose.AsyncImage
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_retry
-import myapplication.shared.generated.resources.feedback_list_title
-import myapplication.shared.generated.resources.feedback_submit_title
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_retry
+import coolmallkmp.shared.generated.resources.feedback_list_title
+import coolmallkmp.shared.generated.resources.feedback_submit_title
 import org.jetbrains.compose.resources.stringResource
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.empty.EmptyData
-import com.joker.coolmall.core.ui.component.AppButton
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.core.ui.component.LoadMore
-import com.joker.coolmall.core.ui.component.RefreshLayout
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import myapplication.shared.generated.resources.feedback_empty
-import myapplication.shared.generated.resources.feedback_empty_hint
-import myapplication.shared.generated.resources.feedback_no_content
-import myapplication.shared.generated.resources.feedback_reply
-import myapplication.shared.generated.resources.feedback_status_done
-import myapplication.shared.generated.resources.feedback_status_pending
-import myapplication.shared.generated.resources.feedback_type_experience
-import myapplication.shared.generated.resources.feedback_type_other
-import myapplication.shared.generated.resources.feedback_type_suggestion
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.component.AppButton
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.LoadMore
+import com.joker.coolmallkmp.core.ui.component.RefreshLayout
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import coolmallkmp.shared.generated.resources.feedback_empty
+import coolmallkmp.shared.generated.resources.feedback_empty_hint
+import coolmallkmp.shared.generated.resources.feedback_no_content
+import coolmallkmp.shared.generated.resources.feedback_reply
+import coolmallkmp.shared.generated.resources.feedback_status_done
+import coolmallkmp.shared.generated.resources.feedback_status_pending
+import coolmallkmp.shared.generated.resources.feedback_type_experience
+import coolmallkmp.shared.generated.resources.feedback_type_other
+import coolmallkmp.shared.generated.resources.feedback_type_suggestion
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

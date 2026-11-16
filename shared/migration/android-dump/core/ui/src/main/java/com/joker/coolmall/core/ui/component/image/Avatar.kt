@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.image
+package com.joker.coolmallkmp.core.ui.component.image
 
 
 import androidx.compose.foundation.background
@@ -19,8 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.ui.R
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.ui.R
 
 /**
  * 用户头像组件

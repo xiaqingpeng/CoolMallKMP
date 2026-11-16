@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.cs.util
+package com.joker.coolmallkmp.feature.cs.util
 
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
-import com.joker.coolmall.feature.cs.R
+import com.joker.coolmallkmp.feature.cs.R
 
 /**
  * 聊天音效管理器

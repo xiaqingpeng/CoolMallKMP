@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.network.service
+package com.joker.coolmallkmp.core.network.service
 
-import com.joker.coolmall.core.model.entity.Feedback
-import com.joker.coolmall.core.model.request.FeedbackSubmitRequest
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.Feedback
+import com.joker.coolmallkmp.core.model.request.FeedbackSubmitRequest
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 

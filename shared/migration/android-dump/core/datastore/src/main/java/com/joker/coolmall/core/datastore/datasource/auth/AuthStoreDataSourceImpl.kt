@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.datastore.datasource.auth
+package com.joker.coolmallkmp.core.datastore.datasource.auth
 
-import com.joker.coolmall.core.model.entity.Auth
-import com.joker.coolmall.core.util.storage.MMKVUtils
+import com.joker.coolmallkmp.core.model.entity.Auth
+import com.joker.coolmallkmp.core.util.storage.MMKVUtils
 import jakarta.inject.Inject
 import kotlinx.serialization.json.Json
 

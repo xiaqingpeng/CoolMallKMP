@@ -21,11 +21,11 @@ dependencies {
 }
 
 android {
-    namespace = "com.joker.coolmall"
+    namespace = "com.joker.coolmallkmp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.joker.coolmall"
+        applicationId = "com.joker.coolmallkmp"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

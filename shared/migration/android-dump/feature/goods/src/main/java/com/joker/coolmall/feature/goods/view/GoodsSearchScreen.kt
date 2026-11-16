@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods.view
+package com.joker.coolmallkmp.feature.goods.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -20,27 +20,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.ShapeCircle
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.model.entity.GoodsSearchKeyword
-import com.joker.coolmall.core.model.entity.SearchHistory
-import com.joker.coolmall.core.model.preview.previewGoodsSearchKeywordList
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.appbar.SearchTopAppBar
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.feature.goods.R
-import com.joker.coolmall.feature.goods.viewmodel.GoodsSearchViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeCircle
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.model.entity.GoodsSearchKeyword
+import com.joker.coolmallkmp.core.model.entity.SearchHistory
+import com.joker.coolmallkmp.core.model.preview.previewGoodsSearchKeywordList
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.appbar.SearchTopAppBar
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.feature.goods.R
+import com.joker.coolmallkmp.feature.goods.viewmodel.GoodsSearchViewModel
 
 /**
  * 商品搜索路由

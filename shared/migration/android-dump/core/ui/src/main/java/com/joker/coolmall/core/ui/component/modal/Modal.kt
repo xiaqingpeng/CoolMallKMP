@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.modal
+package com.joker.coolmallkmp.core.ui.component.modal
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween

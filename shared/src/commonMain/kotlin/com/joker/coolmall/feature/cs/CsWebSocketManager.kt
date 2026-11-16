@@ -1,8 +1,8 @@
-package com.joker.coolmall.feature.cs
+package com.joker.coolmallkmp.feature.cs
 
-import com.joker.coolmall.core.model.entity.CsMsg
-import com.joker.coolmall.core.network.NetworkJson
-import com.joker.coolmall.core.network.platformHttpClient
+import com.joker.coolmallkmp.core.model.entity.CsMsg
+import com.joker.coolmallkmp.core.network.NetworkJson
+import com.joker.coolmallkmp.core.network.platformHttpClient
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
 import io.ktor.client.plugins.websocket.WebSockets

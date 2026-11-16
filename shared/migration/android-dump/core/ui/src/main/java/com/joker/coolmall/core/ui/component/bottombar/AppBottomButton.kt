@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.bottombar
+package com.joker.coolmallkmp.core.ui.component.bottombar
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -7,8 +7,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.ui.component.button.AppButton
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.ui.component.button.AppButton
 
 /**
  * 底部按钮栏组件

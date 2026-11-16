@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util.`package`
+package com.joker.coolmallkmp.core.util.`package`
 
 import android.content.Context
 import android.content.pm.PackageInfo

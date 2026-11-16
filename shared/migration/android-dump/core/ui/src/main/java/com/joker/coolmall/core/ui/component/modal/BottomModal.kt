@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.modal
+package com.joker.coolmallkmp.core.ui.component.modal
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
@@ -28,10 +28,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.TitleLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.TitleLarge
 import kotlinx.coroutines.launch
 
 /**

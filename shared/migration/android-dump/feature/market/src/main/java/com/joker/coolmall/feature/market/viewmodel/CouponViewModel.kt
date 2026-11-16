@@ -1,13 +1,13 @@
-package com.joker.coolmall.feature.market.viewmodel
+package com.joker.coolmallkmp.feature.market.viewmodel
 
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkListViewModel
-import com.joker.coolmall.core.data.repository.CouponRepository
-import com.joker.coolmall.core.model.entity.Coupon
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.navigation.goods.GoodsRoutes
-import com.joker.coolmall.navigation.navigate
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkListViewModel
+import com.joker.coolmallkmp.core.data.repository.CouponRepository
+import com.joker.coolmallkmp.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.navigation.goods.GoodsRoutes
+import com.joker.coolmallkmp.navigation.navigate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

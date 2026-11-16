@@ -1,11 +1,11 @@
-package com.joker.coolmall.feature.common
+package com.joker.coolmallkmp.feature.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.local.ThemeColor
-import com.joker.coolmall.core.data.local.ThemeMode
-import com.joker.coolmall.core.data.local.ThemePreferences
-import com.joker.coolmall.core.data.local.SplashPreferences
+import com.joker.coolmallkmp.core.data.local.ThemeColor
+import com.joker.coolmallkmp.core.data.local.ThemeMode
+import com.joker.coolmallkmp.core.data.local.ThemePreferences
+import com.joker.coolmallkmp.core.data.local.SplashPreferences
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

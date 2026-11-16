@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.database.datasource.searchhistory.SearchHistoryDataSource
-import com.joker.coolmall.core.model.entity.SearchHistory
+import com.joker.coolmallkmp.core.database.datasource.searchhistory.SearchHistoryDataSource
+import com.joker.coolmallkmp.core.model.entity.SearchHistory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn

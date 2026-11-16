@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.network.datasource.page
+package com.joker.coolmallkmp.core.network.datasource.page
 
-import com.joker.coolmall.core.model.entity.ConfirmOrder
-import com.joker.coolmall.core.model.entity.GoodsDetail
-import com.joker.coolmall.core.model.entity.Home
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.base.BaseNetworkDataSource
-import com.joker.coolmall.core.network.service.PageService
+import com.joker.coolmallkmp.core.model.entity.ConfirmOrder
+import com.joker.coolmallkmp.core.model.entity.GoodsDetail
+import com.joker.coolmallkmp.core.model.entity.Home
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.base.BaseNetworkDataSource
+import com.joker.coolmallkmp.core.network.service.PageService
 import javax.inject.Inject
 
 /**

@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
-import com.joker.coolmall.core.model.common.Id
-import com.joker.coolmall.core.model.common.Ids
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.common.Id
+import com.joker.coolmallkmp.core.model.common.Ids
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

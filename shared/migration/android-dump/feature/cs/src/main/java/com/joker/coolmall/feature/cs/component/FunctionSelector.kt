@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs.component
+package com.joker.coolmallkmp.feature.cs.component
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -22,16 +22,16 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.component.AppRow
-import com.joker.coolmall.core.designsystem.theme.ShapeCircle
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.feature.cs.R
+import com.joker.coolmallkmp.core.designsystem.component.AppRow
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeCircle
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.feature.cs.R
 
 /**
  * 聊天功能选择器组件

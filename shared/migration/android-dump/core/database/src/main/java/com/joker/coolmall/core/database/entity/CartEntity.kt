@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.database.entity
+package com.joker.coolmallkmp.core.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.joker.coolmall.core.database.util.CartSpecConverter
-import com.joker.coolmall.core.model.entity.CartGoodsSpec
+import com.joker.coolmallkmp.core.database.util.CartSpecConverter
+import com.joker.coolmallkmp.core.model.entity.CartGoodsSpec
 
 /**
  * 购物车数据库实体

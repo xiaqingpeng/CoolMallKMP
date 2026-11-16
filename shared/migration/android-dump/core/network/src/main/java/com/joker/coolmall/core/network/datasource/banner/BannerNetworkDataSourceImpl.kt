@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.network.datasource.banner
+package com.joker.coolmallkmp.core.network.datasource.banner
 
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.base.BaseNetworkDataSource
-import com.joker.coolmall.core.network.service.BannerService
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.base.BaseNetworkDataSource
+import com.joker.coolmallkmp.core.network.service.BannerService
 import javax.inject.Inject
 
 /**

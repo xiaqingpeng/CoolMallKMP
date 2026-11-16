@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.badge
+package com.joker.coolmallkmp.core.ui.component.badge
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

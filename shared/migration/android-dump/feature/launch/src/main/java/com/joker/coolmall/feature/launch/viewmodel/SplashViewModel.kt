@@ -1,10 +1,10 @@
-package com.joker.coolmall.feature.launch.viewmodel
+package com.joker.coolmallkmp.feature.launch.viewmodel
 
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.navigation.launch.LaunchNavigator
-import com.joker.coolmall.navigation.launch.LaunchRoutes
-import com.joker.coolmall.navigation.main.MainNavigator
-import com.joker.coolmall.core.util.storage.MMKVUtils
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.navigation.launch.LaunchNavigator
+import com.joker.coolmallkmp.navigation.launch.LaunchRoutes
+import com.joker.coolmallkmp.navigation.main.MainNavigator
+import com.joker.coolmallkmp.core.util.storage.MMKVUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

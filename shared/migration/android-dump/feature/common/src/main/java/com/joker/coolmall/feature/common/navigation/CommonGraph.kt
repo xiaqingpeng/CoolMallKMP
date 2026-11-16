@@ -1,14 +1,14 @@
-package com.joker.coolmall.feature.common.navigation
+package com.joker.coolmallkmp.feature.common.navigation
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
-import com.joker.coolmall.navigation.common.CommonRoutes
-import com.joker.coolmall.feature.common.view.AboutRoute
-import com.joker.coolmall.feature.common.view.ContributorsRoute
-import com.joker.coolmall.feature.common.view.PrivacyPolicyRoute
-import com.joker.coolmall.feature.common.view.SettingsRoute
-import com.joker.coolmall.feature.common.view.UserAgreementRoute
-import com.joker.coolmall.feature.common.view.WebRoute
+import com.joker.coolmallkmp.navigation.common.CommonRoutes
+import com.joker.coolmallkmp.feature.common.view.AboutRoute
+import com.joker.coolmallkmp.feature.common.view.ContributorsRoute
+import com.joker.coolmallkmp.feature.common.view.PrivacyPolicyRoute
+import com.joker.coolmallkmp.feature.common.view.SettingsRoute
+import com.joker.coolmallkmp.feature.common.view.UserAgreementRoute
+import com.joker.coolmallkmp.feature.common.view.WebRoute
 
 /**
  * 通用模块导航图

@@ -1,10 +1,10 @@
-package com.joker.coolmall.feature.launch
+package com.joker.coolmallkmp.feature.launch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.local.GuidePreferences
-import com.joker.coolmall.core.data.local.SplashPreferences
-import com.joker.coolmall.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.data.local.GuidePreferences
+import com.joker.coolmallkmp.core.data.local.SplashPreferences
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

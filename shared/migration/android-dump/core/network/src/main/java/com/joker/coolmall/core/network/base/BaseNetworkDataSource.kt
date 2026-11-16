@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.network.base
+package com.joker.coolmallkmp.core.network.base
 
 import retrofit2.Retrofit
 

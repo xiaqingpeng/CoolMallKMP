@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.data.local.SearchHistoryPreferences
-import com.joker.coolmall.core.database.dao.SearchHistoryDao
-import com.joker.coolmall.core.database.entity.SearchHistoryEntity
-import com.joker.coolmall.core.model.entity.SearchHistory
+import com.joker.coolmallkmp.core.data.local.SearchHistoryPreferences
+import com.joker.coolmallkmp.core.database.dao.SearchHistoryDao
+import com.joker.coolmallkmp.core.database.entity.SearchHistoryEntity
+import com.joker.coolmallkmp.core.model.entity.SearchHistory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map

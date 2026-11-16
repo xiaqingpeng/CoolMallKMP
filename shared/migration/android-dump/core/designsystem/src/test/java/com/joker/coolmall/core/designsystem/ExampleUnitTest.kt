@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.designsystem
+package com.joker.coolmallkmp.core.designsystem
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

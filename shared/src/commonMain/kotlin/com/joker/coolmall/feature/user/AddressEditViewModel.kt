@@ -1,11 +1,11 @@
-package com.joker.coolmall.feature.user
+package com.joker.coolmallkmp.feature.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.AddressRepository
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.data.repository.AddressRepository
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow

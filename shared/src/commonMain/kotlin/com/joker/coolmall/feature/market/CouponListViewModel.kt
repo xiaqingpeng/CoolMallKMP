@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.market
+package com.joker.coolmallkmp.feature.market
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.CouponRepository
-import com.joker.coolmall.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.data.repository.CouponRepository
+import com.joker.coolmallkmp.core.model.entity.Coupon
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 
 sealed interface CouponListUiState {
     data object Loading : CouponListUiState

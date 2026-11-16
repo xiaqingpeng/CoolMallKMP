@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 /**
  * Android 端能力开关。

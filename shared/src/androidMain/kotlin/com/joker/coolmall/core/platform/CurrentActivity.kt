@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 import android.app.Activity
 import android.app.Application

@@ -1,12 +1,12 @@
-package com.joker.coolmall.core.network.datasource.coupon
+package com.joker.coolmallkmp.core.network.datasource.coupon
 
-import com.joker.coolmall.core.model.entity.Coupon
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.model.request.ReceiveCouponRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.base.BaseNetworkDataSource
-import com.joker.coolmall.core.network.service.CouponService
+import com.joker.coolmallkmp.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.model.request.ReceiveCouponRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.base.BaseNetworkDataSource
+import com.joker.coolmallkmp.core.network.service.CouponService
 import javax.inject.Inject
 
 /**

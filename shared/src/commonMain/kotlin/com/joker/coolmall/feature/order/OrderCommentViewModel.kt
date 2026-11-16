@@ -1,14 +1,14 @@
-package com.joker.coolmall.feature.order
+package com.joker.coolmallkmp.feature.order
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.FileUploadRepository
-import com.joker.coolmall.core.data.repository.GoodsRepository
-import com.joker.coolmall.core.data.repository.OrderRepository
-import com.joker.coolmall.core.model.entity.Comment
-import com.joker.coolmall.core.model.entity.OrderGoods
-import com.joker.coolmall.core.model.request.GoodsCommentSubmitRequest
-import com.joker.coolmall.core.platform.PickedImage
+import com.joker.coolmallkmp.core.data.repository.FileUploadRepository
+import com.joker.coolmallkmp.core.data.repository.GoodsRepository
+import com.joker.coolmallkmp.core.data.repository.OrderRepository
+import com.joker.coolmallkmp.core.model.entity.Comment
+import com.joker.coolmallkmp.core.model.entity.OrderGoods
+import com.joker.coolmallkmp.core.model.request.GoodsCommentSubmitRequest
+import com.joker.coolmallkmp.core.platform.PickedImage
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -17,8 +17,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 
 sealed interface OrderCommentUiState {
     data object Loading : OrderCommentUiState

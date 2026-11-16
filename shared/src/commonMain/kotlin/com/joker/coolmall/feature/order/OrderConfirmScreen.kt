@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order
+package com.joker.coolmallkmp.feature.order
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.clickable
@@ -47,33 +47,33 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.core.model.entity.Cart
-import com.joker.coolmall.core.model.entity.ConfirmOrder
-import com.joker.coolmall.core.model.entity.Order
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.cart_default_spec
-import myapplication.shared.generated.resources.cart_total_count
-import myapplication.shared.generated.resources.cart_total_prefix
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_default
-import myapplication.shared.generated.resources.common_retry
-import myapplication.shared.generated.resources.order_confirm_add_address
-import myapplication.shared.generated.resources.order_confirm_ios_pay_hint
-import myapplication.shared.generated.resources.order_confirm_remark
-import myapplication.shared.generated.resources.order_confirm_submit
-import myapplication.shared.generated.resources.order_confirm_title
-import myapplication.shared.generated.resources.price_times_count
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.core.model.entity.Cart
+import com.joker.coolmallkmp.core.model.entity.ConfirmOrder
+import com.joker.coolmallkmp.core.model.entity.Order
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.cart_default_spec
+import coolmallkmp.shared.generated.resources.cart_total_count
+import coolmallkmp.shared.generated.resources.cart_total_prefix
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_default
+import coolmallkmp.shared.generated.resources.common_retry
+import coolmallkmp.shared.generated.resources.order_confirm_add_address
+import coolmallkmp.shared.generated.resources.order_confirm_ios_pay_hint
+import coolmallkmp.shared.generated.resources.order_confirm_remark
+import coolmallkmp.shared.generated.resources.order_confirm_submit
+import coolmallkmp.shared.generated.resources.order_confirm_title
+import coolmallkmp.shared.generated.resources.price_times_count
 import org.jetbrains.compose.resources.stringResource
-import com.joker.coolmall.core.ui.component.AppButtonFixed
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.core.ui.component.PriceText
-import com.joker.coolmall.core.ui.component.PriceTextSmall
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.core.ui.component.AppButtonFixed
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.PriceText
+import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -100,7 +100,7 @@ fun OrderConfirmRoute(
     val isSubmitting by viewModel.isSubmitting.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val selectedAddressResult by
-        com.joker.coolmall.feature.user.navigation.AddressSelectionStore.selectedAddress
+        com.joker.coolmallkmp.feature.user.navigation.AddressSelectionStore.selectedAddress
             .collectAsState()
 
     LaunchedEffect(Unit) {
@@ -112,7 +112,7 @@ fun OrderConfirmRoute(
     LaunchedEffect(selectedAddressResult) {
         selectedAddressResult?.let {
             viewModel.selectAddress(it)
-            com.joker.coolmall.feature.user.navigation.AddressSelectionStore.consume()
+            com.joker.coolmallkmp.feature.user.navigation.AddressSelectionStore.consume()
         }
     }
 

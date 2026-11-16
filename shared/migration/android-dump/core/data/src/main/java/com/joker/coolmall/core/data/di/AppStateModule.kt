@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.data.di
+package com.joker.coolmallkmp.core.data.di
 
 import dagger.Module
 import dagger.Provides

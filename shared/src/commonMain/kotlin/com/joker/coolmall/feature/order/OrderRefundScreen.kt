@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order
+package com.joker.coolmallkmp.feature.order
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -47,34 +47,34 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.ui.component.AppButton
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.core.ui.component.PriceTextSmall
-import myapplication.shared.generated.resources.price_times_count
+import com.joker.coolmallkmp.core.ui.component.AppButton
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
+import coolmallkmp.shared.generated.resources.price_times_count
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.core.model.entity.Order
-import com.joker.coolmall.core.model.entity.OrderGoods
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_goods
-import myapplication.shared.generated.resources.common_retry
-import myapplication.shared.generated.resources.order_refund_extra
-import myapplication.shared.generated.resources.order_refund_no_preset
-import myapplication.shared.generated.resources.order_refund_order_num
-import myapplication.shared.generated.resources.order_refund_paid_amount
-import myapplication.shared.generated.resources.order_refund_reason
-import myapplication.shared.generated.resources.order_refund_reason_other
-import myapplication.shared.generated.resources.order_refund_retry_reasons
-import myapplication.shared.generated.resources.order_refund_submit
-import myapplication.shared.generated.resources.order_refund_title
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.entity.Order
+import com.joker.coolmallkmp.core.model.entity.OrderGoods
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_goods
+import coolmallkmp.shared.generated.resources.common_retry
+import coolmallkmp.shared.generated.resources.order_refund_extra
+import coolmallkmp.shared.generated.resources.order_refund_no_preset
+import coolmallkmp.shared.generated.resources.order_refund_order_num
+import coolmallkmp.shared.generated.resources.order_refund_paid_amount
+import coolmallkmp.shared.generated.resources.order_refund_reason
+import coolmallkmp.shared.generated.resources.order_refund_reason_other
+import coolmallkmp.shared.generated.resources.order_refund_retry_reasons
+import coolmallkmp.shared.generated.resources.order_refund_submit
+import coolmallkmp.shared.generated.resources.order_refund_title
 import org.jetbrains.compose.resources.stringResource
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.resolveUiMessage
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.resolveUiMessage
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 import android.Manifest
 import android.app.NotificationChannel
@@ -9,7 +9,7 @@ import androidx.annotation.RequiresPermission
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.di.AppContainerProvider
 import kotlinx.datetime.Clock
 
 private var pendingVerificationCode: String? = null
@@ -41,7 +41,7 @@ actual fun notifyVerificationCode(code: String) {
         return
     }
     val notification = NotificationCompat.Builder(context, channelId)
-        .setSmallIcon(com.joker.coolmall.shared.R.drawable.ic_logo)
+        .setSmallIcon(com.joker.coolmallkmp.shared.R.drawable.ic_logo)
         .setContentTitle("验证码")
         .setContentText("您的验证码是: $code")
         .setPriority(NotificationCompat.PRIORITY_HIGH)

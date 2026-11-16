@@ -1,10 +1,10 @@
 plugins {
-    alias(libs.plugins.coolmall.android.library)
-    alias(libs.plugins.coolmall.hilt)
+    alias(libs.plugins.coolmallkmp.android.library)
+    alias(libs.plugins.coolmallkmp.hilt)
 }
 
 android {
-    namespace = "com.joker.coolmall.core.network"
+    namespace = "com.joker.coolmallkmp.core.network"
 
 }
 dependencies {

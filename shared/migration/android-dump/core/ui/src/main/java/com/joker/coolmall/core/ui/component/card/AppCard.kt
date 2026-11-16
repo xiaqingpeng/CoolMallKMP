@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.card
+package com.joker.coolmallkmp.core.ui.component.card
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.TitleLarge
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.TitleLarge
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
 
 /**
  * 通用卡片组件

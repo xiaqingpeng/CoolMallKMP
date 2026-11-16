@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.image
+package com.joker.coolmallkmp.core.ui.component.image
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable

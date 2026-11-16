@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
-import com.joker.coolmall.core.model.entity.OssUpload
-import com.joker.coolmall.core.model.request.DictDataRequest
-import com.joker.coolmall.core.model.response.DictDataResponse
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.session.AuthSession
-import com.joker.coolmall.core.session.networkAuthLog
+import com.joker.coolmallkmp.core.model.entity.OssUpload
+import com.joker.coolmallkmp.core.model.request.DictDataRequest
+import com.joker.coolmallkmp.core.model.response.DictDataResponse
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.session.AuthSession
+import com.joker.coolmallkmp.core.session.networkAuthLog
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.parameter

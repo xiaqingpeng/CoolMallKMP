@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.component
+package com.joker.coolmallkmp.feature.common.component
 
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -6,12 +6,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.joker.coolmall.core.common.config.ThemePreference
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.modal.BottomModal
-import com.joker.coolmall.feature.common.R
+import com.joker.coolmallkmp.core.common.config.ThemePreference
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.modal.BottomModal
+import com.joker.coolmallkmp.feature.common.R
 
 /**
  * 主题模式选择弹窗

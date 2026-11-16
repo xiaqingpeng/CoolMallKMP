@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util
+package com.joker.coolmallkmp.core.util
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

@@ -1,4 +1,4 @@
-package com.joker.coolmall.ui
+package com.joker.coolmallkmp.ui
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -12,86 +12,86 @@ import androidx.navigation.compose.rememberNavController
 import coil3.ImageLoader
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.network.ktor3.KtorNetworkFetcherFactory
-import com.joker.coolmall.core.data.local.ThemeColor
-import com.joker.coolmall.core.data.local.ThemeMode
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.network.Network
-import com.joker.coolmall.core.ui.theme.coolMallDarkColorScheme
-import com.joker.coolmall.core.ui.theme.coolMallLightColorScheme
-import com.joker.coolmall.feature.auth.navigation.accountLoginScreen
-import com.joker.coolmall.feature.auth.navigation.navigateToAccountLogin
-import com.joker.coolmall.feature.auth.navigation.navigateToLogin
-import com.joker.coolmall.feature.auth.navigation.loginScreen
-import com.joker.coolmall.feature.auth.navigation.navigateToRegister
-import com.joker.coolmall.feature.auth.navigation.navigateToResetPassword
-import com.joker.coolmall.feature.auth.navigation.navigateToSmsLogin
-import com.joker.coolmall.feature.auth.navigation.registerScreen
-import com.joker.coolmall.feature.auth.navigation.resetPasswordScreen
-import com.joker.coolmall.feature.auth.navigation.smsLoginScreen
-import com.joker.coolmall.feature.common.navigation.aboutScreen
-import com.joker.coolmall.feature.common.navigation.navigateToAbout
-import com.joker.coolmall.feature.common.navigation.navigateToPrivacyPolicy
-import com.joker.coolmall.feature.common.navigation.navigateToContributors
-import com.joker.coolmall.feature.common.navigation.navigateToSettings
-import com.joker.coolmall.feature.common.navigation.navigateToUserAgreement
-import com.joker.coolmall.feature.common.navigation.navigateToWeb
-import com.joker.coolmall.feature.common.navigation.privacyPolicyScreen
-import com.joker.coolmall.feature.common.navigation.contributorsScreen
-import com.joker.coolmall.feature.common.navigation.settingsScreen
-import com.joker.coolmall.feature.common.navigation.userAgreementScreen
-import com.joker.coolmall.feature.common.navigation.webScreen
-import com.joker.coolmall.feature.cs.navigation.chatScreen
-import com.joker.coolmall.feature.cs.navigation.navigateToChat
-import com.joker.coolmall.feature.feedback.navigation.feedbackListScreen
-import com.joker.coolmall.feature.feedback.navigation.feedbackSubmitScreen
-import com.joker.coolmall.feature.feedback.navigation.navigateToFeedbackList
-import com.joker.coolmall.feature.feedback.navigation.navigateToFeedbackSubmit
-import com.joker.coolmall.feature.goods.navigation.goodsCategoryScreen
-import com.joker.coolmall.feature.goods.navigation.goodsDetailScreen
-import com.joker.coolmall.feature.goods.navigation.goodsCommentScreen
-import com.joker.coolmall.feature.goods.navigation.goodsSearchScreen
-import com.joker.coolmall.feature.goods.navigation.GoodsCategoryRouteArgs
-import com.joker.coolmall.feature.goods.navigation.navigateToGoodsCategory
-import com.joker.coolmall.feature.goods.navigation.GoodsSearchRouteArgs
-import com.joker.coolmall.feature.goods.navigation.navigateToGoodsDetail
-import com.joker.coolmall.feature.goods.navigation.navigateToGoodsComments
-import com.joker.coolmall.feature.goods.navigation.navigateToGoodsSearch
-import com.joker.coolmall.feature.launch.navigation.guideScreen
-import com.joker.coolmall.feature.launch.navigation.navigateToGuide
-import com.joker.coolmall.feature.launch.navigation.navigateFromGuideToMain
-import com.joker.coolmall.feature.launch.navigation.navigateToMain
-import com.joker.coolmall.feature.launch.navigation.splashScreen
-import com.joker.coolmall.feature.main.navigation.mainScreen
-import com.joker.coolmall.feature.market.navigation.couponListScreen
-import com.joker.coolmall.feature.market.navigation.navigateToCouponList
-import com.joker.coolmall.feature.order.navigation.backToMainFromOrder
-import com.joker.coolmall.feature.order.navigation.navigateToOrderComment
-import com.joker.coolmall.feature.order.navigation.navigateToOrderConfirm
-import com.joker.coolmall.feature.order.navigation.navigateToOrderDetail
-import com.joker.coolmall.feature.order.navigation.navigateToOrderList
-import com.joker.coolmall.feature.order.navigation.navigateToOrderLogistics
-import com.joker.coolmall.feature.order.navigation.navigateToOrderPay
-import com.joker.coolmall.feature.order.navigation.navigateToOrderRefund
-import com.joker.coolmall.feature.order.navigation.navigateToOrderResult
-import com.joker.coolmall.feature.order.navigation.orderCommentScreen
-import com.joker.coolmall.feature.order.navigation.orderConfirmScreen
-import com.joker.coolmall.feature.order.navigation.orderDetailScreen
-import com.joker.coolmall.feature.order.navigation.orderListScreen
-import com.joker.coolmall.feature.order.navigation.orderLogisticsScreen
-import com.joker.coolmall.feature.order.navigation.orderPayScreen
-import com.joker.coolmall.feature.order.navigation.orderRefundScreen
-import com.joker.coolmall.feature.order.navigation.orderResultScreen
-import com.joker.coolmall.feature.user.navigation.addressEditScreen
-import com.joker.coolmall.feature.user.navigation.addressListScreen
-import com.joker.coolmall.feature.user.navigation.AddressSelectionStore
-import com.joker.coolmall.feature.user.navigation.footprintScreen
-import com.joker.coolmall.feature.user.navigation.navigateToAddressEdit
-import com.joker.coolmall.feature.user.navigation.navigateToAddressList
-import com.joker.coolmall.feature.user.navigation.navigateToFootprint
-import com.joker.coolmall.feature.user.navigation.navigateToProfile
-import com.joker.coolmall.feature.user.navigation.profileScreen
-import com.joker.coolmall.ui.navigation.Routes
-import com.joker.coolmall.core.session.AuthSession
+import com.joker.coolmallkmp.core.data.local.ThemeColor
+import com.joker.coolmallkmp.core.data.local.ThemeMode
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.network.Network
+import com.joker.coolmallkmp.core.ui.theme.coolMallDarkColorScheme
+import com.joker.coolmallkmp.core.ui.theme.coolMallLightColorScheme
+import com.joker.coolmallkmp.feature.auth.navigation.accountLoginScreen
+import com.joker.coolmallkmp.feature.auth.navigation.navigateToAccountLogin
+import com.joker.coolmallkmp.feature.auth.navigation.navigateToLogin
+import com.joker.coolmallkmp.feature.auth.navigation.loginScreen
+import com.joker.coolmallkmp.feature.auth.navigation.navigateToRegister
+import com.joker.coolmallkmp.feature.auth.navigation.navigateToResetPassword
+import com.joker.coolmallkmp.feature.auth.navigation.navigateToSmsLogin
+import com.joker.coolmallkmp.feature.auth.navigation.registerScreen
+import com.joker.coolmallkmp.feature.auth.navigation.resetPasswordScreen
+import com.joker.coolmallkmp.feature.auth.navigation.smsLoginScreen
+import com.joker.coolmallkmp.feature.common.navigation.aboutScreen
+import com.joker.coolmallkmp.feature.common.navigation.navigateToAbout
+import com.joker.coolmallkmp.feature.common.navigation.navigateToPrivacyPolicy
+import com.joker.coolmallkmp.feature.common.navigation.navigateToContributors
+import com.joker.coolmallkmp.feature.common.navigation.navigateToSettings
+import com.joker.coolmallkmp.feature.common.navigation.navigateToUserAgreement
+import com.joker.coolmallkmp.feature.common.navigation.navigateToWeb
+import com.joker.coolmallkmp.feature.common.navigation.privacyPolicyScreen
+import com.joker.coolmallkmp.feature.common.navigation.contributorsScreen
+import com.joker.coolmallkmp.feature.common.navigation.settingsScreen
+import com.joker.coolmallkmp.feature.common.navigation.userAgreementScreen
+import com.joker.coolmallkmp.feature.common.navigation.webScreen
+import com.joker.coolmallkmp.feature.cs.navigation.chatScreen
+import com.joker.coolmallkmp.feature.cs.navigation.navigateToChat
+import com.joker.coolmallkmp.feature.feedback.navigation.feedbackListScreen
+import com.joker.coolmallkmp.feature.feedback.navigation.feedbackSubmitScreen
+import com.joker.coolmallkmp.feature.feedback.navigation.navigateToFeedbackList
+import com.joker.coolmallkmp.feature.feedback.navigation.navigateToFeedbackSubmit
+import com.joker.coolmallkmp.feature.goods.navigation.goodsCategoryScreen
+import com.joker.coolmallkmp.feature.goods.navigation.goodsDetailScreen
+import com.joker.coolmallkmp.feature.goods.navigation.goodsCommentScreen
+import com.joker.coolmallkmp.feature.goods.navigation.goodsSearchScreen
+import com.joker.coolmallkmp.feature.goods.navigation.GoodsCategoryRouteArgs
+import com.joker.coolmallkmp.feature.goods.navigation.navigateToGoodsCategory
+import com.joker.coolmallkmp.feature.goods.navigation.GoodsSearchRouteArgs
+import com.joker.coolmallkmp.feature.goods.navigation.navigateToGoodsDetail
+import com.joker.coolmallkmp.feature.goods.navigation.navigateToGoodsComments
+import com.joker.coolmallkmp.feature.goods.navigation.navigateToGoodsSearch
+import com.joker.coolmallkmp.feature.launch.navigation.guideScreen
+import com.joker.coolmallkmp.feature.launch.navigation.navigateToGuide
+import com.joker.coolmallkmp.feature.launch.navigation.navigateFromGuideToMain
+import com.joker.coolmallkmp.feature.launch.navigation.navigateToMain
+import com.joker.coolmallkmp.feature.launch.navigation.splashScreen
+import com.joker.coolmallkmp.feature.main.navigation.mainScreen
+import com.joker.coolmallkmp.feature.market.navigation.couponListScreen
+import com.joker.coolmallkmp.feature.market.navigation.navigateToCouponList
+import com.joker.coolmallkmp.feature.order.navigation.backToMainFromOrder
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderComment
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderConfirm
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderDetail
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderList
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderLogistics
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderPay
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderRefund
+import com.joker.coolmallkmp.feature.order.navigation.navigateToOrderResult
+import com.joker.coolmallkmp.feature.order.navigation.orderCommentScreen
+import com.joker.coolmallkmp.feature.order.navigation.orderConfirmScreen
+import com.joker.coolmallkmp.feature.order.navigation.orderDetailScreen
+import com.joker.coolmallkmp.feature.order.navigation.orderListScreen
+import com.joker.coolmallkmp.feature.order.navigation.orderLogisticsScreen
+import com.joker.coolmallkmp.feature.order.navigation.orderPayScreen
+import com.joker.coolmallkmp.feature.order.navigation.orderRefundScreen
+import com.joker.coolmallkmp.feature.order.navigation.orderResultScreen
+import com.joker.coolmallkmp.feature.user.navigation.addressEditScreen
+import com.joker.coolmallkmp.feature.user.navigation.addressListScreen
+import com.joker.coolmallkmp.feature.user.navigation.AddressSelectionStore
+import com.joker.coolmallkmp.feature.user.navigation.footprintScreen
+import com.joker.coolmallkmp.feature.user.navigation.navigateToAddressEdit
+import com.joker.coolmallkmp.feature.user.navigation.navigateToAddressList
+import com.joker.coolmallkmp.feature.user.navigation.navigateToFootprint
+import com.joker.coolmallkmp.feature.user.navigation.navigateToProfile
+import com.joker.coolmallkmp.feature.user.navigation.profileScreen
+import com.joker.coolmallkmp.ui.navigation.Routes
+import com.joker.coolmallkmp.core.session.AuthSession
 
 /**
  * CoolMall KMP 真正业务入口（对齐 netcloudmusic MyApp）
@@ -117,11 +117,11 @@ fun CoolMallApp() {
         ThemeMode.DARK -> true
     }
     val primary = when (themeColor) {
-        ThemeColor.DEFAULT -> com.joker.coolmall.core.ui.theme.PrimaryDefault
-        ThemeColor.PURPLE -> com.joker.coolmall.core.ui.theme.ColorPurple
-        ThemeColor.GREEN -> com.joker.coolmall.core.ui.theme.ColorSuccess
+        ThemeColor.DEFAULT -> com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
+        ThemeColor.PURPLE -> com.joker.coolmallkmp.core.ui.theme.ColorPurple
+        ThemeColor.GREEN -> com.joker.coolmallkmp.core.ui.theme.ColorSuccess
         ThemeColor.ORANGE -> androidx.compose.ui.graphics.Color(0xFFFF8A00)
-        ThemeColor.RED -> com.joker.coolmall.core.ui.theme.ColorDanger
+        ThemeColor.RED -> com.joker.coolmallkmp.core.ui.theme.ColorDanger
     }
     val colorScheme = if (darkTheme) {
         coolMallDarkColorScheme(primary)

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,10 +18,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.core.model.entity.Captcha
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.auth_captcha_refresh
-import myapplication.shared.generated.resources.auth_captcha_description
+import com.joker.coolmallkmp.core.model.entity.Captcha
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.auth_captcha_refresh
+import coolmallkmp.shared.generated.resources.auth_captcha_description
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

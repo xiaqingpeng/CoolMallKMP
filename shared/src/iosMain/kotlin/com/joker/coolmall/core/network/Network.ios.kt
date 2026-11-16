@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig

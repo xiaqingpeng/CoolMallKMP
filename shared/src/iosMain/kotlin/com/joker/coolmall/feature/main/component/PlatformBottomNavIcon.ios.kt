@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.component
+package com.joker.coolmallkmp.feature.main.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import com.joker.coolmall.feature.main.model.TopLevelDestination
+import com.joker.coolmallkmp.feature.main.model.TopLevelDestination
 
 @Composable
 actual fun PlatformBottomNavIcon(

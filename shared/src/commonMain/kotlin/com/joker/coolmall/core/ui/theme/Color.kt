@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.theme
+package com.joker.coolmallkmp.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

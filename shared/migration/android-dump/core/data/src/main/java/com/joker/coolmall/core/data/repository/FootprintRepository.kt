@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.database.datasource.footprint.FootprintDataSource
-import com.joker.coolmall.core.model.entity.Footprint
+import com.joker.coolmallkmp.core.database.datasource.footprint.FootprintDataSource
+import com.joker.coolmallkmp.core.model.entity.Footprint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn

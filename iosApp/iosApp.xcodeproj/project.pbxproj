@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		72B5D7DA5406423B5AB65423 /* MyApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B5D7DA5406423B5AB65423 /* CoolMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoolMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8F0959BCC960BCDA53456E02 /* Exceptions for "iosApp" folder in "iosApp" target */ = {
+		8F0959BCC960BCDA53456E02 /* Exceptions for "iosApp" folder in "CoolMall" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 504D5E5F0AF161326D8702BC /* iosApp */;
+			target = 504D5E5F0AF161326D8702BC /* CoolMall */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -59,7 +59,7 @@
 		CB3CF018977BC86213659780 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				72B5D7DA5406423B5AB65423 /* MyApplication.app */,
+				72B5D7DA5406423B5AB65423 /* CoolMall.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		504D5E5F0AF161326D8702BC /* iosApp */ = {
+		504D5E5F0AF161326D8702BC /* CoolMall */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 89BEC4FFD62D5E9E62E58E28 /* Build configuration list for PBXNativeTarget "iosApp" */;
+			buildConfigurationList = 89BEC4FFD62D5E9E62E58E28 /* Build configuration list for PBXNativeTarget "CoolMall" */;
 			buildPhases = (
 				1C8A3432438F47C50BE5497A /* Compile Kotlin Framework */,
 				8E32C598C0ADCE7C61926E6C /* Sources */,
@@ -83,11 +83,11 @@
 			fileSystemSynchronizedGroups = (
 				EB5BE22D99801F0FF4A1D3A1 /* iosApp */,
 			);
-			name = iosApp;
+			name = CoolMall;
 			packageProductDependencies = (
 			);
-			productName = iosApp;
-			productReference = 72B5D7DA5406423B5AB65423 /* MyApplication.app */;
+			productName = CoolMall;
+			productReference = 72B5D7DA5406423B5AB65423 /* CoolMall.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -105,11 +105,12 @@
 					};
 				};
 			};
-			buildConfigurationList = 9842A2DCAB2F0B275B168D00 /* Build configuration list for PBXProject "iosApp" */;
+			buildConfigurationList = 9842A2DCAB2F0B275B168D00 /* Build configuration list for PBXProject "CoolMall" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 				Base,
 			);
 			mainGroup = DF4248F6CE439D4C3FCC3AAB;
@@ -119,7 +120,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				504D5E5F0AF161326D8702BC /* iosApp */,
+				504D5E5F0AF161326D8702BC /* CoolMall */,
 			);
 		};
 /* End PBXProject section */
@@ -349,7 +350,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9842A2DCAB2F0B275B168D00 /* Build configuration list for PBXProject "iosApp" */ = {
+		9842A2DCAB2F0B275B168D00 /* Build configuration list for PBXProject "CoolMall" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2B1B2DCE98A48FDD65634C92 /* Debug */,
@@ -358,7 +359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		89BEC4FFD62D5E9E62E58E28 /* Build configuration list for PBXNativeTarget "iosApp" */ = {
+		89BEC4FFD62D5E9E62E58E28 /* Build configuration list for PBXNativeTarget "CoolMall" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1105D3B546F65C53B8F9E2E7 /* Debug */,

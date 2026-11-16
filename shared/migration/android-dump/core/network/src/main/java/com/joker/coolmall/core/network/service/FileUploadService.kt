@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.network.service
+package com.joker.coolmallkmp.core.network.service
 
 import android.net.Uri
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 
 /**
  * 文件上传服务接口

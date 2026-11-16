@@ -1,13 +1,13 @@
-package com.joker.coolmall.feature.auth
+package com.joker.coolmallkmp.feature.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.AuthRepository
-import com.joker.coolmall.core.platform.ThirdPartyCapabilities
-import com.joker.coolmall.core.platform.ThirdPartyLogin
-import com.joker.coolmall.core.platform.ThirdPartyLoginResult
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.platform.ThirdPartyCapabilities
+import com.joker.coolmallkmp.core.platform.ThirdPartyLogin
+import com.joker.coolmallkmp.core.platform.ThirdPartyLoginResult
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow

@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.datastore.di
+package com.joker.coolmallkmp.core.datastore.di
 
-import com.joker.coolmall.core.datastore.datasource.auth.AuthStoreDataSource
-import com.joker.coolmall.core.datastore.datasource.auth.AuthStoreDataSourceImpl
-import com.joker.coolmall.core.datastore.datasource.userinfo.UserInfoStoreDataSource
-import com.joker.coolmall.core.datastore.datasource.userinfo.UserInfoStoreDataSourceImpl
+import com.joker.coolmallkmp.core.datastore.datasource.auth.AuthStoreDataSource
+import com.joker.coolmallkmp.core.datastore.datasource.auth.AuthStoreDataSourceImpl
+import com.joker.coolmallkmp.core.datastore.datasource.userinfo.UserInfoStoreDataSource
+import com.joker.coolmallkmp.core.datastore.datasource.userinfo.UserInfoStoreDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

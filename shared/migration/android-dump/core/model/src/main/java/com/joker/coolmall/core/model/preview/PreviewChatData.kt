@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.CsMsg
+import com.joker.coolmallkmp.core.model.entity.CsMsg
 
 /**
  * 预览客服聊天数据

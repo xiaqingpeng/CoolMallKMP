@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.Banner
+import com.joker.coolmallkmp.core.model.entity.Banner
 
 /**
  * 预览轮播图数据

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.text
+package com.joker.coolmallkmp.core.ui.component.text
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -11,11 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
 
 /**
  * 文本组件展示页面

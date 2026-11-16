@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.component
+package com.joker.coolmallkmp.feature.user.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -28,11 +28,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.feature.user.model.Region
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.address_city
-import myapplication.shared.generated.resources.address_district
-import myapplication.shared.generated.resources.address_province
+import com.joker.coolmallkmp.feature.user.model.Region
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.address_city
+import coolmallkmp.shared.generated.resources.address_district
+import coolmallkmp.shared.generated.resources.address_province
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,14 +1,14 @@
-package com.joker.coolmall.feature.order.viewmodel
+package com.joker.coolmallkmp.feature.order.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkViewModel
-import com.joker.coolmall.core.data.repository.OrderRepository
-import com.joker.coolmall.core.model.entity.Logistics
-import com.joker.coolmall.core.model.entity.Order
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.navigation.order.OrderRoutes
-import com.joker.coolmall.result.ResultHandler
-import com.joker.coolmall.result.asResult
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkViewModel
+import com.joker.coolmallkmp.core.data.repository.OrderRepository
+import com.joker.coolmallkmp.core.model.entity.Logistics
+import com.joker.coolmallkmp.core.model.entity.Order
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.navigation.order.OrderRoutes
+import com.joker.coolmallkmp.result.ResultHandler
+import com.joker.coolmallkmp.result.asResult
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

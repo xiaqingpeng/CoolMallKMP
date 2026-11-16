@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.network
+package com.joker.coolmallkmp.core.ui.component.network
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.ui.component.empty.EmptyNetwork
-import com.joker.coolmall.core.ui.component.loading.PageLoading
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.ui.component.empty.EmptyNetwork
+import com.joker.coolmallkmp.core.ui.component.loading.PageLoading
 
 /**
  * 基础网络视图组件，用于处理网络请求的三种状态：加载中、错误和成功

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.component
+package com.joker.coolmallkmp.feature.main.component
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets

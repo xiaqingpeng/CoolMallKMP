@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.ui.component.modal
+package com.joker.coolmallkmp.core.ui.component.modal
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
-import com.joker.coolmall.core.ui.component.Modal as SharedModal
-import com.joker.coolmall.core.ui.component.ModalType as SharedModalType
+import com.joker.coolmallkmp.core.ui.component.Modal as SharedModal
+import com.joker.coolmallkmp.core.ui.component.ModalType as SharedModalType
 
 typealias ModalType = SharedModalType
 

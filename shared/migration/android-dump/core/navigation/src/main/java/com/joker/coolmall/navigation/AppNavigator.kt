@@ -1,7 +1,7 @@
-package com.joker.coolmall.navigation
+package com.joker.coolmallkmp.navigation
 
 import androidx.navigation3.runtime.NavKey
-import com.joker.coolmall.core.data.state.AppState
+import com.joker.coolmallkmp.core.data.state.AppState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filter

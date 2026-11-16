@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.ui.component.address
+package com.joker.coolmallkmp.core.ui.component.address
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.core.ui.component.AddressCard as SharedAddressCard
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.core.ui.component.AddressCard as SharedAddressCard
 
 @Composable
 fun AddressCard(

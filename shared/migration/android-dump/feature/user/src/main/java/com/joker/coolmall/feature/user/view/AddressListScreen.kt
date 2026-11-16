@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.view
+package com.joker.coolmallkmp.feature.user.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -10,24 +10,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.core.model.preview.previewAddressList
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.navigation.user.UserNavigator
-import com.joker.coolmall.core.navigation.user.UserRoutes
-import com.joker.coolmall.core.ui.component.address.AddressActionButton
-import com.joker.coolmall.core.ui.component.address.AddressCard
-import com.joker.coolmall.core.ui.component.bottombar.AppBottomButton
-import com.joker.coolmall.core.ui.component.dialog.WeDialog
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkListView
-import com.joker.coolmall.core.ui.component.refresh.RefreshLayout
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.feature.user.R
-import com.joker.coolmall.feature.user.skeleton.AddressListLoadingSkeleton
-import com.joker.coolmall.feature.user.viewmodel.AddressListViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.core.model.preview.previewAddressList
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.navigation.user.UserNavigator
+import com.joker.coolmallkmp.core.navigation.user.UserRoutes
+import com.joker.coolmallkmp.core.ui.component.address.AddressActionButton
+import com.joker.coolmallkmp.core.ui.component.address.AddressCard
+import com.joker.coolmallkmp.core.ui.component.bottombar.AppBottomButton
+import com.joker.coolmallkmp.core.ui.component.dialog.WeDialog
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkListView
+import com.joker.coolmallkmp.core.ui.component.refresh.RefreshLayout
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.feature.user.R
+import com.joker.coolmallkmp.feature.user.skeleton.AddressListLoadingSkeleton
+import com.joker.coolmallkmp.feature.user.viewmodel.AddressListViewModel
 
 /**
  * 收货地址列表路由

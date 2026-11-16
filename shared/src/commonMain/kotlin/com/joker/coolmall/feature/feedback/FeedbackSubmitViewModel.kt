@@ -1,16 +1,16 @@
-package com.joker.coolmall.feature.feedback
+package com.joker.coolmallkmp.feature.feedback
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.CommonRepository
-import com.joker.coolmall.core.data.repository.FeedbackRepository
-import com.joker.coolmall.core.data.repository.FileUploadRepository
-import com.joker.coolmall.core.data.repository.AuthRepository
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.core.model.request.FeedbackSubmitRequest
-import com.joker.coolmall.core.platform.PickedImage
-import com.joker.coolmall.core.session.AuthSession
-import com.joker.coolmall.core.session.networkAuthLog
+import com.joker.coolmallkmp.core.data.repository.CommonRepository
+import com.joker.coolmallkmp.core.data.repository.FeedbackRepository
+import com.joker.coolmallkmp.core.data.repository.FileUploadRepository
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.request.FeedbackSubmitRequest
+import com.joker.coolmallkmp.core.platform.PickedImage
+import com.joker.coolmallkmp.core.session.AuthSession
+import com.joker.coolmallkmp.core.session.networkAuthLog
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -19,8 +19,8 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 
 sealed interface FeedbackTypesUiState {
     data object Loading : FeedbackTypesUiState

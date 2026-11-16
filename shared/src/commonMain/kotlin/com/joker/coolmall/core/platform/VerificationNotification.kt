@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 /**
  * 在支持的平台上显示短信验证码通知。

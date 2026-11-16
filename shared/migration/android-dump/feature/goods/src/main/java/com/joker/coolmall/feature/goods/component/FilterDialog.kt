@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods.component
+package com.joker.coolmallkmp.feature.goods.component
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibilityScope
@@ -46,37 +46,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.joker.coolmall.core.designsystem.component.SpaceBetweenRow
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.ShapeCircle
-import com.joker.coolmall.core.designsystem.theme.ShapeLarge
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingLarge
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingXSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.model.entity.CategoryTree
-import com.joker.coolmall.core.model.preview.previewCategoryTreeList
-import com.joker.coolmall.core.ui.component.button.AppButton
-import com.joker.coolmall.core.ui.component.button.AppButtonBordered
-import com.joker.coolmall.core.ui.component.button.ButtonSize
-import com.joker.coolmall.core.ui.component.button.ButtonStyle
-import com.joker.coolmall.core.ui.component.button.ButtonType
-import com.joker.coolmall.core.ui.component.empty.EmptyNetwork
-import com.joker.coolmall.core.ui.component.image.NetWorkImage
-import com.joker.coolmall.core.ui.component.loading.PageLoading
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.goods.R
-import com.joker.coolmall.feature.goods.state.CategoryUiState
-import com.joker.coolmall.core.ui.R as CoreUiR
+import com.joker.coolmallkmp.core.designsystem.component.SpaceBetweenRow
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeCircle
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeLarge
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.model.entity.CategoryTree
+import com.joker.coolmallkmp.core.model.preview.previewCategoryTreeList
+import com.joker.coolmallkmp.core.ui.component.button.AppButton
+import com.joker.coolmallkmp.core.ui.component.button.AppButtonBordered
+import com.joker.coolmallkmp.core.ui.component.button.ButtonSize
+import com.joker.coolmallkmp.core.ui.component.button.ButtonStyle
+import com.joker.coolmallkmp.core.ui.component.button.ButtonType
+import com.joker.coolmallkmp.core.ui.component.empty.EmptyNetwork
+import com.joker.coolmallkmp.core.ui.component.image.NetWorkImage
+import com.joker.coolmallkmp.core.ui.component.loading.PageLoading
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.goods.R
+import com.joker.coolmallkmp.feature.goods.state.CategoryUiState
+import com.joker.coolmallkmp.core.ui.R as CoreUiR
 
 /**
  * 筛选对话框

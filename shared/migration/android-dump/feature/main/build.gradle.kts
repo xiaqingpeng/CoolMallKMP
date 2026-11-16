@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.coolmall.android.feature)
+    alias(libs.plugins.coolmallkmp.android.feature)
 }
 
 android {
-    namespace = "com.joker.coolmall.feature.main"
+    namespace = "com.joker.coolmallkmp.feature.main"
 }
 dependencies {
     // lottie 动画

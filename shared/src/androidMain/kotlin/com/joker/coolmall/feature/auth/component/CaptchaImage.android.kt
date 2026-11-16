@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import android.graphics.BitmapFactory
 import androidx.compose.ui.graphics.ImageBitmap

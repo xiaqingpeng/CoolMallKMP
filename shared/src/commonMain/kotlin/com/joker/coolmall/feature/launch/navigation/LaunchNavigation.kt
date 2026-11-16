@@ -1,11 +1,11 @@
-package com.joker.coolmall.feature.launch.navigation
+package com.joker.coolmallkmp.feature.launch.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.joker.coolmall.feature.launch.GuideRoute
-import com.joker.coolmall.feature.launch.SplashRoute
-import com.joker.coolmall.ui.navigation.Routes
+import com.joker.coolmallkmp.feature.launch.GuideRoute
+import com.joker.coolmallkmp.feature.launch.SplashRoute
+import com.joker.coolmallkmp.ui.navigation.Routes
 
 fun NavController.navigateToGuide() {
     navigate(Routes.GUIDE) {

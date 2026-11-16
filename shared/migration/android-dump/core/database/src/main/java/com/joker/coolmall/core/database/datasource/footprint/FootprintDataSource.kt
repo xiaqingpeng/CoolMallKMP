@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.database.datasource.footprint
+package com.joker.coolmallkmp.core.database.datasource.footprint
 
-import com.joker.coolmall.core.database.dao.FootprintDao
-import com.joker.coolmall.core.database.entity.FootprintEntity
-import com.joker.coolmall.core.model.entity.Footprint
+import com.joker.coolmallkmp.core.database.dao.FootprintDao
+import com.joker.coolmallkmp.core.database.entity.FootprintEntity
+import com.joker.coolmallkmp.core.model.entity.Footprint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

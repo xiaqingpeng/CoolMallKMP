@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.skeleton
+package com.joker.coolmallkmp.core.ui.component.skeleton
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,13 +24,13 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
 import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.rememberShimmer
 import com.valentinilk.shimmer.shimmer

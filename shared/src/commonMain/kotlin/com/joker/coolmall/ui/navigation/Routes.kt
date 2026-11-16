@@ -1,4 +1,4 @@
-package com.joker.coolmall.ui.navigation
+package com.joker.coolmallkmp.ui.navigation
 
 object Routes {
     const val SPLASH = "splash"

@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.main.navigation
+package com.joker.coolmallkmp.feature.main.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.joker.coolmall.feature.main.view.MainRoute
-import com.joker.coolmall.ui.navigation.Routes
+import com.joker.coolmallkmp.feature.main.view.MainRoute
+import com.joker.coolmallkmp.ui.navigation.Routes
 
 fun NavGraphBuilder.mainScreen(
     onGoodsClick: (Long) -> Unit = {},

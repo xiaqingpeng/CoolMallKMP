@@ -1,11 +1,11 @@
-package com.joker.coolmall.feature.common.viewmodel
+package com.joker.coolmallkmp.feature.common.viewmodel
 
 import android.content.Context
 import android.content.Intent
 import androidx.core.net.toUri
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.navigation.common.CommonRoutes
-import com.joker.coolmall.feature.common.model.WebViewData
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.navigation.common.CommonRoutes
+import com.joker.coolmallkmp.feature.common.model.WebViewData
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -67,7 +67,7 @@ class WebViewModel @AssistedInject constructor(
         // 从路由获取参数
         val url = webViewRoute.url
         val title = webViewRoute.title
-            ?: context.getString(com.joker.coolmall.feature.common.R.string.web_title)
+            ?: context.getString(com.joker.coolmallkmp.feature.common.R.string.web_title)
 
         if (url.isNotEmpty()) {
             _webViewData.value = WebViewData(url = url, title = title)

@@ -1,17 +1,17 @@
-package com.joker.coolmall.feature.main.viewmodel
+package com.joker.coolmallkmp.feature.main.viewmodel
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.core.data.repository.FootprintRepository
-import com.joker.coolmall.core.data.repository.OrderRepository
-import com.joker.coolmall.core.data.state.AppState
-import com.joker.coolmall.core.model.entity.Footprint
-import com.joker.coolmall.core.model.entity.OrderCount
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.result.ResultHandler
-import com.joker.coolmall.result.asResult
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.core.data.repository.FootprintRepository
+import com.joker.coolmallkmp.core.data.repository.OrderRepository
+import com.joker.coolmallkmp.core.data.state.AppState
+import com.joker.coolmallkmp.core.model.entity.Footprint
+import com.joker.coolmallkmp.core.model.entity.OrderCount
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.result.ResultHandler
+import com.joker.coolmallkmp.result.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

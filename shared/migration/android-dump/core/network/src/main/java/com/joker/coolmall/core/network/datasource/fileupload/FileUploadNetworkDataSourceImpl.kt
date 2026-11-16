@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.network.datasource.fileupload
+package com.joker.coolmallkmp.core.network.datasource.fileupload
 
 import android.net.Uri
 import android.util.Log
-import com.joker.coolmall.core.model.entity.OssUpload
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.datasource.common.CommonNetworkDataSource
-import com.joker.coolmall.core.network.service.FileUploadService
+import com.joker.coolmallkmp.core.model.entity.OssUpload
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.datasource.common.CommonNetworkDataSource
+import com.joker.coolmallkmp.core.network.service.FileUploadService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

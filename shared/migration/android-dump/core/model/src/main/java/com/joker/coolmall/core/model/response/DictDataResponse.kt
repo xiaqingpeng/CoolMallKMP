@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.response
+package com.joker.coolmallkmp.core.model.response
 
-import com.joker.coolmall.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.entity.DictItem
 import kotlinx.serialization.Serializable
 
 /**

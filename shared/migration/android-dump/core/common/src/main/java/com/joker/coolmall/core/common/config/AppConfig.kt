@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.config
+package com.joker.coolmallkmp.core.common.config
 
 /**
  * 应用配置常量

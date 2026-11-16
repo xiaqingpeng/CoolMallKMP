@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.common.viewmodel
+package com.joker.coolmallkmp.feature.common.viewmodel
 
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.navigation.common.CommonNavigator
-import com.joker.coolmall.feature.common.data.DependencyDataSource
-import com.joker.coolmall.feature.common.model.Dependency
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.navigation.common.CommonNavigator
+import com.joker.coolmallkmp.feature.common.data.DependencyDataSource
+import com.joker.coolmallkmp.feature.common.model.Dependency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

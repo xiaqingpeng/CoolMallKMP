@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.database.di
+package com.joker.coolmallkmp.core.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.joker.coolmall.core.database.AppDatabase
-import com.joker.coolmall.core.database.dao.CartDao
-import com.joker.coolmall.core.database.dao.FootprintDao
-import com.joker.coolmall.core.database.dao.SearchHistoryDao
+import com.joker.coolmallkmp.core.database.AppDatabase
+import com.joker.coolmallkmp.core.database.dao.CartDao
+import com.joker.coolmallkmp.core.database.dao.FootprintDao
+import com.joker.coolmallkmp.core.database.dao.SearchHistoryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

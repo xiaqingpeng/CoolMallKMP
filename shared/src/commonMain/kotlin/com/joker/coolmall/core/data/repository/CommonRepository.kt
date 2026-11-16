@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.core.model.entity.OssUpload
-import com.joker.coolmall.core.model.request.DictDataRequest
-import com.joker.coolmall.core.model.response.DictDataResponse
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.KtorCommonNetworkDataSource
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.entity.OssUpload
+import com.joker.coolmallkmp.core.model.request.DictDataRequest
+import com.joker.coolmallkmp.core.model.response.DictDataResponse
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.KtorCommonNetworkDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext

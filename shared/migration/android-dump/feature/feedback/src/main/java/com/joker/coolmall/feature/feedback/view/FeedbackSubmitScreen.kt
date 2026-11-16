@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.feedback.view
+package com.joker.coolmallkmp.feature.feedback.view
 
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
@@ -26,24 +26,24 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.core.model.response.DictDataResponse
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.bottombar.AppBottomButton
-import com.joker.coolmall.core.ui.component.card.AppCard
-import com.joker.coolmall.core.ui.component.imagepicker.ImageGridPicker
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.feedback.R
-import com.joker.coolmall.feature.feedback.viewmodel.FeedbackSubmitViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.response.DictDataResponse
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.bottombar.AppBottomButton
+import com.joker.coolmallkmp.core.ui.component.card.AppCard
+import com.joker.coolmallkmp.core.ui.component.imagepicker.ImageGridPicker
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.feedback.R
+import com.joker.coolmallkmp.feature.feedback.viewmodel.FeedbackSubmitViewModel
 
 /**
  * 提交反馈路由

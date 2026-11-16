@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth
+package com.joker.coolmallkmp.feature.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,10 +17,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.auth_login_agree_prefix
-import myapplication.shared.generated.resources.privacy_policy
-import myapplication.shared.generated.resources.user_agreement
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.auth_login_agree_prefix
+import coolmallkmp.shared.generated.resources.privacy_policy
+import coolmallkmp.shared.generated.resources.user_agreement
 import org.jetbrains.compose.resources.stringResource
 
 /**

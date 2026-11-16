@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods.model
+package com.joker.coolmallkmp.feature.goods.model
 
 /**
  * 排序类型

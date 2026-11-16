@@ -1,15 +1,15 @@
-package com.joker.coolmall.feature.user.navigation
+package com.joker.coolmallkmp.feature.user.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
-import com.joker.coolmall.core.navigation.user.UserRoutes
-import com.joker.coolmall.feature.user.view.AddressDetailRoute
-import com.joker.coolmall.feature.user.view.AddressListRoute
-import com.joker.coolmall.feature.user.view.FootprintRoute
-import com.joker.coolmall.feature.user.view.ProfileRoute
+import com.joker.coolmallkmp.core.navigation.user.UserRoutes
+import com.joker.coolmallkmp.feature.user.view.AddressDetailRoute
+import com.joker.coolmallkmp.feature.user.view.AddressListRoute
+import com.joker.coolmallkmp.feature.user.view.FootprintRoute
+import com.joker.coolmallkmp.feature.user.view.ProfileRoute
 
 /**
  * 用户模块导航图

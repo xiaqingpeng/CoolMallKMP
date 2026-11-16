@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.ui.component.goods
+package com.joker.coolmallkmp.core.ui.component.goods
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.model.entity.CartGoodsSpec
-import com.joker.coolmall.core.ui.component.OrderGoodsItem as SharedOrderGoodsItem
+import com.joker.coolmallkmp.core.model.entity.CartGoodsSpec
+import com.joker.coolmallkmp.core.ui.component.OrderGoodsItem as SharedOrderGoodsItem
 
 @Composable
 fun OrderGoodsItem(

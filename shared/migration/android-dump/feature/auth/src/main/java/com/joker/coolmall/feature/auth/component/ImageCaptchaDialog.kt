@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -30,12 +30,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.core.designsystem.component.StartRow
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXLarge
-import com.joker.coolmall.core.model.entity.Captcha
-import com.joker.coolmall.core.ui.component.button.AppButton
-import com.joker.coolmall.core.ui.component.modal.BottomModal
-import com.joker.coolmall.feature.auth.R
+import com.joker.coolmallkmp.core.designsystem.component.StartRow
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXLarge
+import com.joker.coolmallkmp.core.model.entity.Captcha
+import com.joker.coolmallkmp.core.ui.component.button.AppButton
+import com.joker.coolmallkmp.core.ui.component.modal.BottomModal
+import com.joker.coolmallkmp.feature.auth.R
 
 /**
  * 图片验证码对话框组件

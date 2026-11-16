@@ -1,7 +1,7 @@
-package com.joker.coolmall.feature.auth.viewmodel
+package com.joker.coolmallkmp.feature.auth.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

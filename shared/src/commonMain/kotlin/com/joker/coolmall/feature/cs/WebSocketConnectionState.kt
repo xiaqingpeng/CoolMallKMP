@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs
+package com.joker.coolmallkmp.feature.cs
 
 /**
  * 客服 Socket.IO WebSocket 连接状态

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.designsystem.theme
+package com.joker.coolmallkmp.core.designsystem.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

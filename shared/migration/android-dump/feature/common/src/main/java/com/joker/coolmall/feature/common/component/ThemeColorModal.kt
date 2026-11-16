@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.component
+package com.joker.coolmallkmp.feature.common.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -15,12 +15,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.common.config.ThemeColorOption
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.modal.BottomModal
-import com.joker.coolmall.feature.common.R
+import com.joker.coolmallkmp.core.common.config.ThemeColorOption
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.modal.BottomModal
+import com.joker.coolmallkmp.feature.common.R
 
 /**
  * 主题颜色选择弹窗

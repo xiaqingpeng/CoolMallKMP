@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui
+package com.joker.coolmallkmp.core.ui
 
 /**
  * ViewModel 侧文案载体：固定文案用 [Code]，服务端/SDK 动态文案用 [Raw]。

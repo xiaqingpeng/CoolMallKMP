@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.viewmodel
+package com.joker.coolmallkmp.feature.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

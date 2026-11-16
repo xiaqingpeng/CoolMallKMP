@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.network.datasource.usercontributor
+package com.joker.coolmallkmp.core.network.datasource.usercontributor
 
-import com.joker.coolmall.core.model.entity.UserContributor
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.service.UserContributorService
+import com.joker.coolmallkmp.core.model.entity.UserContributor
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.service.UserContributorService
 import javax.inject.Inject
 
 /**

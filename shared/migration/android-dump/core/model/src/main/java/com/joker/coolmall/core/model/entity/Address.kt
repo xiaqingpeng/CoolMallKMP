@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.model.entity
+package com.joker.coolmallkmp.core.model.entity
 
 import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.EncodeDefault.Mode

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.model
+package com.joker.coolmallkmp.feature.user.model
 
 /**
  * 地区数据模型

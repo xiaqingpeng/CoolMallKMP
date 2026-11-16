@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.designsystem.component
+package com.joker.coolmallkmp.core.designsystem.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,10 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingLarge
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingSmall
 
 /**
  * 封装的Row组件，预设了常用的修饰符

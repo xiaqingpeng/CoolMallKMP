@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -21,10 +21,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.core.designsystem.component.TopColumn
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXXLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXXLarge
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.designsystem.component.TopColumn
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXXLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXXLarge
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
 
 /**
  * 带动画效果的认证页面框架组件，包含AppScaffold、AnimatedVisibility、TopColumn和标题文字

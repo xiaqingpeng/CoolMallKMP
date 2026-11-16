@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.view
+package com.joker.coolmallkmp.feature.common.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,25 +23,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.joker.coolmall.core.common.config.ThemeColorOption
-import com.joker.coolmall.core.common.config.ThemePreference
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.navigation.common.CommonNavigator
-import com.joker.coolmall.navigation.feedback.FeedbackNavigator
-import com.joker.coolmall.navigation.launch.LaunchNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.navigation.user.UserNavigator
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
-import com.joker.coolmall.feature.common.R
-import com.joker.coolmall.feature.common.component.ThemeColorModal
-import com.joker.coolmall.feature.common.component.ThemeModeModal
-import com.joker.coolmall.feature.common.viewmodel.SettingsViewModel
+import com.joker.coolmallkmp.core.common.config.ThemeColorOption
+import com.joker.coolmallkmp.core.common.config.ThemePreference
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.navigation.common.CommonNavigator
+import com.joker.coolmallkmp.navigation.feedback.FeedbackNavigator
+import com.joker.coolmallkmp.navigation.launch.LaunchNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.navigation.user.UserNavigator
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.feature.common.R
+import com.joker.coolmallkmp.feature.common.component.ThemeColorModal
+import com.joker.coolmallkmp.feature.common.component.ThemeModeModal
+import com.joker.coolmallkmp.feature.common.viewmodel.SettingsViewModel
 
 /**
  * 设置页面路由

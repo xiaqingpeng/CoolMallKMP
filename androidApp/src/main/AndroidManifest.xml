@@ -19,7 +19,7 @@
         android:theme="@style/Theme.CoolMallKotlin">
         <activity
             android:exported="true"
-            android:name="com.joker.coolmall.MainActivity"
+            android:name="com.joker.coolmallkmp.MainActivity"
             android:theme="@style/Theme.CoolMallKotlin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

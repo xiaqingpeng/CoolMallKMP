@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.database.util
+package com.joker.coolmallkmp.core.database.util
 
 import androidx.room.TypeConverter
-import com.joker.coolmall.core.model.entity.CartGoodsSpec
+import com.joker.coolmallkmp.core.model.entity.CartGoodsSpec
 import kotlinx.serialization.json.Json
 
 /**

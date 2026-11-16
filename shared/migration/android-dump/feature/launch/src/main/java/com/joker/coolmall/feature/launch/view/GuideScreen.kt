@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.launch.view
+package com.joker.coolmallkmp.feature.launch.view
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.core.animateDpAsState
@@ -38,25 +38,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.component.CenterColumn
-import com.joker.coolmall.core.designsystem.component.CenterRow
-import com.joker.coolmall.core.designsystem.component.FullScreenColumn
-import com.joker.coolmall.core.designsystem.component.SpaceBetweenRow
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXXLarge
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXXLarge
-import com.joker.coolmall.navigation.launch.LaunchRoutes
-import com.joker.coolmall.core.ui.component.button.AppButton
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.launch.R
-import com.joker.coolmall.feature.launch.model.GuidePageData
-import com.joker.coolmall.feature.launch.viewmodel.GuideViewModel
+import com.joker.coolmallkmp.core.designsystem.component.CenterColumn
+import com.joker.coolmallkmp.core.designsystem.component.CenterRow
+import com.joker.coolmallkmp.core.designsystem.component.FullScreenColumn
+import com.joker.coolmallkmp.core.designsystem.component.SpaceBetweenRow
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXXLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXXLarge
+import com.joker.coolmallkmp.navigation.launch.LaunchRoutes
+import com.joker.coolmallkmp.core.ui.component.button.AppButton
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.launch.R
+import com.joker.coolmallkmp.feature.launch.model.GuidePageData
+import com.joker.coolmallkmp.feature.launch.viewmodel.GuideViewModel
 import kotlinx.coroutines.launch
 
 /**

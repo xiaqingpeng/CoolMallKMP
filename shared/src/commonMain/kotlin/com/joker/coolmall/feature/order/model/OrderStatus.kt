@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order.model
+package com.joker.coolmallkmp.feature.order.model
 
 /**
  * 订单状态标签（对齐 CoolMallKotlin OrderStatus）

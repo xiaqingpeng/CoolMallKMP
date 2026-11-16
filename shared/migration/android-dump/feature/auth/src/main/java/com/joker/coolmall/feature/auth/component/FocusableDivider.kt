@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
 
 /**
  * 可聚焦的分隔线组件，在输入框获取焦点时显示主题色，否则显示普通颜色

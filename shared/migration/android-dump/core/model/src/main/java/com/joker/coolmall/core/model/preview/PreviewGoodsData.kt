@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.core.model.entity.GoodsSpec
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.core.model.entity.GoodsSpec
 
 /**
  * 预览商品数据列表

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.modal
+package com.joker.coolmallkmp.core.ui.component.modal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,26 +29,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.component.SpaceBetweenRow
-import com.joker.coolmall.core.designsystem.component.StartRow
-import com.joker.coolmall.core.designsystem.component.WrapColumn
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.core.ui.R
-import com.joker.coolmall.core.ui.component.button.AppButton
-import com.joker.coolmall.core.ui.component.button.ButtonSize
-import com.joker.coolmall.core.ui.component.empty.EmptyNetwork
-import com.joker.coolmall.core.ui.component.loading.PageLoading
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.component.SpaceBetweenRow
+import com.joker.coolmallkmp.core.designsystem.component.StartRow
+import com.joker.coolmallkmp.core.designsystem.component.WrapColumn
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.ui.R
+import com.joker.coolmallkmp.core.ui.component.button.AppButton
+import com.joker.coolmallkmp.core.ui.component.button.ButtonSize
+import com.joker.coolmallkmp.core.ui.component.empty.EmptyNetwork
+import com.joker.coolmallkmp.core.ui.component.loading.PageLoading
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
 
 /**
  * 字典选择底部弹出层

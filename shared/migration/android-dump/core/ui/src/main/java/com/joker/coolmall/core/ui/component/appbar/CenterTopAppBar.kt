@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.appbar
+package com.joker.coolmallkmp.core.ui.component.appbar
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import com.joker.coolmall.core.designsystem.theme.ArrowLeftIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ArrowLeftIcon
 
 
 /**

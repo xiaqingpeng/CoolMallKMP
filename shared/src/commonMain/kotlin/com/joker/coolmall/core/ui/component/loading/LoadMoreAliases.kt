@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.ui.component.loading
+package com.joker.coolmallkmp.core.ui.component.loading
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.ui.component.LoadMore as SharedLoadMore
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.ui.component.LoadMore as SharedLoadMore
 
 @Composable
 fun LoadMore(

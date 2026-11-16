@@ -1,4 +1,4 @@
-package com.joker.coolmall
+package com.joker.coolmallkmp
 
 import platform.UIKit.UIDevice
 

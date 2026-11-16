@@ -1,10 +1,10 @@
 plugins {
-    alias(libs.plugins.coolmall.android.library)
+    alias(libs.plugins.coolmallkmp.android.library)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.joker.coolmall.result"
+    namespace = "com.joker.coolmallkmp.result"
 }
 dependencies {
     // 引入 model 模块

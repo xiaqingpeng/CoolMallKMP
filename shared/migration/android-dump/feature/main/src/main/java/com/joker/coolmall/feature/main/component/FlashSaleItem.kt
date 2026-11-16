@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.component
+package com.joker.coolmallkmp.feature.main.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -12,12 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.core.ui.component.image.NetWorkImage
-import com.joker.coolmall.core.ui.component.text.PriceText
-import com.joker.coolmall.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.core.ui.component.image.NetWorkImage
+import com.joker.coolmallkmp.core.ui.component.text.PriceText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
 
 /**
  * 限时精选卡片项

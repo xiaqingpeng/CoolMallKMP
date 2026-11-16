@@ -1,13 +1,13 @@
-package com.joker.coolmall.core.network.datasource.address
+package com.joker.coolmallkmp.core.network.datasource.address
 
-import com.joker.coolmall.core.model.common.Id
-import com.joker.coolmall.core.model.common.Ids
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.base.BaseNetworkDataSource
-import com.joker.coolmall.core.network.service.AddressService
+import com.joker.coolmallkmp.core.model.common.Id
+import com.joker.coolmallkmp.core.model.common.Ids
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.base.BaseNetworkDataSource
+import com.joker.coolmallkmp.core.network.service.AddressService
 import javax.inject.Inject
 
 /**

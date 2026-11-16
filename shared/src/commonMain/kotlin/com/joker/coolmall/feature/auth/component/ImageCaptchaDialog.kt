@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,12 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.model.entity.Captcha
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.auth_captcha_confirm
-import myapplication.shared.generated.resources.auth_captcha_title
-import myapplication.shared.generated.resources.auth_captcha_hint
-import myapplication.shared.generated.resources.common_cancel
+import com.joker.coolmallkmp.core.model.entity.Captcha
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.auth_captcha_confirm
+import coolmallkmp.shared.generated.resources.auth_captcha_title
+import coolmallkmp.shared.generated.resources.auth_captcha_hint
+import coolmallkmp.shared.generated.resources.common_cancel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

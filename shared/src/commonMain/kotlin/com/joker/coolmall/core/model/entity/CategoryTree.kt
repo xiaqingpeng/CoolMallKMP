@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.model.entity
+package com.joker.coolmallkmp.core.model.entity
 
 /**
  * 商品分类树（UI 展示用，非网络直接反序列化）

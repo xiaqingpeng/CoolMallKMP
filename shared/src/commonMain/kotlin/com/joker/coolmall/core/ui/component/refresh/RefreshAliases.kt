@@ -1,12 +1,12 @@
-package com.joker.coolmall.core.ui.component.refresh
+package com.joker.coolmallkmp.core.ui.component.refresh
 
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.ui.component.RefreshLayout as SharedRefreshLayout
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.ui.component.RefreshLayout as SharedRefreshLayout
 
 @Composable
 fun RefreshLayout(

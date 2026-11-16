@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.base.viewmodel
+package com.joker.coolmallkmp.core.common.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 

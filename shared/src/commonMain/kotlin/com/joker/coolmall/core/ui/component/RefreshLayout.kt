@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
 
 /**
  * 跨平台列表容器。下拉刷新通过 onRefresh 暴露，滚动到底部自动触发 onLoadMore。

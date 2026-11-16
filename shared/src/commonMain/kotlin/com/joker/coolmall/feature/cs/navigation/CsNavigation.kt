@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.cs.navigation
+package com.joker.coolmallkmp.feature.cs.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.joker.coolmall.feature.cs.ChatRoute
+import com.joker.coolmallkmp.feature.cs.ChatRoute
 import kotlinx.serialization.Serializable
 
 @Serializable

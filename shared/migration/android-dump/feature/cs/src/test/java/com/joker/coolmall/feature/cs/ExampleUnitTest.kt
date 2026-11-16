@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs
+package com.joker.coolmallkmp.feature.cs
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

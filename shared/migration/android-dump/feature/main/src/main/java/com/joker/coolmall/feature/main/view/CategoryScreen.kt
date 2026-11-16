@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.view
+package com.joker.coolmallkmp.feature.main.view
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -45,25 +45,25 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.component.AppColumn
-import com.joker.coolmall.core.designsystem.component.AppLazyColumn
-import com.joker.coolmall.core.designsystem.component.AppRow
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.RadiusLarge
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.model.entity.CategoryTree
-import com.joker.coolmall.core.model.preview.previewCategoryTreeList
-import com.joker.coolmall.navigation.goods.GoodsNavigator
-import com.joker.coolmall.core.ui.component.appbar.CenterTopAppBar
-import com.joker.coolmall.core.ui.component.image.NetWorkImage
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
-import com.joker.coolmall.feature.main.R
-import com.joker.coolmall.feature.main.component.CommonScaffold
-import com.joker.coolmall.feature.main.skeleton.CategoryLoadingSkeleton
-import com.joker.coolmall.feature.main.viewmodel.CategoryViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.component.AppColumn
+import com.joker.coolmallkmp.core.designsystem.component.AppLazyColumn
+import com.joker.coolmallkmp.core.designsystem.component.AppRow
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.RadiusLarge
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.model.entity.CategoryTree
+import com.joker.coolmallkmp.core.model.preview.previewCategoryTreeList
+import com.joker.coolmallkmp.navigation.goods.GoodsNavigator
+import com.joker.coolmallkmp.core.ui.component.appbar.CenterTopAppBar
+import com.joker.coolmallkmp.core.ui.component.image.NetWorkImage
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.feature.main.R
+import com.joker.coolmallkmp.feature.main.component.CommonScaffold
+import com.joker.coolmallkmp.feature.main.skeleton.CategoryLoadingSkeleton
+import com.joker.coolmallkmp.feature.main.viewmodel.CategoryViewModel
 import kotlinx.coroutines.launch
 
 /**

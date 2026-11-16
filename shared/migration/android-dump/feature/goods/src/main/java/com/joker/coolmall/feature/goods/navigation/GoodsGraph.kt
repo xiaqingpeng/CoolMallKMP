@@ -1,12 +1,12 @@
-package com.joker.coolmall.feature.goods.navigation
+package com.joker.coolmallkmp.feature.goods.navigation
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
-import com.joker.coolmall.navigation.goods.GoodsRoutes
-import com.joker.coolmall.feature.goods.view.GoodsCategoryRoute
-import com.joker.coolmall.feature.goods.view.GoodsCommentRoute
-import com.joker.coolmall.feature.goods.view.GoodsDetailRoute
-import com.joker.coolmall.feature.goods.view.GoodsSearchRoute
+import com.joker.coolmallkmp.navigation.goods.GoodsRoutes
+import com.joker.coolmallkmp.feature.goods.view.GoodsCategoryRoute
+import com.joker.coolmallkmp.feature.goods.view.GoodsCommentRoute
+import com.joker.coolmallkmp.feature.goods.view.GoodsDetailRoute
+import com.joker.coolmallkmp.feature.goods.view.GoodsSearchRoute
 
 /**
  * 商品模块导航图

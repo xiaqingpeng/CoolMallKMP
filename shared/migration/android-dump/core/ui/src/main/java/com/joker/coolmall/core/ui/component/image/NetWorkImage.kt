@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.image
+package com.joker.coolmallkmp.core.ui.component.image
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -21,9 +21,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
-import com.joker.coolmall.core.ui.component.loading.WeLoading
-import com.joker.coolmall.core.ui.R as UiR
-import com.joker.coolmall.core.util.R as CoreUtilR
+import com.joker.coolmallkmp.core.ui.component.loading.WeLoading
+import com.joker.coolmallkmp.core.ui.R as UiR
+import com.joker.coolmallkmp.core.util.R as CoreUtilR
 
 /**
  * 带加载状态的网络图片组件

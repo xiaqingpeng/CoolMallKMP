@@ -1,8 +1,8 @@
-package com.joker.coolmall.feature.launch
+package com.joker.coolmallkmp.feature.launch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.local.GuidePreferences
+import com.joker.coolmallkmp.core.data.local.GuidePreferences
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow

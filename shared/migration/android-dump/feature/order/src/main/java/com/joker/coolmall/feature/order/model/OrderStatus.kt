@@ -1,7 +1,7 @@
-package com.joker.coolmall.feature.order.model
+package com.joker.coolmallkmp.feature.order.model
 
 import androidx.annotation.StringRes
-import com.joker.coolmall.feature.order.R
+import com.joker.coolmallkmp.feature.order.R
 
 /**
  * 订单状态枚举

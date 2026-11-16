@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.market.skeleton
+package com.joker.coolmallkmp.feature.market.skeleton
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,16 +17,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.ui.component.divider.WeDivider
-import com.joker.coolmall.core.ui.component.skeleton.SkeletonBlock
-import com.joker.coolmall.core.ui.component.skeleton.SkeletonTextLine
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.ui.component.divider.WeDivider
+import com.joker.coolmallkmp.core.ui.component.skeleton.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.component.skeleton.SkeletonTextLine
 
 /**
  * 优惠券列表骨架屏

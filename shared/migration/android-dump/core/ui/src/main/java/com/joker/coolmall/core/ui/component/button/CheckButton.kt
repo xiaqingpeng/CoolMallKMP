@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.button
+package com.joker.coolmallkmp.core.ui.component.button
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
@@ -9,10 +9,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.designsystem.theme.ShapeCircle
-import com.joker.coolmall.core.ui.R
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeCircle
+import com.joker.coolmallkmp.core.ui.R
 
 /**
  * 通用选择按钮组件

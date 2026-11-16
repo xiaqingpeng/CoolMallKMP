@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.main
+package com.joker.coolmallkmp.feature.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.CartRepository
-import com.joker.coolmall.core.model.entity.Cart
+import com.joker.coolmallkmp.core.data.repository.CartRepository
+import com.joker.coolmallkmp.core.model.entity.Cart
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.util.permission
+package com.joker.coolmallkmp.core.util.permission
 
 import android.content.Context
 import com.hjq.permissions.XXPermissions
 import com.hjq.permissions.permission.PermissionLists
 import com.hjq.permissions.permission.base.IPermission
-import com.joker.coolmall.core.util.toast.ToastUtils
+import com.joker.coolmallkmp.core.util.toast.ToastUtils
 
 /**
  * 权限工具类，基于 XXPermissions 框架封装

@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.ui.component.list
+package com.joker.coolmallkmp.core.ui.component.list
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.ui.component.ListItem as SharedListItem
+import com.joker.coolmallkmp.core.ui.component.ListItem as SharedListItem
 
 @Composable
 fun AppListItem(

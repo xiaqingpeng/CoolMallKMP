@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.view
+package com.joker.coolmallkmp.feature.user.view
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -17,22 +17,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.joker.coolmall.core.designsystem.component.CenterBox
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.image.SmallAvatar
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
-import com.joker.coolmall.feature.user.R
-import com.joker.coolmall.feature.user.viewmodel.ProfileViewModel
+import com.joker.coolmallkmp.core.designsystem.component.CenterBox
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.image.SmallAvatar
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.feature.user.R
+import com.joker.coolmallkmp.feature.user.viewmodel.ProfileViewModel
 
 /**
  * 个人中心路由

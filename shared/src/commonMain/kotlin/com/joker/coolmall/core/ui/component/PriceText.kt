@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -12,7 +12,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.core.ui.theme.ColorDanger
+import com.joker.coolmallkmp.core.ui.theme.ColorDanger
 
 /**
  * 价格文本（对齐 CoolMallKotlin PriceText）

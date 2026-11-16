@@ -1,8 +1,8 @@
-package com.joker.coolmall
+package com.joker.coolmallkmp
 
 import androidx.compose.ui.window.ComposeUIViewController
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.ui.CoolMallApp
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.ui.CoolMallApp
 
 fun MainViewController() = ComposeUIViewController {
     AppContainerProvider.initialize(

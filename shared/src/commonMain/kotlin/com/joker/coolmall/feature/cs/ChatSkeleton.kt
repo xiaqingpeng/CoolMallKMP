@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs
+package com.joker.coolmallkmp.feature.cs
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,8 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.component.SkeletonBlock
-import com.joker.coolmall.core.ui.component.SkeletonCircle
+import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.component.SkeletonCircle
 
 @Composable
 fun ChatLoadingSkeleton(modifier: Modifier = Modifier) {

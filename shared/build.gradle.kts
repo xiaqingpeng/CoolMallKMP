@@ -10,6 +10,11 @@ plugins {
     alias(libs.plugins.androidx.room3)
 }
 
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "coolmallkmp.shared.generated.resources"
+}
+
 kotlin {
     listOf(
         iosArm64(),
@@ -21,7 +26,7 @@ kotlin {
         }
     }
     android {
-       namespace = "com.joker.coolmall.shared"
+       namespace = "com.joker.coolmallkmp.shared"
        compileSdk = libs.versions.android.compileSdk.get().toInt()
        minSdk = libs.versions.android.minSdk.get().toInt()
        compilerOptions {

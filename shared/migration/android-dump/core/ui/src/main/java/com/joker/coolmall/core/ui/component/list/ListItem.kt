@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.list
+package com.joker.coolmallkmp.core.ui.component.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,14 +18,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.ArrowRightIcon
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.ui.component.divider.WeDivider
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.designsystem.theme.ArrowRightIcon
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.ui.component.divider.WeDivider
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
 
 /**
  * 列表项组件

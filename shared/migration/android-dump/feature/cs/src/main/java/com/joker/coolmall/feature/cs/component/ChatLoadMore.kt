@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs.component
+package com.joker.coolmallkmp.feature.cs.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,13 +18,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.ui.component.divider.WeDivider
-import com.joker.coolmall.core.ui.component.loading.WeLoading
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.cs.R
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.ui.component.divider.WeDivider
+import com.joker.coolmallkmp.core.ui.component.loading.WeLoading
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.cs.R
 
 /**
  * 聊天消息加载更多组件

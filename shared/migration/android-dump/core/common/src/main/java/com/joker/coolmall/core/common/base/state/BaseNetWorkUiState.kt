@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.base.state
+package com.joker.coolmallkmp.core.common.base.state
 
 /**
  * 网络请求UI状态

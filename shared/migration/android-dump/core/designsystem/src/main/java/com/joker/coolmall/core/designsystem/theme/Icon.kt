@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.designsystem.theme
+package com.joker.coolmallkmp.core.designsystem.theme
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.R
+import com.joker.coolmallkmp.core.designsystem.R
 
 /**
  * 为应用封装的统一图标组件，简化官方图标的使用方式

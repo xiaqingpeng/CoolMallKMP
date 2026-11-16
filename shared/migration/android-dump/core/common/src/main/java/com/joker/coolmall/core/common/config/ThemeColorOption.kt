@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.config
+package com.joker.coolmallkmp.core.common.config
 
 /**
  * 主题颜色选项

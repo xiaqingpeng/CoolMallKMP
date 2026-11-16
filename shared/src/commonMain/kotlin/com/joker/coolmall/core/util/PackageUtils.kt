@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util
+package com.joker.coolmallkmp.core.util
 
 expect object PackageUtils {
     fun packageName(context: Any?): String

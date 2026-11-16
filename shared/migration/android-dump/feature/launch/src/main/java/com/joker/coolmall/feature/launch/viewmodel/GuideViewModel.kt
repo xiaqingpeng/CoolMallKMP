@@ -1,12 +1,12 @@
-package com.joker.coolmall.feature.launch.viewmodel
+package com.joker.coolmallkmp.feature.launch.viewmodel
 
 import android.content.Context
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.navigation.launch.LaunchRoutes
-import com.joker.coolmall.navigation.main.MainNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.util.storage.MMKVUtils
-import com.joker.coolmall.feature.launch.model.GuidePageProvider
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.navigation.launch.LaunchRoutes
+import com.joker.coolmallkmp.navigation.main.MainNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.util.storage.MMKVUtils
+import com.joker.coolmallkmp.feature.launch.model.GuidePageProvider
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util
+package com.joker.coolmallkmp.core.util
 
 object ValidationUtils {
     private val phonePattern = Regex("^1[3-9]\\d{9}$")

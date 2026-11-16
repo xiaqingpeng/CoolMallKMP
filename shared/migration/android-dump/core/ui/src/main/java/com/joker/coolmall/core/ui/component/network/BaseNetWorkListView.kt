@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.network
+package com.joker.coolmallkmp.core.ui.component.network
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -10,10 +10,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.ui.component.empty.EmptyData
-import com.joker.coolmall.core.ui.component.empty.EmptyNetwork
-import com.joker.coolmall.core.ui.component.loading.PageLoading
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.ui.component.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.component.empty.EmptyNetwork
+import com.joker.coolmallkmp.core.ui.component.loading.PageLoading
 
 /**
  * 基础网络列表视图组件

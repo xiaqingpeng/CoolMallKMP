@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.view
+package com.joker.coolmallkmp.feature.common.view
 
 import android.content.Intent
 import android.view.ViewGroup
@@ -28,15 +28,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.component.FullScreenBox
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.navigation.common.CommonRoutes
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.feature.common.R
-import com.joker.coolmall.feature.common.model.WebViewData
-import com.joker.coolmall.feature.common.viewmodel.WebViewModel
+import com.joker.coolmallkmp.core.designsystem.component.FullScreenBox
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.navigation.common.CommonRoutes
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.feature.common.R
+import com.joker.coolmallkmp.feature.common.model.WebViewData
+import com.joker.coolmallkmp.feature.common.viewmodel.WebViewModel
 
 /**
  * 网页路由

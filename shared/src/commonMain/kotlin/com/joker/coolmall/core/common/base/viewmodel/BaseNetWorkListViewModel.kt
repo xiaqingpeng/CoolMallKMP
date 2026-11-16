@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.common.base.viewmodel
+package com.joker.coolmallkmp.core.common.base.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.ui.UiMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

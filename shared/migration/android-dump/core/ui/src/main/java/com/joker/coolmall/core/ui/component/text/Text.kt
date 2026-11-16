@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.text
+package com.joker.coolmallkmp.core.ui.component.text
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -21,10 +21,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import com.joker.coolmall.core.designsystem.theme.ColorDanger
-import com.joker.coolmall.core.designsystem.theme.ColorSuccess
-import com.joker.coolmall.core.designsystem.theme.ColorWarning
-import com.joker.coolmall.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.ColorDanger
+import com.joker.coolmallkmp.core.designsystem.theme.ColorSuccess
+import com.joker.coolmallkmp.core.designsystem.theme.ColorWarning
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
 
 /**
  * 文本类型

@@ -1,12 +1,12 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
-import com.joker.coolmall.core.model.entity.Feedback
-import com.joker.coolmall.core.model.request.FeedbackSubmitRequest
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.session.AuthSession
-import com.joker.coolmall.core.session.networkAuthLog
+import com.joker.coolmallkmp.core.model.entity.Feedback
+import com.joker.coolmallkmp.core.model.request.FeedbackSubmitRequest
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.session.AuthSession
+import com.joker.coolmallkmp.core.session.networkAuthLog
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post

@@ -1,6 +1,6 @@
-package com.joker.coolmall.feature.goods.state
+package com.joker.coolmallkmp.feature.goods.state
 
-import com.joker.coolmall.core.model.entity.CategoryTree
+import com.joker.coolmallkmp.core.model.entity.CategoryTree
 
 /**
  * 分类页面UI状态

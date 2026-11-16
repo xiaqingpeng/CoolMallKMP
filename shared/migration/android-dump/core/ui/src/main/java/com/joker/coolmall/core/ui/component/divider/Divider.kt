@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.divider
+package com.joker.coolmallkmp.core.ui.component.divider
 
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme

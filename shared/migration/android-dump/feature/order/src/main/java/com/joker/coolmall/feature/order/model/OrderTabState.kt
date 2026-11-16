@@ -1,8 +1,8 @@
-package com.joker.coolmall.feature.order.model
+package com.joker.coolmallkmp.feature.order.model
 
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.model.entity.Order
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.model.entity.Order
 
 /**
  * 订单标签页状态

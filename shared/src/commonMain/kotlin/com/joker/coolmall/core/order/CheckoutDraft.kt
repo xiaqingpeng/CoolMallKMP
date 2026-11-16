@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.order
+package com.joker.coolmallkmp.core.order
 
-import com.joker.coolmall.core.model.entity.Cart
-import com.joker.coolmall.core.model.entity.SelectedGoods
-import com.joker.coolmall.core.model.entity.toSelectedGoodsList
+import com.joker.coolmallkmp.core.model.entity.Cart
+import com.joker.coolmallkmp.core.model.entity.SelectedGoods
+import com.joker.coolmallkmp.core.model.entity.toSelectedGoodsList
 
 /**
  * 结算草稿：替代 Android MMKV 的 selectedGoodsList / carts 缓存。
@@ -59,7 +59,7 @@ object CheckoutDraft {
                         goodsMainPic = first.goodsInfo?.mainPic.orEmpty(),
                         spec = items.mapNotNull { item ->
                             val spec = item.spec ?: return@mapNotNull null
-                            com.joker.coolmall.core.model.entity.CartGoodsSpec(
+                            com.joker.coolmallkmp.core.model.entity.CartGoodsSpec(
                                 id = spec.id,
                                 goodsId = spec.goodsId,
                                 name = spec.name,

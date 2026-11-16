@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 /** iOS：QQ / 微信 / 支付宝均不实现 */
 actual object ThirdPartyCapabilities {

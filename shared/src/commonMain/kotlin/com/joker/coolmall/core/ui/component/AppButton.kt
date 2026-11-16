@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -25,14 +25,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.theme.ColorDanger
-import com.joker.coolmall.core.ui.theme.ColorPurple
-import com.joker.coolmall.core.ui.theme.ColorSuccess
-import com.joker.coolmall.core.ui.theme.ColorWarning
-import com.joker.coolmall.core.ui.theme.GradientPrimaryEnd
-import com.joker.coolmall.core.ui.theme.GradientPrimaryStart
-import com.joker.coolmall.core.ui.theme.PrimaryDefault
-import com.joker.coolmall.core.ui.theme.TextWhite
+import com.joker.coolmallkmp.core.ui.theme.ColorDanger
+import com.joker.coolmallkmp.core.ui.theme.ColorPurple
+import com.joker.coolmallkmp.core.ui.theme.ColorSuccess
+import com.joker.coolmallkmp.core.ui.theme.ColorWarning
+import com.joker.coolmallkmp.core.ui.theme.GradientPrimaryEnd
+import com.joker.coolmallkmp.core.ui.theme.GradientPrimaryStart
+import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
+import com.joker.coolmallkmp.core.ui.theme.TextWhite
 
 /**
  * 按钮类型（对齐 CoolMallKotlin ButtonType）

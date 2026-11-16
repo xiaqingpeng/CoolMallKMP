@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods
+package com.joker.coolmallkmp.feature.goods
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.component.SkeletonBlock
-import com.joker.coolmall.core.ui.component.SkeletonCircle
+import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.component.SkeletonCircle
 
 @Composable
 fun GoodsCommentLoadingSkeleton(modifier: Modifier = Modifier) {

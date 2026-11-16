@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common
+package com.joker.coolmallkmp.feature.common
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.component.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
 
 @Composable
 internal fun DocumentLoadingSkeleton(

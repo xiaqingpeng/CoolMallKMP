@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.feature.auth.R
+import com.joker.coolmallkmp.feature.auth.R
 
 /**
  * 密码输入组件，包含可切换密码显示/隐藏的按钮

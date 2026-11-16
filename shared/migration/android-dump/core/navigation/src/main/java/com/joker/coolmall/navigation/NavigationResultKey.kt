@@ -1,4 +1,4 @@
-package com.joker.coolmall.navigation
+package com.joker.coolmallkmp.navigation
 
 /**
  * 导航返回结果的类型安全 Key。

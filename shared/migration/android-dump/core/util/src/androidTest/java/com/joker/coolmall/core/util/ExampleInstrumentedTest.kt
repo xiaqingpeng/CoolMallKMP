@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util
+package com.joker.coolmallkmp.core.util
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.joker.coolmall.core.util.test", appContext.packageName)
+        assertEquals("com.joker.coolmallkmp.core.util.test", appContext.packageName)
     }
 }

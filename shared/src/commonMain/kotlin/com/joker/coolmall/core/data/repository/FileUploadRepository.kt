@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.Network
-import com.joker.coolmall.core.platform.PickedImage
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.Network
+import com.joker.coolmallkmp.core.platform.PickedImage
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.post
@@ -12,7 +12,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.isSuccess
-import com.joker.coolmall.core.session.networkAuthLog
+import com.joker.coolmallkmp.core.session.networkAuthLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext

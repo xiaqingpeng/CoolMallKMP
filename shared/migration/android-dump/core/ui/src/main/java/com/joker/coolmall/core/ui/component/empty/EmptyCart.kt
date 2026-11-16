@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.ui.component.empty
+package com.joker.coolmallkmp.core.ui.component.empty
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.ui.R
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.ui.R
 
 /**
  * 购物车为空状态视图

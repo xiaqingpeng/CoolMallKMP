@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods
+package com.joker.coolmallkmp.feature.goods
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,16 +32,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.model.entity.Comment
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_load_more
-import myapplication.shared.generated.resources.common_retry
-import myapplication.shared.generated.resources.goods_comment_empty
-import myapplication.shared.generated.resources.goods_comment_title
-import myapplication.shared.generated.resources.me_user_fallback
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.model.entity.Comment
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_load_more
+import coolmallkmp.shared.generated.resources.common_retry
+import coolmallkmp.shared.generated.resources.goods_comment_empty
+import coolmallkmp.shared.generated.resources.goods_comment_title
+import coolmallkmp.shared.generated.resources.me_user_fallback
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -1,6 +1,6 @@
-package com.joker.coolmall.navigation.auth
+package com.joker.coolmallkmp.navigation.auth
 
-import com.joker.coolmall.navigation.navigate
+import com.joker.coolmallkmp.navigation.navigate
 
 /**
  * 认证模块导航封装

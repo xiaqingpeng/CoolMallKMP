@@ -1,12 +1,12 @@
-package com.joker.coolmall.feature.user
+package com.joker.coolmallkmp.feature.user
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkListViewModel
-import com.joker.coolmall.core.data.repository.AddressRepository
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkListViewModel
+import com.joker.coolmallkmp.core.data.repository.AddressRepository
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.core.model.request.PageRequest
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -19,8 +19,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 
 sealed interface AddressListUiState {
     data object Loading : AddressListUiState

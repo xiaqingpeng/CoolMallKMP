@@ -1,12 +1,12 @@
-package com.joker.coolmall.feature.auth
+package com.joker.coolmallkmp.feature.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.AuthRepository
-import com.joker.coolmall.core.model.entity.Captcha
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
-import com.joker.coolmall.core.platform.notifyVerificationCode
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.model.entity.Captcha
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
+import com.joker.coolmallkmp.core.platform.notifyVerificationCode
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow

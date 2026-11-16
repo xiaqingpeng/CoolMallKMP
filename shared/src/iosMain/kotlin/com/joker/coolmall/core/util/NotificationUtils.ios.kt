@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util
+package com.joker.coolmallkmp.core.util
 
 actual object NotificationUtils {
     actual fun notify(context: Any?, title: String, content: String) {

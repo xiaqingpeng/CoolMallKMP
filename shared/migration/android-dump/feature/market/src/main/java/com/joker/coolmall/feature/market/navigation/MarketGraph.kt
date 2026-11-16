@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.market.navigation
+package com.joker.coolmallkmp.feature.market.navigation
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
-import com.joker.coolmall.navigation.market.MarketRoutes
-import com.joker.coolmall.feature.market.view.CouponRoute
+import com.joker.coolmallkmp.navigation.market.MarketRoutes
+import com.joker.coolmallkmp.feature.market.view.CouponRoute
 
 /**
  * 营销模块导航图

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.refresh
+package com.joker.coolmallkmp.core.ui.component.refresh
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +17,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
 import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 

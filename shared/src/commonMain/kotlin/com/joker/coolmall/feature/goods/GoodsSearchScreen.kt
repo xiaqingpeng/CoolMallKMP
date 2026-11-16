@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods
+package com.joker.coolmallkmp.feature.goods
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -49,17 +49,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.component.SkeletonBlock
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_search
-import myapplication.shared.generated.resources.search_hint
-import myapplication.shared.generated.resources.search_history
-import myapplication.shared.generated.resources.search_history_clear
-import myapplication.shared.generated.resources.search_no_keywords
-import myapplication.shared.generated.resources.search_recommended
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_search
+import coolmallkmp.shared.generated.resources.search_hint
+import coolmallkmp.shared.generated.resources.search_history
+import coolmallkmp.shared.generated.resources.search_history_clear
+import coolmallkmp.shared.generated.resources.search_no_keywords
+import coolmallkmp.shared.generated.resources.search_recommended
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)

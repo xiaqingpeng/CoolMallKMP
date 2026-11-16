@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user
+package com.joker.coolmallkmp.feature.user
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -44,28 +44,28 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.ui.component.AppButton
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.core.ui.resolveMessageCode
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
-import com.joker.coolmall.feature.user.component.RegionPickerModal
-import com.joker.coolmall.feature.user.data.RegionData
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.address_add
-import myapplication.shared.generated.resources.address_city
-import myapplication.shared.generated.resources.address_contact
-import myapplication.shared.generated.resources.address_default_hint
-import myapplication.shared.generated.resources.address_default_switch
-import myapplication.shared.generated.resources.address_detail
-import myapplication.shared.generated.resources.address_district
-import myapplication.shared.generated.resources.address_edit
-import myapplication.shared.generated.resources.address_phone
-import myapplication.shared.generated.resources.address_province
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_save
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.ui.component.AppButton
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.resolveMessageCode
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.feature.user.component.RegionPickerModal
+import com.joker.coolmallkmp.feature.user.data.RegionData
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.address_add
+import coolmallkmp.shared.generated.resources.address_city
+import coolmallkmp.shared.generated.resources.address_contact
+import coolmallkmp.shared.generated.resources.address_default_hint
+import coolmallkmp.shared.generated.resources.address_default_switch
+import coolmallkmp.shared.generated.resources.address_detail
+import coolmallkmp.shared.generated.resources.address_district
+import coolmallkmp.shared.generated.resources.address_edit
+import coolmallkmp.shared.generated.resources.address_phone
+import coolmallkmp.shared.generated.resources.address_province
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_save
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

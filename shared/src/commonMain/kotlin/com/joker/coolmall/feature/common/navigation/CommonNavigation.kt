@@ -1,18 +1,18 @@
-package com.joker.coolmall.feature.common.navigation
+package com.joker.coolmallkmp.feature.common.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.joker.coolmall.feature.common.AboutRoute
-import com.joker.coolmall.feature.common.ContributorsRoute
-import com.joker.coolmall.feature.common.DocumentRoute
-import com.joker.coolmall.feature.common.SettingsRoute
-import com.joker.coolmall.feature.common.WebRoute
+import com.joker.coolmallkmp.feature.common.AboutRoute
+import com.joker.coolmallkmp.feature.common.ContributorsRoute
+import com.joker.coolmallkmp.feature.common.DocumentRoute
+import com.joker.coolmallkmp.feature.common.SettingsRoute
+import com.joker.coolmallkmp.feature.common.WebRoute
 import kotlinx.serialization.Serializable
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.privacy_policy
-import myapplication.shared.generated.resources.user_agreement
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.privacy_policy
+import coolmallkmp.shared.generated.resources.user_agreement
 import org.jetbrains.compose.resources.stringResource
 
 @Serializable

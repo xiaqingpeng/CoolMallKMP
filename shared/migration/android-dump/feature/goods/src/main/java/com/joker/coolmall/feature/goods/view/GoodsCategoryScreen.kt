@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods.view
+package com.joker.coolmallkmp.feature.goods.view
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -31,36 +31,36 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.ShapeCircle
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingXSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.navigation.goods.GoodsNavigator
-import com.joker.coolmall.navigation.goods.GoodsRoutes
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.appbar.SearchTopAppBar
-import com.joker.coolmall.core.ui.component.goods.GoodsGridItem
-import com.joker.coolmall.core.ui.component.goods.GoodsListItem
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkListView
-import com.joker.coolmall.core.ui.component.refresh.RefreshLayout
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.feature.goods.R
-import com.joker.coolmall.feature.goods.component.FilterDialog
-import com.joker.coolmall.feature.goods.model.SortState
-import com.joker.coolmall.feature.goods.model.SortType
-import com.joker.coolmall.feature.goods.skeleton.GoodsCategoryLoadingSkeleton
-import com.joker.coolmall.feature.goods.viewmodel.GoodsCategoryViewModel
-import com.joker.coolmall.core.ui.R as CoreUiR
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeCircle
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.navigation.goods.GoodsNavigator
+import com.joker.coolmallkmp.navigation.goods.GoodsRoutes
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.appbar.SearchTopAppBar
+import com.joker.coolmallkmp.core.ui.component.goods.GoodsGridItem
+import com.joker.coolmallkmp.core.ui.component.goods.GoodsListItem
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkListView
+import com.joker.coolmallkmp.core.ui.component.refresh.RefreshLayout
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.feature.goods.R
+import com.joker.coolmallkmp.feature.goods.component.FilterDialog
+import com.joker.coolmallkmp.feature.goods.model.SortState
+import com.joker.coolmallkmp.feature.goods.model.SortType
+import com.joker.coolmallkmp.feature.goods.skeleton.GoodsCategoryLoadingSkeleton
+import com.joker.coolmallkmp.feature.goods.viewmodel.GoodsCategoryViewModel
+import com.joker.coolmallkmp.core.ui.R as CoreUiR
 
 /**
  * 商品分类路由

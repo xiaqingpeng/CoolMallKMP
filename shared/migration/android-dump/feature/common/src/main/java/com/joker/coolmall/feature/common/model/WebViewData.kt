@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.model
+package com.joker.coolmallkmp.feature.common.model
 
 /**
  * WebView 数据实体

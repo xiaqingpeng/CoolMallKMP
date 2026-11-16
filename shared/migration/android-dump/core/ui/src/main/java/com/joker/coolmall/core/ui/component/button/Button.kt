@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.button
+package com.joker.coolmallkmp.core.ui.component.button
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,15 +27,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.ColorDanger
-import com.joker.coolmall.core.designsystem.theme.ColorPurple
-import com.joker.coolmall.core.designsystem.theme.ColorSuccess
-import com.joker.coolmall.core.designsystem.theme.ColorWarning
-import com.joker.coolmall.core.designsystem.theme.GradientPrimaryEnd
-import com.joker.coolmall.core.designsystem.theme.GradientPrimaryStart
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.TextWhite
+import com.joker.coolmallkmp.core.designsystem.theme.ColorDanger
+import com.joker.coolmallkmp.core.designsystem.theme.ColorPurple
+import com.joker.coolmallkmp.core.designsystem.theme.ColorSuccess
+import com.joker.coolmallkmp.core.designsystem.theme.ColorWarning
+import com.joker.coolmallkmp.core.designsystem.theme.GradientPrimaryEnd
+import com.joker.coolmallkmp.core.designsystem.theme.GradientPrimaryStart
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.TextWhite
 
 /**
  * 按钮类型

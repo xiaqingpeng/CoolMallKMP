@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order
+package com.joker.coolmallkmp.feature.order
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

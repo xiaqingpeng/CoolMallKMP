@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.modal
+package com.joker.coolmallkmp.core.ui.component.modal
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,14 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.component.WrapColumn
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.model.entity.Coupon
-import com.joker.coolmall.core.model.preview.previewAvailableCoupons
-import com.joker.coolmall.core.ui.R
-import com.joker.coolmall.core.ui.component.coupon.CouponCard
-import com.joker.coolmall.core.ui.component.coupon.CouponCardMode
+import com.joker.coolmallkmp.core.designsystem.component.WrapColumn
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.model.preview.previewAvailableCoupons
+import com.joker.coolmallkmp.core.ui.R
+import com.joker.coolmallkmp.core.ui.component.coupon.CouponCard
+import com.joker.coolmallkmp.core.ui.component.coupon.CouponCardMode
 
 /**
  * 优惠券领取弹出层

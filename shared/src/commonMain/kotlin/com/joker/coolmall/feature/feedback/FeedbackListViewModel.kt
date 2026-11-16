@@ -1,17 +1,17 @@
-package com.joker.coolmall.feature.feedback
+package com.joker.coolmallkmp.feature.feedback
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkListViewModel
-import com.joker.coolmall.core.data.repository.FeedbackRepository
-import com.joker.coolmall.core.data.repository.CommonRepository
-import com.joker.coolmall.core.data.repository.AuthRepository
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.core.model.entity.Feedback
-import com.joker.coolmall.core.model.request.PageRequest
-import com.joker.coolmall.core.session.AuthSession
-import com.joker.coolmall.core.session.networkAuthLog
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkListViewModel
+import com.joker.coolmallkmp.core.data.repository.FeedbackRepository
+import com.joker.coolmallkmp.core.data.repository.CommonRepository
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.entity.Feedback
+import com.joker.coolmallkmp.core.model.request.PageRequest
+import com.joker.coolmallkmp.core.session.AuthSession
+import com.joker.coolmallkmp.core.session.networkAuthLog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,8 +20,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.launch
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 
 sealed interface FeedbackListUiState {
     data object Loading : FeedbackListUiState

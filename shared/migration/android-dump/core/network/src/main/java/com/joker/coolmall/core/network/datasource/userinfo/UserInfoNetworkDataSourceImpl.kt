@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.network.datasource.userinfo
+package com.joker.coolmallkmp.core.network.datasource.userinfo
 
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.base.BaseNetworkDataSource
-import com.joker.coolmall.core.network.service.UserInfoService
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.base.BaseNetworkDataSource
+import com.joker.coolmallkmp.core.network.service.UserInfoService
 import javax.inject.Inject
 
 /**

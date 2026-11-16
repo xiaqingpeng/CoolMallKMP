@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common
+package com.joker.coolmallkmp.feature.common
 
 import androidx.compose.animation.core.EaseOutCubic
 import androidx.compose.animation.core.animateDpAsState
@@ -46,51 +46,51 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.ui.component.TitleWithLine
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import kotlinx.coroutines.delay
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.about_api_doc
-import myapplication.shared.generated.resources.about_api_doc_desc
-import myapplication.shared.generated.resources.about_app_name
-import myapplication.shared.generated.resources.about_citation
-import myapplication.shared.generated.resources.about_citation_desc
-import myapplication.shared.generated.resources.about_copyright
-import myapplication.shared.generated.resources.about_demo_download
-import myapplication.shared.generated.resources.about_demo_download_desc
-import myapplication.shared.generated.resources.about_developer
-import myapplication.shared.generated.resources.about_developer_email
-import myapplication.shared.generated.resources.about_developer_name
-import myapplication.shared.generated.resources.about_gitee
-import myapplication.shared.generated.resources.about_gitee_url
-import myapplication.shared.generated.resources.about_github
-import myapplication.shared.generated.resources.about_github_discussion
-import myapplication.shared.generated.resources.about_github_discussion_desc
-import myapplication.shared.generated.resources.about_github_url
-import myapplication.shared.generated.resources.about_help
-import myapplication.shared.generated.resources.about_help_desc
-import myapplication.shared.generated.resources.about_icon_source
-import myapplication.shared.generated.resources.about_icon_source_desc
-import myapplication.shared.generated.resources.about_open_source_license
-import myapplication.shared.generated.resources.about_privacy_policy
-import myapplication.shared.generated.resources.about_qq_group
-import myapplication.shared.generated.resources.about_section_discussion
-import myapplication.shared.generated.resources.about_section_other
-import myapplication.shared.generated.resources.about_section_project
-import myapplication.shared.generated.resources.about_section_resources
-import myapplication.shared.generated.resources.about_section_support
-import myapplication.shared.generated.resources.about_support
-import myapplication.shared.generated.resources.about_support_desc
-import myapplication.shared.generated.resources.about_translation
-import myapplication.shared.generated.resources.about_translation_desc
-import myapplication.shared.generated.resources.about_user_agreement
-import myapplication.shared.generated.resources.about_version
-import myapplication.shared.generated.resources.about_version_code
-import myapplication.shared.generated.resources.about_wechat_group
-import myapplication.shared.generated.resources.app_name
-import myapplication.shared.generated.resources.avatar
-import myapplication.shared.generated.resources.ic_logo
-import myapplication.shared.generated.resources.me_about
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.about_api_doc
+import coolmallkmp.shared.generated.resources.about_api_doc_desc
+import coolmallkmp.shared.generated.resources.about_app_name
+import coolmallkmp.shared.generated.resources.about_citation
+import coolmallkmp.shared.generated.resources.about_citation_desc
+import coolmallkmp.shared.generated.resources.about_copyright
+import coolmallkmp.shared.generated.resources.about_demo_download
+import coolmallkmp.shared.generated.resources.about_demo_download_desc
+import coolmallkmp.shared.generated.resources.about_developer
+import coolmallkmp.shared.generated.resources.about_developer_email
+import coolmallkmp.shared.generated.resources.about_developer_name
+import coolmallkmp.shared.generated.resources.about_gitee
+import coolmallkmp.shared.generated.resources.about_gitee_url
+import coolmallkmp.shared.generated.resources.about_github
+import coolmallkmp.shared.generated.resources.about_github_discussion
+import coolmallkmp.shared.generated.resources.about_github_discussion_desc
+import coolmallkmp.shared.generated.resources.about_github_url
+import coolmallkmp.shared.generated.resources.about_help
+import coolmallkmp.shared.generated.resources.about_help_desc
+import coolmallkmp.shared.generated.resources.about_icon_source
+import coolmallkmp.shared.generated.resources.about_icon_source_desc
+import coolmallkmp.shared.generated.resources.about_open_source_license
+import coolmallkmp.shared.generated.resources.about_privacy_policy
+import coolmallkmp.shared.generated.resources.about_qq_group
+import coolmallkmp.shared.generated.resources.about_section_discussion
+import coolmallkmp.shared.generated.resources.about_section_other
+import coolmallkmp.shared.generated.resources.about_section_project
+import coolmallkmp.shared.generated.resources.about_section_resources
+import coolmallkmp.shared.generated.resources.about_section_support
+import coolmallkmp.shared.generated.resources.about_support
+import coolmallkmp.shared.generated.resources.about_support_desc
+import coolmallkmp.shared.generated.resources.about_translation
+import coolmallkmp.shared.generated.resources.about_translation_desc
+import coolmallkmp.shared.generated.resources.about_user_agreement
+import coolmallkmp.shared.generated.resources.about_version
+import coolmallkmp.shared.generated.resources.about_version_code
+import coolmallkmp.shared.generated.resources.about_wechat_group
+import coolmallkmp.shared.generated.resources.app_name
+import coolmallkmp.shared.generated.resources.avatar
+import coolmallkmp.shared.generated.resources.ic_logo
+import coolmallkmp.shared.generated.resources.me_about
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -163,7 +163,7 @@ fun AboutRoute(
             }
             AboutSection(stringResource(Res.string.about_section_resources)) {
                 AboutLink(stringResource(Res.string.about_api_doc), stringResource(Res.string.about_api_doc_desc)) {
-                    onWebClick("https://coolmall.apifox.cn", "API 文档")
+                    onWebClick("https://coolmallkmp.apifox.cn", "API 文档")
                 }
                 AboutLink(stringResource(Res.string.about_demo_download), stringResource(Res.string.about_demo_download_desc)) {
                     onWebClick("https://www.pgyer.com/CoolMallKotlinProdRelease", "Demo 下载")

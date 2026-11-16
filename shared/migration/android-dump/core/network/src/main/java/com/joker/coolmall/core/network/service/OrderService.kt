@@ -1,14 +1,14 @@
-package com.joker.coolmall.core.network.service
+package com.joker.coolmallkmp.core.network.service
 
-import com.joker.coolmall.core.model.entity.Logistics
-import com.joker.coolmall.core.model.entity.Order
-import com.joker.coolmall.core.model.entity.OrderCount
-import com.joker.coolmall.core.model.request.CancelOrderRequest
-import com.joker.coolmall.core.model.request.CreateOrderRequest
-import com.joker.coolmall.core.model.request.OrderPageRequest
-import com.joker.coolmall.core.model.request.RefundOrderRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.Logistics
+import com.joker.coolmallkmp.core.model.entity.Order
+import com.joker.coolmallkmp.core.model.entity.OrderCount
+import com.joker.coolmallkmp.core.model.request.CancelOrderRequest
+import com.joker.coolmallkmp.core.model.request.CreateOrderRequest
+import com.joker.coolmallkmp.core.model.request.OrderPageRequest
+import com.joker.coolmallkmp.core.model.request.RefundOrderRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

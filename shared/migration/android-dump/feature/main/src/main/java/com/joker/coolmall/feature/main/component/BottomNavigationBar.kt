@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.component
+package com.joker.coolmallkmp.feature.main.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -25,10 +25,10 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.PrimaryDefault
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.feature.main.model.TopLevelDestination
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.PrimaryDefault
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.feature.main.model.TopLevelDestination
 
 /**
  * 底部导航栏

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods.view
+package com.joker.coolmallkmp.feature.goods.view
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateOffsetAsState
@@ -67,64 +67,64 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.component.SpaceBetweenRow
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ArrowRightIcon
-import com.joker.coolmall.core.designsystem.theme.ColorDanger
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.designsystem.theme.RadiusMedium
-import com.joker.coolmall.core.designsystem.theme.ShapeCircle
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceDivider
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingXSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.model.entity.Comment
-import com.joker.coolmall.core.model.entity.Coupon
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.core.model.entity.GoodsDetail
-import com.joker.coolmall.core.model.entity.GoodsSpec
-import com.joker.coolmall.core.model.entity.SelectedGoods
-import com.joker.coolmall.core.model.preview.previewGoods
-import com.joker.coolmall.core.model.preview.previewMyCoupons
-import com.joker.coolmall.navigation.cs.CsNavigator
-import com.joker.coolmall.navigation.goods.GoodsNavigator
-import com.joker.coolmall.navigation.goods.GoodsRoutes
-import com.joker.coolmall.navigation.main.MainNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.button.AppButtonBordered
-import com.joker.coolmall.core.ui.component.button.AppButtonFixed
-import com.joker.coolmall.core.ui.component.button.ButtonShape
-import com.joker.coolmall.core.ui.component.button.ButtonSize
-import com.joker.coolmall.core.ui.component.button.ButtonStyle
-import com.joker.coolmall.core.ui.component.button.ButtonType
-import com.joker.coolmall.core.ui.component.card.AppCard
-import com.joker.coolmall.core.ui.component.divider.WeDivider
-import com.joker.coolmall.core.ui.component.image.NetWorkImage
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.modal.CouponModal
-import com.joker.coolmall.core.ui.component.modal.SpecSelectModal
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.swiper.WeSwiper
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.PriceText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
-import com.joker.coolmall.feature.goods.R
-import com.joker.coolmall.feature.goods.component.CommentItem
-import com.joker.coolmall.feature.goods.skeleton.GoodsDetailLoadingSkeleton
-import com.joker.coolmall.feature.goods.viewmodel.GoodsDetailViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.component.SpaceBetweenRow
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ArrowRightIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ColorDanger
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.RadiusMedium
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeCircle
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceDivider
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.model.entity.Comment
+import com.joker.coolmallkmp.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.core.model.entity.GoodsDetail
+import com.joker.coolmallkmp.core.model.entity.GoodsSpec
+import com.joker.coolmallkmp.core.model.entity.SelectedGoods
+import com.joker.coolmallkmp.core.model.preview.previewGoods
+import com.joker.coolmallkmp.core.model.preview.previewMyCoupons
+import com.joker.coolmallkmp.navigation.cs.CsNavigator
+import com.joker.coolmallkmp.navigation.goods.GoodsNavigator
+import com.joker.coolmallkmp.navigation.goods.GoodsRoutes
+import com.joker.coolmallkmp.navigation.main.MainNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.button.AppButtonBordered
+import com.joker.coolmallkmp.core.ui.component.button.AppButtonFixed
+import com.joker.coolmallkmp.core.ui.component.button.ButtonShape
+import com.joker.coolmallkmp.core.ui.component.button.ButtonSize
+import com.joker.coolmallkmp.core.ui.component.button.ButtonStyle
+import com.joker.coolmallkmp.core.ui.component.button.ButtonType
+import com.joker.coolmallkmp.core.ui.component.card.AppCard
+import com.joker.coolmallkmp.core.ui.component.divider.WeDivider
+import com.joker.coolmallkmp.core.ui.component.image.NetWorkImage
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.modal.CouponModal
+import com.joker.coolmallkmp.core.ui.component.modal.SpecSelectModal
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.swiper.WeSwiper
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.PriceText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.feature.goods.R
+import com.joker.coolmallkmp.feature.goods.component.CommentItem
+import com.joker.coolmallkmp.feature.goods.skeleton.GoodsDetailLoadingSkeleton
+import com.joker.coolmallkmp.feature.goods.viewmodel.GoodsDetailViewModel
 import kotlinx.coroutines.flow.collectLatest
-import com.joker.coolmall.core.ui.R as CoreUiR
+import com.joker.coolmallkmp.core.ui.R as CoreUiR
 
 /**
  * 商品详情页面路由入口
@@ -387,7 +387,7 @@ private fun GoodsDetailTopBar(
             .padding(horizontal = SpacePaddingMedium, vertical = SpacePaddingSmall)
     ) {
         CircleIconButton(
-            icon = com.joker.coolmall.core.designsystem.R.drawable.ic_left,
+            icon = com.joker.coolmallkmp.core.designsystem.R.drawable.ic_left,
             onClick = { navigateBack() },
             iconSize = 28.dp,
             scale = buttonScale

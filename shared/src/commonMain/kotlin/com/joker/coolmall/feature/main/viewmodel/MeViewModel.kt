@@ -1,14 +1,14 @@
-package com.joker.coolmall.feature.main.viewmodel
+package com.joker.coolmallkmp.feature.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.AuthRepository
-import com.joker.coolmall.core.data.repository.FootprintRepository
-import com.joker.coolmall.core.data.repository.OrderRepository
-import com.joker.coolmall.core.data.repository.UserRepository
-import com.joker.coolmall.core.model.entity.Footprint
-import com.joker.coolmall.core.model.entity.OrderCount
-import com.joker.coolmall.core.model.entity.User
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.data.repository.FootprintRepository
+import com.joker.coolmallkmp.core.data.repository.OrderRepository
+import com.joker.coolmallkmp.core.data.repository.UserRepository
+import com.joker.coolmallkmp.core.model.entity.Footprint
+import com.joker.coolmallkmp.core.model.entity.OrderCount
+import com.joker.coolmallkmp.core.model.entity.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

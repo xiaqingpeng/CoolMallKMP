@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.joker.coolmall.core.config.AppConfig
-import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.config.AppConfig
+import com.joker.coolmallkmp.core.di.AppContainerProvider
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.okhttp.OkHttp

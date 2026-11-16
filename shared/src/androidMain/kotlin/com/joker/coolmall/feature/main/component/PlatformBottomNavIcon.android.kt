@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.component
+package com.joker.coolmallkmp.feature.main.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,8 +9,8 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.joker.coolmall.feature.main.model.TopLevelDestination
-import com.joker.coolmall.shared.R
+import com.joker.coolmallkmp.feature.main.model.TopLevelDestination
+import com.joker.coolmallkmp.shared.R
 
 @Composable
 actual fun PlatformBottomNavIcon(

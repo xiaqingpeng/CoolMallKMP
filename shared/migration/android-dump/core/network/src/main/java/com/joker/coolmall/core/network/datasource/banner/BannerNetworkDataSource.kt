@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.network.datasource.banner
+package com.joker.coolmallkmp.core.network.datasource.banner
 
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 
 /**
  * 轮播图相关数据源接口

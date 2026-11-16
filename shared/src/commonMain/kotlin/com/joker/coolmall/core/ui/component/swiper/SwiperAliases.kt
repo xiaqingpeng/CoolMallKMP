@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.swiper
+package com.joker.coolmallkmp.core.ui.component.swiper
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.component.Swiper as SharedSwiper
+import com.joker.coolmallkmp.core.ui.component.Swiper as SharedSwiper
 
 @Composable
 fun <T> WeSwiper(

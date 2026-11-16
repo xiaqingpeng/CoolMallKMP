@@ -1,13 +1,13 @@
-package com.joker.coolmall.core.data.state
+package com.joker.coolmallkmp.core.data.state
 
-import com.joker.coolmall.core.data.di.ApplicationScope
-import com.joker.coolmall.core.data.repository.AuthStoreRepository
-import com.joker.coolmall.core.data.repository.UserInfoRepository
-import com.joker.coolmall.core.data.repository.UserInfoStoreRepository
-import com.joker.coolmall.core.model.entity.Auth
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.result.ResultHandler
-import com.joker.coolmall.result.asResult
+import com.joker.coolmallkmp.core.data.di.ApplicationScope
+import com.joker.coolmallkmp.core.data.repository.AuthStoreRepository
+import com.joker.coolmallkmp.core.data.repository.UserInfoRepository
+import com.joker.coolmallkmp.core.data.repository.UserInfoStoreRepository
+import com.joker.coolmallkmp.core.model.entity.Auth
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.result.ResultHandler
+import com.joker.coolmallkmp.result.asResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,15 +1,15 @@
-package com.joker.coolmall.core.database
+package com.joker.coolmallkmp.core.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.joker.coolmall.core.database.dao.CartDao
-import com.joker.coolmall.core.database.dao.FootprintDao
-import com.joker.coolmall.core.database.dao.SearchHistoryDao
-import com.joker.coolmall.core.database.entity.CartEntity
-import com.joker.coolmall.core.database.entity.FootprintEntity
-import com.joker.coolmall.core.database.entity.SearchHistoryEntity
-import com.joker.coolmall.core.database.util.CartSpecConverter
+import com.joker.coolmallkmp.core.database.dao.CartDao
+import com.joker.coolmallkmp.core.database.dao.FootprintDao
+import com.joker.coolmallkmp.core.database.dao.SearchHistoryDao
+import com.joker.coolmallkmp.core.database.entity.CartEntity
+import com.joker.coolmallkmp.core.database.entity.FootprintEntity
+import com.joker.coolmallkmp.core.database.entity.SearchHistoryEntity
+import com.joker.coolmallkmp.core.database.util.CartSpecConverter
 
 /**
  * 应用数据库
@@ -54,6 +54,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun searchHistoryDao(): SearchHistoryDao
 
     companion object {
-        const val DATABASE_NAME = "coolmall-database"
+        const val DATABASE_NAME = "coolmallkmp-database"
     }
 }

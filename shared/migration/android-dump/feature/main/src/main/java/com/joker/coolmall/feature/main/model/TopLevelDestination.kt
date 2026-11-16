@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.main.model
+package com.joker.coolmallkmp.feature.main.model
 
 import androidx.annotation.RawRes
 import androidx.annotation.StringRes
-import com.joker.coolmall.navigation.main.MainRoutes
-import com.joker.coolmall.feature.main.R
+import com.joker.coolmallkmp.navigation.main.MainRoutes
+import com.joker.coolmallkmp.feature.main.R
 
 /**
  * 顶级导航目的地

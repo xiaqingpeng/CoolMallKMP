@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -36,23 +36,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.model.entity.Coupon
-import com.joker.coolmall.core.ui.theme.GradientPrimaryEnd
-import com.joker.coolmall.core.ui.theme.GradientPrimaryStart
-import com.joker.coolmall.core.ui.theme.TextWhite
-import com.joker.coolmall.core.util.DateTimeUtils
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.coupon_conditions
-import myapplication.shared.generated.resources.coupon_expired
-import myapplication.shared.generated.resources.coupon_fallback_title
-import myapplication.shared.generated.resources.coupon_insufficient
-import myapplication.shared.generated.resources.coupon_receive
-import myapplication.shared.generated.resources.coupon_select
-import myapplication.shared.generated.resources.coupon_selected
-import myapplication.shared.generated.resources.coupon_usage_instructions
-import myapplication.shared.generated.resources.coupon_use
-import myapplication.shared.generated.resources.coupon_used
-import myapplication.shared.generated.resources.coupon_valid_until
+import com.joker.coolmallkmp.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.ui.theme.GradientPrimaryEnd
+import com.joker.coolmallkmp.core.ui.theme.GradientPrimaryStart
+import com.joker.coolmallkmp.core.ui.theme.TextWhite
+import com.joker.coolmallkmp.core.util.DateTimeUtils
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.coupon_conditions
+import coolmallkmp.shared.generated.resources.coupon_expired
+import coolmallkmp.shared.generated.resources.coupon_fallback_title
+import coolmallkmp.shared.generated.resources.coupon_insufficient
+import coolmallkmp.shared.generated.resources.coupon_receive
+import coolmallkmp.shared.generated.resources.coupon_select
+import coolmallkmp.shared.generated.resources.coupon_selected
+import coolmallkmp.shared.generated.resources.coupon_usage_instructions
+import coolmallkmp.shared.generated.resources.coupon_use
+import coolmallkmp.shared.generated.resources.coupon_used
+import coolmallkmp.shared.generated.resources.coupon_valid_until
 import org.jetbrains.compose.resources.stringResource
 
 /** 优惠券卡片模式 */

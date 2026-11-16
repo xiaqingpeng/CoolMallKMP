@@ -1,12 +1,12 @@
-package com.joker.coolmall.feature.user
+package com.joker.coolmallkmp.feature.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.AuthRepository
-import com.joker.coolmall.core.data.repository.UserRepository
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.data.repository.UserRepository
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.view
+package com.joker.coolmallkmp.feature.main.view
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -49,19 +49,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.model.entity.CategoryTree
-import com.joker.coolmall.core.ui.empty.EmptyData
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.feature.main.component.CommonScaffold
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.feature.main.viewmodel.CategoryUiState
-import com.joker.coolmall.feature.main.viewmodel.CategoryViewModel
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.model.entity.CategoryTree
+import com.joker.coolmallkmp.core.ui.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.feature.main.component.CommonScaffold
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.feature.main.viewmodel.CategoryUiState
+import com.joker.coolmallkmp.feature.main.viewmodel.CategoryViewModel
 import kotlinx.coroutines.launch
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.category_empty
-import myapplication.shared.generated.resources.category_no_children
-import myapplication.shared.generated.resources.category_title
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.category_empty
+import coolmallkmp.shared.generated.resources.category_no_children
+import coolmallkmp.shared.generated.resources.category_title
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,6 +1,6 @@
-package com.joker.coolmall.navigation.cs
+package com.joker.coolmallkmp.navigation.cs
 
-import com.joker.coolmall.navigation.navigate
+import com.joker.coolmallkmp.navigation.navigate
 
 /**
  * 客服模块导航封装

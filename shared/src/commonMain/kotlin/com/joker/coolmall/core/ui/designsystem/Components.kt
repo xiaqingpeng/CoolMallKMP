@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.designsystem
+package com.joker.coolmallkmp.core.ui.designsystem
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

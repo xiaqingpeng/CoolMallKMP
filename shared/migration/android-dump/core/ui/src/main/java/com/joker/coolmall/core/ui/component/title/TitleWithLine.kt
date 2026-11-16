@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.title
+package com.joker.coolmallkmp.core.ui.component.title
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,10 +14,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.TitleLarge
-import com.joker.coolmall.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.TitleLarge
+import com.joker.coolmallkmp.core.ui.component.text.AppText
 
 /**
  * 带有垂直装饰线的标题组件

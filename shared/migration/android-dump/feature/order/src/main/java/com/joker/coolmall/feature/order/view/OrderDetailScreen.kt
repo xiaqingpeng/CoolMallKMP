@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order.view
+package com.joker.coolmallkmp.feature.order.view
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,37 +17,37 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.component.EndRow
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.model.entity.Cart
-import com.joker.coolmall.core.model.entity.DictItem
-import com.joker.coolmall.core.model.entity.Order
-import com.joker.coolmall.core.model.preview.previewOrder
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.navigation.order.OrderRoutes
-import com.joker.coolmall.core.ui.component.address.AddressCard
-import com.joker.coolmall.core.ui.component.dialog.WeDialog
-import com.joker.coolmall.core.ui.component.goods.OrderGoodsCard
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.modal.DictSelectModal
-import com.joker.coolmall.core.ui.component.modal.OrderGoodsModal
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.PriceText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
-import com.joker.coolmall.feature.order.R
-import com.joker.coolmall.feature.order.component.OrderButtons
-import com.joker.coolmall.feature.order.skeleton.OrderDetailLoadingSkeleton
-import com.joker.coolmall.feature.order.viewmodel.OrderDetailViewModel
-import com.joker.coolmall.core.ui.R as CoreUiR
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.component.EndRow
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.model.entity.Cart
+import com.joker.coolmallkmp.core.model.entity.DictItem
+import com.joker.coolmallkmp.core.model.entity.Order
+import com.joker.coolmallkmp.core.model.preview.previewOrder
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.navigation.order.OrderRoutes
+import com.joker.coolmallkmp.core.ui.component.address.AddressCard
+import com.joker.coolmallkmp.core.ui.component.dialog.WeDialog
+import com.joker.coolmallkmp.core.ui.component.goods.OrderGoodsCard
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.modal.DictSelectModal
+import com.joker.coolmallkmp.core.ui.component.modal.OrderGoodsModal
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.PriceText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.feature.order.R
+import com.joker.coolmallkmp.feature.order.component.OrderButtons
+import com.joker.coolmallkmp.feature.order.skeleton.OrderDetailLoadingSkeleton
+import com.joker.coolmallkmp.feature.order.viewmodel.OrderDetailViewModel
+import com.joker.coolmallkmp.core.ui.R as CoreUiR
 
 /**
  * 订单详情路由

@@ -1,4 +1,4 @@
-package com.joker.coolmall.navigation
+package com.joker.coolmallkmp.navigation
 
 /**
  * 通用的页面刷新结果 Key。

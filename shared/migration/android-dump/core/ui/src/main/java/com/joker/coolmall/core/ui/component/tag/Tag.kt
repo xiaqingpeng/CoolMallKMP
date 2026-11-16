@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.tag
+package com.joker.coolmallkmp.core.ui.component.tag
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,21 +20,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.BgGreenLight
-import com.joker.coolmall.core.designsystem.theme.BgPurpleLight
-import com.joker.coolmall.core.designsystem.theme.BgRedLight
-import com.joker.coolmall.core.designsystem.theme.BgYellowLight
-import com.joker.coolmall.core.designsystem.theme.ColorDanger
-import com.joker.coolmall.core.designsystem.theme.ColorSuccess
-import com.joker.coolmall.core.designsystem.theme.ColorWarning
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingXSmall
-import com.joker.coolmall.core.designsystem.theme.TextWhite
-import com.joker.coolmall.core.ui.R
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.BgGreenLight
+import com.joker.coolmallkmp.core.designsystem.theme.BgPurpleLight
+import com.joker.coolmallkmp.core.designsystem.theme.BgRedLight
+import com.joker.coolmallkmp.core.designsystem.theme.BgYellowLight
+import com.joker.coolmallkmp.core.designsystem.theme.ColorDanger
+import com.joker.coolmallkmp.core.designsystem.theme.ColorSuccess
+import com.joker.coolmallkmp.core.designsystem.theme.ColorWarning
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.TextWhite
+import com.joker.coolmallkmp.core.ui.R
 
 /**
  * 标签类型

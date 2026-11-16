@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.network.interceptor
+package com.joker.coolmallkmp.core.network.interceptor
 
-import com.joker.coolmall.core.datastore.datasource.auth.AuthStoreDataSource
+import com.joker.coolmallkmp.core.datastore.datasource.auth.AuthStoreDataSource
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response

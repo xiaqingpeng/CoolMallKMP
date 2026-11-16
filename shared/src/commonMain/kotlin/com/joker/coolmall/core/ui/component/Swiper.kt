@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.animation.core.animateDpAsState
@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.theme.PrimaryDefault
+import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
 import kotlinx.coroutines.delay
 
 @Composable

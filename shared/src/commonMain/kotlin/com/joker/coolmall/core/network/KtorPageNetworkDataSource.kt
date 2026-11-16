@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
-import com.joker.coolmall.core.model.entity.ConfirmOrder
-import com.joker.coolmall.core.model.entity.GoodsDetail
-import com.joker.coolmall.core.model.entity.Home
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.ConfirmOrder
+import com.joker.coolmallkmp.core.model.entity.GoodsDetail
+import com.joker.coolmallkmp.core.model.entity.Home
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

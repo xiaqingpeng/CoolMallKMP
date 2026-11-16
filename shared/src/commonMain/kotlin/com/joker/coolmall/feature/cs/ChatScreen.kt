@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs
+package com.joker.coolmallkmp.feature.cs
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -51,27 +51,27 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.model.entity.CsMsg
-import com.joker.coolmall.core.platform.rememberPlatformImagePicker
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.cs_chat_title
-import myapplication.shared.generated.resources.cs_connected
-import myapplication.shared.generated.resources.cs_connecting
-import myapplication.shared.generated.resources.cs_disconnected
-import myapplication.shared.generated.resources.cs_input_hint
-import myapplication.shared.generated.resources.cs_load_more
-import myapplication.shared.generated.resources.cs_retry
-import myapplication.shared.generated.resources.cs_role_agent
-import myapplication.shared.generated.resources.cs_role_me
-import myapplication.shared.generated.resources.cs_send
-import myapplication.shared.generated.resources.cs_send_image
-import myapplication.shared.generated.resources.cs_uploading_image
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.model.entity.CsMsg
+import com.joker.coolmallkmp.core.platform.rememberPlatformImagePicker
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.cs_chat_title
+import coolmallkmp.shared.generated.resources.cs_connected
+import coolmallkmp.shared.generated.resources.cs_connecting
+import coolmallkmp.shared.generated.resources.cs_disconnected
+import coolmallkmp.shared.generated.resources.cs_input_hint
+import coolmallkmp.shared.generated.resources.cs_load_more
+import coolmallkmp.shared.generated.resources.cs_retry
+import coolmallkmp.shared.generated.resources.cs_role_agent
+import coolmallkmp.shared.generated.resources.cs_role_me
+import coolmallkmp.shared.generated.resources.cs_send
+import coolmallkmp.shared.generated.resources.cs_send_image
+import coolmallkmp.shared.generated.resources.cs_uploading_image
 import org.jetbrains.compose.resources.stringResource
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
-import com.joker.coolmall.core.ui.component.ReverseLoadMore
-import com.joker.coolmall.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.core.ui.component.ReverseLoadMore
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

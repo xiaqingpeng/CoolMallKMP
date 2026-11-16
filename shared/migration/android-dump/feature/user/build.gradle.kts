@@ -1,10 +1,10 @@
 plugins {
-    alias(libs.plugins.coolmall.android.feature)
+    alias(libs.plugins.coolmallkmp.android.feature)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.joker.coolmall.feature.user"
+    namespace = "com.joker.coolmallkmp.feature.user"
 }
 dependencies {
     // kotlin序列化

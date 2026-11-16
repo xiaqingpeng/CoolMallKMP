@@ -5,17 +5,17 @@
 ## ViewModel 示例
 
 ```kotlin
-package com.joker.coolmall.feature.user.viewmodel
+package com.joker.coolmallkmp.feature.user.viewmodel
 
 import User
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.result.Result
-import com.joker.coolmall.core.common.result.asResult
-import com.joker.coolmall.core.data.repository.AuthRepository
-import com.joker.coolmall.core.data.repository.UserInfoRepository
-import com.joker.coolmall.core.data.state.AppState
-import com.joker.coolmall.core.model.Auth
+import com.joker.coolmallkmp.core.common.result.Result
+import com.joker.coolmallkmp.core.common.result.asResult
+import com.joker.coolmallkmp.core.data.repository.AuthRepository
+import com.joker.coolmallkmp.core.data.repository.UserInfoRepository
+import com.joker.coolmallkmp.core.data.state.AppState
+import com.joker.coolmallkmp.core.model.Auth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -114,7 +114,7 @@ class UserViewModel @Inject constructor(
 ## Composable UI 示例
 
 ```kotlin
-package com.joker.coolmall.feature.user.screen
+package com.joker.coolmallkmp.feature.user.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -133,7 +133,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.joker.coolmall.feature.user.viewmodel.UserViewModel
+import com.joker.coolmallkmp.feature.user.viewmodel.UserViewModel
 
 /**
  * 用户个人中心界面

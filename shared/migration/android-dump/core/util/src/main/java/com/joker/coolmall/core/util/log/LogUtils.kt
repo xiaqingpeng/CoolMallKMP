@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util.log
+package com.joker.coolmallkmp.core.util.log
 
 import android.app.Application
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order.skeleton
+package com.joker.coolmallkmp.feature.order.skeleton
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,11 +10,11 @@ import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.ui.component.address.AddressCardSkeleton
-import com.joker.coolmall.core.ui.component.skeleton.SkeletonTextLine
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.ui.component.address.AddressCardSkeleton
+import com.joker.coolmallkmp.core.ui.component.skeleton.SkeletonTextLine
 
 /**
  * 订单详情骨架屏

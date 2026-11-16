@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.goods
+package com.joker.coolmallkmp.feature.goods
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
@@ -52,47 +52,47 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.model.entity.Comment
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.core.model.entity.GoodsDetail
-import com.joker.coolmall.core.model.entity.GoodsSpec
-import com.joker.coolmall.core.ui.component.AppButton
-import com.joker.coolmall.core.ui.component.AppButtonBordered
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.core.ui.component.PriceTextLarge
-import com.joker.coolmall.core.ui.component.TitleWithLine
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.component.DetailSkeleton
-import com.joker.coolmall.core.ui.component.CouponCard
-import com.joker.coolmall.core.ui.component.CouponCardMode
-import com.joker.coolmall.core.ui.component.AppCard
-import com.joker.coolmall.core.ui.component.Modal
-import com.joker.coolmall.core.ui.component.Swiper
-import com.joker.coolmall.core.ui.component.RefreshLayout
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
-import com.joker.coolmall.core.ui.theme.ColorDanger
-import com.joker.coolmall.core.ui.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.ui.theme.SpacePaddingLarge
-import com.joker.coolmall.core.ui.theme.SpaceVerticalMedium
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.goods_add_to_cart
-import myapplication.shared.generated.resources.goods_available_coupons
-import myapplication.shared.generated.resources.goods_buy_now
-import myapplication.shared.generated.resources.goods_content_detail
-import myapplication.shared.generated.resources.goods_coupon_full_reduce
-import myapplication.shared.generated.resources.goods_detail_title
-import myapplication.shared.generated.resources.goods_no_image
-import myapplication.shared.generated.resources.goods_rating
-import myapplication.shared.generated.resources.goods_select_spec
-import myapplication.shared.generated.resources.goods_sold
-import myapplication.shared.generated.resources.goods_spec
-import myapplication.shared.generated.resources.goods_user_comments
-import myapplication.shared.generated.resources.goods_view_all_comments
-import myapplication.shared.generated.resources.me_user_fallback
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.model.entity.Comment
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.core.model.entity.GoodsDetail
+import com.joker.coolmallkmp.core.model.entity.GoodsSpec
+import com.joker.coolmallkmp.core.ui.component.AppButton
+import com.joker.coolmallkmp.core.ui.component.AppButtonBordered
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.PriceTextLarge
+import com.joker.coolmallkmp.core.ui.component.TitleWithLine
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.component.DetailSkeleton
+import com.joker.coolmallkmp.core.ui.component.CouponCard
+import com.joker.coolmallkmp.core.ui.component.CouponCardMode
+import com.joker.coolmallkmp.core.ui.component.AppCard
+import com.joker.coolmallkmp.core.ui.component.Modal
+import com.joker.coolmallkmp.core.ui.component.Swiper
+import com.joker.coolmallkmp.core.ui.component.RefreshLayout
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.core.ui.theme.ColorDanger
+import com.joker.coolmallkmp.core.ui.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.ui.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.ui.theme.SpaceVerticalMedium
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.goods_add_to_cart
+import coolmallkmp.shared.generated.resources.goods_available_coupons
+import coolmallkmp.shared.generated.resources.goods_buy_now
+import coolmallkmp.shared.generated.resources.goods_content_detail
+import coolmallkmp.shared.generated.resources.goods_coupon_full_reduce
+import coolmallkmp.shared.generated.resources.goods_detail_title
+import coolmallkmp.shared.generated.resources.goods_no_image
+import coolmallkmp.shared.generated.resources.goods_rating
+import coolmallkmp.shared.generated.resources.goods_select_spec
+import coolmallkmp.shared.generated.resources.goods_sold
+import coolmallkmp.shared.generated.resources.goods_spec
+import coolmallkmp.shared.generated.resources.goods_user_comments
+import coolmallkmp.shared.generated.resources.goods_view_all_comments
+import coolmallkmp.shared.generated.resources.me_user_fallback
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -260,7 +260,7 @@ fun GoodsDetailRoute(
 @Composable
 private fun GoodsDetailScreen(
     detail: GoodsDetail,
-    selectedSpec: com.joker.coolmall.core.model.entity.GoodsSpec?,
+    selectedSpec: com.joker.coolmallkmp.core.model.entity.GoodsSpec?,
     onShowSpecModal: () -> Unit,
     onShowCouponModal: () -> Unit,
     onCommentsClick: () -> Unit,

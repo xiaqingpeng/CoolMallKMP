@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.dialog
+package com.joker.coolmallkmp.core.ui.component.dialog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.joker.coolmall.core.ui.component.divider.WeDivider
+import com.joker.coolmallkmp.core.ui.component.divider.WeDivider
 
 /**
  * 对话框

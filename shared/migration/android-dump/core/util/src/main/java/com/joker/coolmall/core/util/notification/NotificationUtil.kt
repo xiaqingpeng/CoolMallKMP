@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util.notification
+package com.joker.coolmallkmp.core.util.notification
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.joker.coolmall.core.designsystem.R
+import com.joker.coolmallkmp.core.designsystem.R
 
 /**
  * 通知工具类

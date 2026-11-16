@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.model
+package com.joker.coolmallkmp.feature.main.model
 
 enum class TopLevelDestination {
     HOME,

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.core.designsystem.component.CenterRow
-import com.joker.coolmall.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.component.CenterRow
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
 
 /**
  * 底部导航栏组件，用于显示登录、注册等页面的底部导航选项

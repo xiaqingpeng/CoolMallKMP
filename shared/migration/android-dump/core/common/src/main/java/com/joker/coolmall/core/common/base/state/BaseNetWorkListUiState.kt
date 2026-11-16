@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.base.state
+package com.joker.coolmallkmp.core.common.base.state
 
 /**
  * 列表页UI状态

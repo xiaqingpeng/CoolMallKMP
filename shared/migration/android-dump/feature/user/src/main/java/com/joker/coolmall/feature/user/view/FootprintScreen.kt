@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.view
+package com.joker.coolmallkmp.feature.user.view
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -22,19 +22,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.model.entity.Footprint
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.navigation.goods.GoodsNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.empty.EmptyData
-import com.joker.coolmall.core.ui.component.goods.GoodsGridItem
-import com.joker.coolmall.core.ui.component.loading.PageLoading
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.feature.user.R
-import com.joker.coolmall.feature.user.state.FootprintUiState
-import com.joker.coolmall.feature.user.viewmodel.FootprintViewModel
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.model.entity.Footprint
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.navigation.goods.GoodsNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.component.goods.GoodsGridItem
+import com.joker.coolmallkmp.core.ui.component.loading.PageLoading
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.feature.user.R
+import com.joker.coolmallkmp.feature.user.state.FootprintUiState
+import com.joker.coolmallkmp.feature.user.viewmodel.FootprintViewModel
 
 /**
  * 用户足迹路由

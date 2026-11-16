@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util
+package com.joker.coolmallkmp.core.util
 
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate

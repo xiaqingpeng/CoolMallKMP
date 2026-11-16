@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.Address
+import com.joker.coolmallkmp.core.model.entity.Address
 
 /**
  * 预览地址数据

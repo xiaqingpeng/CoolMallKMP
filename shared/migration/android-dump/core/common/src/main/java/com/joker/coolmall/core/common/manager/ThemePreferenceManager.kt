@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.common.manager
+package com.joker.coolmallkmp.core.common.manager
 
-import com.joker.coolmall.core.common.config.ThemeColorOption
-import com.joker.coolmall.core.common.config.ThemePreference
-import com.joker.coolmall.core.util.storage.MMKVUtils
+import com.joker.coolmallkmp.core.common.config.ThemeColorOption
+import com.joker.coolmallkmp.core.common.config.ThemePreference
+import com.joker.coolmallkmp.core.util.storage.MMKVUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

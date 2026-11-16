@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.loading
+package com.joker.coolmallkmp.core.ui.component.loading
 
 import androidx.compose.animation.core.DurationBasedAnimationSpec
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -34,9 +34,9 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.ui.R
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.ui.R
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin

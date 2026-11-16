@@ -1,10 +1,10 @@
-package com.joker.coolmall.feature.user.viewmodel
+package com.joker.coolmallkmp.feature.user.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.core.data.repository.FootprintRepository
-import com.joker.coolmall.core.model.entity.Footprint
-import com.joker.coolmall.feature.user.state.FootprintUiState
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.core.data.repository.FootprintRepository
+import com.joker.coolmallkmp.core.model.entity.Footprint
+import com.joker.coolmallkmp.feature.user.state.FootprintUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

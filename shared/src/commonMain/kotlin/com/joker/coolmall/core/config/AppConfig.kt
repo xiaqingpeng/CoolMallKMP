@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.config
+package com.joker.coolmallkmp.core.config
 
 /**
  * 跨平台运行时配置。

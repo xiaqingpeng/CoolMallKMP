@@ -1,6 +1,6 @@
-package com.joker.coolmall.feature.user.data
+package com.joker.coolmallkmp.feature.user.data
 
-import com.joker.coolmall.feature.user.model.Region
+import com.joker.coolmallkmp.feature.user.model.Region
 
 /**
  * 地区数据

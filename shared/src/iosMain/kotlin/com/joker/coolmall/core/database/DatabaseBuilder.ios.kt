@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.database
+package com.joker.coolmallkmp.core.database
 
 import androidx.room3.Room
 import androidx.room3.RoomDatabase

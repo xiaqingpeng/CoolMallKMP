@@ -1,15 +1,15 @@
-package com.joker.coolmall.feature.order.component
+package com.joker.coolmallkmp.feature.order.component
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.model.entity.Order
-import com.joker.coolmall.core.ui.component.button.AppButtonBordered
-import com.joker.coolmall.core.ui.component.button.ButtonType
-import com.joker.coolmall.feature.order.R
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.model.entity.Order
+import com.joker.coolmallkmp.core.ui.component.button.AppButtonBordered
+import com.joker.coolmallkmp.core.ui.component.button.ButtonType
+import com.joker.coolmallkmp.feature.order.R
 
 /**
  * 订单按钮组件，用于显示订单相关的操作按钮

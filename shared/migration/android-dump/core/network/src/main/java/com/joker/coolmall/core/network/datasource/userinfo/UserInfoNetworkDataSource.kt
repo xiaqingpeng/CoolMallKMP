@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.network.datasource.userinfo
+package com.joker.coolmallkmp.core.network.datasource.userinfo
 
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 
 /**
  * 用户信息相关数据源接口

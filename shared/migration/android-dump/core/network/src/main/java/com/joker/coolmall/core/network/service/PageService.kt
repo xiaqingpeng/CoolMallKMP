@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.network.service
+package com.joker.coolmallkmp.core.network.service
 
-import com.joker.coolmall.core.model.entity.ConfirmOrder
-import com.joker.coolmall.core.model.entity.GoodsDetail
-import com.joker.coolmall.core.model.entity.Home
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.ConfirmOrder
+import com.joker.coolmallkmp.core.model.entity.GoodsDetail
+import com.joker.coolmallkmp.core.model.entity.Home
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

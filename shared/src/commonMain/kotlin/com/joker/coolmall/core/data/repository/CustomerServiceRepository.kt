@@ -1,12 +1,12 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.model.entity.CsMsg
-import com.joker.coolmall.core.model.entity.CsSession
-import com.joker.coolmall.core.model.request.MessagePageRequest
-import com.joker.coolmall.core.model.request.ReadMessageRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.KtorCustomerServiceNetworkDataSource
+import com.joker.coolmallkmp.core.model.entity.CsMsg
+import com.joker.coolmallkmp.core.model.entity.CsSession
+import com.joker.coolmallkmp.core.model.request.MessagePageRequest
+import com.joker.coolmallkmp.core.model.request.ReadMessageRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.KtorCustomerServiceNetworkDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext

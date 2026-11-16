@@ -1,10 +1,10 @@
-package com.joker.coolmall.feature.user.viewmodel
+package com.joker.coolmallkmp.feature.user.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.core.data.state.AppState
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.navigation.navigateBack
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.core.data.state.AppState
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.navigation.navigateBack
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

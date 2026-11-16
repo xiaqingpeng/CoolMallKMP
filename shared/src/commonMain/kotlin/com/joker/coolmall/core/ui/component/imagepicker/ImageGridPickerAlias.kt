@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.ui.component.imagepicker
+package com.joker.coolmallkmp.core.ui.component.imagepicker
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.platform.PickedImage
-import com.joker.coolmall.core.ui.component.ImageGridPicker as SharedImageGridPicker
+import com.joker.coolmallkmp.core.platform.PickedImage
+import com.joker.coolmallkmp.core.ui.component.ImageGridPicker as SharedImageGridPicker
 
 @Composable
 fun ImageGridPicker(

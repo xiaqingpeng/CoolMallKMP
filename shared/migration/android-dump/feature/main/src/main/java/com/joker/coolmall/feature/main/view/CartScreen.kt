@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.view
+package com.joker.coolmallkmp.feature.main.view
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -33,27 +33,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.model.entity.Cart
-import com.joker.coolmall.core.model.preview.previewCartList
-import com.joker.coolmall.navigation.goods.GoodsNavigator
-import com.joker.coolmall.navigation.main.MainRoutes
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.appbar.CenterTopAppBar
-import com.joker.coolmall.core.ui.component.button.AppButtonFixed
-import com.joker.coolmall.core.ui.component.button.ButtonShape
-import com.joker.coolmall.core.ui.component.button.ButtonSize
-import com.joker.coolmall.core.ui.component.button.ButtonType
-import com.joker.coolmall.core.ui.component.button.CheckButton
-import com.joker.coolmall.core.ui.component.empty.EmptyCart
-import com.joker.coolmall.core.ui.component.goods.OrderGoodsCard
-import com.joker.coolmall.core.ui.component.text.PriceText
-import com.joker.coolmall.feature.main.R
-import com.joker.coolmall.feature.main.component.CommonScaffold
-import com.joker.coolmall.feature.main.viewmodel.CartViewModel
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.model.entity.Cart
+import com.joker.coolmallkmp.core.model.preview.previewCartList
+import com.joker.coolmallkmp.navigation.goods.GoodsNavigator
+import com.joker.coolmallkmp.navigation.main.MainRoutes
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.appbar.CenterTopAppBar
+import com.joker.coolmallkmp.core.ui.component.button.AppButtonFixed
+import com.joker.coolmallkmp.core.ui.component.button.ButtonShape
+import com.joker.coolmallkmp.core.ui.component.button.ButtonSize
+import com.joker.coolmallkmp.core.ui.component.button.ButtonType
+import com.joker.coolmallkmp.core.ui.component.button.CheckButton
+import com.joker.coolmallkmp.core.ui.component.empty.EmptyCart
+import com.joker.coolmallkmp.core.ui.component.goods.OrderGoodsCard
+import com.joker.coolmallkmp.core.ui.component.text.PriceText
+import com.joker.coolmallkmp.feature.main.R
+import com.joker.coolmallkmp.feature.main.component.CommonScaffold
+import com.joker.coolmallkmp.feature.main.viewmodel.CartViewModel
 import kotlinx.coroutines.delay
 
 /**

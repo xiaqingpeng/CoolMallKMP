@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.view
+package com.joker.coolmallkmp.feature.user.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -27,24 +27,24 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ArrowRightIcon
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.navigation.user.UserRoutes
-import com.joker.coolmall.core.ui.component.bottombar.AppBottomButton
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.feature.user.R
-import com.joker.coolmall.feature.user.component.RegionPickerModal
-import com.joker.coolmall.feature.user.data.RegionData
-import com.joker.coolmall.feature.user.viewmodel.AddressDetailViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ArrowRightIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.navigation.user.UserRoutes
+import com.joker.coolmallkmp.core.ui.component.bottombar.AppBottomButton
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.feature.user.R
+import com.joker.coolmallkmp.feature.user.component.RegionPickerModal
+import com.joker.coolmallkmp.feature.user.data.RegionData
+import com.joker.coolmallkmp.feature.user.viewmodel.AddressDetailViewModel
 
 /**
  * 收货地址详情路由

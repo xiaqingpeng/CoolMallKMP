@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util.toast
+package com.joker.coolmallkmp.core.util.toast
 
 import android.app.Application
 import android.content.Context
@@ -8,7 +8,7 @@ import com.hjq.toast.Toaster
 import com.hjq.toast.style.BlackToastStyle
 import com.hjq.toast.style.CustomToastStyle
 import com.hjq.toast.style.WhiteToastStyle
-import com.joker.coolmall.core.util.R
+import com.joker.coolmallkmp.core.util.R
 
 /**
  * Toast 工具类，基于 Toaster 框架封装

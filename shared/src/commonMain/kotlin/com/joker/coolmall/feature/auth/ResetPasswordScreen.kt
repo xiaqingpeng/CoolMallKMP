@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth
+package com.joker.coolmallkmp.feature.auth
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,29 +15,29 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.joker.coolmall.core.ui.component.AppButton
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.AppButton
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.resolveMessageCode
-import com.joker.coolmall.core.ui.resolveUiMessage
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
-import com.joker.coolmall.feature.auth.component.ImageCaptchaDialog
-import com.joker.coolmall.feature.auth.component.AuthCodeField
-import com.joker.coolmall.feature.auth.component.AuthPage
-import com.joker.coolmall.feature.auth.component.AuthPasswordField
-import com.joker.coolmall.feature.auth.component.AuthPhoneField
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.auth_confirm_password
-import myapplication.shared.generated.resources.auth_get_code
-import myapplication.shared.generated.resources.auth_new_password
-import myapplication.shared.generated.resources.auth_phone
-import myapplication.shared.generated.resources.auth_reset_submit
-import myapplication.shared.generated.resources.auth_reset_title
-import myapplication.shared.generated.resources.auth_sms_code
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.resolveMessageCode
+import com.joker.coolmallkmp.core.ui.resolveUiMessage
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.feature.auth.component.ImageCaptchaDialog
+import com.joker.coolmallkmp.feature.auth.component.AuthCodeField
+import com.joker.coolmallkmp.feature.auth.component.AuthPage
+import com.joker.coolmallkmp.feature.auth.component.AuthPasswordField
+import com.joker.coolmallkmp.feature.auth.component.AuthPhoneField
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.auth_confirm_password
+import coolmallkmp.shared.generated.resources.auth_get_code
+import coolmallkmp.shared.generated.resources.auth_new_password
+import coolmallkmp.shared.generated.resources.auth_phone
+import coolmallkmp.shared.generated.resources.auth_reset_submit
+import coolmallkmp.shared.generated.resources.auth_reset_title
+import coolmallkmp.shared.generated.resources.auth_sms_code
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

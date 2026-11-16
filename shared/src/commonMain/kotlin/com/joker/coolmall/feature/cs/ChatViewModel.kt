@@ -1,13 +1,13 @@
-package com.joker.coolmall.feature.cs
+package com.joker.coolmallkmp.feature.cs
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.CustomerServiceRepository
-import com.joker.coolmall.core.common.base.state.ReversePagedListState
-import com.joker.coolmall.core.data.repository.FileUploadRepository
-import com.joker.coolmall.core.model.entity.CsMsg
-import com.joker.coolmall.core.platform.PickedImage
-import com.joker.coolmall.core.session.AuthSession
+import com.joker.coolmallkmp.core.data.repository.CustomerServiceRepository
+import com.joker.coolmallkmp.core.common.base.state.ReversePagedListState
+import com.joker.coolmallkmp.core.data.repository.FileUploadRepository
+import com.joker.coolmallkmp.core.model.entity.CsMsg
+import com.joker.coolmallkmp.core.platform.PickedImage
+import com.joker.coolmallkmp.core.session.AuthSession
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -18,8 +18,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.launch
-import com.joker.coolmall.core.ui.MessageCode
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.ui.MessageCode
+import com.joker.coolmallkmp.core.ui.UiMessage
 
 sealed class ChatUiState {
     data object Loading : ChatUiState()

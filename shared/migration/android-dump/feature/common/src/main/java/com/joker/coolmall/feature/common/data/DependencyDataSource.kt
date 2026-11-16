@@ -1,6 +1,6 @@
-package com.joker.coolmall.feature.common.data
+package com.joker.coolmallkmp.feature.common.data
 
-import com.joker.coolmall.feature.common.model.Dependency
+import com.joker.coolmallkmp.feature.common.model.Dependency
 
 /**
  * 依赖库数据源

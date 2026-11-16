@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 import platform.Foundation.NSURL
 import platform.UIKit.UIApplication

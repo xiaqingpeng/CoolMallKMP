@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 import android.content.Intent
 import android.net.Uri
-import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.di.AppContainerProvider
 
 actual fun openExternalUrl(url: String) {
     val context = AppContainerProvider.appContext as? android.content.Context ?: return

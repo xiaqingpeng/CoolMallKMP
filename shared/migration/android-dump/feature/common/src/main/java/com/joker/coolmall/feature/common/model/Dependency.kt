@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.model
+package com.joker.coolmallkmp.feature.common.model
 
 /**
  * 依赖库数据模型

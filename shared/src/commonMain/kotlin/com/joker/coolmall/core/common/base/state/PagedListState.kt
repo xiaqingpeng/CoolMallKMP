@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.base.state
+package com.joker.coolmallkmp.core.common.base.state
 
 /**
  * 可复用的分页快照。订单多 Tab 和实时消息列表都可以在自己的外壳中复用，

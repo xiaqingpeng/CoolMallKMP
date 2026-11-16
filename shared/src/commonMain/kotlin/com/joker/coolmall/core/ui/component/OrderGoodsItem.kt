@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,8 +20,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.model.entity.CartGoodsSpec
-import com.joker.coolmall.core.model.entity.OrderGoods
+import com.joker.coolmallkmp.core.model.entity.CartGoodsSpec
+import com.joker.coolmallkmp.core.model.entity.OrderGoods
 
 @Composable
 fun OrderGoodsItem(

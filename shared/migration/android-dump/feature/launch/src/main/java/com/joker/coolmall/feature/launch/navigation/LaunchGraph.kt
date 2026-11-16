@@ -1,13 +1,13 @@
-package com.joker.coolmall.feature.launch.navigation
+package com.joker.coolmallkmp.feature.launch.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
-import com.joker.coolmall.navigation.launch.LaunchRoutes
-import com.joker.coolmall.feature.launch.view.GuideRoute
-import com.joker.coolmall.feature.launch.view.SplashRoute
+import com.joker.coolmallkmp.navigation.launch.LaunchRoutes
+import com.joker.coolmallkmp.feature.launch.view.GuideRoute
+import com.joker.coolmallkmp.feature.launch.view.SplashRoute
 
 /**
  * 启动模块导航图

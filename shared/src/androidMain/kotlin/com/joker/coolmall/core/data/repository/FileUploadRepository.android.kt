@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
 import android.content.Context
 import android.net.Uri
-import com.joker.coolmall.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.di.AppContainerProvider
 import java.io.File
 
 actual suspend fun readImageBytes(uri: String): ByteArray? {

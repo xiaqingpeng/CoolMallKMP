@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.refresh
+package com.joker.coolmallkmp.core.ui.component.refresh
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
@@ -14,12 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.ui.R
-import com.joker.coolmall.core.ui.component.loading.MiLoadingMobile
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.ui.R
+import com.joker.coolmallkmp.core.ui.component.loading.MiLoadingMobile
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
 
 /**
  * 刷新指示器组件

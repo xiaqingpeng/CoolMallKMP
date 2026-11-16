@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat

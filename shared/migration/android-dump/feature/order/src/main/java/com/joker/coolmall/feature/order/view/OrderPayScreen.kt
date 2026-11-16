@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order.view
+package com.joker.coolmallkmp.feature.order.view
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -24,22 +24,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.alipay.sdk.app.PayTask
-import com.joker.coolmall.core.designsystem.component.CenterRow
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ColorDanger
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.navigation.order.OrderRoutes
-import com.joker.coolmall.core.ui.component.bottombar.AppBottomButton
-import com.joker.coolmall.core.ui.component.button.CheckButton
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.order.R
-import com.joker.coolmall.feature.order.viewmodel.OrderPayViewModel
+import com.joker.coolmallkmp.core.designsystem.component.CenterRow
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ColorDanger
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.navigation.order.OrderRoutes
+import com.joker.coolmallkmp.core.ui.component.bottombar.AppBottomButton
+import com.joker.coolmallkmp.core.ui.component.button.CheckButton
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.order.R
+import com.joker.coolmallkmp.feature.order.viewmodel.OrderPayViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -178,7 +178,7 @@ private fun OrderPayContentView(
             AppListItem(
                 leadingContent = {
                     Image(
-                        painter = painterResource(id = com.joker.coolmall.core.ui.R.drawable.ic_alipay),
+                        painter = painterResource(id = com.joker.coolmallkmp.core.ui.R.drawable.ic_alipay),
                         contentDescription = null,
                         modifier = Modifier.size(24.dp)
                     )
@@ -197,7 +197,7 @@ private fun OrderPayContentView(
             AppListItem(
                 leadingContent = {
                     Image(
-                        painter = painterResource(id = com.joker.coolmall.core.ui.R.drawable.ic_wechat),
+                        painter = painterResource(id = com.joker.coolmallkmp.core.ui.R.drawable.ic_wechat),
                         contentDescription = null,
                         modifier = Modifier.size(24.dp)
                     )
@@ -216,7 +216,7 @@ private fun OrderPayContentView(
             AppListItem(
                 leadingContent = {
                     Image(
-                        painter = painterResource(id = com.joker.coolmall.core.ui.R.drawable.ic_qq),
+                        painter = painterResource(id = com.joker.coolmallkmp.core.ui.R.drawable.ic_qq),
                         contentDescription = null,
                         modifier = Modifier.size(24.dp)
                     )

@@ -1,8 +1,8 @@
 plugins {
-    alias(libs.plugins.coolmall.android.feature)
+    alias(libs.plugins.coolmallkmp.android.feature)
 }
 
 android {
-    namespace = "com.joker.coolmall.feature.auth"
+    namespace = "com.joker.coolmallkmp.feature.auth"
 }
 dependencies {}

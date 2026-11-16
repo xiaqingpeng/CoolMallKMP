@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.base.state
+package com.joker.coolmallkmp.core.common.base.state
 
 /**
  * 倒序消息列表的分页快照：新消息放在头部，历史页追加到尾部。

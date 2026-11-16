@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order
+package com.joker.coolmallkmp.feature.order
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -38,23 +38,23 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.model.entity.Logistics
-import com.joker.coolmall.core.model.entity.LogisticsItem
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_retry
-import myapplication.shared.generated.resources.order_logistics_carrier_unknown
-import myapplication.shared.generated.resources.order_logistics_courier
-import myapplication.shared.generated.resources.order_logistics_empty
-import myapplication.shared.generated.resources.order_logistics_in_transit
-import myapplication.shared.generated.resources.order_logistics_number
-import myapplication.shared.generated.resources.order_logistics_number_empty
-import myapplication.shared.generated.resources.order_logistics_take_time
-import myapplication.shared.generated.resources.order_logistics_title
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.model.entity.Logistics
+import com.joker.coolmallkmp.core.model.entity.LogisticsItem
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_retry
+import coolmallkmp.shared.generated.resources.order_logistics_carrier_unknown
+import coolmallkmp.shared.generated.resources.order_logistics_courier
+import coolmallkmp.shared.generated.resources.order_logistics_empty
+import coolmallkmp.shared.generated.resources.order_logistics_in_transit
+import coolmallkmp.shared.generated.resources.order_logistics_number
+import coolmallkmp.shared.generated.resources.order_logistics_number_empty
+import coolmallkmp.shared.generated.resources.order_logistics_take_time
+import coolmallkmp.shared.generated.resources.order_logistics_title
 import org.jetbrains.compose.resources.stringResource
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

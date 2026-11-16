@@ -1,9 +1,9 @@
-package com.joker.coolmall
+package com.joker.coolmallkmp
 
 import android.app.Application
 import android.content.Context
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.platform.CurrentActivityHolder
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.platform.CurrentActivityHolder
 
 /**
  * Android 入口初始化（由 androidApp MainActivity 调用）。

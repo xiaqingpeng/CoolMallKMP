@@ -1,15 +1,15 @@
-package com.joker.coolmall.feature.order.navigation
+package com.joker.coolmallkmp.feature.order.navigation
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
-import com.joker.coolmall.navigation.order.OrderRoutes
-import com.joker.coolmall.feature.order.view.OrderCommentRoute
-import com.joker.coolmall.feature.order.view.OrderConfirmRoute
-import com.joker.coolmall.feature.order.view.OrderDetailRoute
-import com.joker.coolmall.feature.order.view.OrderListRoute
-import com.joker.coolmall.feature.order.view.OrderLogisticsRoute
-import com.joker.coolmall.feature.order.view.OrderPayRoute
-import com.joker.coolmall.feature.order.view.OrderRefundRoute
+import com.joker.coolmallkmp.navigation.order.OrderRoutes
+import com.joker.coolmallkmp.feature.order.view.OrderCommentRoute
+import com.joker.coolmallkmp.feature.order.view.OrderConfirmRoute
+import com.joker.coolmallkmp.feature.order.view.OrderDetailRoute
+import com.joker.coolmallkmp.feature.order.view.OrderListRoute
+import com.joker.coolmallkmp.feature.order.view.OrderLogisticsRoute
+import com.joker.coolmallkmp.feature.order.view.OrderPayRoute
+import com.joker.coolmallkmp.feature.order.view.OrderRefundRoute
 
 /**
  * 订单模块导航图

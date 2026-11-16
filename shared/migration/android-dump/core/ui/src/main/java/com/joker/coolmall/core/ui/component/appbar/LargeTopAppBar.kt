@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.appbar
+package com.joker.coolmallkmp.core.ui.component.appbar
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.core.designsystem.theme.ArrowLeftIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ArrowLeftIcon
 
 /**
  * 大标题顶部应用栏组件

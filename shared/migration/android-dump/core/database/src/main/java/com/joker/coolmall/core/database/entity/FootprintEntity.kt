@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.database.entity
+package com.joker.coolmallkmp.core.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

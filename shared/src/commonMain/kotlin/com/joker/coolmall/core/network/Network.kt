@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
-import com.joker.coolmall.core.config.AppConfig
-import com.joker.coolmall.core.session.AuthSession
-import com.joker.coolmall.core.session.networkAuthLog
+import com.joker.coolmallkmp.core.config.AppConfig
+import com.joker.coolmallkmp.core.session.AuthSession
+import com.joker.coolmallkmp.core.session.networkAuthLog
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.DefaultRequest

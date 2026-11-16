@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.session
+package com.joker.coolmallkmp.core.session
 
 /**
  * 进程内当前登录 token，供 Ktor Authorization 头读取。
- * 持久化由 [com.joker.coolmall.core.data.local.AuthPreferences] 负责，
- * 启动时通过 [com.joker.coolmall.core.data.repository.AuthRepository.restoreSession] 恢复。
+ * 持久化由 [com.joker.coolmallkmp.core.data.local.AuthPreferences] 负责，
+ * 启动时通过 [com.joker.coolmallkmp.core.data.repository.AuthRepository.restoreSession] 恢复。
  */
 object AuthSession {
     private var _token: String = ""

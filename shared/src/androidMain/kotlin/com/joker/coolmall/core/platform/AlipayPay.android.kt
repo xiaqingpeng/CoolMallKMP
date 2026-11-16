@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.platform
+package com.joker.coolmallkmp.core.platform
 
 import com.alipay.sdk.app.PayTask
 import kotlinx.coroutines.Dispatchers

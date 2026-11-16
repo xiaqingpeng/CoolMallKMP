@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user
+package com.joker.coolmallkmp.feature.user
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,20 +46,20 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.model.entity.Footprint
-import com.joker.coolmall.core.ui.component.PriceTextSmall
-import com.joker.coolmall.core.ui.empty.EmptyData
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.cart_clear
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_delete
-import myapplication.shared.generated.resources.common_goods
-import myapplication.shared.generated.resources.footprint_empty
-import myapplication.shared.generated.resources.footprint_empty_hint
-import myapplication.shared.generated.resources.footprint_title
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.model.entity.Footprint
+import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
+import com.joker.coolmallkmp.core.ui.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.cart_clear
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_delete
+import coolmallkmp.shared.generated.resources.common_goods
+import coolmallkmp.shared.generated.resources.footprint_empty
+import coolmallkmp.shared.generated.resources.footprint_empty_hint
+import coolmallkmp.shared.generated.resources.footprint_title
 import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)

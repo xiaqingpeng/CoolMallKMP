@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.Logistics
-import com.joker.coolmall.core.model.entity.LogisticsItem
+import com.joker.coolmallkmp.core.model.entity.Logistics
+import com.joker.coolmallkmp.core.model.entity.LogisticsItem
 
 /**
  * 预览物流数据

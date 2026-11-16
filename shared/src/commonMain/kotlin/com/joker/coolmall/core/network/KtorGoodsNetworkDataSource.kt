@@ -1,15 +1,15 @@
-package com.joker.coolmall.core.network
+package com.joker.coolmallkmp.core.network
 
-import com.joker.coolmall.core.model.entity.Category
-import com.joker.coolmall.core.model.entity.Comment
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.core.model.entity.GoodsSearchKeyword
-import com.joker.coolmall.core.model.entity.GoodsSpec
-import com.joker.coolmall.core.model.request.GoodsCommentPageRequest
-import com.joker.coolmall.core.model.request.GoodsCommentSubmitRequest
-import com.joker.coolmall.core.model.request.GoodsSearchRequest
-import com.joker.coolmall.core.model.response.NetworkPageData
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.Category
+import com.joker.coolmallkmp.core.model.entity.Comment
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.core.model.entity.GoodsSearchKeyword
+import com.joker.coolmallkmp.core.model.entity.GoodsSpec
+import com.joker.coolmallkmp.core.model.request.GoodsCommentPageRequest
+import com.joker.coolmallkmp.core.model.request.GoodsCommentSubmitRequest
+import com.joker.coolmallkmp.core.model.request.GoodsSearchRequest
+import com.joker.coolmallkmp.core.model.response.NetworkPageData
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post

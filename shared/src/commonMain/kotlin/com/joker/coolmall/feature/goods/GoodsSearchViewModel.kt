@@ -1,11 +1,11 @@
-package com.joker.coolmall.feature.goods
+package com.joker.coolmallkmp.feature.goods
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.repository.SearchHistoryRepository
-import com.joker.coolmall.core.data.repository.GoodsRepository
-import com.joker.coolmall.core.model.entity.GoodsSearchKeyword
-import com.joker.coolmall.core.ui.UiMessage
+import com.joker.coolmallkmp.core.data.repository.SearchHistoryRepository
+import com.joker.coolmallkmp.core.data.repository.GoodsRepository
+import com.joker.coolmallkmp.core.model.entity.GoodsSearchKeyword
+import com.joker.coolmallkmp.core.ui.UiMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

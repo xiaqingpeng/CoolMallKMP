@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.network.datasource.fileupload
+package com.joker.coolmallkmp.core.network.datasource.fileupload
 
 import android.net.Uri
-import com.joker.coolmall.core.model.entity.OssUpload
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.OssUpload
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 
 /**

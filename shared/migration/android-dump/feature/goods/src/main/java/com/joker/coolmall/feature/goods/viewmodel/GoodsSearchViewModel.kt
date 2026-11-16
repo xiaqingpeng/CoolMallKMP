@@ -1,14 +1,14 @@
-package com.joker.coolmall.feature.goods.viewmodel
+package com.joker.coolmallkmp.feature.goods.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkViewModel
-import com.joker.coolmall.core.data.repository.GoodsRepository
-import com.joker.coolmall.core.data.repository.SearchHistoryRepository
-import com.joker.coolmall.core.model.entity.GoodsSearchKeyword
-import com.joker.coolmall.core.model.entity.SearchHistory
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.navigation.goods.GoodsRoutes
-import com.joker.coolmall.navigation.navigate
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkViewModel
+import com.joker.coolmallkmp.core.data.repository.GoodsRepository
+import com.joker.coolmallkmp.core.data.repository.SearchHistoryRepository
+import com.joker.coolmallkmp.core.model.entity.GoodsSearchKeyword
+import com.joker.coolmallkmp.core.model.entity.SearchHistory
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.navigation.goods.GoodsRoutes
+import com.joker.coolmallkmp.navigation.navigate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

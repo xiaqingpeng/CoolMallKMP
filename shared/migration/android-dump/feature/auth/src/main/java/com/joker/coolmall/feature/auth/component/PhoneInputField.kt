@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -16,10 +16,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
-import com.joker.coolmall.core.designsystem.component.StartRow
-import com.joker.coolmall.core.designsystem.theme.Primary
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalXLarge
-import com.joker.coolmall.feature.auth.R
+import com.joker.coolmallkmp.core.designsystem.component.StartRow
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalXLarge
+import com.joker.coolmallkmp.feature.auth.R
 
 /**
  * 手机号输入组件，包含国家代码与输入框

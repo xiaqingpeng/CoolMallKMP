@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.common.base.viewmodel
+package com.joker.coolmallkmp.core.common.base.viewmodel
 
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

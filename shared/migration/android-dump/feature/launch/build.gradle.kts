@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.coolmall.android.feature)
+    alias(libs.plugins.coolmallkmp.android.feature)
 }
 
 android {
-    namespace = "com.joker.coolmall.feature.launch"
+    namespace = "com.joker.coolmallkmp.feature.launch"
 }

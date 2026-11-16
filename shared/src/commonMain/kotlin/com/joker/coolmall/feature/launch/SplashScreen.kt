@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.launch
+package com.joker.coolmallkmp.feature.launch
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,11 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.splash_brand
-import myapplication.shared.generated.resources.splash_subtitle
-import myapplication.shared.generated.resources.ic_logo
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.splash_brand
+import coolmallkmp.shared.generated.resources.splash_subtitle
+import coolmallkmp.shared.generated.resources.ic_logo
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

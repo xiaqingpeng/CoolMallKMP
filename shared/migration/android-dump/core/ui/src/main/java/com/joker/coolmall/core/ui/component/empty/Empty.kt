@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.empty
+package com.joker.coolmallkmp.core.ui.component.empty
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -16,13 +16,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXLarge
-import com.joker.coolmall.core.designsystem.theme.appTextColors
-import com.joker.coolmall.core.ui.R
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXLarge
+import com.joker.coolmallkmp.core.designsystem.theme.appTextColors
+import com.joker.coolmallkmp.core.ui.R
 
 /**
  * 页面状态视图

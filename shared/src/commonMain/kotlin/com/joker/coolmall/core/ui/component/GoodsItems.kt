@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,9 +23,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.model.entity.Goods
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.goods_sold
+import com.joker.coolmallkmp.core.model.entity.Goods
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.goods_sold
 import org.jetbrains.compose.resources.stringResource
 
 /**

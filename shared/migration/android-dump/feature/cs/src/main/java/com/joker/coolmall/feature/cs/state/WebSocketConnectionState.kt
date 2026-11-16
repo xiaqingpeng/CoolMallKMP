@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.cs.state
+package com.joker.coolmallkmp.feature.cs.state
 
 /**
  * WebSocket连接状态

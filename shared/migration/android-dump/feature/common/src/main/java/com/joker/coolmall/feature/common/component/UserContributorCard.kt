@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.component
+package com.joker.coolmallkmp.feature.common.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,21 +15,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.model.entity.UserContributor
-import com.joker.coolmall.core.ui.component.image.SmallAvatar
-import com.joker.coolmall.core.ui.component.tag.Tag
-import com.joker.coolmall.core.ui.component.tag.TagSize
-import com.joker.coolmall.core.ui.component.tag.TagStyle
-import com.joker.coolmall.core.ui.component.tag.TagType
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.model.entity.UserContributor
+import com.joker.coolmallkmp.core.ui.component.image.SmallAvatar
+import com.joker.coolmallkmp.core.ui.component.tag.Tag
+import com.joker.coolmallkmp.core.ui.component.tag.TagSize
+import com.joker.coolmallkmp.core.ui.component.tag.TagStyle
+import com.joker.coolmallkmp.core.ui.component.tag.TagType
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
 
 /**
  * 用户贡献者卡片组件

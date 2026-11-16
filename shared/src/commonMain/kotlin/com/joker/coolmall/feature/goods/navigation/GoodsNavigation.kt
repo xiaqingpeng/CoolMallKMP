@@ -1,11 +1,11 @@
-package com.joker.coolmall.feature.goods.navigation
+package com.joker.coolmallkmp.feature.goods.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.joker.coolmall.feature.goods.GoodsDetailRoute
-import com.joker.coolmall.feature.goods.GoodsCommentRoute
+import com.joker.coolmallkmp.feature.goods.GoodsDetailRoute
+import com.joker.coolmallkmp.feature.goods.GoodsCommentRoute
 import kotlinx.serialization.Serializable
 
 @Serializable

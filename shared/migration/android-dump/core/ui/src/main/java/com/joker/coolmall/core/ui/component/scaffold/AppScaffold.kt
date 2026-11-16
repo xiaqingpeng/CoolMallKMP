@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.scaffold
+package com.joker.coolmallkmp.core.ui.component.scaffold
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,8 +19,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import com.joker.coolmall.core.ui.component.appbar.CenterTopAppBar
-import com.joker.coolmall.core.ui.component.appbar.LargeTopAppBar
+import com.joker.coolmallkmp.core.ui.component.appbar.CenterTopAppBar
+import com.joker.coolmallkmp.core.ui.component.appbar.LargeTopAppBar
 
 /**
  * 应用通用Scaffold组件

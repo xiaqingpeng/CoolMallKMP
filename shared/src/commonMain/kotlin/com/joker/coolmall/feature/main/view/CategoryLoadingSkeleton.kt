@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.view
+package com.joker.coolmallkmp.feature.main.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,7 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.component.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
 
 @Composable
 internal fun CategoryLoadingSkeleton() {

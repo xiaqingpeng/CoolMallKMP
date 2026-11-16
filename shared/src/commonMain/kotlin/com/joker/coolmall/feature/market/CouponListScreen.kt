@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.market
+package com.joker.coolmallkmp.feature.market
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,16 +24,16 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.ui.component.CouponCard
-import com.joker.coolmall.core.ui.component.CouponCardMode
-import com.joker.coolmall.core.ui.empty.EmptyData
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.coupon_empty
-import myapplication.shared.generated.resources.coupon_list_title
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.ui.component.CouponCard
+import com.joker.coolmallkmp.core.ui.component.CouponCardMode
+import com.joker.coolmallkmp.core.ui.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.coupon_empty
+import coolmallkmp.shared.generated.resources.coupon_list_title
 import org.jetbrains.compose.resources.stringResource
 
 @Suppress("ParamsComparedByRef")

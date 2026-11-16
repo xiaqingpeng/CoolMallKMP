@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.base.state
+package com.joker.coolmallkmp.core.common.base.state
 
 /**
  * 与 CoolMallKotlin 对齐的基础 UI 状态标记。

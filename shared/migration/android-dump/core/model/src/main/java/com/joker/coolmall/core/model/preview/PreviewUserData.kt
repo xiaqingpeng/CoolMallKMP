@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.User
+import com.joker.coolmallkmp.core.model.entity.User
 
 /**
  * 预览用户数据

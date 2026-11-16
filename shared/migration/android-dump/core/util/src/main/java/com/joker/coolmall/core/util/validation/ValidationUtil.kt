@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.util.validation
+package com.joker.coolmallkmp.core.util.validation
 
 /**
  * 验证工具类

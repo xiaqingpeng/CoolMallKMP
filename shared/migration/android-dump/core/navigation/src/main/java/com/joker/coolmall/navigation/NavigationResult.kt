@@ -1,4 +1,4 @@
-package com.joker.coolmall.navigation
+package com.joker.coolmallkmp.navigation
 
 /**
  * 公共导航返回结果定义

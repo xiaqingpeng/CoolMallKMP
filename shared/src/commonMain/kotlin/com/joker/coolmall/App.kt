@@ -1,4 +1,4 @@
-package com.joker.coolmall
+package com.joker.coolmallkmp
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.resources.painterResource
 
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.compose_multiplatform
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.compose_multiplatform
 
 @Composable
 @Preview

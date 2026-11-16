@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.state
+package com.joker.coolmallkmp.feature.user.state
 
 /**
  * 足迹 ui 状态

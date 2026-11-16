@@ -1,9 +1,9 @@
-package com.joker.coolmall.feature.common.viewmodel
+package com.joker.coolmallkmp.feature.common.viewmodel
 
-import com.joker.coolmall.core.common.base.viewmodel.BaseViewModel
-import com.joker.coolmall.core.common.config.ThemeColorOption
-import com.joker.coolmall.core.common.config.ThemePreference
-import com.joker.coolmall.core.common.manager.ThemePreferenceManager
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseViewModel
+import com.joker.coolmallkmp.core.common.config.ThemeColorOption
+import com.joker.coolmallkmp.core.common.config.ThemePreference
+import com.joker.coolmallkmp.core.common.manager.ThemePreferenceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,12 +1,12 @@
 plugins {
-    alias(libs.plugins.coolmall.android.library)
-    alias(libs.plugins.coolmall.hilt)
+    alias(libs.plugins.coolmallkmp.android.library)
+    alias(libs.plugins.coolmallkmp.hilt)
     alias(libs.plugins.room)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.joker.coolmall.core.database"
+    namespace = "com.joker.coolmallkmp.core.database"
 }
 
 room {

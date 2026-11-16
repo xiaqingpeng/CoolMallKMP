@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.view
+package com.joker.coolmallkmp.feature.main.view
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -47,48 +47,48 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.LogoIcon
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.ShapeSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingXSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.model.entity.Banner
-import com.joker.coolmall.core.model.entity.Category
-import com.joker.coolmall.core.model.entity.Coupon
-import com.joker.coolmall.core.model.entity.Goods
-import com.joker.coolmall.core.model.entity.Home
-import com.joker.coolmall.core.model.preview.previewAvailableCoupons
-import com.joker.coolmall.core.model.preview.previewBannerList
-import com.joker.coolmall.core.model.preview.previewCategoryList
-import com.joker.coolmall.core.model.preview.previewGoodsList
-import com.joker.coolmall.navigation.common.CommonNavigator
-import com.joker.coolmall.navigation.goods.GoodsNavigator
-import com.joker.coolmall.core.ui.component.card.AppCard
-import com.joker.coolmall.core.ui.component.goods.GoodsGridItem
-import com.joker.coolmall.core.ui.component.goods.GoodsListItem
-import com.joker.coolmall.core.ui.component.image.NetWorkImage
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.modal.CouponModal
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkListView
-import com.joker.coolmall.core.ui.component.refresh.RefreshLayout
-import com.joker.coolmall.core.ui.component.swiper.WeSwiper
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
-import com.joker.coolmall.feature.main.R
-import com.joker.coolmall.feature.main.component.CommonScaffold
-import com.joker.coolmall.feature.main.component.FlashSaleItem
-import com.joker.coolmall.feature.main.skeleton.HomeLoadingSkeleton
-import com.joker.coolmall.feature.main.viewmodel.HomeViewModel
-import com.joker.coolmall.core.ui.R as CoreUiR
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.LogoIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.model.entity.Banner
+import com.joker.coolmallkmp.core.model.entity.Category
+import com.joker.coolmallkmp.core.model.entity.Coupon
+import com.joker.coolmallkmp.core.model.entity.Goods
+import com.joker.coolmallkmp.core.model.entity.Home
+import com.joker.coolmallkmp.core.model.preview.previewAvailableCoupons
+import com.joker.coolmallkmp.core.model.preview.previewBannerList
+import com.joker.coolmallkmp.core.model.preview.previewCategoryList
+import com.joker.coolmallkmp.core.model.preview.previewGoodsList
+import com.joker.coolmallkmp.navigation.common.CommonNavigator
+import com.joker.coolmallkmp.navigation.goods.GoodsNavigator
+import com.joker.coolmallkmp.core.ui.component.card.AppCard
+import com.joker.coolmallkmp.core.ui.component.goods.GoodsGridItem
+import com.joker.coolmallkmp.core.ui.component.goods.GoodsListItem
+import com.joker.coolmallkmp.core.ui.component.image.NetWorkImage
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.modal.CouponModal
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkListView
+import com.joker.coolmallkmp.core.ui.component.refresh.RefreshLayout
+import com.joker.coolmallkmp.core.ui.component.swiper.WeSwiper
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.feature.main.R
+import com.joker.coolmallkmp.feature.main.component.CommonScaffold
+import com.joker.coolmallkmp.feature.main.component.FlashSaleItem
+import com.joker.coolmallkmp.feature.main.skeleton.HomeLoadingSkeleton
+import com.joker.coolmallkmp.feature.main.viewmodel.HomeViewModel
+import com.joker.coolmallkmp.core.ui.R as CoreUiR
 
 /**
  * 首页路由入口
@@ -550,7 +550,7 @@ private fun HomeTopAppBar(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Icon(
-                        painter = painterResource(id = com.joker.coolmall.core.ui.R.drawable.ic_search),
+                        painter = painterResource(id = com.joker.coolmallkmp.core.ui.R.drawable.ic_search),
                         contentDescription = stringResource(R.string.search),
                         tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                         modifier = Modifier.size(18.dp)

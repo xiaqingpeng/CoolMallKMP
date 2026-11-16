@@ -1,4 +1,4 @@
-package com.joker.coolmall
+package com.joker.coolmallkmp
 
 import android.os.Bundle
 import android.graphics.Color as AndroidColor
@@ -9,8 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.joker.coolmall.core.platform.onVerificationNotificationPermissionResult
-import com.joker.coolmall.ui.CoolMallApp
+import com.joker.coolmallkmp.core.platform.onVerificationNotificationPermissionResult
+import com.joker.coolmallkmp.ui.CoolMallApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

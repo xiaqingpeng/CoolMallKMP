@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.feedback.view
+package com.joker.coolmallkmp.feature.feedback.view
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -7,20 +7,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
-import com.joker.coolmall.core.common.base.state.LoadMoreState
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.model.entity.Feedback
-import com.joker.coolmall.navigation.feedback.FeedbackNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.bottombar.AppBottomButton
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkListView
-import com.joker.coolmall.core.ui.component.refresh.RefreshLayout
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.feature.feedback.R
-import com.joker.coolmall.feature.feedback.component.FeedbackCard
-import com.joker.coolmall.feature.feedback.skeleton.FeedbackListLoadingSkeleton
-import com.joker.coolmall.feature.feedback.viewmodel.FeedbackListViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.model.entity.Feedback
+import com.joker.coolmallkmp.navigation.feedback.FeedbackNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.bottombar.AppBottomButton
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkListView
+import com.joker.coolmallkmp.core.ui.component.refresh.RefreshLayout
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.feature.feedback.R
+import com.joker.coolmallkmp.feature.feedback.component.FeedbackCard
+import com.joker.coolmallkmp.feature.feedback.skeleton.FeedbackListLoadingSkeleton
+import com.joker.coolmallkmp.feature.feedback.viewmodel.FeedbackListViewModel
 
 /**
  * 反馈列表路由

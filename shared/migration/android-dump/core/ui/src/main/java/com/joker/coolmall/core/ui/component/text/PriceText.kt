@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.text
+package com.joker.coolmallkmp.core.ui.component.text
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
 
 /**
  * 价格文本组件

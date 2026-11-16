@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth.view
+package com.joker.coolmallkmp.feature.auth.view
 
 import android.app.Activity
 import androidx.annotation.DrawableRes
@@ -34,24 +34,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.component.CenterColumn
-import com.joker.coolmall.core.designsystem.component.SpaceBetweenColumn
-import com.joker.coolmall.core.designsystem.component.SpaceEvenlyRow
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.LogoIcon
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXLarge
-import com.joker.coolmall.navigation.auth.AuthNavigator
-import com.joker.coolmall.navigation.common.CommonNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.button.AppButton
-import com.joker.coolmall.core.ui.component.button.ButtonStyle
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.auth.R
-import com.joker.coolmall.feature.auth.component.UserAgreement
-import com.joker.coolmall.feature.auth.viewmodel.LoginViewModel
+import com.joker.coolmallkmp.core.designsystem.component.CenterColumn
+import com.joker.coolmallkmp.core.designsystem.component.SpaceBetweenColumn
+import com.joker.coolmallkmp.core.designsystem.component.SpaceEvenlyRow
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.LogoIcon
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXLarge
+import com.joker.coolmallkmp.navigation.auth.AuthNavigator
+import com.joker.coolmallkmp.navigation.common.CommonNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.button.AppButton
+import com.joker.coolmallkmp.core.ui.component.button.ButtonStyle
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.auth.R
+import com.joker.coolmallkmp.feature.auth.component.UserAgreement
+import com.joker.coolmallkmp.feature.auth.viewmodel.LoginViewModel
 
 /**
  * 登录主页路由
@@ -212,21 +212,21 @@ private fun LoginContentView(
                 SpaceEvenlyRow {
                     // 微信登录
                     ThirdPartyLoginButton(
-                        icon = com.joker.coolmall.core.ui.R.drawable.ic_wechat,
+                        icon = com.joker.coolmallkmp.core.ui.R.drawable.ic_wechat,
                         name = stringResource(id = R.string.wechat),
                         onClick = onWechatLoginClick
                     )
 
                     // QQ登录
                     ThirdPartyLoginButton(
-                        icon = com.joker.coolmall.core.ui.R.drawable.ic_qq,
+                        icon = com.joker.coolmallkmp.core.ui.R.drawable.ic_qq,
                         name = stringResource(id = R.string.qq),
                         onClick = onQQLogin
                     )
 
                     // 支付宝登录
                     ThirdPartyLoginButton(
-                        icon = com.joker.coolmall.core.ui.R.drawable.ic_alipay,
+                        icon = com.joker.coolmallkmp.core.ui.R.drawable.ic_alipay,
                         name = stringResource(id = R.string.alipay),
                         onClick = onAlipayLoginClick
                     )

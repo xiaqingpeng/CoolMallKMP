@@ -1,10 +1,10 @@
-package com.joker.coolmall.feature.main.viewmodel
+package com.joker.coolmallkmp.feature.main.viewmodel
 
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkViewModel
-import com.joker.coolmall.core.data.repository.GoodsRepository
-import com.joker.coolmall.core.model.entity.Category
-import com.joker.coolmall.core.model.entity.CategoryTree
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkViewModel
+import com.joker.coolmallkmp.core.data.repository.GoodsRepository
+import com.joker.coolmallkmp.core.model.entity.Category
+import com.joker.coolmallkmp.core.model.entity.CategoryTree
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.Flow

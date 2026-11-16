@@ -1,16 +1,16 @@
-package com.joker.coolmall.core.database
+package com.joker.coolmallkmp.core.database
 
 import androidx.room3.ConstructedBy
 import androidx.room3.Database
 import androidx.room3.AutoMigration
 import androidx.room3.RoomDatabase
 import androidx.room3.RoomDatabaseConstructor
-import com.joker.coolmall.core.database.dao.CartDao
-import com.joker.coolmall.core.database.dao.FootprintDao
-import com.joker.coolmall.core.database.dao.SearchHistoryDao
-import com.joker.coolmall.core.database.entity.CartEntity
-import com.joker.coolmall.core.database.entity.FootprintEntity
-import com.joker.coolmall.core.database.entity.SearchHistoryEntity
+import com.joker.coolmallkmp.core.database.dao.CartDao
+import com.joker.coolmallkmp.core.database.dao.FootprintDao
+import com.joker.coolmallkmp.core.database.dao.SearchHistoryDao
+import com.joker.coolmallkmp.core.database.entity.CartEntity
+import com.joker.coolmallkmp.core.database.entity.FootprintEntity
+import com.joker.coolmallkmp.core.database.entity.SearchHistoryEntity
 
 @Database(
     entities = [CartEntity::class, FootprintEntity::class, SearchHistoryEntity::class],
@@ -25,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun searchHistoryDao(): SearchHistoryDao
 
     companion object {
-        const val DATABASE_NAME = "coolmall-database.db"
+        const val DATABASE_NAME = "coolmallkmp-database.db"
     }
 }
 
@@ -37,4 +37,6 @@ abstract class AppDatabase : RoomDatabase() {
     "NO_ACTUAL_FOR_EXPECT",
     "KotlinNoActualForExpect",
 )
-expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase>
+expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
+    override fun initialize(): AppDatabase
+}

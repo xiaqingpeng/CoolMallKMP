@@ -4,14 +4,14 @@
  *
  * @author Joker.X
  */
-package com.joker.coolmall.core.network.service.impl
+package com.joker.coolmallkmp.core.network.service.impl
 
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.di.FileUploadQualifier
-import com.joker.coolmall.core.network.service.FileUploadService
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.di.FileUploadQualifier
+import com.joker.coolmallkmp.core.network.service.FileUploadService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order.model
+package com.joker.coolmallkmp.feature.order.model
 
 import android.text.TextUtils
 

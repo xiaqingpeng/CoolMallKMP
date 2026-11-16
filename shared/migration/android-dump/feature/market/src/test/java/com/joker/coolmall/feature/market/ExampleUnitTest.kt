@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.market
+package com.joker.coolmallkmp.feature.market
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

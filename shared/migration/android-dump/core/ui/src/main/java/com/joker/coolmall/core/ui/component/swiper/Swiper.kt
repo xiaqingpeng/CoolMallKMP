@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component.swiper
+package com.joker.coolmallkmp.core.ui.component.swiper
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.Primary
+import com.joker.coolmallkmp.core.designsystem.theme.Primary
 import kotlinx.coroutines.delay
 
 /**

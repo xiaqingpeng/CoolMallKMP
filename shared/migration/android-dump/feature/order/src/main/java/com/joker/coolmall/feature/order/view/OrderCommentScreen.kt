@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order.view
+package com.joker.coolmallkmp.feature.order.view
 
 import android.net.Uri
 import androidx.compose.foundation.background
@@ -22,20 +22,20 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.component.VerticalList
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ShapeMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXXLarge
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.navigation.order.OrderRoutes
-import com.joker.coolmall.core.ui.component.bottombar.AppBottomButton
-import com.joker.coolmall.core.ui.component.imagepicker.ImageGridPicker
-import com.joker.coolmall.core.ui.component.rate.WeRate
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.feature.order.R
-import com.joker.coolmall.feature.order.viewmodel.OrderCommentViewModel
+import com.joker.coolmallkmp.core.designsystem.component.VerticalList
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXXLarge
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.navigation.order.OrderRoutes
+import com.joker.coolmallkmp.core.ui.component.bottombar.AppBottomButton
+import com.joker.coolmallkmp.core.ui.component.imagepicker.ImageGridPicker
+import com.joker.coolmallkmp.core.ui.component.rate.WeRate
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.feature.order.R
+import com.joker.coolmallkmp.feature.order.viewmodel.OrderCommentViewModel
 
 /**
  * 订单评价路由

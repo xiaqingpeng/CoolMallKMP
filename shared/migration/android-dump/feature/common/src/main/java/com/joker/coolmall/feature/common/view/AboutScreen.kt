@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.view
+package com.joker.coolmallkmp.feature.common.view
 
 import androidx.compose.animation.core.EaseOutCubic
 import androidx.compose.animation.core.LinearEasing
@@ -58,30 +58,30 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.component.CenterColumn
-import com.joker.coolmall.core.designsystem.component.FullScreenBox
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.core.designsystem.theme.ArrowLeftIcon
-import com.joker.coolmall.core.designsystem.theme.LogoIcon
-import com.joker.coolmall.core.designsystem.theme.ShapeExtraLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalMedium
-import com.joker.coolmall.core.designsystem.theme.SpacePaddingLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalXLarge
-import com.joker.coolmall.navigation.common.CommonNavigator
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.core.ui.component.title.TitleWithLine
-import com.joker.coolmall.core.util.`package`.PackageUtils
-import com.joker.coolmall.feature.common.R
-import com.joker.coolmall.feature.common.component.DependencyModal
-import com.joker.coolmall.feature.common.viewmodel.AboutViewModel
+import com.joker.coolmallkmp.core.designsystem.component.CenterColumn
+import com.joker.coolmallkmp.core.designsystem.component.FullScreenBox
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.core.designsystem.theme.ArrowLeftIcon
+import com.joker.coolmallkmp.core.designsystem.theme.LogoIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeExtraLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpacePaddingLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalXLarge
+import com.joker.coolmallkmp.navigation.common.CommonNavigator
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.core.ui.component.title.TitleWithLine
+import com.joker.coolmallkmp.core.util.`package`.PackageUtils
+import com.joker.coolmallkmp.feature.common.R
+import com.joker.coolmallkmp.feature.common.component.DependencyModal
+import com.joker.coolmallkmp.feature.common.viewmodel.AboutViewModel
 import kotlinx.coroutines.delay
 import kotlin.math.PI
 import kotlin.math.cos
@@ -551,7 +551,7 @@ private fun AboutBottomScrollableContent(
                 showArrow = true,
                 showDivider = true,
                 onClick = {
-                    CommonNavigator.toWeb(url = "https://coolmall.apifox.cn", title = "API 文档")
+                    CommonNavigator.toWeb(url = "https://coolmallkmp.apifox.cn", title = "API 文档")
                 },
                 horizontalPadding = SpaceHorizontalLarge,
                 verticalPadding = SpaceVerticalLarge

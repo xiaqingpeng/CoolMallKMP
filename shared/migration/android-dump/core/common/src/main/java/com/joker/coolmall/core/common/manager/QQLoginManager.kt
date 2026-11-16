@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.common.manager
+package com.joker.coolmallkmp.core.common.manager
 
 import android.app.Activity
 import android.content.Context

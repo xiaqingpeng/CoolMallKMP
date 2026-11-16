@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common
+package com.joker.coolmallkmp.feature.common
 
 import android.webkit.WebView
 import android.webkit.WebViewClient

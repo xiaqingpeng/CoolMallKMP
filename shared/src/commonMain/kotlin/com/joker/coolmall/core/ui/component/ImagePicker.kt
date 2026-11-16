@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,8 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.platform.PickedImage
-import com.joker.coolmall.core.platform.rememberPlatformImagePicker
+import com.joker.coolmallkmp.core.platform.PickedImage
+import com.joker.coolmallkmp.core.platform.rememberPlatformImagePicker
 
 @Composable
 fun ImageGridPicker(

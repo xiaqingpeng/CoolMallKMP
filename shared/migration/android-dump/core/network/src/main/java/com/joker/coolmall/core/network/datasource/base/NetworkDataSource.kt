@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.network.datasource.base
+package com.joker.coolmallkmp.core.network.datasource.base
 
 /**
  * 网络数据源基础接口

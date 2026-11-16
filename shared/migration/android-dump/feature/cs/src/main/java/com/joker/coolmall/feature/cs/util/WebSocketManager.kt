@@ -1,8 +1,8 @@
-package com.joker.coolmall.feature.cs.util
+package com.joker.coolmallkmp.feature.cs.util
 
-import com.joker.coolmall.core.model.entity.CsMsg
-import com.joker.coolmall.core.util.log.LogUtils
-import com.joker.coolmall.feature.cs.state.WebSocketConnectionState
+import com.joker.coolmallkmp.core.model.entity.CsMsg
+import com.joker.coolmallkmp.core.util.log.LogUtils
+import com.joker.coolmallkmp.feature.cs.state.WebSocketConnectionState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

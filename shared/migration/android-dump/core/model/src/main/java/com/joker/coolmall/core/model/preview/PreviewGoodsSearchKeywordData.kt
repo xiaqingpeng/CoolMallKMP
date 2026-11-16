@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.GoodsSearchKeyword
+import com.joker.coolmallkmp.core.model.entity.GoodsSearchKeyword
 
 /**
  * 预览搜索关键词数据

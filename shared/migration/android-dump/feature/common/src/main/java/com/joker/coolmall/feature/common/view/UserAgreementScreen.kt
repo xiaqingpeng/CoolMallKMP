@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common.view
+package com.joker.coolmallkmp.feature.common.view
 
 import android.os.Build
 import android.view.ViewGroup
@@ -14,14 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.common.base.state.BaseNetWorkUiState
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.navigation.navigateBack
-import com.joker.coolmall.core.ui.component.network.BaseNetWorkView
-import com.joker.coolmall.core.ui.component.scaffold.AppScaffold
-import com.joker.coolmall.feature.common.R
-import com.joker.coolmall.feature.common.skeleton.DocumentLoadingSkeleton
-import com.joker.coolmall.feature.common.viewmodel.UserAgreementViewModel
+import com.joker.coolmallkmp.core.common.base.state.BaseNetWorkUiState
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.navigation.navigateBack
+import com.joker.coolmallkmp.core.ui.component.network.BaseNetWorkView
+import com.joker.coolmallkmp.core.ui.component.scaffold.AppScaffold
+import com.joker.coolmallkmp.feature.common.R
+import com.joker.coolmallkmp.feature.common.skeleton.DocumentLoadingSkeleton
+import com.joker.coolmallkmp.feature.common.viewmodel.UserAgreementViewModel
 
 /**
  * 用户协议路由

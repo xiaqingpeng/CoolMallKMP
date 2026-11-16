@@ -1,8 +1,8 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
 import android.net.Uri
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.datasource.fileupload.FileUploadNetworkDataSource
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.datasource.fileupload.FileUploadNetworkDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.data.local
+package com.joker.coolmallkmp.core.data.local
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.joker.coolmall.core.model.entity.User
+import com.joker.coolmallkmp.core.model.entity.User
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json

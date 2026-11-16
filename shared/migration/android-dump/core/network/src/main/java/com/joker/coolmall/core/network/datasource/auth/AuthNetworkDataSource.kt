@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.network.datasource.auth
+package com.joker.coolmallkmp.core.network.datasource.auth
 
-import com.joker.coolmall.core.model.entity.Auth
-import com.joker.coolmall.core.model.entity.Captcha
-import com.joker.coolmall.core.model.request.QQLoginRequest
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.Auth
+import com.joker.coolmallkmp.core.model.entity.Captcha
+import com.joker.coolmallkmp.core.model.request.QQLoginRequest
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 
 /**
  * 认证相关数据源接口

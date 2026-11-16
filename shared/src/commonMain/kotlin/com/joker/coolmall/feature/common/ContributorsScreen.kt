@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common
+package com.joker.coolmallkmp.feature.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,20 +34,20 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import com.joker.coolmall.core.model.entity.UserContributor
-import com.joker.coolmall.core.platform.openExternalUrl
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.component.ListCardSkeleton
-import com.joker.coolmall.core.ui.resolveUiMessage
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_load_more
-import myapplication.shared.generated.resources.common_retry
-import myapplication.shared.generated.resources.contributors_empty
-import myapplication.shared.generated.resources.contributors_signature_empty
-import myapplication.shared.generated.resources.contributors_title
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import com.joker.coolmallkmp.core.model.entity.UserContributor
+import com.joker.coolmallkmp.core.platform.openExternalUrl
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.component.ListCardSkeleton
+import com.joker.coolmallkmp.core.ui.resolveUiMessage
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_load_more
+import coolmallkmp.shared.generated.resources.common_retry
+import coolmallkmp.shared.generated.resources.contributors_empty
+import coolmallkmp.shared.generated.resources.contributors_signature_empty
+import coolmallkmp.shared.generated.resources.contributors_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

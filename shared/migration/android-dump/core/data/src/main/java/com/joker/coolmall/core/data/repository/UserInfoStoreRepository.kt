@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.datastore.datasource.userinfo.UserInfoStoreDataSource
-import com.joker.coolmall.core.model.entity.User
+import com.joker.coolmallkmp.core.datastore.datasource.userinfo.UserInfoStoreDataSource
+import com.joker.coolmallkmp.core.model.entity.User
 import javax.inject.Inject
 import javax.inject.Singleton
 

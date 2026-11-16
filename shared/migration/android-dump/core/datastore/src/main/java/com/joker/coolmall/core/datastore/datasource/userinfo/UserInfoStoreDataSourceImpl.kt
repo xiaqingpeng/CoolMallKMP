@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.datastore.datasource.userinfo
+package com.joker.coolmallkmp.core.datastore.datasource.userinfo
 
-import com.joker.coolmall.core.model.entity.User
-import com.joker.coolmall.core.util.storage.MMKVUtils
+import com.joker.coolmallkmp.core.model.entity.User
+import com.joker.coolmallkmp.core.util.storage.MMKVUtils
 import jakarta.inject.Inject
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject

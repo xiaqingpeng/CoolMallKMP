@@ -1,15 +1,15 @@
-package com.joker.coolmall.feature.auth.component
+package com.joker.coolmallkmp.feature.auth.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.joker.coolmall.core.designsystem.component.CenterRow
-import com.joker.coolmall.core.designsystem.component.StartRow
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.ui.component.text.AppText
-import com.joker.coolmall.core.ui.component.text.TextSize
-import com.joker.coolmall.core.ui.component.text.TextType
-import com.joker.coolmall.feature.auth.R
+import com.joker.coolmallkmp.core.designsystem.component.CenterRow
+import com.joker.coolmallkmp.core.designsystem.component.StartRow
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.ui.component.text.AppText
+import com.joker.coolmallkmp.core.ui.component.text.TextSize
+import com.joker.coolmallkmp.core.ui.component.text.TextType
+import com.joker.coolmallkmp.feature.auth.R
 
 /**
  * 用户协议组件，显示用户协议与隐私政策链接

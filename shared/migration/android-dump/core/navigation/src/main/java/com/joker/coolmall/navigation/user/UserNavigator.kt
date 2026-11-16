@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.navigation.user
+package com.joker.coolmallkmp.core.navigation.user
 
-import com.joker.coolmall.navigation.navigate
+import com.joker.coolmallkmp.navigation.navigate
 
 /**
  * 用户模块导航封装

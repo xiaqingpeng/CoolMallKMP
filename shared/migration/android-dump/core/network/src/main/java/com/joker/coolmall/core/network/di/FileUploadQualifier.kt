@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.network.di
+package com.joker.coolmallkmp.core.network.di
 
 import javax.inject.Qualifier
 

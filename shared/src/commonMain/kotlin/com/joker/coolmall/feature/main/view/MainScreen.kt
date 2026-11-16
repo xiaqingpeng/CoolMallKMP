@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.view
+package com.joker.coolmallkmp.feature.main.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -27,15 +27,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.theme.PrimaryDefault
-import com.joker.coolmall.feature.main.component.PlatformBottomNavIcon
-import com.joker.coolmall.feature.main.model.TopLevelDestination
+import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
+import com.joker.coolmallkmp.feature.main.component.PlatformBottomNavIcon
+import com.joker.coolmallkmp.feature.main.model.TopLevelDestination
 import kotlinx.coroutines.launch
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.home_title
-import myapplication.shared.generated.resources.category_title
-import myapplication.shared.generated.resources.cart_title
-import myapplication.shared.generated.resources.me_title
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.home_title
+import coolmallkmp.shared.generated.resources.category_title
+import coolmallkmp.shared.generated.resources.cart_title
+import coolmallkmp.shared.generated.resources.me_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

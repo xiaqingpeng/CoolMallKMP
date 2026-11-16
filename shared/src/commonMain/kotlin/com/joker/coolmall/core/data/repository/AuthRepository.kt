@@ -1,11 +1,11 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.data.local.AuthPreferences
-import com.joker.coolmall.core.model.entity.Auth
-import com.joker.coolmall.core.model.entity.Captcha
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.network.KtorAuthNetworkDataSource
-import com.joker.coolmall.core.session.AuthSession
+import com.joker.coolmallkmp.core.data.local.AuthPreferences
+import com.joker.coolmallkmp.core.model.entity.Auth
+import com.joker.coolmallkmp.core.model.entity.Captcha
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.network.KtorAuthNetworkDataSource
+import com.joker.coolmallkmp.core.session.AuthSession
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow

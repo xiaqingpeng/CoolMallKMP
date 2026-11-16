@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user
+package com.joker.coolmallkmp.feature.user
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
@@ -53,34 +53,34 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.joker.coolmall.core.di.AppContainerProvider
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.feature.main.component.CenterTopAppBar
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.address_add
-import myapplication.shared.generated.resources.address_delete_confirm
-import myapplication.shared.generated.resources.address_delete_title
-import myapplication.shared.generated.resources.address_empty
-import myapplication.shared.generated.resources.address_is_default
-import myapplication.shared.generated.resources.address_list_title
-import myapplication.shared.generated.resources.address_set_default
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.common_cancel
-import myapplication.shared.generated.resources.common_default
-import myapplication.shared.generated.resources.common_delete
-import myapplication.shared.generated.resources.common_edit
-import myapplication.shared.generated.resources.common_retry
-import com.joker.coolmall.core.ui.component.AppButton
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.core.ui.component.LoadMore
-import com.joker.coolmall.core.ui.component.RefreshLayout
+import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.address_add
+import coolmallkmp.shared.generated.resources.address_delete_confirm
+import coolmallkmp.shared.generated.resources.address_delete_title
+import coolmallkmp.shared.generated.resources.address_empty
+import coolmallkmp.shared.generated.resources.address_is_default
+import coolmallkmp.shared.generated.resources.address_list_title
+import coolmallkmp.shared.generated.resources.address_set_default
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_cancel
+import coolmallkmp.shared.generated.resources.common_default
+import coolmallkmp.shared.generated.resources.common_delete
+import coolmallkmp.shared.generated.resources.common_edit
+import coolmallkmp.shared.generated.resources.common_retry
+import com.joker.coolmallkmp.core.ui.component.AppButton
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.LoadMore
+import com.joker.coolmallkmp.core.ui.component.RefreshLayout
 import org.jetbrains.compose.resources.stringResource
-import com.joker.coolmall.core.ui.empty.EmptyUiMessage
-import com.joker.coolmall.core.ui.empty.EmptyData
-import com.joker.coolmall.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.core.ui.empty.EmptyData
+import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.joker.coolmall.core.ui.component.AddressCard
+import com.joker.coolmallkmp.core.ui.component.AddressCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

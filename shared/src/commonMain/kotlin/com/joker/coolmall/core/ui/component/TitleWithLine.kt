@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.ui.component
+package com.joker.coolmallkmp.core.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.ui.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.ui.theme.SpaceHorizontalSmall
 
 /**
  * 带左侧竖线装饰的区块标题（对齐 CoolMallKotlin TitleWithLine）

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.data.local
+package com.joker.coolmallkmp.core.data.local
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

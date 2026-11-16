@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.auth
+package com.joker.coolmallkmp.feature.auth
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

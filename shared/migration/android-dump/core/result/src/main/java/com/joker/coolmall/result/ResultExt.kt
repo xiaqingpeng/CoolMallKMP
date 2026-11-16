@@ -1,4 +1,4 @@
-package com.joker.coolmall.result
+package com.joker.coolmallkmp.result
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

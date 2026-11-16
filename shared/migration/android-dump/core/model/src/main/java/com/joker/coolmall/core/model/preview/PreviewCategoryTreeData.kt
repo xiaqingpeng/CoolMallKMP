@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.CategoryTree
+import com.joker.coolmallkmp.core.model.entity.CategoryTree
 
 /**
  * 预览分类树形数据

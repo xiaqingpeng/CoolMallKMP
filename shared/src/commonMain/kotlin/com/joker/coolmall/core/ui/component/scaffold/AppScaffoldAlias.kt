@@ -1,10 +1,10 @@
-package com.joker.coolmall.core.ui.component.scaffold
+package com.joker.coolmallkmp.core.ui.component.scaffold
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.joker.coolmall.core.ui.component.AppScaffold as SharedAppScaffold
+import com.joker.coolmallkmp.core.ui.component.AppScaffold as SharedAppScaffold
 
 @Composable
 fun AppScaffold(

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.model.request
+package com.joker.coolmallkmp.core.model.request
 
 import kotlinx.serialization.Serializable
 

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.user.component
+package com.joker.coolmallkmp.feature.user.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,21 +25,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.designsystem.theme.CommonIcon
-import com.joker.coolmall.core.designsystem.theme.ShapeCircle
-import com.joker.coolmall.core.designsystem.theme.SpaceHorizontalSmall
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalLarge
-import com.joker.coolmall.core.designsystem.theme.SpaceVerticalMedium
-import com.joker.coolmall.core.ui.component.divider.WeDivider
-import com.joker.coolmall.core.ui.component.list.AppListItem
-import com.joker.coolmall.core.ui.component.modal.BottomModal
-import com.joker.coolmall.core.ui.component.tag.Tag
-import com.joker.coolmall.core.ui.component.tag.TagSize
-import com.joker.coolmall.core.ui.component.tag.TagStyle
-import com.joker.coolmall.core.ui.component.tag.TagType
-import com.joker.coolmall.feature.user.R
-import com.joker.coolmall.feature.user.model.Region
-import com.joker.coolmall.core.ui.R as CoreUiR
+import com.joker.coolmallkmp.core.designsystem.theme.CommonIcon
+import com.joker.coolmallkmp.core.designsystem.theme.ShapeCircle
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceHorizontalSmall
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalLarge
+import com.joker.coolmallkmp.core.designsystem.theme.SpaceVerticalMedium
+import com.joker.coolmallkmp.core.ui.component.divider.WeDivider
+import com.joker.coolmallkmp.core.ui.component.list.AppListItem
+import com.joker.coolmallkmp.core.ui.component.modal.BottomModal
+import com.joker.coolmallkmp.core.ui.component.tag.Tag
+import com.joker.coolmallkmp.core.ui.component.tag.TagSize
+import com.joker.coolmallkmp.core.ui.component.tag.TagStyle
+import com.joker.coolmallkmp.core.ui.component.tag.TagType
+import com.joker.coolmallkmp.feature.user.R
+import com.joker.coolmallkmp.feature.user.model.Region
+import com.joker.coolmallkmp.core.ui.R as CoreUiR
 
 /**
  * 地区选择对话框

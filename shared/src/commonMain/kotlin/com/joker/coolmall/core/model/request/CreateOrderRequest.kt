@@ -1,6 +1,6 @@
-package com.joker.coolmall.core.model.request
+package com.joker.coolmallkmp.core.model.request
 
-import com.joker.coolmall.core.model.entity.SelectedGoods
+import com.joker.coolmallkmp.core.model.entity.SelectedGoods
 import kotlinx.serialization.Serializable
 
 @Serializable

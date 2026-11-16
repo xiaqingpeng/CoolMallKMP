@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.network.interceptor
+package com.joker.coolmallkmp.core.network.interceptor
 
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject

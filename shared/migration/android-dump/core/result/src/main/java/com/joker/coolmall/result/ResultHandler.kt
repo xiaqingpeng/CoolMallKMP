@@ -1,8 +1,8 @@
-package com.joker.coolmall.result
+package com.joker.coolmallkmp.result
 
-import com.joker.coolmall.core.model.response.NetworkResponse
-import com.joker.coolmall.core.util.log.LogUtils
-import com.joker.coolmall.core.util.toast.ToastUtils
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.util.log.LogUtils
+import com.joker.coolmallkmp.core.util.toast.ToastUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest

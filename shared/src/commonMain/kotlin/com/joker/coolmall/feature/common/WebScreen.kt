@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.common
+package com.joker.coolmallkmp.feature.common
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,12 +25,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.platform.openExternalUrl
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.common_back
-import myapplication.shared.generated.resources.web_menu_open_browser
-import myapplication.shared.generated.resources.web_menu_refresh
-import myapplication.shared.generated.resources.web_more_options
+import com.joker.coolmallkmp.core.platform.openExternalUrl
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.web_menu_open_browser
+import coolmallkmp.shared.generated.resources.web_menu_refresh
+import coolmallkmp.shared.generated.resources.web_more_options
 import org.jetbrains.compose.resources.stringResource
 
 /**

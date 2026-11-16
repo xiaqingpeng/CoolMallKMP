@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.feedback
+package com.joker.coolmallkmp.feature.feedback
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.order
+package com.joker.coolmallkmp.feature.order
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,20 +18,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.joker.coolmall.core.platform.ThirdPartyCapabilities
-import com.joker.coolmall.core.ui.component.AppButton
-import com.joker.coolmall.core.ui.component.AppButtonBordered
-import com.joker.coolmall.core.ui.component.AppButtonSize
-import com.joker.coolmall.core.ui.component.AppButtonStyle
-import com.joker.coolmall.core.ui.component.PriceText
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.order_go_pay
-import myapplication.shared.generated.resources.order_result_back_home
-import myapplication.shared.generated.resources.order_result_no_pay
-import myapplication.shared.generated.resources.order_result_order_id
-import myapplication.shared.generated.resources.order_result_order_num
-import myapplication.shared.generated.resources.order_result_success
-import myapplication.shared.generated.resources.order_result_view_orders
+import com.joker.coolmallkmp.core.platform.ThirdPartyCapabilities
+import com.joker.coolmallkmp.core.ui.component.AppButton
+import com.joker.coolmallkmp.core.ui.component.AppButtonBordered
+import com.joker.coolmallkmp.core.ui.component.AppButtonSize
+import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.PriceText
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.order_go_pay
+import coolmallkmp.shared.generated.resources.order_result_back_home
+import coolmallkmp.shared.generated.resources.order_result_no_pay
+import coolmallkmp.shared.generated.resources.order_result_order_id
+import coolmallkmp.shared.generated.resources.order_result_order_num
+import coolmallkmp.shared.generated.resources.order_result_success
+import coolmallkmp.shared.generated.resources.order_result_view_orders
 import org.jetbrains.compose.resources.stringResource
 
 /**

@@ -1,7 +1,7 @@
-package com.joker.coolmall.core.model.preview
+package com.joker.coolmallkmp.core.model.preview
 
-import com.joker.coolmall.core.model.entity.Cart
-import com.joker.coolmall.core.model.entity.CartGoodsSpec
+import com.joker.coolmallkmp.core.model.entity.Cart
+import com.joker.coolmallkmp.core.model.entity.CartGoodsSpec
 
 /**
  * 预览购物车数据列表

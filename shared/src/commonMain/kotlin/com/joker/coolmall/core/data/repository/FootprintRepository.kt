@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.data.repository
+package com.joker.coolmallkmp.core.data.repository
 
-import com.joker.coolmall.core.database.dao.FootprintDao
-import com.joker.coolmall.core.database.entity.FootprintEntity
-import com.joker.coolmall.core.model.entity.Footprint
-import com.joker.coolmall.core.model.entity.Goods
+import com.joker.coolmallkmp.core.database.dao.FootprintDao
+import com.joker.coolmallkmp.core.database.entity.FootprintEntity
+import com.joker.coolmallkmp.core.model.entity.Footprint
+import com.joker.coolmallkmp.core.model.entity.Goods
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow

@@ -1,4 +1,4 @@
-package com.joker.coolmall.core.navigation
+package com.joker.coolmallkmp.core.navigation
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

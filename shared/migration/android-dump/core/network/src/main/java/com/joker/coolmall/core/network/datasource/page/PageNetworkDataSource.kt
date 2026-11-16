@@ -1,9 +1,9 @@
-package com.joker.coolmall.core.network.datasource.page
+package com.joker.coolmallkmp.core.network.datasource.page
 
-import com.joker.coolmall.core.model.entity.ConfirmOrder
-import com.joker.coolmall.core.model.entity.GoodsDetail
-import com.joker.coolmall.core.model.entity.Home
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.model.entity.ConfirmOrder
+import com.joker.coolmallkmp.core.model.entity.GoodsDetail
+import com.joker.coolmallkmp.core.model.entity.Home
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 
 /**
  * 页面相关数据源接口

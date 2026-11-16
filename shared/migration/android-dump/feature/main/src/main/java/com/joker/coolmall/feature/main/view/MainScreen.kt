@@ -1,4 +1,4 @@
-package com.joker.coolmall.feature.main.view
+package com.joker.coolmallkmp.feature.main.view
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -21,11 +21,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.joker.coolmall.core.designsystem.theme.AppTheme
-import com.joker.coolmall.navigation.main.MainRoutes
-import com.joker.coolmall.feature.main.component.BottomNavigationBar
-import com.joker.coolmall.feature.main.model.TopLevelDestination
-import com.joker.coolmall.feature.main.viewmodel.MainViewModel
+import com.joker.coolmallkmp.core.designsystem.theme.AppTheme
+import com.joker.coolmallkmp.navigation.main.MainRoutes
+import com.joker.coolmallkmp.feature.main.component.BottomNavigationBar
+import com.joker.coolmallkmp.feature.main.model.TopLevelDestination
+import com.joker.coolmallkmp.feature.main.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 /**

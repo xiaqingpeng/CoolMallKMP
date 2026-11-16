@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.coolmall.android.library.compose)
+    alias(libs.plugins.coolmallkmp.android.library.compose)
 }
 
 android {
-    namespace = "com.joker.coolmall.core.ui"
+    namespace = "com.joker.coolmallkmp.core.ui"
 }
 dependencies {
     implementation(projects.core.designsystem)

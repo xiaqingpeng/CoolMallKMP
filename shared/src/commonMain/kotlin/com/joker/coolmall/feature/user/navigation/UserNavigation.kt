@@ -1,12 +1,12 @@
-package com.joker.coolmall.feature.user.navigation
+package com.joker.coolmallkmp.feature.user.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.joker.coolmall.core.model.entity.Address
-import com.joker.coolmall.feature.user.AddressEditRoute
-import com.joker.coolmall.feature.user.AddressListRoute
+import com.joker.coolmallkmp.core.model.entity.Address
+import com.joker.coolmallkmp.feature.user.AddressEditRoute
+import com.joker.coolmallkmp.feature.user.AddressListRoute
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

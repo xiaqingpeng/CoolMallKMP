@@ -1,8 +1,8 @@
-package com.joker.coolmall.feature.common.viewmodel
+package com.joker.coolmallkmp.feature.common.viewmodel
 
-import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkViewModel
-import com.joker.coolmall.core.data.repository.CommonRepository
-import com.joker.coolmall.core.model.response.NetworkResponse
+import com.joker.coolmallkmp.core.common.base.viewmodel.BaseNetWorkViewModel
+import com.joker.coolmallkmp.core.data.repository.CommonRepository
+import com.joker.coolmallkmp.core.model.response.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
