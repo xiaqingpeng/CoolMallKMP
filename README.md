@@ -30,6 +30,7 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 本工程目标：将 [CoolMallKotlin](../compose/CoolMallKotlin) 电商功能迁移为 **Android + iOS** Compose Multiplatform。
 
+- **完整业务流转**：见 [`README_BUSINESS_FLOW.md`](./README_BUSINESS_FLOW.md)
 - **差距分析与计划**：见 [`docs/KMP_MIGRATION_GAP.md`](./docs/KMP_MIGRATION_GAP.md)
 - **未改造的 Android 原码备份**：`shared/migration/android-dump/`（457 个 `.kt`，不参与编译）
 - **参考样板**：`/Applications/qingpengxia/development-playground/android/kmp/netcloudmusic`

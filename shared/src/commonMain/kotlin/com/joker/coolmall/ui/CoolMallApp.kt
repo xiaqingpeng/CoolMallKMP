@@ -1,4 +1,4 @@
-package com.joker.coolmallkmp.ui
+package com.joker.coolmall.ui
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import coil3.ImageLoader
@@ -92,6 +93,10 @@ import com.joker.coolmallkmp.feature.user.navigation.navigateToProfile
 import com.joker.coolmallkmp.feature.user.navigation.profileScreen
 import com.joker.coolmallkmp.ui.navigation.Routes
 import com.joker.coolmallkmp.core.session.AuthSession
+import com.joker.coolmallkmp.core.ui.theme.ColorDanger
+import com.joker.coolmallkmp.core.ui.theme.ColorPurple
+import com.joker.coolmallkmp.core.ui.theme.ColorSuccess
+import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
 
 /**
  * CoolMall KMP 真正业务入口（对齐 netcloudmusic MyApp）
@@ -117,11 +122,11 @@ fun CoolMallApp() {
         ThemeMode.DARK -> true
     }
     val primary = when (themeColor) {
-        ThemeColor.DEFAULT -> com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
-        ThemeColor.PURPLE -> com.joker.coolmallkmp.core.ui.theme.ColorPurple
-        ThemeColor.GREEN -> com.joker.coolmallkmp.core.ui.theme.ColorSuccess
-        ThemeColor.ORANGE -> androidx.compose.ui.graphics.Color(0xFFFF8A00)
-        ThemeColor.RED -> com.joker.coolmallkmp.core.ui.theme.ColorDanger
+        ThemeColor.DEFAULT -> PrimaryDefault
+        ThemeColor.PURPLE -> ColorPurple
+        ThemeColor.GREEN -> ColorSuccess
+        ThemeColor.ORANGE -> Color(0xFFFF8A00)
+        ThemeColor.RED -> ColorDanger
     }
     val colorScheme = if (darkTheme) {
         coolMallDarkColorScheme(primary)
@@ -425,7 +430,7 @@ fun CoolMallApp() {
                 onGoodsClick = navController::navigateToGoodsDetail,
                 onSearch = { args, keyword ->
                     navController.navigateToGoodsCategory(
-                        typeId = args.typeId.takeIf { it > 0 },
+                        typeId = args.typeId.takeIf { it > 0 }, // val temp = args.typeId  typeId = if (temp > 0) temp else null
                         title = args.title,
                         featured = args.featured,
                         recommend = args.recommend,

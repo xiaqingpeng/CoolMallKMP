@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.joker.coolmallkmp.core.platform.onVerificationNotificationPermissionResult
-import com.joker.coolmallkmp.ui.CoolMallApp
+import com.joker.coolmall.ui.CoolMallApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
