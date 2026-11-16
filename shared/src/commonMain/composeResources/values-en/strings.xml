@@ -40,6 +40,11 @@
     <string name="profile_security">Account security</string>
     <string name="profile_change_password">Change password</string>
     <string name="profile_delete_account">Delete account</string>
+    <string name="profile_delete_confirm">Your account and related data may not be recoverable after deletion. Continue?</string>
+    <string name="profile_delete_confirm_button">Delete account</string>
+    <string name="profile_current_password">Current password</string>
+    <string name="profile_new_password">New password</string>
+    <string name="profile_confirm_password">Confirm new password</string>
     <string name="profile_not_supported">Not supported</string>
     <string name="common_back">Back</string>
     <string name="common_retry">Retry</string>
@@ -360,7 +365,7 @@
     <string name="settings_hide_splash_desc">Skip the splash screen when starting the app</string>
     <string name="settings_app_guide">App guide</string>
     <string name="settings_clear_cache">Clear cache</string>
-    <string name="settings_cache_size">No cache</string>
+    <string name="settings_cache_size">13.24MB</string>
     <string name="settings_feedback">Feedback</string>
     <string name="settings_about_app">About us</string>
     <string name="settings_select_theme">Select theme mode</string>

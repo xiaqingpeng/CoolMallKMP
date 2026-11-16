@@ -40,6 +40,11 @@
     <string name="profile_security">账号安全</string>
     <string name="profile_change_password">修改密码</string>
     <string name="profile_delete_account">注销账号</string>
+    <string name="profile_delete_confirm">注销后账号及相关数据可能无法恢复，确定继续吗？</string>
+    <string name="profile_delete_confirm_button">确认注销</string>
+    <string name="profile_current_password">当前密码</string>
+    <string name="profile_new_password">新密码</string>
+    <string name="profile_confirm_password">确认新密码</string>
     <string name="profile_not_supported">暂未支持</string>
     <string name="common_back">返回</string>
     <string name="common_retry">重试</string>
@@ -366,7 +371,7 @@
     <string name="settings_hide_splash_desc">打开后进入应用将跳过启动页</string>
     <string name="settings_app_guide">应用引导</string>
     <string name="settings_clear_cache">清除缓存</string>
-    <string name="settings_cache_size">暂无缓存</string>
+    <string name="settings_cache_size">13.24MB</string>
     <string name="settings_feedback">意见反馈</string>
     <string name="settings_about_app">关于我们</string>
     <string name="settings_select_theme">选择主题模式</string>

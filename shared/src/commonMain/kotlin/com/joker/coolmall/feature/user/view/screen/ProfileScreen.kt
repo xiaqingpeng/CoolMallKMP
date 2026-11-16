@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -25,12 +26,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -41,11 +43,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.unit.sp
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -61,6 +68,8 @@ import com.joker.coolmallkmp.core.ui.theme.SpaceVerticalMedium
 import com.joker.coolmallkmp.core.ui.theme.SpaceVerticalSmall
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.common_cancel
+import coolmallkmp.shared.generated.resources.common_save
 import coolmallkmp.shared.generated.resources.me_logout
 import coolmallkmp.shared.generated.resources.me_user_fallback
 import coolmallkmp.shared.generated.resources.profile_account
@@ -77,7 +86,12 @@ import coolmallkmp.shared.generated.resources.profile_wechat
 import coolmallkmp.shared.generated.resources.profile_qq
 import coolmallkmp.shared.generated.resources.profile_security
 import coolmallkmp.shared.generated.resources.profile_change_password
+import coolmallkmp.shared.generated.resources.profile_confirm_password
+import coolmallkmp.shared.generated.resources.profile_current_password
 import coolmallkmp.shared.generated.resources.profile_delete_account
+import coolmallkmp.shared.generated.resources.profile_delete_confirm
+import coolmallkmp.shared.generated.resources.profile_delete_confirm_button
+import coolmallkmp.shared.generated.resources.profile_new_password
 import org.jetbrains.compose.resources.stringResource
 
 /**
@@ -110,10 +124,23 @@ fun ProfileRoute(
         viewModel.message.collect { snackbarHostState.showSnackbar(resolveUiMessageSuspend(it)) }
     }
 
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState(),
+    )
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            LargeTopAppBar(
-                title = { Text(stringResource(Res.string.profile_title)) },
+            MediumTopAppBar(
+                title = {
+                    val scrollFraction = scrollBehavior.state.collapsedFraction
+                    Text(
+                        text = stringResource(Res.string.profile_title),
+                        fontSize = lerp(30.sp, 16.sp, scrollFraction),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -122,13 +149,14 @@ fun ProfileRoute(
                         )
                     }
                 },
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                ),
             )
         },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { padding ->
-        androidx.compose.material3.SnackbarHost(
-            hostState = snackbarHostState,
-            modifier = Modifier.fillMaxSize().padding(padding),
-        )
         ProfileContent(
             user = user,
             isLoggedIn = isLoggedIn,
@@ -141,7 +169,7 @@ fun ProfileRoute(
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = SpaceHorizontalLarge, vertical = SpaceVerticalMedium),
+                .padding(horizontal = 12.dp, vertical = SpaceVerticalMedium),
         )
     }
     if (showChangePassword) {
@@ -156,17 +184,17 @@ fun ProfileRoute(
     if (showDeleteAccount) {
         AlertDialog(
             onDismissRequest = { showDeleteAccount = false },
-            title = { Text("注销账号") },
-            text = { Text("注销后账号及相关数据可能无法恢复，确定继续吗？") },
+            title = { Text(stringResource(Res.string.profile_delete_account)) },
+            text = { Text(stringResource(Res.string.profile_delete_confirm)) },
             confirmButton = {
                 Button(onClick = {
                     showDeleteAccount = false
                     viewModel.deleteAccount(onLoggedOut)
-                }) { Text("确认注销") }
+                }) { Text(stringResource(Res.string.profile_delete_confirm_button)) }
             },
-            dismissButton = {
-                Button(onClick = { showDeleteAccount = false }) { Text("取消") }
-            },
+            dismissButton = { Button(onClick = { showDeleteAccount = false }) {
+                Text(stringResource(Res.string.common_cancel))
+            } },
         )
     }
 }
@@ -201,7 +229,10 @@ private fun ProfileContent(
             )
         }
 
-        TitleWithLine(text = stringResource(Res.string.profile_account_info))
+        TitleWithLine(
+            text = stringResource(Res.string.profile_account_info),
+            modifier = Modifier.padding(top = SpaceVerticalSmall),
+        )
 
         Card(modifier = Modifier.fillMaxWidth()) {
             ProfileRow(
@@ -218,7 +249,10 @@ private fun ProfileContent(
             )
         }
 
-        TitleWithLine(text = stringResource(Res.string.profile_social_accounts))
+        TitleWithLine(
+            text = stringResource(Res.string.profile_social_accounts),
+            modifier = Modifier.padding(top = SpaceVerticalSmall),
+        )
         Card(modifier = Modifier.fillMaxWidth()) {
             ProfileRow(
                 title = stringResource(Res.string.profile_wechat),
@@ -232,17 +266,22 @@ private fun ProfileContent(
             )
         }
 
-        TitleWithLine(text = stringResource(Res.string.profile_security))
+        TitleWithLine(
+            text = stringResource(Res.string.profile_security),
+            modifier = Modifier.padding(top = SpaceVerticalSmall),
+        )
         Card(modifier = Modifier.fillMaxWidth()) {
             ProfileRow(
                 title = stringResource(Res.string.profile_change_password),
                 onClick = onChangePasswordClick,
                 showDivider = true,
+                showArrow = true,
             )
             ProfileRow(
                 title = stringResource(Res.string.profile_delete_account),
                 onClick = onDeleteAccountClick,
                 showDivider = false,
+                showArrow = true,
             )
         }
 
@@ -306,6 +345,7 @@ private fun ProfileRow(
     trailing: (@Composable () -> Unit)? = null,
     showDivider: Boolean,
     onClick: (() -> Unit)? = null,
+    showArrow: Boolean = false,
     verticalPadding: Dp = SpaceVerticalLarge,
 ) {
     Column {
@@ -330,6 +370,13 @@ private fun ProfileRow(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+            if (showArrow) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp),
+                )
+            }
         }
         if (showDivider) {
             HorizontalDivider(
@@ -350,31 +397,35 @@ private fun ChangePasswordDialog(
     var confirmPassword by remember { mutableStateOf("") }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("修改密码") },
+        title = { Text(stringResource(Res.string.profile_change_password)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 androidx.compose.material3.OutlinedTextField(
                     value = oldPassword,
                     onValueChange = { oldPassword = it },
-                    label = { Text("当前密码") },
+                    label = { Text(stringResource(Res.string.profile_current_password)) },
                 )
                 androidx.compose.material3.OutlinedTextField(
                     value = newPassword,
                     onValueChange = { newPassword = it },
-                    label = { Text("新密码") },
+                    label = { Text(stringResource(Res.string.profile_new_password)) },
                 )
                 androidx.compose.material3.OutlinedTextField(
                     value = confirmPassword,
                     onValueChange = { confirmPassword = it },
-                    label = { Text("确认新密码") },
+                    label = { Text(stringResource(Res.string.profile_confirm_password)) },
                 )
             }
         },
         confirmButton = {
             Button(onClick = { onConfirm(oldPassword, newPassword, confirmPassword) }) {
-                Text("保存")
+                Text(stringResource(Res.string.common_save))
             }
         },
-        dismissButton = { Button(onClick = onDismiss) { Text("取消") } },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text(stringResource(Res.string.common_cancel))
+            }
+        },
     )
 }

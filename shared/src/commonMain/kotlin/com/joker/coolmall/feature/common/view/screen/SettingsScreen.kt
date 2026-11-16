@@ -18,19 +18,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,8 +38,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.style.TextOverflow as UiTextOverflow
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -53,10 +58,7 @@ import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.component.AppListItem
 import com.joker.coolmallkmp.core.ui.component.Modal
 import com.joker.coolmallkmp.core.ui.component.ModalType
-import com.joker.coolmallkmp.core.platform.clearAppCache
 import coolmallkmp.shared.generated.resources.Res
-import coolmallkmp.shared.generated.resources.common_cancel
-import coolmallkmp.shared.generated.resources.common_confirm
 import coolmallkmp.shared.generated.resources.privacy_policy
 import coolmallkmp.shared.generated.resources.me_about
 import coolmallkmp.shared.generated.resources.settings_account_security
@@ -87,6 +89,7 @@ import coolmallkmp.shared.generated.resources.settings_title
 import coolmallkmp.shared.generated.resources.user_agreement
 import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsRoute(
     onBack: () -> Unit,
@@ -111,7 +114,6 @@ fun SettingsRoute(
     val themeColor by viewModel.themeColor.collectAsState()
     var showThemeDialog by remember { mutableStateOf(false) }
     var showColorDialog by remember { mutableStateOf(false) }
-    var showCacheDialog by remember { mutableStateOf(false) }
     val showSplash by viewModel.showSplash.collectAsState()
 
     if (showThemeDialog) {
@@ -134,33 +136,23 @@ fun SettingsRoute(
             },
         )
     }
-    if (showCacheDialog) {
-        AlertDialog(
-            onDismissRequest = { showCacheDialog = false },
-            title = { Text(stringResource(Res.string.settings_clear_cache)) },
-            text = { Text(stringResource(Res.string.settings_cache_size)) },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        clearAppCache()
-                        showCacheDialog = false
-                    },
-                ) {
-                    Text(stringResource(Res.string.common_confirm))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showCacheDialog = false }) {
-                    Text(stringResource(Res.string.common_cancel))
-                }
-            },
-        )
-    }
+    val scrollBehavior = androidx.compose.material3.TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState(),
+    )
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            LargeTopAppBar(
-                title = { Text(stringResource(Res.string.settings_title)) },
+            MediumTopAppBar(
+                title = {
+                    val scrollFraction = scrollBehavior.state.collapsedFraction
+                    Text(
+                        text = stringResource(Res.string.settings_title),
+                        fontSize = lerp(30.sp, 16.sp, scrollFraction),
+                        maxLines = 1,
+                        overflow = UiTextOverflow.Ellipsis,
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -169,6 +161,10 @@ fun SettingsRoute(
                         )
                     }
                 },
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                ),
             )
         }
     ) { padding ->
@@ -235,7 +231,7 @@ fun SettingsRoute(
             SettingsCard {
                 SettingsLinkRow(
                     stringResource(Res.string.settings_clear_cache),
-                    onClick = { showCacheDialog = true },
+                    onClick = {},
                     value = stringResource(Res.string.settings_cache_size),
                 )
                 SettingsLinkRow(
@@ -289,7 +285,7 @@ private fun SettingsLinkRow(
     AppListItem(
         title = title,
         horizontalPadding = 16.dp,
-        verticalPadding = 12.dp,
+        verticalPadding = 16.dp,
         showDivider = showDivider,
         trailingContent = {
             value?.let {
@@ -311,7 +307,7 @@ private fun SettingsValueRow(title: String, value: String, showDivider: Boolean 
     AppListItem(
         title = title,
         horizontalPadding = 16.dp,
-        verticalPadding = 12.dp,
+        verticalPadding = 16.dp,
         showArrow = false,
         showDivider = showDivider,
         trailingContent = {
