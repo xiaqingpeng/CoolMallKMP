@@ -1,12 +1,14 @@
 package com.joker.coolmall.core.ui.component
 
 import androidx.compose.foundation.background
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerScope
 import androidx.compose.foundation.pager.PagerState
@@ -14,6 +16,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,7 +35,13 @@ fun <T> Swiper(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     pageSpacing: Dp = 0.dp,
     indicator: (@Composable BoxScope.(Int, Int) -> Unit)? = { count, current ->
-        SwiperIndicator(count, current, Modifier.align(Alignment.BottomCenter))
+        SwiperIndicator(
+            count,
+            current,
+            Modifier
+                .align(Alignment.BottomCenter)
+                .offset(y = (-10).dp),
+        )
     },
     content: @Composable PagerScope.(Int, T) -> Unit,
 ) {
@@ -62,20 +71,17 @@ fun SwiperIndicator(count: Int, current: Int, modifier: Modifier = Modifier) {
             .clip(RoundedCornerShape(2.dp))
             .background(PrimaryDefault.copy(alpha = .2f)),
     ) {
-        repeat(count) { index ->
-            Box(
-                Modifier
-                    .width(16.dp)
-                    .height(3.dp)
-                    .clip(RoundedCornerShape(2.dp))
-                    .background(
-                        if (index == current) {
-                            PrimaryDefault.copy(alpha = .7f)
-                        } else {
-                            androidx.compose.ui.graphics.Color.Transparent
-                        },
-                    ),
-            )
-        }
+        val offsetX by animateDpAsState(
+            targetValue = (current.coerceIn(0, count - 1) * 16).dp,
+            label = "swiper_indicator_offset",
+        )
+        Box(
+            Modifier
+                .width(16.dp)
+                .height(3.dp)
+                .offset(x = offsetX)
+                .clip(RoundedCornerShape(2.dp))
+                .background(PrimaryDefault.copy(alpha = .7f)),
+        )
     }
 }

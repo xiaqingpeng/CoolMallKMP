@@ -69,6 +69,8 @@ class AddressListViewModel(
     val message: SharedFlow<UiMessage> = _message.asSharedFlow()
 
     init {
+        // 子类依赖已完成初始化后再发起首次请求，避免父类初始化阶段访问未赋值的 repository。
+        load()
         // 新增/编辑/删除成功后 repository.revision 自增，自动刷新（drop 掉初始值避免重复请求）
         viewModelScope.launch {
             addressRepository.revision.drop(1).collect { load() }

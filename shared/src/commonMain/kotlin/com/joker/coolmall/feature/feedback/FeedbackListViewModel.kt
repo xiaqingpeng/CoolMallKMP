@@ -61,6 +61,7 @@ class FeedbackListViewModel(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     init {
+        load()
         loadFeedbackTypes()
     }
 

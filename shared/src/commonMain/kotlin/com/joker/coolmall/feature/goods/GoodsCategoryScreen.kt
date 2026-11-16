@@ -2,6 +2,7 @@ package com.joker.coolmall.feature.goods
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -74,6 +76,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -453,15 +456,23 @@ private fun FilterDialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
-        Surface(
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .heightIn(max = 680.dp)
-                .clip(RoundedCornerShape(16.dp)),
-            color = MaterialTheme.colorScheme.background,
-            tonalElevation = 6.dp,
+                .padding(16.dp),
         ) {
+            val bottomInset = with(LocalDensity.current) {
+                WindowInsets.navigationBars.getBottom(this).toDp()
+            }
+            val maxDialogHeight = (maxHeight - bottomInset - 32.dp).coerceAtLeast(320.dp)
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = minOf(680.dp, maxDialogHeight))
+                    .clip(RoundedCornerShape(16.dp)),
+                color = MaterialTheme.colorScheme.background,
+                tonalElevation = 6.dp,
+            ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 Column(
                     modifier = Modifier
@@ -637,6 +648,7 @@ private fun FilterDialog(
                     }
                 }
             }
+        }
         }
     }
 }

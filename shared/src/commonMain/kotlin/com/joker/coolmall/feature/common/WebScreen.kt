@@ -43,6 +43,7 @@ fun WebRoute(
     title: String = "",
     onBack: () -> Unit,
 ) {
+    val hasFixedTitle = title.isNotBlank()
     var pageTitle by remember(title) { mutableStateOf(title) }
     var progress by remember { mutableStateOf(0) }
     var reloadToken by remember { mutableStateOf(0) }
@@ -100,7 +101,11 @@ fun WebRoute(
             PlatformWebPage(
                 url = url,
                 reloadToken = reloadToken,
-                onTitleChange = { if (it.isNotBlank()) pageTitle = it },
+                onTitleChange = {
+                    if (!hasFixedTitle && it.isNotBlank()) {
+                        pageTitle = it
+                    }
+                },
                 onProgressChange = { progress = it },
                 modifier = Modifier.fillMaxSize(),
             )

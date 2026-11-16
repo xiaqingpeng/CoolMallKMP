@@ -47,10 +47,6 @@ abstract class BaseNetWorkListViewModel<T : Any> : BaseViewModel() {
         size: Int,
     ): NetworkResponse<NetworkPageData<T>>
 
-    init {
-        load()
-    }
-
     fun load() {
         if (requestInFlight) return
         requestInFlight = true
