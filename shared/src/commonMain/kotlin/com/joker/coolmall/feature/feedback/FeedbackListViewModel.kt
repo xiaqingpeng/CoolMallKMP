@@ -1,7 +1,9 @@
 package com.joker.coolmall.feature.feedback
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmall.core.common.base.state.LoadMoreState
+import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkListViewModel
 import com.joker.coolmall.core.data.repository.FeedbackRepository
 import com.joker.coolmall.core.data.repository.CommonRepository
 import com.joker.coolmall.core.data.repository.AuthRepository
@@ -13,6 +15,10 @@ import com.joker.coolmall.core.session.networkAuthLog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.launch
 import com.joker.coolmall.core.ui.MessageCode
 import com.joker.coolmall.core.ui.UiMessage
@@ -27,86 +33,47 @@ class FeedbackListViewModel(
     private val feedbackRepository: FeedbackRepository,
     private val commonRepository: CommonRepository,
     private val authRepository: AuthRepository,
-) : ViewModel() {
+) : BaseNetWorkListViewModel<Feedback>() {
 
-    private val _uiState = MutableStateFlow<FeedbackListUiState>(FeedbackListUiState.Loading)
-    val uiState: StateFlow<FeedbackListUiState> = _uiState.asStateFlow()
+    val feedbackUiState: StateFlow<FeedbackListUiState> = combine(
+        networkUiState,
+        listData,
+        errorMessage,
+    ) { state, list, error ->
+        when (state) {
+            BaseNetWorkListUiState.Loading -> FeedbackListUiState.Loading
+            BaseNetWorkListUiState.Success,
+            BaseNetWorkListUiState.Empty -> FeedbackListUiState.Success(list)
+            BaseNetWorkListUiState.Error -> FeedbackListUiState.Error(
+                error ?: UiMessage.network(null),
+            )
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = FeedbackListUiState.Loading,
+    )
+    val uiState: StateFlow<FeedbackListUiState> = feedbackUiState
     private val _feedbackTypes = MutableStateFlow<List<DictItem>>(emptyList())
     val feedbackTypes: StateFlow<List<DictItem>> = _feedbackTypes.asStateFlow()
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
-    private val _isLoadingMore = MutableStateFlow(false)
-    val isLoadingMore: StateFlow<Boolean> = _isLoadingMore.asStateFlow()
-    private var currentPage = 1
-    private var totalCount: Int? = null
+    val isLoadingMore: StateFlow<Boolean> = loadMoreState
+        .map { it == LoadMoreState.Loading }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     init {
-        load()
         loadFeedbackTypes()
     }
 
-    fun load() {
-        viewModelScope.launch {
-            _uiState.value = FeedbackListUiState.Loading
-            fetchPage(page = 1, append = false)
+    override suspend fun requestListData(
+        page: Int,
+        size: Int,
+    ) = run {
+        if (AuthSession.token.isBlank()) {
+            networkAuthLog("feedback list token empty, restoring session")
+            authRepository.restoreSession()
         }
-    }
-
-    fun refresh() {
-        if (_isRefreshing.value) return
-        viewModelScope.launch {
-            _isRefreshing.value = true
-            fetchPage(page = 1, append = false)
-            _isRefreshing.value = false
-        }
-    }
-
-    fun loadMore() {
-        val state = _uiState.value as? FeedbackListUiState.Success ?: return
-        if (_isLoadingMore.value || !hasMore(state.list.size)) return
-        viewModelScope.launch {
-            _isLoadingMore.value = true
-            fetchPage(page = currentPage + 1, append = true)
-            _isLoadingMore.value = false
-        }
-    }
-
-    fun hasMore(currentSize: Int): Boolean =
-        totalCount == null || currentSize < (totalCount ?: 0)
-
-    private suspend fun fetchPage(page: Int, append: Boolean) {
-        runCatching {
-                if (AuthSession.token.isBlank()) {
-                    networkAuthLog("feedback list token empty, restoring session")
-                    authRepository.restoreSession()
-                }
-                networkAuthLog("feedback list load token=${AuthSession.tokenSummary()}")
-                feedbackRepository.getFeedbackPage(PageRequest(page = page, size = 10))
-            }.onSuccess { response ->
-                if (response.isSucceeded) {
-                    currentPage = page
-                    totalCount = response.data?.pagination?.total
-                    val incoming = response.data?.list.orEmpty()
-                    val existing = (_uiState.value as? FeedbackListUiState.Success)?.list.orEmpty()
-                    _uiState.value = FeedbackListUiState.Success(
-                        if (append) (existing + incoming).distinctBy { it.id } else incoming,
-                    )
-                } else {
-                    if (!append) {
-                        _uiState.value = FeedbackListUiState.Error(
-                            UiMessage.loadFailed(response.message, response.code),
-                        )
-                    }
-                }
-            }.onFailure { error ->
-                networkAuthLog(
-                    "feedback list viewModel failure type=${error::class.simpleName} " +
-                        "message=${error.message}",
-                )
-                if (!append) {
-                    _uiState.value = FeedbackListUiState.Error(UiMessage.network(error.message))
-                }
-            }
+        networkAuthLog("feedback list load token=${AuthSession.tokenSummary()}")
+        feedbackRepository.getFeedbackPage(PageRequest(page = page, size = size))
     }
 
     private fun loadFeedbackTypes() {

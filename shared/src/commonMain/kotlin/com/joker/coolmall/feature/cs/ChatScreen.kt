@@ -70,6 +70,8 @@ import myapplication.shared.generated.resources.cs_uploading_image
 import org.jetbrains.compose.resources.stringResource
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
+import com.joker.coolmall.core.ui.component.ReverseLoadMore
+import com.joker.coolmall.core.common.base.state.LoadMoreState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -208,22 +210,11 @@ private fun ChatMessageList(
         }
         if (isLoadingHistory || hasMore) {
             item(key = "footer") {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    if (isLoadingHistory) {
-                        CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
-                    } else if (hasMore) {
-                        Text(
-                            text = stringResource(Res.string.cs_load_more),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                }
+                ReverseLoadMore(
+                    state = if (isLoadingHistory) LoadMoreState.Loading else LoadMoreState.PullToLoad,
+                    modifier = Modifier.padding(4.dp),
+                    onRetry = onLoadMore,
+                )
             }
         }
     }

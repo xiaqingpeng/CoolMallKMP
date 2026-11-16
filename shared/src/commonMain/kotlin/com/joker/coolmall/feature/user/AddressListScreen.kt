@@ -50,8 +50,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -75,11 +73,14 @@ import myapplication.shared.generated.resources.common_retry
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
+import com.joker.coolmall.core.ui.component.LoadMore
+import com.joker.coolmall.core.ui.component.RefreshLayout
 import org.jetbrains.compose.resources.stringResource
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
 import com.joker.coolmall.core.ui.empty.EmptyData
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.joker.coolmall.core.ui.component.AddressCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -104,7 +105,6 @@ fun AddressListRoute(
     val snackbarHostState = remember { SnackbarHostState() }
     var pendingDelete by remember { mutableStateOf<Address?>(null) }
     val listState = rememberLazyListState()
-    val pullToRefreshState = rememberPullToRefreshState()
     val shouldLoadMore by remember {
         derivedStateOf {
             val last = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
@@ -169,47 +169,50 @@ fun AddressListRoute(
                             .padding(padding),
                     )
                 } else {
-                    PullToRefreshBox(
+                    RefreshLayout(
                         isRefreshing = isRefreshing,
                         onRefresh = viewModel::refresh,
-                        state = pullToRefreshState,
+                        loadMoreState = viewModel.loadMoreState.collectAsState().value,
+                        contentPadding = PaddingValues(16.dp),
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(padding),
                     ) {
-                        LazyColumn(
-                            state = listState,
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            items(state.addresses, key = { it.id }) { address ->
-                                AddressCard(
-                                    address = address,
-                                    enabled = !isActing,
-                                    isSelectMode = isSelectMode,
-                                    onEdit = {
-                                        if (isSelectMode) {
-                                            onAddressSelected(address)
-                                        } else {
-                                            onEditClick(address.id)
+                        items(state.addresses, key = { it.id }) { address ->
+                            AddressCard(
+                                address = address,
+                                onClick = {
+                                    if (isSelectMode) onAddressSelected(address)
+                                    else onEditClick(address.id)
+                                },
+                                actionContent = {
+                                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        AddressActionButton(
+                                            enabled = !isActing,
+                                            onClick = {
+                                                if (isSelectMode) onAddressSelected(address)
+                                                else onEditClick(address.id)
+                                            },
+                                            icon = Icons.Filled.Edit,
+                                            contentDescription = stringResource(Res.string.common_edit),
+                                        )
+                                        if (!isSelectMode) {
+                                            AddressActionButton(
+                                                enabled = !isActing,
+                                                onClick = { pendingDelete = address },
+                                                icon = Icons.Filled.Delete,
+                                                contentDescription = stringResource(Res.string.address_delete_title),
+                                            )
                                         }
-                                    },
-                                    onDelete = { pendingDelete = address },
-                                )
-                            }
-                            if (isLoadingMore) {
-                                item {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(12.dp),
-                                        contentAlignment = Alignment.Center,
-                                    ) {
-                                        CircularProgressIndicator(modifier = Modifier.size(22.dp))
                                     }
-                                }
-                            }
+                                },
+                            )
+                        }
+                        item {
+                            LoadMore(
+                                state = viewModel.loadMoreState.collectAsState().value,
+                                onRetry = viewModel::loadMore,
+                            )
                         }
                     }
                 }
@@ -240,81 +243,6 @@ fun AddressListRoute(
                 }
             },
         )
-    }
-}
-
-@Composable
-private fun AddressCard(
-    address: Address,
-    enabled: Boolean,
-    isSelectMode: Boolean,
-    onEdit: () -> Unit,
-    onDelete: () -> Unit,
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(enabled = enabled, onClick = onEdit),
-    ) {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Column(Modifier.weight(1f)) {
-                    Text(
-                        text = "${address.province}${address.city}${address.district}",
-                        style = MaterialTheme.typography.titleLarge,
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = address.address,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    AddressActionButton(
-                        enabled = enabled,
-                        onClick = onEdit,
-                        icon = Icons.Filled.Edit,
-                        contentDescription = stringResource(Res.string.common_edit),
-                    )
-                    if (!isSelectMode) {
-                        AddressActionButton(
-                            enabled = enabled,
-                            onClick = onDelete,
-                            icon = Icons.Filled.Delete,
-                            contentDescription = stringResource(Res.string.address_delete_title),
-                        )
-                    }
-                }
-            }
-            HorizontalDivider(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                color = MaterialTheme.colorScheme.outlineVariant,
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(address.contact, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Spacer(Modifier.width(16.dp))
-                Text(address.phone, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Spacer(Modifier.weight(1f))
-                if (address.isDefault) {
-                    Text(
-                        text = stringResource(Res.string.common_default),
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.labelMedium,
-                    )
-                }
-            }
-        }
     }
 }
 

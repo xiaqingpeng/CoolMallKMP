@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,11 +23,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Remove
-import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -52,6 +53,8 @@ import com.joker.coolmall.core.model.entity.Cart
 import com.joker.coolmall.core.model.entity.CartGoodsSpec
 import com.joker.coolmall.core.order.CheckoutDraft
 import com.joker.coolmall.core.ui.component.AppButtonFixed
+import com.joker.coolmall.core.ui.component.AppCard
+import com.joker.coolmall.core.ui.component.RefreshLayout
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
 import com.joker.coolmall.core.ui.component.PriceText
@@ -117,10 +120,17 @@ fun CartRoute(
         },
         bottomBar = {
             if (carts.isNotEmpty()) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shadowElevation = 4.dp,
                 ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .navigationBarsPadding()
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             stringResource(Res.string.cart_selected_count, selectedCount),
@@ -169,6 +179,7 @@ fun CartRoute(
                             style = AppButtonStyle.GRADIENT,
                         )
                     }
+                    }
                 }
             }
         },
@@ -179,8 +190,9 @@ fun CartRoute(
             val flatItems = remember(carts) {
                 carts.flatMap { cart -> cart.spec.map { cart to it } }
             }
-            LazyColumn(
+            RefreshLayout(
                 modifier = Modifier.fillMaxSize().padding(padding),
+                onRefresh = {},
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
@@ -231,7 +243,7 @@ private fun CartItemCard(
     onGoodsClick: () -> Unit,
 ) {
     val image = spec.images?.firstOrNull()?.takeIf(String::isNotBlank) ?: cart.goodsMainPic
-    Card(
+    AppCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onGoodsClick),

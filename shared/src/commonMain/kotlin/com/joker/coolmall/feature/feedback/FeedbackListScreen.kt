@@ -24,8 +24,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -71,6 +69,9 @@ import com.joker.coolmall.core.ui.empty.EmptyData
 import com.joker.coolmall.core.ui.component.AppButton
 import com.joker.coolmall.core.ui.component.AppButtonSize
 import com.joker.coolmall.core.ui.component.AppButtonStyle
+import com.joker.coolmall.core.ui.component.LoadMore
+import com.joker.coolmall.core.ui.component.RefreshLayout
+import com.joker.coolmall.core.common.base.state.LoadMoreState
 import myapplication.shared.generated.resources.feedback_empty
 import myapplication.shared.generated.resources.feedback_empty_hint
 import myapplication.shared.generated.resources.feedback_no_content
@@ -101,7 +102,7 @@ fun FeedbackListRoute(
     val uiState by viewModel.uiState.collectAsState()
     val feedbackTypes by viewModel.feedbackTypes.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()
-    val isLoadingMore by viewModel.isLoadingMore.collectAsState()
+    val loadMoreState by viewModel.loadMoreState.collectAsState()
     val lifecycleOwner = LocalLifecycleOwner.current
 
     // 提交页返回时列表页会重新进入 RESUMED，重新请求以展示刚提交的反馈。
@@ -161,43 +162,17 @@ fun FeedbackListRoute(
                             .padding(padding),
                     )
                 } else {
-                    val listState = rememberLazyListState()
-                    val pullState = rememberPullToRefreshState()
-                    LaunchedEffect(listState, state.list.size) {
-                        snapshotFlow { listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0 }
-                            .distinctUntilChanged()
-                            .filter { it >= state.list.lastIndex - 2 }
-                            .collectLatest { viewModel.loadMore() }
-                    }
-                    PullToRefreshBox(
+                    RefreshLayout(
                         isRefreshing = isRefreshing,
                         onRefresh = viewModel::refresh,
-                        state = pullState,
+                        loadMoreState = loadMoreState,
+                        contentPadding = PaddingValues(16.dp),
                         modifier = Modifier.fillMaxSize().padding(padding),
                     ) {
-                        LazyColumn(
-                            state = listState,
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            items(state.list, key = { it.id }) { item ->
-                                FeedbackCard(item, feedbackTypes)
-                            }
-                            if (isLoadingMore) {
-                                item {
-                                    Box(
-                                        Modifier.fillMaxWidth().padding(12.dp),
-                                        contentAlignment = Alignment.Center,
-                                    ) {
-                                        Text(
-                                            text = "加载更多…",
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        )
-                                    }
-                                }
-                            }
+                        items(state.list, key = { it.id }) { item ->
+                            FeedbackCard(item, feedbackTypes)
                         }
+                        item { LoadMore(state = loadMoreState, onRetry = viewModel::loadMore) }
                     }
                 }
             }

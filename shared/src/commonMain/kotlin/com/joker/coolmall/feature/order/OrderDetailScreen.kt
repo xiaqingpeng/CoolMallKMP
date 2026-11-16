@@ -13,14 +13,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material3.Card
 import com.joker.coolmall.core.ui.component.AppButtonBordered
 import com.joker.coolmall.core.ui.component.AppButtonFixed
 import com.joker.coolmall.core.ui.component.AppButtonSize
@@ -33,6 +34,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -57,6 +59,9 @@ import coil3.compose.AsyncImage
 import com.joker.coolmall.core.ui.component.PriceText
 import com.joker.coolmall.core.ui.component.PriceTextSmall
 import com.joker.coolmall.core.ui.component.TitleWithLine
+import com.joker.coolmall.core.ui.component.AppCard
+import com.joker.coolmall.core.ui.component.OrderGoodsItem
+import com.joker.coolmall.core.ui.component.RefreshLayout
 import com.joker.coolmall.core.ui.theme.ColorDanger
 import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.feature.main.component.CenterTopAppBar
@@ -174,6 +179,7 @@ fun OrderDetailRoute(
             is OrderDetailUiState.Success -> {
                 OrderDetailContent(
                     order = state.order,
+                    onRefresh = viewModel::load,
                     modifier = Modifier.padding(padding),
                 )
             }
@@ -206,11 +212,16 @@ private fun OrderDetailBottomBar(
         return
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shadowElevation = 4.dp,
     ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .navigationBarsPadding()
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+        ) {
         if (showPay && !ThirdPartyCapabilities.supportsAlipay) {
             Text(
                 text = stringResource(Res.string.order_detail_pay_unsupported),
@@ -278,21 +289,25 @@ private fun OrderDetailBottomBar(
                 )
             }
         }
+        }
     }
 }
 
 @Composable
 private fun OrderDetailContent(
     order: Order,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    LazyColumn(
+    RefreshLayout(
         modifier = modifier.fillMaxSize(),
+        listState = rememberLazyListState(),
+        onRefresh = onRefresh,
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         item {
-            Card(modifier = Modifier.fillMaxWidth()) {
+            AppCard(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(14.dp)) {
                     Text(
                         text = order.statusLabel(),
@@ -337,11 +352,13 @@ private fun OrderDetailContent(
         }
 
         items(order.goodsList.orEmpty(), key = { it.id }) { goods ->
-            OrderGoodsCard(goods = goods)
+            AppCard(modifier = Modifier.fillMaxWidth()) {
+                OrderGoodsItem(data = goods)
+            }
         }
 
         item {
-            Card(modifier = Modifier.fillMaxWidth()) {
+            AppCard(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(14.dp)) {
                     TitleWithLine(text = stringResource(Res.string.order_detail_amount_section))
                     Spacer(modifier = Modifier.height(8.dp))
@@ -399,7 +416,7 @@ private fun OrderDetailContent(
 
 @Composable
 private fun AddressBlock(address: Address?) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    AppCard(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.padding(14.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -435,58 +452,6 @@ private fun AddressBlock(address: Address?) {
                     Text(
                         text = address.displayLine(),
                         style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun OrderGoodsCard(goods: OrderGoods) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            AsyncImage(
-                model = goods.displayPic,
-                contentDescription = goods.goodsName,
-                modifier = Modifier
-                    .size(72.dp)
-                    .clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop,
-            )
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = goods.goodsName.ifBlank {
-                        stringResource(Res.string.common_goods)
-                    },
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Medium,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
-                if (goods.specName.isNotBlank()) {
-                    Text(
-                        text = goods.specName,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    PriceTextSmall(
-                        price = goods.price.toInt(),
-                        modifier = Modifier.weight(1f),
-                    )
-                    Text(
-                        text = "x${goods.count}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }

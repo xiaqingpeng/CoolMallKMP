@@ -22,6 +22,7 @@ import com.joker.coolmall.core.data.repository.FootprintRepository
 import com.joker.coolmall.core.data.repository.GoodsRepository
 import com.joker.coolmall.core.data.repository.OrderRepository
 import com.joker.coolmall.core.data.repository.PageRepository
+import com.joker.coolmall.core.data.repository.SearchHistoryRepository
 import com.joker.coolmall.core.data.repository.UserRepository
 import com.joker.coolmall.core.data.repository.UserContributorRepository
 import com.joker.coolmall.core.database.createAppDatabase
@@ -129,6 +130,10 @@ class AppContainer(
     val themePreferences: ThemePreferences = ThemePreferences(dataStore)
 
     val searchHistoryPreferences: SearchHistoryPreferences = SearchHistoryPreferences(dataStore)
+    val searchHistoryRepository: SearchHistoryRepository = SearchHistoryRepository(
+        dao = database.searchHistoryDao(),
+        preferences = searchHistoryPreferences,
+    )
 
     val splashPreferences: SplashPreferences = SplashPreferences(dataStore)
 }

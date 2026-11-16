@@ -59,7 +59,6 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import coil3.compose.AsyncImage
 import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.feature.main.component.CenterTopAppBar
 import com.joker.coolmall.core.model.entity.Order
@@ -90,6 +89,10 @@ import myapplication.shared.generated.resources.order_view_detail
 import myapplication.shared.generated.resources.order_view_logistics
 import org.jetbrains.compose.resources.stringResource
 import com.joker.coolmall.core.ui.component.PriceText
+import com.joker.coolmall.core.ui.component.OrderGoodsItem
+import com.joker.coolmall.core.ui.component.AppCard
+import com.joker.coolmall.core.ui.component.LoadMore
+import com.joker.coolmall.core.common.base.state.LoadMoreState
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
 import com.joker.coolmall.core.ui.empty.EmptyData
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
@@ -257,23 +260,14 @@ private fun OrderTabPage(
                         )
                     }
                     item {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 8.dp),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            when {
-                                isLoadingMore -> CircularProgressIndicator(
-                                    modifier = Modifier.size(24.dp)
-                                )
-                                !state.hasMore -> Text(
-                                    text = stringResource(Res.string.order_list_no_more),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
-                            }
-                        }
+                        LoadMore(
+                            state = when {
+                                isLoadingMore -> LoadMoreState.Loading
+                                !state.hasMore -> LoadMoreState.NoMore
+                                else -> LoadMoreState.PullToLoad
+                            },
+                            onRetry = { viewModel.loadMore(tabIndex) },
+                        )
                     }
                 }
             }
@@ -292,12 +286,11 @@ private fun OrderCard(
     onCommentClick: () -> Unit = {},
     onPayClick: () -> Unit = {},
 ) {
-    Card(
+    AppCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -322,21 +315,9 @@ private fun OrderCard(
 
             val goods = order.goodsList.orEmpty()
             if (goods.isNotEmpty()) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    goods.forEach { item ->
-                        AsyncImage(
-                            model = item.displayPic,
-                            contentDescription = item.goodsName,
-                            modifier = Modifier
-                                .size(64.dp)
-                                .clip(RoundedCornerShape(8.dp)),
-                            contentScale = ContentScale.Crop,
-                        )
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    goods.take(3).forEach { item ->
+                        OrderGoodsItem(data = item)
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -448,8 +429,6 @@ private fun OrderCard(
             }
         }
     }
-}
-
 @Composable
 private fun OrderStatus.tabLabel(): String = when (this) {
     OrderStatus.ALL -> stringResource(Res.string.order_status_all)

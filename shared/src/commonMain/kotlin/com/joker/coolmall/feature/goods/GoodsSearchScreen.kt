@@ -73,7 +73,7 @@ fun GoodsSearchRoute(
                 val c = AppContainerProvider.instance
                 GoodsSearchViewModel(
                     goodsRepository = c.goodsRepository,
-                    searchHistoryPreferences = c.searchHistoryPreferences,
+                    searchHistoryRepository = c.searchHistoryRepository,
                 )
             }
         }

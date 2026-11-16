@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
@@ -43,4 +44,22 @@ class SearchHistoryPreferences(
     suspend fun clear() {
         dataStore.edit { prefs -> prefs.remove(key) }
     }
+
+    suspend fun historyValue(): List<String> = dataStore.data.map { prefs ->
+        decode(prefs[key].orEmpty())
+    }.first()
+
+    suspend fun replace(values: List<String>) {
+        dataStore.edit { prefs ->
+            if (values.isEmpty()) {
+                prefs.remove(key)
+            } else {
+                prefs[key] = json.encodeToString(serializer, values)
+            }
+        }
+    }
+
+    private fun decode(raw: String): List<String> =
+        if (raw.isBlank()) emptyList()
+        else runCatching { json.decodeFromString(serializer, raw) }.getOrDefault(emptyList())
 }

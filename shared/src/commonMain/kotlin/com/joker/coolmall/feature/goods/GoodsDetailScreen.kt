@@ -17,27 +17,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -72,6 +68,10 @@ import com.joker.coolmall.core.ui.empty.EmptyUiMessage
 import com.joker.coolmall.core.ui.component.DetailSkeleton
 import com.joker.coolmall.core.ui.component.CouponCard
 import com.joker.coolmall.core.ui.component.CouponCardMode
+import com.joker.coolmall.core.ui.component.AppCard
+import com.joker.coolmall.core.ui.component.Modal
+import com.joker.coolmall.core.ui.component.Swiper
+import com.joker.coolmall.core.ui.component.RefreshLayout
 import com.joker.coolmall.core.ui.resolveUiMessageSuspend
 import com.joker.coolmall.core.ui.theme.ColorDanger
 import com.joker.coolmall.core.ui.theme.SpaceHorizontalMedium
@@ -147,6 +147,7 @@ fun GoodsDetailRoute(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                            .navigationBarsPadding()
                         .padding(
                             horizontal = SpacePaddingLarge,
                             vertical = SpaceVerticalMedium,
@@ -194,6 +195,7 @@ fun GoodsDetailRoute(
                     onShowSpecModal = viewModel::showSpecModal,
                     onShowCouponModal = { couponsVisible = true },
                     onCommentsClick = { onCommentsClick(goodsId) },
+                    onRefresh = viewModel::loadDetail,
                     modifier = Modifier.padding(padding),
                 )
                 if (specModalVisible) {
@@ -217,14 +219,13 @@ fun GoodsDetailRoute(
                     )
                 }
                 if (couponsVisible) {
-                    ModalBottomSheet(
-                        onDismissRequest = { couponsVisible = false },
-                        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+                    Modal(
+                        visible = true,
+                        onDismiss = { couponsVisible = false },
                     ) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .navigationBarsPadding()
                                 .padding(horizontal = 16.dp),
                         ) {
                             Text(
@@ -263,11 +264,14 @@ private fun GoodsDetailScreen(
     onShowSpecModal: () -> Unit,
     onShowCouponModal: () -> Unit,
     onCommentsClick: () -> Unit,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val goods = detail.goodsInfo
-    LazyColumn(
+    RefreshLayout(
         modifier = modifier.fillMaxSize(),
+        listState = rememberLazyListState(),
+        onRefresh = onRefresh,
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -278,7 +282,7 @@ private fun GoodsDetailScreen(
             GoodsInfoSection(goods = goods, selectedSpec = selectedSpec)
         }
         item {
-            Card(
+            AppCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(onClick = onShowSpecModal),
@@ -313,7 +317,7 @@ private fun GoodsDetailScreen(
                     )
             }
             items(detail.coupon, key = { it.id }) { coupon ->
-                Card(modifier = Modifier.fillMaxWidth()) {
+                AppCard(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         Text(
                             text = coupon.title,
@@ -372,6 +376,9 @@ private fun GoodsDetailScreen(
                 )
             }
         }
+        item {
+            Spacer(modifier = Modifier.height(120.dp))
+        }
     }
 }
 
@@ -393,46 +400,25 @@ private fun GoodsGallery(goods: Goods) {
         }
         return
     }
-    val pagerState = rememberPagerState(pageCount = { pics.size })
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp)),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        HorizontalPager(
-            state = pagerState,
+        Swiper(
+            items = pics,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f),
-        ) { page ->
+            autoplay = false,
+        ) { _, pic ->
             AsyncImage(
-                model = pics[page],
+                model = pic,
                 contentDescription = goods.title,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
             )
-        }
-        if (pics.size > 1) {
-            Row(
-                modifier = Modifier.padding(top = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                repeat(pics.size) { index ->
-                    Box(
-                        modifier = Modifier
-                            .size(if (index == pagerState.currentPage) 8.dp else 6.dp)
-                            .clip(CircleShape)
-                            .background(
-                                if (index == pagerState.currentPage) {
-                                    MaterialTheme.colorScheme.primary
-                                } else {
-                                    MaterialTheme.colorScheme.outlineVariant
-                                },
-                            ),
-                    )
-                }
-            }
         }
     }
 }
@@ -467,7 +453,7 @@ private fun GoodsInfoSection(
 
 @Composable
 private fun CommentItem(comment: Comment) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    AppCard(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 AsyncImage(

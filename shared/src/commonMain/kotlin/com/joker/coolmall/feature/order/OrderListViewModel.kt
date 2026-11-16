@@ -3,6 +3,7 @@ package com.joker.coolmall.feature.order
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joker.coolmall.core.data.repository.OrderRepository
+import com.joker.coolmall.core.common.base.state.PagedListState
 import com.joker.coolmall.core.model.entity.Order
 import com.joker.coolmall.core.model.request.OrderPageRequest
 import com.joker.coolmall.feature.order.model.OrderStatus
@@ -43,10 +44,9 @@ class OrderListViewModel(
         MutableStateFlow<OrderListUiState>(OrderListUiState.Loading)
     }
     private val tabUiStates: List<StateFlow<OrderListUiState>> = tabStates.map { it.asStateFlow() }
-    private val tabPages = MutableList(OrderStatus.entries.size) { 1 }
-    private val tabHasMore = MutableList(OrderStatus.entries.size) { true }
-    private val tabLoaded = MutableList(OrderStatus.entries.size) { false }
-    private val tabOrders = OrderStatus.entries.map { mutableListOf<Order>() }
+    private val tabPaging = MutableList(OrderStatus.entries.size) {
+        PagedListState<Order>()
+    }
 
     private val _isLoadingMore = MutableStateFlow(false)
     val isLoadingMore: StateFlow<Boolean> = _isLoadingMore.asStateFlow()
@@ -65,7 +65,7 @@ class OrderListViewModel(
     fun selectTab(index: Int) {
         if (index !in OrderStatus.entries.indices) return
         _selectedTabIndex.value = index
-        if (!tabLoaded[index]) {
+        if (!tabPaging[index].loaded) {
             loadTab(index, force = true)
         }
     }
@@ -76,7 +76,7 @@ class OrderListViewModel(
 
     fun loadMore(tabIndex: Int = _selectedTabIndex.value) {
         if (tabIndex !in OrderStatus.entries.indices) return
-        if (!tabHasMore[tabIndex] || _isLoadingMore.value) return
+        if (!tabPaging[tabIndex].hasMore || _isLoadingMore.value) return
         if (tabStates[tabIndex].value is OrderListUiState.Loading) return
         loadTab(tabIndex, force = false)
     }
@@ -117,20 +117,22 @@ class OrderListViewModel(
 
     private fun loadTab(tabIndex: Int, force: Boolean) {
         viewModelScope.launch {
-            val isRefresh = force || !tabLoaded[tabIndex]
+            val previous = tabPaging[tabIndex]
+            val isRefresh = force || !previous.loaded
             if (isRefresh) {
-                tabPages[tabIndex] = 1
-                tabHasMore[tabIndex] = true
-                tabOrders[tabIndex].clear()
+                tabPaging[tabIndex] = PagedListState(loading = true)
                 tabStates[tabIndex].value = OrderListUiState.Loading
             } else {
-                if (!tabHasMore[tabIndex]) return@launch
-                tabPages[tabIndex] += 1
+                if (!previous.hasMore) return@launch
+                tabPaging[tabIndex] = previous.copy(
+                    page = previous.page + 1,
+                    loading = true,
+                )
                 _isLoadingMore.value = true
             }
 
             val status = OrderStatus.entries[tabIndex]
-            val page = tabPages[tabIndex]
+            val page = tabPaging[tabIndex].page
             runCatching {
                 orderRepository.getOrderPage(
                     OrderPageRequest(
@@ -145,28 +147,30 @@ class OrderListViewModel(
                     if (isRefresh) {
                         tabStates[tabIndex].value = OrderListUiState.Error(UiMessage.loadFailed(response.message, response.code))
                     } else {
-                        tabPages[tabIndex] = (page - 1).coerceAtLeast(1)
+                        tabPaging[tabIndex] = previous
                     }
                     return@onSuccess
                 }
 
                 val pageData = response.data
                 val list = pageData?.list.orEmpty()
-                if (isRefresh) {
-                    tabOrders[tabIndex].clear()
-                }
-                tabOrders[tabIndex].addAll(list)
-
                 val total = pageData?.pagination?.total
-                tabHasMore[tabIndex] = if (total != null) {
-                    tabOrders[tabIndex].size < total
+                val nextItems = if (isRefresh) list else previous.items + list
+                val hasMore = if (total != null) {
+                    nextItems.size < total
                 } else {
                     list.size >= pageSize
                 }
-                tabLoaded[tabIndex] = true
+                tabPaging[tabIndex] = PagedListState(
+                    page = page,
+                    items = nextItems,
+                    hasMore = hasMore,
+                    loaded = true,
+                    loading = false,
+                )
                 tabStates[tabIndex].value = OrderListUiState.Success(
-                    orders = tabOrders[tabIndex].toList(),
-                    hasMore = tabHasMore[tabIndex],
+                    orders = nextItems,
+                    hasMore = hasMore,
                 )
             }.onFailure { error ->
                 _isLoadingMore.value = false
@@ -174,7 +178,7 @@ class OrderListViewModel(
                     tabStates[tabIndex].value =
                         OrderListUiState.Error(UiMessage.network(error.message))
                 } else {
-                    tabPages[tabIndex] = (page - 1).coerceAtLeast(1)
+                    tabPaging[tabIndex] = previous
                 }
             }
         }

@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -50,8 +51,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -84,6 +83,8 @@ import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.core.ui.component.GoodsGridItem
 import com.joker.coolmall.core.ui.component.GoodsListItem
 import com.joker.coolmall.core.ui.component.GoodsGridSkeleton
+import com.joker.coolmall.core.ui.component.RefreshGridLayout
+import com.joker.coolmall.core.ui.component.RefreshLayout
 import com.joker.coolmall.core.ui.component.SkeletonBlock
 import com.joker.coolmall.core.ui.empty.EmptyData
 import com.joker.coolmall.core.ui.empty.EmptyUiMessage
@@ -138,7 +139,6 @@ fun GoodsCategoryRoute(
     var searchText by rememberSaveable { mutableStateOf(keyword.orEmpty()) }
     val gridState = rememberLazyGridState()
     val listState = rememberLazyListState()
-    val pullToRefreshState = rememberPullToRefreshState()
     val keyboard = LocalSoftwareKeyboardController.current
 
     val shouldLoadMore by remember {
@@ -320,16 +320,13 @@ fun GoodsCategoryRoute(
                             .padding(padding),
                     )
                 } else {
-                    PullToRefreshBox(
-                        isRefreshing = uiState is GoodsCategoryUiState.Loading,
-                        onRefresh = viewModel::refresh,
-                        state = pullToRefreshState,
-                        modifier = Modifier.fillMaxSize().padding(padding),
-                    ) {
-                        if (isGrid) LazyVerticalGrid(
-                            columns = GridCells.Fixed(2),
-                            state = gridState,
-                            modifier = Modifier.fillMaxSize(),
+                    if (isGrid) {
+                        RefreshGridLayout(
+                            gridState = gridState,
+                            isRefreshing = uiState is GoodsCategoryUiState.Loading,
+                            onRefresh = viewModel::refresh,
+                            onLoadMore = viewModel::loadMore,
+                            modifier = Modifier.fillMaxSize().padding(padding),
                             contentPadding = PaddingValues(12.dp),
                             verticalArrangement = Arrangement.spacedBy(12.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -343,19 +340,22 @@ fun GoodsCategoryRoute(
                             item(span = { GridItemSpan(maxLineSpan) }) {
                                 LoadMoreFooter(isLoadingMore, state.hasMore)
                             }
-                        } else {
-                            LazyColumn(
-                                state = listState,
-                                modifier = Modifier.fillMaxSize(),
-                                contentPadding = PaddingValues(12.dp),
-                                verticalArrangement = Arrangement.spacedBy(12.dp),
-                            ) {
-                                columnItems(state.goods, key = { it.id }) { goods ->
-                                    GoodsListItem(goods = goods, onClick = { onGoodsClick(goods.id) })
-                                }
-                                item {
-                                    LoadMoreFooter(isLoadingMore, state.hasMore)
-                                }
+                        }
+                    } else {
+                        RefreshLayout(
+                            listState = listState,
+                            isRefreshing = uiState is GoodsCategoryUiState.Loading,
+                            onRefresh = viewModel::refresh,
+                            onLoadMore = viewModel::loadMore,
+                            modifier = Modifier.fillMaxSize().padding(padding),
+                            contentPadding = PaddingValues(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            columnItems(state.goods, key = { it.id }) { goods ->
+                                GoodsListItem(goods = goods, onClick = { onGoodsClick(goods.id) })
+                            }
+                            item {
+                                LoadMoreFooter(isLoadingMore, state.hasMore)
                             }
                         }
                     }
@@ -455,7 +455,8 @@ private fun FilterDialog(
     ) {
         Surface(
             modifier = Modifier
-                .fillMaxWidth(0.9f)
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
                 .heightIn(max = 680.dp)
                 .clip(RoundedCornerShape(16.dp)),
             color = MaterialTheme.colorScheme.background,
@@ -499,7 +500,12 @@ private fun FilterDialog(
                                     onValueChange = { min = it.filter(Char::isDigit).take(8) },
                                     modifier = Modifier.weight(1f),
                                 )
-                                Text("-", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Box(
+                                    modifier = Modifier
+                                        .width(16.dp)
+                                        .height(1.dp)
+                                        .background(MaterialTheme.colorScheme.outline),
+                                )
                                 PriceInputField(
                                     value = max,
                                     placeholder = "最高价格",
@@ -595,14 +601,19 @@ private fun FilterDialog(
                         }
                     }
                 }
-                Row(
+                Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .align(Alignment.BottomCenter)
-                        .background(MaterialTheme.colorScheme.background)
-                        .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        .align(Alignment.BottomCenter),
+                    shadowElevation = 4.dp,
                 ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .navigationBarsPadding()
+                            .padding(12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    ) {
                     com.joker.coolmall.core.ui.component.AppButtonBordered(
                         text = "重置",
                         onClick = {
@@ -623,6 +634,7 @@ private fun FilterDialog(
                         style = com.joker.coolmall.core.ui.component.AppButtonStyle.GRADIENT,
                         fullWidth = true,
                     )
+                    }
                 }
             }
         }
@@ -638,6 +650,7 @@ private fun PriceInputField(
 ) {
     Box(
         modifier = modifier
+            .height(48.dp)
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.outline,

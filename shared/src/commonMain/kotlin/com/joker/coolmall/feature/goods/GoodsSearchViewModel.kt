@@ -2,7 +2,7 @@ package com.joker.coolmall.feature.goods
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joker.coolmall.core.data.local.SearchHistoryPreferences
+import com.joker.coolmall.core.data.repository.SearchHistoryRepository
 import com.joker.coolmall.core.data.repository.GoodsRepository
 import com.joker.coolmall.core.model.entity.GoodsSearchKeyword
 import com.joker.coolmall.core.ui.UiMessage
@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -21,7 +22,7 @@ sealed interface GoodsSearchUiState {
 
 class GoodsSearchViewModel(
     private val goodsRepository: GoodsRepository,
-    private val searchHistoryPreferences: SearchHistoryPreferences,
+    private val searchHistoryRepository: SearchHistoryRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<GoodsSearchUiState>(GoodsSearchUiState.Loading)
@@ -30,7 +31,8 @@ class GoodsSearchViewModel(
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query.asStateFlow()
 
-    val history: StateFlow<List<String>> = searchHistoryPreferences.history
+    val history: StateFlow<List<String>> = searchHistoryRepository.history
+        .map { values -> values.map { it.keyword } }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -69,14 +71,14 @@ class GoodsSearchViewModel(
         val keyword = raw.trim()
         if (keyword.isEmpty()) return null
         viewModelScope.launch {
-            searchHistoryPreferences.addKeyword(keyword)
+            searchHistoryRepository.add(keyword)
         }
         return keyword
     }
 
     fun clearHistory() {
         viewModelScope.launch {
-            searchHistoryPreferences.clear()
+            searchHistoryRepository.clear()
         }
     }
 }

@@ -3,6 +3,7 @@ package com.joker.coolmall.feature.cs
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joker.coolmall.core.data.repository.CustomerServiceRepository
+import com.joker.coolmall.core.common.base.state.ReversePagedListState
 import com.joker.coolmall.core.data.repository.FileUploadRepository
 import com.joker.coolmall.core.model.entity.CsMsg
 import com.joker.coolmall.core.platform.PickedImage
@@ -13,6 +14,9 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.launch
 import com.joker.coolmall.core.ui.MessageCode
 import com.joker.coolmall.core.ui.UiMessage
@@ -33,17 +37,21 @@ class ChatViewModel(
     private val _uiState = MutableStateFlow<ChatUiState>(ChatUiState.Loading)
     val uiState: StateFlow<ChatUiState> = _uiState.asStateFlow()
 
-    private val _messages = MutableStateFlow<List<CsMsg>>(emptyList())
-    val messages: StateFlow<List<CsMsg>> = _messages.asStateFlow()
+    private val _historyState = MutableStateFlow(ReversePagedListState<CsMsg>())
+    val messages: StateFlow<List<CsMsg>> = _historyState
+        .map { it.items }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
     private val _inputText = MutableStateFlow("")
     val inputText: StateFlow<String> = _inputText.asStateFlow()
 
-    private val _isLoadingHistory = MutableStateFlow(false)
-    val isLoadingHistory: StateFlow<Boolean> = _isLoadingHistory.asStateFlow()
+    val isLoadingHistory: StateFlow<Boolean> = _historyState
+        .map { it.loading }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
-    private val _hasMore = MutableStateFlow(true)
-    val hasMore: StateFlow<Boolean> = _hasMore.asStateFlow()
+    val hasMore: StateFlow<Boolean> = _historyState
+        .map { it.hasMore }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
 
     private val _isSendingImage = MutableStateFlow(false)
     val isSendingImage: StateFlow<Boolean> = _isSendingImage.asStateFlow()
@@ -56,7 +64,6 @@ class ChatViewModel(
     val messageEvent: SharedFlow<UiMessage> = _messageEvent.asSharedFlow()
 
     private var sessionId: Long = 0
-    private var currentPage = 1
     private val pageSize = 10
 
     init {
@@ -76,8 +83,10 @@ class ChatViewModel(
     }
 
     fun loadMore() {
-        if (_isLoadingHistory.value || !_hasMore.value || sessionId <= 0) return
-        currentPage += 1
+        if (_historyState.value.loading || !_historyState.value.hasMore || sessionId <= 0) return
+        _historyState.value = _historyState.value.copy(
+            page = _historyState.value.page + 1,
+        )
         loadHistory(isInitial = false)
     }
 
@@ -151,8 +160,8 @@ class ChatViewModel(
                     }
                     sessionId = resp.data.id
                     connectSocket()
-                    currentPage = 1
-                    _hasMore.value = true
+                    _historyState.value = ReversePagedListState()
+                    _historyState.value = ReversePagedListState()
                     loadHistory(isInitial = true)
                 }
                 .onFailure { e ->
@@ -162,10 +171,11 @@ class ChatViewModel(
     }
 
     private fun loadHistory(isInitial: Boolean) {
-        if (_isLoadingHistory.value) return
+        if (_historyState.value.loading) return
         val sid = sessionId
         if (sid <= 0) return
-        _isLoadingHistory.value = true
+        _historyState.value = _historyState.value.copy(loading = true)
+        val currentPage = _historyState.value.page
         viewModelScope.launch {
             runCatching {
                 customerServiceRepository.getMessagePage(
@@ -174,19 +184,21 @@ class ChatViewModel(
                     size = pageSize,
                 )
             }.onSuccess { resp ->
-                _isLoadingHistory.value = false
+                _historyState.value = _historyState.value.copy(loading = false)
                 if (!resp.isSucceeded) {
                     if (isInitial) {
                         _uiState.value = ChatUiState.Error(UiMessage.rawOrCode(resp.message, MessageCode.CsLoadMessagesFailed))
                     } else {
-                        currentPage = (currentPage - 1).coerceAtLeast(1)
+                        _historyState.value = _historyState.value.copy(
+                            page = (currentPage - 1).coerceAtLeast(1),
+                        )
                     }
                     return@onSuccess
                 }
                 val page = resp.data
                 val list = page?.list.orEmpty()
                 val pagination = page?.pagination
-                _hasMore.value = if (pagination?.total != null) {
+                val hasMore = if (pagination?.total != null) {
                     val total = pagination.total!!
                     val size = pagination.size ?: pageSize
                     val pageNum = pagination.page ?: currentPage
@@ -194,21 +206,35 @@ class ChatViewModel(
                 } else {
                     list.size >= pageSize
                 }
+                _historyState.value = if (isInitial || currentPage == 1) {
+                    _historyState.value.copy(
+                        page = currentPage,
+                        items = list,
+                        hasMore = hasMore,
+                        loading = false,
+                    )
+                } else {
+                    val existing = _historyState.value.items.map { it.id }.toSet()
+                    val unique = list.filter { it.id !in existing }
+                    _historyState.value.copy(
+                        page = currentPage,
+                        items = _historyState.value.items + unique,
+                        hasMore = hasMore,
+                        loading = false,
+                    )
+                }
                 if (isInitial || currentPage == 1) {
-                    _messages.value = list
                     _uiState.value = ChatUiState.Success
                     markUnreadRead()
-                } else {
-                    val existing = _messages.value.map { it.id }.toSet()
-                    val unique = list.filter { it.id !in existing }
-                    _messages.value = _messages.value + unique
                 }
             }.onFailure { e ->
-                _isLoadingHistory.value = false
+                _historyState.value = _historyState.value.copy(loading = false)
                 if (isInitial) {
                     _uiState.value = ChatUiState.Error(UiMessage.rawOrCode(e.message, MessageCode.CsLoadMessagesFailed))
                 } else {
-                    currentPage = (currentPage - 1).coerceAtLeast(1)
+                    _historyState.value = _historyState.value.copy(
+                        page = (_historyState.value.page - 1).coerceAtLeast(1),
+                    )
                 }
             }
         }
@@ -221,9 +247,9 @@ class ChatViewModel(
     }
 
     private fun addIncomingMessage(message: CsMsg) {
-        val current = _messages.value
+        val current = _historyState.value.items
         if (current.any { it.id == message.id }) return
-        _messages.value = listOf(message) + current
+        _historyState.value = _historyState.value.copy(items = listOf(message) + current)
         if (message.type == 1 && message.status == 0) {
             viewModelScope.launch {
                 runCatching {
@@ -234,7 +260,7 @@ class ChatViewModel(
     }
 
     private fun markUnreadRead() {
-        val ids = _messages.value.filter { it.status == 0 }.map { it.id }
+        val ids = _historyState.value.items.filter { it.status == 0 }.map { it.id }
         if (ids.isEmpty()) return
         viewModelScope.launch {
             runCatching { customerServiceRepository.readMessage(ids) }

@@ -1,7 +1,9 @@
 package com.joker.coolmall.feature.user
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.joker.coolmall.core.common.base.state.BaseNetWorkListUiState
+import com.joker.coolmall.core.common.base.state.LoadMoreState
+import com.joker.coolmall.core.common.base.viewmodel.BaseNetWorkListViewModel
 import com.joker.coolmall.core.data.repository.AddressRepository
 import com.joker.coolmall.core.model.entity.Address
 import com.joker.coolmall.core.model.request.PageRequest
@@ -11,7 +13,11 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import com.joker.coolmall.core.ui.MessageCode
 import com.joker.coolmall.core.ui.UiMessage
@@ -27,126 +33,50 @@ sealed interface AddressListUiState {
 
 class AddressListViewModel(
     private val addressRepository: AddressRepository,
-) : ViewModel() {
+) : BaseNetWorkListViewModel<Address>() {
 
-    private val _uiState = MutableStateFlow<AddressListUiState>(AddressListUiState.Loading)
-    val uiState: StateFlow<AddressListUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<AddressListUiState> = combine(
+        networkUiState,
+        listData,
+        loadMoreState,
+        errorMessage,
+    ) { state, addresses, moreState, error ->
+        when (state) {
+            BaseNetWorkListUiState.Loading -> AddressListUiState.Loading
+            BaseNetWorkListUiState.Success,
+            BaseNetWorkListUiState.Empty -> AddressListUiState.Success(
+                addresses = addresses,
+                hasMore = moreState != LoadMoreState.NoMore,
+            )
+            BaseNetWorkListUiState.Error -> AddressListUiState.Error(
+                error ?: UiMessage.network(null),
+            )
+        }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5_000),
+        AddressListUiState.Loading,
+    )
 
     private val _isActing = MutableStateFlow(false)
     val isActing: StateFlow<Boolean> = _isActing.asStateFlow()
 
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
-
-    private val _isLoadingMore = MutableStateFlow(false)
-    val isLoadingMore: StateFlow<Boolean> = _isLoadingMore.asStateFlow()
-
-    private val loadedAddresses = mutableListOf<Address>()
-    private var currentPage = 1
-    private val pageSize = 10
-    private var hasMore = true
+    val isLoadingMore: StateFlow<Boolean> = loadMoreState
+        .map { it == LoadMoreState.Loading }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     private val _message = MutableSharedFlow<UiMessage>(extraBufferCapacity = 1)
     val message: SharedFlow<UiMessage> = _message.asSharedFlow()
 
     init {
-        load()
         // 新增/编辑/删除成功后 repository.revision 自增，自动刷新（drop 掉初始值避免重复请求）
         viewModelScope.launch {
             addressRepository.revision.drop(1).collect { load() }
         }
     }
 
-    fun load() {
-        viewModelScope.launch {
-            _isRefreshing.value = false
-            _isLoadingMore.value = false
-            currentPage = 1
-            hasMore = true
-            loadedAddresses.clear()
-            _uiState.value = AddressListUiState.Loading
-            runCatching {
-                addressRepository.getAddressPage(PageRequest(page = 1, size = pageSize))
-            }.onSuccess { response ->
-                if (response.isSucceeded) {
-                    val page = response.data
-                    val list = page?.list.orEmpty()
-                    loadedAddresses.addAll(list)
-                    hasMore = page?.pagination?.total?.let { loadedAddresses.size < it }
-                        ?: (list.size >= pageSize)
-                    _uiState.value = AddressListUiState.Success(
-                        addresses = loadedAddresses.toList(),
-                        hasMore = hasMore,
-                    )
-                } else {
-                    _uiState.value = AddressListUiState.Error(UiMessage.loadFailed(response.message, response.code))
-                }
-            }.onFailure { error ->
-                _uiState.value = AddressListUiState.Error(UiMessage.network(error.message))
-            }
-        }
-    }
-
-    fun refresh() {
-        if (_isActing.value || _isLoadingMore.value) return
-        viewModelScope.launch {
-            _isRefreshing.value = true
-            currentPage = 1
-            hasMore = true
-            runCatching {
-                addressRepository.getAddressPage(PageRequest(page = 1, size = pageSize))
-            }.onSuccess { response ->
-                if (response.isSucceeded) {
-                    val page = response.data
-                    val list = page?.list.orEmpty()
-                    loadedAddresses.clear()
-                    loadedAddresses.addAll(list)
-                    hasMore = page?.pagination?.total?.let { loadedAddresses.size < it }
-                        ?: (list.size >= pageSize)
-                    _uiState.value = AddressListUiState.Success(
-                        addresses = loadedAddresses.toList(),
-                        hasMore = hasMore,
-                    )
-                } else {
-                    _message.emit(UiMessage.loadFailed(response.message, response.code))
-                }
-            }.onFailure { error ->
-                _message.emit(UiMessage.network(error.message))
-            }
-            _isRefreshing.value = false
-        }
-    }
-
-    fun loadMore() {
-        if (!hasMore || _isRefreshing.value || _isLoadingMore.value) return
-        viewModelScope.launch {
-            _isLoadingMore.value = true
-            val nextPage = currentPage + 1
-            runCatching {
-                addressRepository.getAddressPage(PageRequest(page = nextPage, size = pageSize))
-            }.onSuccess { response ->
-                if (response.isSucceeded) {
-                    val page = response.data
-                    val list = page?.list.orEmpty()
-                    if (list.isNotEmpty()) {
-                        currentPage = nextPage
-                        loadedAddresses.addAll(list)
-                    }
-                    hasMore = page?.pagination?.total?.let { loadedAddresses.size < it }
-                        ?: (list.size >= pageSize)
-                    _uiState.value = AddressListUiState.Success(
-                        addresses = loadedAddresses.toList(),
-                        hasMore = hasMore,
-                    )
-                } else {
-                    _message.emit(UiMessage.loadFailed(response.message, response.code))
-                }
-            }.onFailure { error ->
-                _message.emit(UiMessage.network(error.message))
-            }
-            _isLoadingMore.value = false
-        }
-    }
+    override suspend fun requestListData(page: Int, size: Int) =
+        addressRepository.getAddressPage(PageRequest(page = page, size = size))
 
     /**
      * 删除地址；成功后本地刷新列表。
