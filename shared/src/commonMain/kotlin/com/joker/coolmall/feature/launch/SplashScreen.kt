@@ -37,6 +37,7 @@ import myapplication.shared.generated.resources.ic_logo
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+@Suppress("ParamsComparedByRef")
 @Composable
 fun SplashRoute(
     toGuide: () -> Unit,

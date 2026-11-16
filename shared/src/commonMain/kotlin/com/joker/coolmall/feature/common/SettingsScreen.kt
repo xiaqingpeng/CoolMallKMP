@@ -1,7 +1,6 @@
 package com.joker.coolmall.feature.common
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,13 +17,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
-import androidx.compose.material3.FilterChip
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
@@ -44,7 +41,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
@@ -53,6 +49,9 @@ import com.joker.coolmall.core.data.local.ThemeColor
 import com.joker.coolmall.core.data.local.ThemeMode
 import com.joker.coolmall.core.di.AppContainerProvider
 import com.joker.coolmall.core.ui.component.TitleWithLine
+import com.joker.coolmall.core.ui.component.AppListItem
+import com.joker.coolmall.core.ui.component.Modal
+import com.joker.coolmall.core.ui.component.ModalType
 import com.joker.coolmall.core.platform.clearAppCache
 import myapplication.shared.generated.resources.Res
 import myapplication.shared.generated.resources.common_cancel
@@ -75,8 +74,8 @@ import myapplication.shared.generated.resources.settings_section_other
 import myapplication.shared.generated.resources.settings_section_privacy
 import myapplication.shared.generated.resources.settings_select_theme
 import myapplication.shared.generated.resources.settings_select_theme_color
-import myapplication.shared.generated.resources.settings_show_splash
-import myapplication.shared.generated.resources.settings_show_splash_desc
+import myapplication.shared.generated.resources.settings_hide_splash
+import myapplication.shared.generated.resources.settings_hide_splash_desc
 import myapplication.shared.generated.resources.settings_theme_color
 import myapplication.shared.generated.resources.settings_theme_color_default
 import myapplication.shared.generated.resources.settings_theme_color_green
@@ -107,7 +106,7 @@ fun SettingsRoute(
                     splashPreferences = AppContainerProvider.instance.splashPreferences,
                 )
             }
-        },
+        }
     ),
 ) {
     val themeMode by viewModel.themeMode.collectAsState()
@@ -118,7 +117,7 @@ fun SettingsRoute(
     val showSplash by viewModel.showSplash.collectAsState()
 
     if (showThemeDialog) {
-        ThemeModeDialog(
+        ThemeModeModal(
             selected = themeMode,
             onDismiss = { showThemeDialog = false },
             onSelect = {
@@ -128,7 +127,7 @@ fun SettingsRoute(
         )
     }
     if (showColorDialog) {
-        ThemeColorDialog(
+        ThemeColorModal(
             selected = themeColor,
             onDismiss = { showColorDialog = false },
             onSelect = {
@@ -173,15 +172,15 @@ fun SettingsRoute(
                     }
                 },
             )
-        },
+        }
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            .padding(horizontal = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             SettingsCard {
                 SettingsLinkRow(
@@ -223,10 +222,10 @@ fun SettingsRoute(
             SettingsSectionTitle(stringResource(Res.string.settings_section_other))
             SettingsCard {
                 SettingsSwitchRow(
-                    title = stringResource(Res.string.settings_show_splash),
-                    description = stringResource(Res.string.settings_show_splash_desc),
-                    checked = showSplash,
-                    onCheckedChange = viewModel::setShowSplash,
+                    title = stringResource(Res.string.settings_hide_splash),
+                    description = stringResource(Res.string.settings_hide_splash_desc),
+                    checked = !showSplash,
+                    onCheckedChange = { hidden -> viewModel.setShowSplash(!hidden) },
                 )
                 SettingsLinkRow(
                     title = stringResource(Res.string.settings_app_guide),
@@ -289,46 +288,42 @@ private fun SettingsLinkRow(
     trailing: (@Composable () -> Unit)? = null,
     showDivider: Boolean = true,
 ) {
-    Column {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable(onClick = onClick)
-                .padding(horizontal = 16.dp, vertical = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(title, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+    AppListItem(
+        title = title,
+        horizontalPadding = 16.dp,
+        verticalPadding = 12.dp,
+        showDivider = showDivider,
+        trailingContent = {
             value?.let {
-                Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Spacer(Modifier.size(8.dp))
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(end = 8.dp),
+                )
             }
             trailing?.invoke()
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
-        if (showDivider) {
-            Divider(modifier = Modifier.padding(horizontal = 16.dp))
-        }
-    }
+        },
+        onClick = onClick,
+    )
 }
 
 @Composable
 private fun SettingsValueRow(title: String, value: String, showDivider: Boolean = true) {
-    Column {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(title, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-            Text(value, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        if (showDivider) {
-            Divider(modifier = Modifier.padding(horizontal = 16.dp))
-        }
-    }
+    AppListItem(
+        title = title,
+        horizontalPadding = 16.dp,
+        verticalPadding = 12.dp,
+        showArrow = false,
+        showDivider = showDivider,
+        trailingContent = {
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        },
+    )
 }
 
 @Composable
@@ -338,76 +333,98 @@ private fun SettingsSwitchRow(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
 ) {
-    Column {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 12.dp, top = 10.dp, bottom = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(title, style = MaterialTheme.typography.bodyLarge)
-                Text(description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
+    AppListItem(
+        title = title,
+        description = description,
+        horizontalPadding = 16.dp,
+        verticalPadding = 10.dp,
+        showArrow = false,
+        trailingContent = {
             Switch(checked = checked, onCheckedChange = onCheckedChange)
-        }
-        Divider(modifier = Modifier.padding(horizontal = 16.dp))
-    }
+        },
+    )
 }
 
 @Composable
-private fun ThemeModeDialog(
+private fun ThemeModeModal(
     selected: ThemeMode,
     onDismiss: () -> Unit,
     onSelect: (ThemeMode) -> Unit,
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(Res.string.settings_select_theme)) },
-        text = {
-            Column {
-                ThemeMode.entries.forEach { mode ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth().selectable(
+    Modal(
+        visible = true,
+        modalType = ModalType.BOTTOM,
+        onDismiss = onDismiss,
+    ) {
+        Text(
+            text = stringResource(Res.string.settings_dark_mode),
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+        )
+        Card {
+            ThemeMode.entries.forEachIndexed { index, mode ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
                             selected = selected == mode,
                             onClick = { onSelect(mode) },
                             role = Role.RadioButton,
-                        ).padding(vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        RadioButton(selected == mode, onClick = null)
-                        Spacer(Modifier.size(8.dp))
-                        Text(themeModeLabel(mode))
-                    }
+                        )
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(themeModeLabel(mode), modifier = Modifier.weight(1f))
+                    RadioButton(selected == mode, onClick = null)
+                }
+                if (index != ThemeMode.entries.lastIndex) {
+                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
-        },
-        confirmButton = { TextButton(onClick = onDismiss) { Text("取消") } },
-    )
+        }
+    }
 }
 
 @Composable
-private fun ThemeColorDialog(
+private fun ThemeColorModal(
     selected: ThemeColor,
     onDismiss: () -> Unit,
     onSelect: (ThemeColor) -> Unit,
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(Res.string.settings_select_theme_color)) },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                ThemeColor.entries.forEach { color ->
-                    FilterChip(
-                        selected = selected == color,
-                        onClick = { onSelect(color) },
-                        label = { Text(themeColorLabel(color)) },
-                        leadingIcon = { ThemeColorDot(color) },
-                        modifier = Modifier.fillMaxWidth(),
-                    )
+    Modal(
+        visible = true,
+        modalType = ModalType.BOTTOM,
+        onDismiss = onDismiss,
+    ) {
+        Text(
+            text = stringResource(Res.string.settings_theme_color),
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+        )
+        Card {
+            ThemeColor.entries.forEachIndexed { index, color ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = selected == color,
+                            onClick = { onSelect(color) },
+                            role = Role.RadioButton,
+                        )
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(themeColorLabel(color), modifier = Modifier.weight(1f))
+                    ThemeColorDot(color)
+                    Spacer(Modifier.size(12.dp))
+                    RadioButton(selected == color, onClick = null)
+                }
+                if (index != ThemeColor.entries.lastIndex) {
+                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
-        },
-        confirmButton = { TextButton(onClick = onDismiss) { Text("取消") } },
-    )
+        }
+    }
 }
 
 @Composable

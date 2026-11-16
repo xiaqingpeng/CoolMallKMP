@@ -26,6 +26,8 @@ fun ListItem(
     trailingContent: (@Composable () -> Unit)? = null,
     showArrow: Boolean = true,
     showDivider: Boolean = true,
+    horizontalPadding: androidx.compose.ui.unit.Dp = 16.dp,
+    verticalPadding: androidx.compose.ui.unit.Dp = 14.dp,
     onClick: () -> Unit = {},
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
@@ -33,7 +35,7 @@ fun ListItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onClick)
-                .padding(horizontal = 16.dp, vertical = 14.dp),
+                .padding(horizontal = horizontalPadding, vertical = verticalPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             leadingContent?.invoke()
@@ -72,6 +74,8 @@ fun AppListItem(
     trailingContent: (@Composable () -> Unit)? = null,
     showArrow: Boolean = true,
     showDivider: Boolean = true,
+    horizontalPadding: androidx.compose.ui.unit.Dp = 16.dp,
+    verticalPadding: androidx.compose.ui.unit.Dp = 14.dp,
     onClick: () -> Unit = {},
 ) = ListItem(
     title = title,
@@ -81,5 +85,7 @@ fun AppListItem(
     trailingContent = trailingContent,
     showArrow = showArrow,
     showDivider = showDivider,
+    horizontalPadding = horizontalPadding,
+    verticalPadding = verticalPadding,
     onClick = onClick,
 )

@@ -362,6 +362,8 @@
     <string name="settings_language_chinese">简体中文</string>
     <string name="settings_show_splash">显示启动页</string>
     <string name="settings_show_splash_desc">启动应用时显示品牌启动页</string>
+    <string name="settings_hide_splash">不展示启动页</string>
+    <string name="settings_hide_splash_desc">打开后进入应用将跳过启动页</string>
     <string name="settings_app_guide">应用引导</string>
     <string name="settings_clear_cache">清除缓存</string>
     <string name="settings_cache_size">暂无缓存</string>

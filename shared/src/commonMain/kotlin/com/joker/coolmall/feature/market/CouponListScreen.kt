@@ -36,6 +36,7 @@ import myapplication.shared.generated.resources.coupon_empty
 import myapplication.shared.generated.resources.coupon_list_title
 import org.jetbrains.compose.resources.stringResource
 
+@Suppress("ParamsComparedByRef")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CouponListRoute(

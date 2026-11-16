@@ -356,6 +356,8 @@
     <string name="settings_language_chinese">Simplified Chinese</string>
     <string name="settings_show_splash">Show splash screen</string>
     <string name="settings_show_splash_desc">Show the branded splash screen when starting the app</string>
+    <string name="settings_hide_splash">Hide splash screen</string>
+    <string name="settings_hide_splash_desc">Skip the splash screen when starting the app</string>
     <string name="settings_app_guide">App guide</string>
     <string name="settings_clear_cache">Clear cache</string>
     <string name="settings_cache_size">No cache</string>
