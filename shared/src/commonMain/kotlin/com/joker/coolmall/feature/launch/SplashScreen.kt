@@ -18,7 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,7 +69,7 @@ fun SplashRoute(
 
 @Composable
 private fun SplashScreen() {
-    var started by remember { mutableStateOf(false) }
+    var started by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         started = true
     }
@@ -125,13 +125,14 @@ private fun SplashScreen() {
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
+                Spacer(modifier = Modifier.size(12.dp))
                 Text(
                     text = stringResource(Res.string.splash_subtitle),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            Spacer(modifier = Modifier.size(48.dp))
+            Spacer(modifier = Modifier.size(32.dp))
         }
     }
 }
