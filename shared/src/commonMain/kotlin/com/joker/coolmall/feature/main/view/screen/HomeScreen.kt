@@ -30,7 +30,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -74,12 +73,15 @@ import com.joker.coolmallkmp.core.model.entity.Home
 import com.joker.coolmallkmp.core.ui.component.CouponCard
 import com.joker.coolmallkmp.core.ui.component.CouponCardMode
 import com.joker.coolmallkmp.core.ui.component.AppDivider
+import com.joker.coolmallkmp.core.ui.component.AppCard
 import com.joker.coolmallkmp.core.ui.component.GoodsGridItem
 import com.joker.coolmallkmp.core.ui.component.GoodsListItem
+import com.joker.coolmallkmp.core.ui.component.AppListItem
 import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
 import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.core.ui.theme.ShapeMedium
 import com.joker.coolmallkmp.feature.main.viewmodel.HomeUiState
 import com.joker.coolmallkmp.feature.main.viewmodel.HomeViewModel
 import com.joker.coolmallkmp.feature.main.view.skeleton.HomeLoadingSkeleton
@@ -386,23 +388,22 @@ private fun HomeTopAppBar(
     TopAppBar(
         scrollBehavior = scrollBehavior,
         navigationIcon = {
-            IconButton(onClick = onAboutClick) {
-                Image(
-                    painter = painterResource(Res.drawable.ic_logo),
-                    contentDescription = null,
-                    modifier = Modifier.size(34.dp),
-                )
-            }
+            Image(
+                painter = painterResource(Res.drawable.ic_logo),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .size(34.dp)
+                    .clickable(onClick = onAboutClick),
+            )
         },
         title = {
             Card(
-                shape = RoundedCornerShape(10.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.55f),
-                ),
+                shape = ShapeMedium,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(38.dp)
+                    .clip(ShapeMedium)
                     .clickable(onClick = onSearchClick),
             ) {
                 Row(
@@ -428,11 +429,15 @@ private fun HomeTopAppBar(
             }
         },
         actions = {
-            IconButton(onClick = onGithubClick) {
+            IconButton(
+                onClick = onGithubClick,
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .size(27.dp),
+            ) {
                 Icon(
                     painter = painterResource(Res.drawable.ic_github),
                     contentDescription = "GitHub",
-                    modifier = Modifier.size(22.dp),
                 )
             }
         },
@@ -466,7 +471,7 @@ private fun BannerSection(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp)),
+            .clip(ShapeMedium),
     ) {
         HorizontalPager(
             state = pagerState,
@@ -478,7 +483,7 @@ private fun BannerSection(
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(2f)
-                    .clip(RoundedCornerShape(12.dp)),
+                    .clip(RoundedCornerShape(6.dp)),
                 contentScale = ContentScale.Crop,
             )
         }
@@ -607,10 +612,9 @@ private fun CategorySection(
     categories: List<Category>,
     onCategoryClick: (Long, String) -> Unit,
 ) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    AppCard {
         Column(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth(),
         ) {
             categories.chunked(5).forEach { rowCategories ->
                 Row(
@@ -650,7 +654,7 @@ private fun CategoryItem(
             model = category.pic,
             contentDescription = category.name,
             modifier = Modifier
-                .fillMaxWidth(0.72f)
+                .fillMaxWidth(0.8f)
                 .aspectRatio(1f)
                 .clip(CircleShape),
             contentScale = ContentScale.Crop,
@@ -673,33 +677,26 @@ private fun FlashSaleSection(
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable(onClick = onViewAllClick)
-                    .padding(horizontal = 12.dp, vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    painter = painterResource(Res.drawable.ic_time),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp),
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(Res.string.home_flash_sale),
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.weight(1f),
-                )
-                Text(
-                    text = stringResource(Res.string.me_view_all),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-            AppDivider()
+            AppListItem(
+                title = stringResource(Res.string.home_flash_sale),
+                leadingContent = {
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_time),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(20.dp),
+                    )
+                },
+                trailingContent = {
+                    Text(
+                        text = stringResource(Res.string.me_view_all),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                },
+                showArrow = false,
+                onClick = onViewAllClick,
+            )
             LazyRow(
                 contentPadding = PaddingValues(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
