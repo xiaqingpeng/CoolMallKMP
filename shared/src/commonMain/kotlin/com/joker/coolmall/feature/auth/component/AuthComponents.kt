@@ -258,7 +258,7 @@ private fun AuthLineField(
         }
         Spacer(Modifier.height(8.dp))
         HorizontalDivider(
-            color = if (focused) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant,
+            color = if (focused) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
             thickness = if (focused) 2.dp else 1.dp,
         )
     }

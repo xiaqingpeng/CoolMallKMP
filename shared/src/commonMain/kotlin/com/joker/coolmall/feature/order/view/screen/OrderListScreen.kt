@@ -27,7 +27,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -94,6 +93,7 @@ import org.jetbrains.compose.resources.stringResource
 import com.joker.coolmallkmp.core.ui.component.PriceText
 import com.joker.coolmallkmp.core.ui.component.OrderGoodsItem
 import com.joker.coolmallkmp.core.ui.component.AppCard
+import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.ui.component.LoadMore
 import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
 import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
@@ -373,7 +373,7 @@ private fun OrderCard(
             val showLogistics = order.status in 2..6
             val showComment = order.status == 3 || order.status == 4
             if (showCancel || showPay || showRefund || showConfirm || showLogistics || showComment) {
-                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                AppDivider(modifier = Modifier.padding(vertical = 8.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

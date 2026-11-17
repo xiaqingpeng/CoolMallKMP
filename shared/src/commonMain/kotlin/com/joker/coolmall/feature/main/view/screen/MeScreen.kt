@@ -28,7 +28,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -54,6 +53,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
 import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.model.entity.Footprint
 import com.joker.coolmallkmp.core.model.entity.OrderCount
 import com.joker.coolmallkmp.core.model.entity.User
@@ -685,9 +685,8 @@ private fun MeMenuRow(
             )
         }
         if (showDivider) {
-            HorizontalDivider(
+            AppDivider(
                 modifier = Modifier.padding(start = 54.dp),
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
             )
         }
     }

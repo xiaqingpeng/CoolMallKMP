@@ -36,7 +36,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -66,6 +65,7 @@ import com.joker.coolmallkmp.core.ui.component.AppButton
 import com.joker.coolmallkmp.core.ui.component.AppButtonBordered
 import com.joker.coolmallkmp.core.ui.component.AppButtonSize
 import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.ui.component.PriceTextLarge
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
@@ -180,7 +180,7 @@ fun SpecSelectSheet(
 
             SpecHeader(goods = goods, selectedSpec = selectedSpec, shape = shapeSmall)
             Spacer(modifier = Modifier.height(SpaceVerticalMedium))
-            HorizontalDivider()
+            AppDivider()
             Spacer(modifier = Modifier.height(SpaceVerticalMedium))
 
             when (val state = specsUiState) {

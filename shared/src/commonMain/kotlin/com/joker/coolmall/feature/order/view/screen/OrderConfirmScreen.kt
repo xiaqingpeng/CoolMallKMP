@@ -24,7 +24,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -73,6 +72,7 @@ import org.jetbrains.compose.resources.stringResource
 import com.joker.coolmallkmp.core.ui.component.AppButtonFixed
 import com.joker.coolmallkmp.core.ui.component.AppButtonSize
 import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.ui.component.PriceText
 import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
 import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
@@ -320,7 +320,7 @@ private fun CartSummaryCard(cart: Cart) {
                 )
                 PriceTextSmall(price = cart.totalAmount)
             }
-            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            AppDivider(modifier = Modifier.padding(vertical = 8.dp))
             cart.spec.forEach { spec ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),

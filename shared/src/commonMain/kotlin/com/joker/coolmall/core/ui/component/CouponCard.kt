@@ -20,7 +20,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.LocalOffer
 import androidx.compose.material3.Card
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -175,7 +174,7 @@ fun CouponCard(
                 }
 
                 if (showDescription || expandable) {
-                    HorizontalDivider()
+                    AppDivider()
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()

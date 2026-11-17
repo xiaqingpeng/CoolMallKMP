@@ -14,19 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,15 +33,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.lerp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.style.TextOverflow as UiTextOverflow
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -54,6 +43,8 @@ import com.joker.coolmall.feature.common.viewmodel.SettingsViewModel
 import com.joker.coolmallkmp.core.data.local.ThemeColor
 import com.joker.coolmallkmp.core.data.local.ThemeMode
 import com.joker.coolmallkmp.core.di.AppContainerProvider
+import com.joker.coolmallkmp.core.ui.component.AppDivider
+import com.joker.coolmallkmp.core.ui.component.AppScaffold
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.component.AppListItem
 import com.joker.coolmallkmp.core.ui.component.Modal
@@ -67,7 +58,6 @@ import coolmallkmp.shared.generated.resources.settings_cache_size
 import coolmallkmp.shared.generated.resources.settings_clear_cache
 import coolmallkmp.shared.generated.resources.settings_dark_mode
 import coolmallkmp.shared.generated.resources.settings_feedback
-import coolmallkmp.shared.generated.resources.settings_hint
 import coolmallkmp.shared.generated.resources.settings_language
 import coolmallkmp.shared.generated.resources.settings_language_chinese
 import coolmallkmp.shared.generated.resources.settings_section_appearance
@@ -136,44 +126,17 @@ fun SettingsRoute(
             },
         )
     }
-    val scrollBehavior = androidx.compose.material3.TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
-        rememberTopAppBarState(),
-    )
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            MediumTopAppBar(
-                title = {
-                    val scrollFraction = scrollBehavior.state.collapsedFraction
-                    Text(
-                        text = stringResource(Res.string.settings_title),
-                        fontSize = lerp(30.sp, 16.sp, scrollFraction),
-                        maxLines = 1,
-                        overflow = UiTextOverflow.Ellipsis,
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null,
-                        )
-                    }
-                },
-                scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                ),
-            )
-        }
-    ) { padding ->
+    AppScaffold(
+        title = stringResource(Res.string.settings_title),
+        onBack = onBack,
+        useLargeTopBar = true,
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
+                .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
-            .padding(horizontal = 12.dp),
+                .padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             SettingsCard {
@@ -244,12 +207,6 @@ fun SettingsRoute(
                     showDivider = false,
                 )
             }
-            Text(
-                text = stringResource(Res.string.settings_hint),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 4.dp, vertical = 4.dp),
-            )
         }
     }
 }
@@ -258,7 +215,7 @@ fun SettingsRoute(
 private fun SettingsSectionTitle(text: String) {
     TitleWithLine(
         text = text,
-        modifier = Modifier.padding(top = 4.dp),
+        modifier = Modifier.padding(top = 8.dp),
     )
 }
 
@@ -266,10 +223,6 @@ private fun SettingsSectionTitle(text: String) {
 private fun SettingsCard(content: @Composable ColumnScope.() -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-        ),
         content = content,
     )
 }
@@ -308,7 +261,7 @@ private fun SettingsValueRow(title: String, value: String, showDivider: Boolean 
         title = title,
         horizontalPadding = 16.dp,
         verticalPadding = 16.dp,
-        showArrow = false,
+        showArrow = true,
         showDivider = showDivider,
         trailingContent = {
             Text(
@@ -372,7 +325,7 @@ private fun ThemeModeModal(
                     RadioButton(selected == mode, onClick = null)
                 }
                 if (index != ThemeMode.entries.lastIndex) {
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                    AppDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
         }
@@ -414,7 +367,7 @@ private fun ThemeColorModal(
                     RadioButton(selected == color, onClick = null)
                 }
                 if (index != ThemeColor.entries.lastIndex) {
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                    AppDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
         }

@@ -23,7 +23,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -60,6 +59,7 @@ import coil3.compose.AsyncImage
 import com.joker.coolmallkmp.core.di.AppContainerProvider
 import com.joker.coolmallkmp.core.model.entity.User
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
+import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
 import com.joker.coolmallkmp.core.ui.theme.ColorDanger
 import com.joker.coolmallkmp.core.ui.theme.SpaceHorizontalLarge
@@ -379,9 +379,8 @@ private fun ProfileRow(
             }
         }
         if (showDivider) {
-            HorizontalDivider(
+            AppDivider(
                 modifier = Modifier.padding(start = SpaceHorizontalLarge),
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
             )
         }
     }

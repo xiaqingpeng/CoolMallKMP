@@ -31,7 +31,6 @@ import com.joker.coolmallkmp.core.ui.component.AppButtonFixed
 import com.joker.coolmallkmp.core.ui.component.AppButtonSize
 import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -64,6 +63,7 @@ import com.joker.coolmallkmp.core.ui.component.PriceText
 import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.component.AppCard
+import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.ui.component.OrderGoodsItem
 import com.joker.coolmallkmp.core.ui.component.RefreshLayout
 import com.joker.coolmallkmp.core.ui.theme.ColorDanger
@@ -379,7 +379,7 @@ private fun OrderDetailContent(
                             negative = true,
                         )
                     }
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    AppDivider(modifier = Modifier.padding(vertical = 8.dp))
                     PriceRow(
                         label = stringResource(Res.string.order_detail_payable),
                         price = order.payableAmount,

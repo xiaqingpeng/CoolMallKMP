@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,9 +36,9 @@ fun LoadMore(
                 modifier = Modifier.clickable(enabled = onRetry != null) { onRetry?.invoke() },
             )
             LoadMoreState.NoMore -> {
-                HorizontalDivider(Modifier.weight(1f))
+                AppDivider(Modifier.weight(1f))
                 Text("没有更多了", modifier = Modifier.padding(horizontal = 12.dp))
-                HorizontalDivider(Modifier.weight(1f))
+                AppDivider(Modifier.weight(1f))
             }
             LoadMoreState.PullToLoad -> Text("上拉加载更多", color = MaterialTheme.colorScheme.onSurfaceVariant)
             LoadMoreState.Success -> Text("加载完成", color = MaterialTheme.colorScheme.onSurfaceVariant)

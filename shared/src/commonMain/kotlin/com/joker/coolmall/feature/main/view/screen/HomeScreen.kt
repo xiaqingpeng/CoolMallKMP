@@ -33,7 +33,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -74,6 +73,7 @@ import com.joker.coolmallkmp.core.model.entity.Goods
 import com.joker.coolmallkmp.core.model.entity.Home
 import com.joker.coolmallkmp.core.ui.component.CouponCard
 import com.joker.coolmallkmp.core.ui.component.CouponCardMode
+import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.ui.component.GoodsGridItem
 import com.joker.coolmallkmp.core.ui.component.GoodsListItem
 import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
@@ -698,7 +698,7 @@ private fun FlashSaleSection(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            HorizontalDivider()
+            AppDivider()
             LazyRow(
                 contentPadding = PaddingValues(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
