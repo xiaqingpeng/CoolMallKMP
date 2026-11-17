@@ -419,11 +419,17 @@
     <string name="address_set_default">Set as default</string>
     <string name="address_is_default">Default</string>
     <string name="address_contact">Contact</string>
+    <string name="address_contact_hint">Enter contact</string>
     <string name="address_phone">Phone</string>
+    <string name="address_phone_hint">Enter phone number</string>
+    <string name="address_region">Province / City / District</string>
+    <string name="address_region_hint">Select your region</string>
+    <string name="address_region_choose">Select</string>
     <string name="address_province">Province</string>
     <string name="address_city">City</string>
     <string name="address_district">District</string>
     <string name="address_detail">Detailed address</string>
+    <string name="address_detail_hint">Street, building number, etc.</string>
     <string name="address_default_switch">Default address</string>
     <string name="address_default_hint">This address will be selected automatically at checkout</string>
     <string name="feedback_list_title">Feedback</string>

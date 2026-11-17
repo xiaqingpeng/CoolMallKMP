@@ -8,6 +8,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -30,6 +32,7 @@ fun AppScaffold(
     showBack: Boolean = true,
     onBack: () -> Unit = {},
     actions: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit = {},
+    snackbarHostState: SnackbarHostState? = null,
     bottomBar: @Composable () -> Unit = {},
     useLargeTopBar: Boolean = false,
     content: @Composable (PaddingValues) -> Unit,
@@ -68,6 +71,9 @@ fun AppScaffold(
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
                 )
             }
+        },
+        snackbarHost = {
+            snackbarHostState?.let { SnackbarHost(it) }
         },
         bottomBar = bottomBar,
         content = content,

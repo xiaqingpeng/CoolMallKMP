@@ -425,11 +425,17 @@
     <string name="address_set_default">设为默认</string>
     <string name="address_is_default">当前默认</string>
     <string name="address_contact">联系人</string>
+    <string name="address_contact_hint">请填写联系人</string>
     <string name="address_phone">手机号</string>
+    <string name="address_phone_hint">请填写手机号</string>
+    <string name="address_region">省市区</string>
+    <string name="address_region_hint">请选择所在地区</string>
+    <string name="address_region_choose">请选择</string>
     <string name="address_province">省</string>
     <string name="address_city">市</string>
     <string name="address_district">区</string>
     <string name="address_detail">详细地址</string>
+    <string name="address_detail_hint">街道、楼牌号等</string>
     <string name="address_default_switch">设为默认地址</string>
     <string name="address_default_hint">下单时将自动选中该地址</string>
     <string name="feedback_list_title">意见反馈</string>

@@ -1,29 +1,24 @@
 package com.joker.coolmallkmp.feature.user.view.screen
-import com.joker.coolmallkmp.feature.user.viewmodel.AddressEditViewModel
-import com.joker.coolmallkmp.feature.user.viewmodel.*
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -31,13 +26,12 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
@@ -47,29 +41,33 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmallkmp.core.di.AppContainerProvider
-import com.joker.coolmallkmp.feature.main.component.CenterTopAppBar
 import com.joker.coolmallkmp.core.ui.component.AppButton
 import com.joker.coolmallkmp.core.ui.component.AppButtonSize
 import com.joker.coolmallkmp.core.ui.component.AppButtonStyle
+import com.joker.coolmallkmp.core.ui.component.AppScaffold
 import com.joker.coolmallkmp.core.ui.resolveMessageCode
 import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
 import com.joker.coolmallkmp.feature.user.component.RegionPickerModal
 import com.joker.coolmallkmp.feature.user.data.RegionData
+import com.joker.coolmallkmp.feature.user.viewmodel.AddressEditViewModel
+import com.joker.coolmallkmp.feature.user.viewmodel.AddressForm
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.address_add
-import coolmallkmp.shared.generated.resources.address_city
 import coolmallkmp.shared.generated.resources.address_contact
+import coolmallkmp.shared.generated.resources.address_contact_hint
 import coolmallkmp.shared.generated.resources.address_default_hint
 import coolmallkmp.shared.generated.resources.address_default_switch
 import coolmallkmp.shared.generated.resources.address_detail
-import coolmallkmp.shared.generated.resources.address_district
+import coolmallkmp.shared.generated.resources.address_detail_hint
 import coolmallkmp.shared.generated.resources.address_edit
 import coolmallkmp.shared.generated.resources.address_phone
-import coolmallkmp.shared.generated.resources.address_province
-import coolmallkmp.shared.generated.resources.common_back
+import coolmallkmp.shared.generated.resources.address_phone_hint
+import coolmallkmp.shared.generated.resources.address_region
+import coolmallkmp.shared.generated.resources.address_region_hint
 import coolmallkmp.shared.generated.resources.common_save
 import org.jetbrains.compose.resources.stringResource
 
+@Suppress("ParamsComparedByRef")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddressEditRoute(
@@ -102,19 +100,19 @@ fun AddressEditRoute(
         viewModel.saved.collect { onBack() }
     }
 
-    Scaffold(
-        topBar = {
-            CenterTopAppBar(
-                title = stringResource(
-                    if (form.isEditMode) Res.string.address_edit else Res.string.address_add,
-                ),
-                showBackIcon = true,
-                onBackClick = onBack,
-            )
-        },
-        snackbarHost = { SnackbarHost(snackbarHostState) },
+    AppScaffold(
+        title = stringResource(
+            if (form.isEditMode) Res.string.address_edit else Res.string.address_add,
+        ),
+        onBack = onBack,
+        snackbarHostState = snackbarHostState,
+        useLargeTopBar = true,
         bottomBar = {
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .androidx.compose.foundation.layout.navigationBarsPadding(),
+            ) {
                 AppButton(
                     text = stringResource(Res.string.common_save),
                     onClick = viewModel::submit,
@@ -181,6 +179,7 @@ fun AddressEditRoute(
     )
 }
 
+@Suppress("ParamsComparedByRef")
 @Composable
 private fun AddressFormFields(
     form: AddressForm,
@@ -192,24 +191,26 @@ private fun AddressFormFields(
         value = form.contact,
         onValueChange = viewModel::updateContact,
         label = { Text(stringResource(Res.string.address_contact)) },
+        placeholder = { Text(stringResource(Res.string.address_contact_hint)) },
         singleLine = true,
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
     )
     OutlinedTextField(
         value = form.phone,
         onValueChange = viewModel::updatePhone,
         label = { Text(stringResource(Res.string.address_phone)) },
+        placeholder = { Text(stringResource(Res.string.address_phone_hint)) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Phone,
             imeAction = ImeAction.Next,
         ),
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
     )
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onRegionClick),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         OutlinedTextField(
             value = if (
@@ -222,13 +223,9 @@ private fun AddressFormFields(
                 ""
             },
             onValueChange = {},
-            label = { Text(stringResource(Res.string.address_province)) },
+            label = { Text(stringResource(Res.string.address_region)) },
             placeholder = {
-                Text(
-                    "${stringResource(Res.string.address_province)} / " +
-                        "${stringResource(Res.string.address_city)} / " +
-                        stringResource(Res.string.address_district),
-                )
+                Text(stringResource(Res.string.address_region_hint))
             },
             trailingIcon = {
                 Icon(
@@ -240,15 +237,27 @@ private fun AddressFormFields(
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             readOnly = true,
+            shape = RoundedCornerShape(12.dp),
+        )
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = onRegionClick,
+                ),
         )
     }
     OutlinedTextField(
         value = form.address,
         onValueChange = viewModel::updateAddress,
         label = { Text(stringResource(Res.string.address_detail)) },
+        placeholder = { Text(stringResource(Res.string.address_detail_hint)) },
         minLines = 3,
         maxLines = 5,
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
     )
     if (includeDefaultSwitch) {
         DefaultAddressRow(

@@ -156,7 +156,8 @@ fun AddressListRoute(
                         isRefreshing = isRefreshing,
                         onRefresh = viewModel::refresh,
                         loadMoreState = viewModel.loadMoreState.collectAsState().value,
-                        contentPadding = PaddingValues(16.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 12.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(padding),

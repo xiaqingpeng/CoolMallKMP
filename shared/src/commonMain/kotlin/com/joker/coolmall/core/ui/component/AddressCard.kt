@@ -17,6 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.joker.coolmallkmp.core.model.entity.Address
+import coolmallkmp.shared.generated.resources.Res
+import coolmallkmp.shared.generated.resources.address_is_default
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AddressCard(
@@ -27,7 +30,12 @@ fun AddressCard(
     actionContent: (@Composable () -> Unit)? = null,
     onClick: () -> Unit = {},
 ) {
-    Card(modifier = modifier.fillMaxWidth().clickable(onClick = onClick)) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
+    ) {
         if (address == null) {
             ListItem(
                 title = "请选择收货地址",
@@ -45,7 +53,7 @@ fun AddressCard(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = address.fullRegion(),
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleLarge,
                     )
                     Text(
                         text = address.address,
@@ -65,15 +73,19 @@ fun AddressCard(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(address.contact, style = MaterialTheme.typography.bodyMedium)
-                    Spacer(Modifier.weight(1f))
+                    Text(
+                        address.contact,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Spacer(Modifier.width(16.dp))
                     Text(address.phone, style = MaterialTheme.typography.bodyMedium)
+                    Spacer(Modifier.weight(1f))
                     if (address.isDefault) {
                         Text(
-                            text = "默认",
+                            text = stringResource(Res.string.address_is_default),
                             color = MaterialTheme.colorScheme.primary,
                             style = MaterialTheme.typography.labelSmall,
-                            modifier = Modifier.padding(start = 12.dp),
                         )
                     }
                 }
