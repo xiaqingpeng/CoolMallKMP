@@ -1,12 +1,18 @@
 package com.joker.coolmallkmp.feature.common.view.screen
 
 import androidx.compose.animation.core.EaseOutCubic
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,10 +31,12 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -40,12 +48,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 import com.joker.coolmallkmp.core.di.AppContainerProvider
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import kotlinx.coroutines.delay
@@ -104,6 +119,7 @@ fun AboutRoute(
 ) {
     val scrollState = rememberScrollState()
     var ready by remember { mutableStateOf(false) }
+    var showDependencyModal by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         delay(100)
         ready = true
@@ -123,18 +139,8 @@ fun AboutRoute(
     )
 
     Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(420.dp)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            MaterialTheme.colorScheme.primary.copy(alpha = .18f),
-                            MaterialTheme.colorScheme.background,
-                        ),
-                    ),
-                ),
+        AnimatedAuroraBackground(
+            modifier = Modifier.graphicsLayer { alpha = heroAlpha },
         )
         Column(
             Modifier
@@ -191,7 +197,11 @@ fun AboutRoute(
                 }
             }
             AboutSection(stringResource(Res.string.about_section_other)) {
-                AboutLink(stringResource(Res.string.about_citation), stringResource(Res.string.about_citation_desc), onClick = onContributorsClick)
+                AboutLink(
+                    stringResource(Res.string.about_citation),
+                    stringResource(Res.string.about_citation_desc),
+                    onClick = { showDependencyModal = true },
+                )
                 AboutLink(stringResource(Res.string.about_user_agreement), onClick = onUserAgreementClick)
                 AboutLink(stringResource(Res.string.about_privacy_policy), onClick = onPrivacyPolicyClick)
                 AboutLink(stringResource(Res.string.about_open_source_license), showDivider = false) {
@@ -229,6 +239,118 @@ fun AboutRoute(
                 containerColor = MaterialTheme.colorScheme.background.copy(alpha = scrollFraction),
             ),
         )
+    }
+    if (showDependencyModal) {
+        DependencyAcknowledgements(
+            onDismiss = { showDependencyModal = false },
+            onDependencyClick = { url, title ->
+                showDependencyModal = false
+                onWebClick(url, title)
+            },
+        )
+    }
+}
+
+@Composable
+private fun AnimatedAuroraBackground(modifier: Modifier = Modifier) {
+    val transition = rememberInfiniteTransition(label = "about_aurora")
+    val phase by transition.animateFloat(
+        initialValue = 0f,
+        targetValue = 2f * PI.toFloat(),
+        animationSpec = infiniteRepeatable(
+            animation = tween(15_000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart,
+        ),
+        label = "about_aurora_phase",
+    )
+    val dark = MaterialTheme.colorScheme.background.luminance() < 0.5f
+    val base = MaterialTheme.colorScheme.background
+    val colors = if (dark) {
+        listOf(Color(0xFF07508F), Color(0xFF874A26), Color(0xFF751044), Color(0xFF292070))
+    } else {
+        listOf(Color(0xFF92C2FA), Color(0xFFFAD9AD), Color(0xFFFABFEF), Color(0xFFBAB2FA))
+    }
+    Box(modifier.fillMaxSize().background(if (dark) Color.Black else base)) {
+        Canvas(Modifier.fillMaxSize().blur(150.dp)) {
+                val w = size.width
+                val h = size.height
+                val centers = listOf(
+                    Offset(w * (0.3f + 0.2f * cos(phase)), h * (0.4f + 0.2f * sin(phase))),
+                    Offset(w * (0.7f + 0.2f * cos(phase * 1.5f + PI.toFloat())), h * (0.6f + 0.15f * sin(phase * 1.5f + PI.toFloat()))),
+                    Offset(w * (0.6f + 0.2f * cos(phase * 0.8f + PI.toFloat() / 2f)), h * (0.3f + 0.2f * sin(phase * 0.8f + PI.toFloat() / 2f))),
+                    Offset(w * (0.2f + 0.1f * cos(phase * 1.2f)), h * (0.7f + 0.1f * sin(phase * 1.2f))),
+                )
+                colors.forEachIndexed { index, color ->
+                    val radius = w * if (index % 2 == 0) 0.7f else 0.6f
+                    drawCircle(
+                        brush = Brush.radialGradient(
+                            colors = listOf(color.copy(alpha = 0.9f), Color.Transparent),
+                            center = centers[index],
+                            radius = radius,
+                        ),
+                        radius = radius,
+                        center = centers[index],
+                    )
+                }
+                val brandRadius = w * 0.7f
+                val brandCenter = Offset(
+                    w * (0.8f + 0.15f * cos(phase * 0.9f + PI.toFloat() * 1.5f)),
+                    h * (0.2f + 0.15f * sin(phase * 0.9f + PI.toFloat() * 1.5f)),
+                )
+                drawCircle(
+                    brush = Brush.radialGradient(
+                        listOf(Color(0xFF3DDC84).copy(alpha = 0.8f), Color.Transparent),
+                        center = brandCenter,
+                        radius = brandRadius,
+                    ),
+                    radius = brandRadius,
+                    center = brandCenter,
+                )
+            }
+        Box(
+            Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        colorStops = arrayOf(0.1f to Color.Transparent, 1f to base),
+                    ),
+                ),
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun DependencyAcknowledgements(
+    onDismiss: () -> Unit,
+    onDependencyClick: (String, String) -> Unit,
+) {
+    val dependencies = listOf(
+        "Kotlin Multiplatform" to "https://kotlinlang.org/multiplatform/",
+        "Compose Multiplatform" to "https://www.jetbrains.com/compose-multiplatform/",
+        "Ktor" to "https://ktor.io/",
+        "Room" to "https://developer.android.com/kotlin/multiplatform/room",
+        "Coil" to "https://coil-kt.github.io/coil/",
+        "Kotlinx Serialization" to "https://github.com/Kotlin/kotlinx.serialization",
+    )
+    ModalBottomSheet(onDismissRequest = onDismiss) {
+        Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp)) {
+            Text(
+                text = "开源依赖致谢",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.SemiBold,
+            )
+            Spacer(Modifier.height(12.dp))
+            dependencies.forEachIndexed { index, (name, url) ->
+                AboutLink(
+                    title = name,
+                    description = url,
+                    showDivider = index < dependencies.lastIndex,
+                    onClick = { onDependencyClick(url, name) },
+                )
+            }
+            Spacer(Modifier.height(24.dp))
+        }
     }
 }
 

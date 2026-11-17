@@ -1,5 +1,8 @@
 package com.joker.coolmallkmp.feature.common.navigation
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.core.tween
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -67,7 +70,32 @@ fun NavGraphBuilder.aboutScreen(
     onContributorsClick: () -> Unit = {},
     onWebClick: (String, String) -> Unit = { _, _ -> },
 ) {
-    composable<AboutRouteArgs> {
+    composable<AboutRouteArgs>(
+        enterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { it },
+                animationSpec = tween(durationMillis = 300),
+            )
+        },
+        exitTransition = {
+            slideOutHorizontally(
+                targetOffsetX = { -it },
+                animationSpec = tween(durationMillis = 300),
+            )
+        },
+        popEnterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { -it },
+                animationSpec = tween(durationMillis = 300),
+            )
+        },
+        popExitTransition = {
+            slideOutHorizontally(
+                targetOffsetX = { it },
+                animationSpec = tween(durationMillis = 300),
+            )
+        },
+    ) {
         AboutRoute(
             onBack = onBack,
             onUserAgreementClick = onUserAgreementClick,
