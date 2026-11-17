@@ -13,11 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
@@ -32,34 +29,40 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmall.feature.common.viewmodel.SettingsViewModel
+import com.joker.coolmallkmp.core.data.local.AppLanguage
 import com.joker.coolmallkmp.core.data.local.ThemeColor
 import com.joker.coolmallkmp.core.data.local.ThemeMode
+import com.joker.coolmallkmp.core.data.local.currentAppLanguage
+import com.joker.coolmallkmp.core.data.local.selectAppLanguage
 import com.joker.coolmallkmp.core.di.AppContainerProvider
-import com.joker.coolmallkmp.core.ui.component.AppScaffold
-import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.component.AppListItem
+import com.joker.coolmallkmp.core.ui.component.AppScaffold
 import com.joker.coolmallkmp.core.ui.component.Modal
 import com.joker.coolmallkmp.core.ui.component.ModalType
+import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import coolmallkmp.shared.generated.resources.Res
-import coolmallkmp.shared.generated.resources.privacy_policy
 import coolmallkmp.shared.generated.resources.me_about
+import coolmallkmp.shared.generated.resources.privacy_policy
 import coolmallkmp.shared.generated.resources.settings_account_security
 import coolmallkmp.shared.generated.resources.settings_app_guide
 import coolmallkmp.shared.generated.resources.settings_cache_size
 import coolmallkmp.shared.generated.resources.settings_clear_cache
 import coolmallkmp.shared.generated.resources.settings_dark_mode
 import coolmallkmp.shared.generated.resources.settings_feedback
+import coolmallkmp.shared.generated.resources.settings_hide_splash
+import coolmallkmp.shared.generated.resources.settings_hide_splash_desc
+import coolmallkmp.shared.generated.resources.settings_language
+import coolmallkmp.shared.generated.resources.settings_language_chinese
+import coolmallkmp.shared.generated.resources.settings_language_english
+import coolmallkmp.shared.generated.resources.settings_language_follow_system
 import coolmallkmp.shared.generated.resources.settings_section_appearance
 import coolmallkmp.shared.generated.resources.settings_section_general
 import coolmallkmp.shared.generated.resources.settings_section_other
 import coolmallkmp.shared.generated.resources.settings_section_privacy
-import coolmallkmp.shared.generated.resources.settings_hide_splash
-import coolmallkmp.shared.generated.resources.settings_hide_splash_desc
 import coolmallkmp.shared.generated.resources.settings_theme_color
 import coolmallkmp.shared.generated.resources.settings_theme_color_default
 import coolmallkmp.shared.generated.resources.settings_theme_color_green
@@ -72,9 +75,8 @@ import coolmallkmp.shared.generated.resources.settings_theme_system
 import coolmallkmp.shared.generated.resources.settings_title
 import coolmallkmp.shared.generated.resources.user_agreement
 import org.jetbrains.compose.resources.stringResource
-import wang.harlon.appsettings.language.languageItem
-import wang.harlon.appsettings.ui.SettingsGroup
 
+@Suppress("ParamsComparedByRef")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsRoute(
@@ -100,7 +102,9 @@ fun SettingsRoute(
     val themeColor by viewModel.themeColor.collectAsState()
     var showThemeDialog by remember { mutableStateOf(false) }
     var showColorDialog by remember { mutableStateOf(false) }
+    var showLanguageDialog by remember { mutableStateOf(false) }
     val showSplash by viewModel.showSplash.collectAsState()
+    val appLanguage = currentAppLanguage()
 
     if (showThemeDialog) {
         ThemeModeModal(
@@ -119,6 +123,16 @@ fun SettingsRoute(
             onSelect = {
                 viewModel.setThemeColor(it)
                 showColorDialog = false
+            },
+        )
+    }
+    if (showLanguageDialog) {
+        AppLanguageModal(
+            selected = appLanguage,
+            onDismiss = { showLanguageDialog = false },
+            onSelect = {
+                showLanguageDialog = false
+                selectAppLanguage(it)
             },
         )
     }
@@ -155,9 +169,12 @@ fun SettingsRoute(
                     trailing = { ThemeColorDot(themeColor) },
                     showDivider = false,
                 )
-            }
-            SettingsGroup {
-                languageItem()
+                SettingsLinkRow(
+                    title = stringResource(Res.string.settings_language),
+                    onClick = { showLanguageDialog = true },
+                    value = appLanguageLabel(appLanguage),
+                    showDivider = false,
+                )
             }
             SettingsSectionTitle(stringResource(Res.string.settings_section_privacy))
             SettingsCard {
@@ -247,24 +264,6 @@ private fun SettingsLinkRow(
             trailing?.invoke()
         },
         onClick = onClick,
-    )
-}
-
-@Composable
-private fun SettingsValueRow(title: String, value: String, showDivider: Boolean = true) {
-    AppListItem(
-        title = title,
-        horizontalPadding = 16.dp,
-        verticalPadding = 16.dp,
-        showArrow = true,
-        showDivider = showDivider,
-        trailingContent = {
-            Text(
-                text = value,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        },
     )
 }
 
@@ -386,6 +385,57 @@ private fun ThemeColorModal(
 }
 
 @Composable
+private fun AppLanguageModal(
+    selected: AppLanguage,
+    onDismiss: () -> Unit,
+    onSelect: (AppLanguage) -> Unit,
+) {
+    val options = listOf(
+        AppLanguage.SYSTEM,
+        AppLanguage.CHINESE,
+        AppLanguage.ENGLISH,
+    )
+    Modal(
+        visible = true,
+        modalType = ModalType.BOTTOM,
+        onDismiss = onDismiss,
+        containerColor = MaterialTheme.colorScheme.background,
+        indicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+        horizontalPadding = 16.dp,
+        skipPartiallyExpanded = false,
+        dragHandleVerticalPadding = 16.dp,
+        bottomContentPadding = 12.dp,
+    ) {
+        Text(
+            text = stringResource(Res.string.settings_language),
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+        )
+        Card {
+            options.forEachIndexed { index, language ->
+                AppListItem(
+                    title = appLanguageLabel(language),
+                    showArrow = false,
+                    horizontalPadding = 16.dp,
+                    verticalPadding = 8.dp,
+                    showDivider = index != options.lastIndex,
+                    trailingContent = {
+                        RadioButton(
+                            selected = selected == language,
+                            onClick = { onSelect(language) },
+                        )
+                    },
+                    onClick = { onSelect(language) },
+                )
+            }
+        }
+    }
+}
+
+@Composable
 private fun ThemeColorDot(color: ThemeColor) {
     Box(
         modifier = Modifier
@@ -408,6 +458,13 @@ private fun themeColorLabel(color: ThemeColor): String = when (color) {
     ThemeColor.GREEN -> stringResource(Res.string.settings_theme_color_green)
     ThemeColor.ORANGE -> stringResource(Res.string.settings_theme_color_orange)
     ThemeColor.RED -> stringResource(Res.string.settings_theme_color_red)
+}
+
+@Composable
+private fun appLanguageLabel(language: AppLanguage): String = when (language) {
+    AppLanguage.SYSTEM -> stringResource(Res.string.settings_language_follow_system)
+    AppLanguage.CHINESE -> stringResource(Res.string.settings_language_chinese)
+    AppLanguage.ENGLISH -> stringResource(Res.string.settings_language_english)
 }
 
 private fun themeColorValue(color: ThemeColor): Color = when (color) {
