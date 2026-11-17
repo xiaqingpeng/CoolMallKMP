@@ -131,27 +131,27 @@ fun CartRoute(
                             .padding(horizontal = 16.dp, vertical = 12.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            stringResource(Res.string.cart_selected_count, selectedCount),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                        if (!isEditing) {
-                            Row(verticalAlignment = Alignment.Bottom) {
-                                Text(
-                                    stringResource(Res.string.cart_total_prefix),
-                                    fontWeight = FontWeight.Bold,
-                                )
-                                PriceText(price = selectedAmount, showDecimals = false)
-                            }
-                        }
-                    }
                     Checkbox(
                         checked = isAllSelected,
                         onCheckedChange = { viewModel.toggleSelectAll() },
                     )
                     Text(stringResource(Res.string.cart_select_all))
+                    Spacer(Modifier.weight(1f))
+                    if (!isEditing) {
+                        Text(
+                            stringResource(Res.string.cart_total_prefix),
+                            fontWeight = FontWeight.Bold,
+                        )
+                        PriceText(price = selectedAmount, showDecimals = false)
+                        Spacer(Modifier.size(8.dp))
+                    } else {
+                        Text(
+                            stringResource(Res.string.cart_selected_count, selectedCount),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Spacer(Modifier.size(8.dp))
+                    }
                     if (isEditing) {
                         AppButtonFixed(
                             text = stringResource(Res.string.cart_delete_selected),
@@ -187,42 +187,45 @@ fun CartRoute(
         if (carts.isEmpty()) {
             EmptyCart(modifier = Modifier.fillMaxSize().padding(padding))
         } else {
-            val flatItems = remember(carts) {
-                carts.flatMap { cart -> cart.spec.map { cart to it } }
-            }
             RefreshLayout(
                 modifier = Modifier.fillMaxSize().padding(padding),
                 onRefresh = {},
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                items(flatItems, key = { (cart, spec) -> "${cart.goodsId}_${spec.id}" }) { (cart, spec) ->
-                    val itemKey = "${cart.goodsId}_${spec.id}"
+                items(carts, key = { cart -> "cart-${cart.goodsId}" }) { cart ->
                     AnimatedVisibility(
-                        visible = itemKey !in deletingItems,
+                        visible = cart.spec.any { "${cart.goodsId}_${it.id}" !in deletingItems },
                         exit = slideOutHorizontally(
                             targetOffsetX = { -it },
                             animationSpec = tween(300),
                         ) + fadeOut(animationSpec = tween(300)),
                     ) {
-                        CartItemCard(
+                        CartGoodsCard(
                             cart = cart,
-                            spec = spec,
-                            onIncrease = { viewModel.increase(cart.goodsId, spec.id, spec.count) },
-                            onDecrease = { viewModel.decrease(cart.goodsId, spec.id, spec.count) },
-                            onRemove = {
+                            selectedItems = selectedItems[cart.goodsId].orEmpty(),
+                            deletingItems = deletingItems,
+                            onGoodsClick = { onGoodsClick(cart.goodsId) },
+                            onSelectionChanged = { specId ->
+                                viewModel.toggleSelection(cart.goodsId, specId)
+                            },
+                            onIncrease = { specId, count ->
+                                viewModel.increase(cart.goodsId, specId, count)
+                            },
+                            onDecrease = { specId, count ->
+                                viewModel.decrease(cart.goodsId, specId, count)
+                            },
+                            onRemove = { specId ->
+                                val itemKey = "${cart.goodsId}_$specId"
                                 if (itemKey !in deletingItems) {
                                     deletingItems = deletingItems + itemKey
                                     deleteScope.launch {
                                         delay(300)
-                                        viewModel.remove(cart.goodsId, spec.id)
+                                        viewModel.remove(cart.goodsId, specId)
                                         deletingItems = deletingItems - itemKey
                                     }
                                 }
                             },
-                            selected = selectedItems[cart.goodsId]?.contains(spec.id) == true,
-                            onSelectionChanged = { viewModel.toggleSelection(cart.goodsId, spec.id) },
-                            onGoodsClick = { onGoodsClick(cart.goodsId) },
                         )
                     }
                 }
@@ -232,65 +235,103 @@ fun CartRoute(
 }
 
 @Composable
-private fun CartItemCard(
+private fun CartGoodsCard(
     cart: Cart,
-    spec: CartGoodsSpec,
-    onIncrease: () -> Unit,
-    onDecrease: () -> Unit,
-    onRemove: () -> Unit,
-    selected: Boolean,
-    onSelectionChanged: () -> Unit,
+    selectedItems: Set<Long>,
+    deletingItems: Set<String>,
     onGoodsClick: () -> Unit,
+    onSelectionChanged: (Long) -> Unit,
+    onIncrease: (Long, Int) -> Unit,
+    onDecrease: (Long, Int) -> Unit,
+    onRemove: (Long) -> Unit,
 ) {
-    val image = spec.images?.firstOrNull()?.takeIf(String::isNotBlank) ?: cart.goodsMainPic
     AppCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onGoodsClick),
     ) {
-        Row(
-            modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Checkbox(
-                checked = selected,
-                onCheckedChange = { onSelectionChanged() },
-            )
-            AsyncImage(
-                model = image,
-                contentDescription = cart.goodsName,
-                modifier = Modifier.size(72.dp).clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop,
-            )
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    cart.goodsName,
-                    style = MaterialTheme.typography.titleSmall,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
+        Text(
+            text = cart.goodsName,
+            style = MaterialTheme.typography.titleSmall,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onGoodsClick)
+                .padding(bottom = 12.dp),
+        )
+        cart.spec.forEach { spec ->
+            val itemKey = "${cart.goodsId}_${spec.id}"
+            AnimatedVisibility(
+                visible = itemKey !in deletingItems,
+                exit = slideOutHorizontally(
+                    targetOffsetX = { -it },
+                    animationSpec = tween(300),
+                ) + fadeOut(animationSpec = tween(300)),
+            ) {
+                CartSpecRow(
+                    cart = cart,
+                    spec = spec,
+                    selected = spec.id in selectedItems,
+                    onSelectionChanged = { onSelectionChanged(spec.id) },
+                    onIncrease = { onIncrease(spec.id, spec.count) },
+                    onDecrease = { onDecrease(spec.id, spec.count) },
+                    onRemove = { onRemove(spec.id) },
                 )
-                Text(
-                    spec.name.ifBlank { stringResource(Res.string.cart_default_spec) },
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                PriceTextSmall(price = spec.price)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onDecrease, modifier = Modifier.size(32.dp)) {
-                        Icon(Icons.Default.Remove, stringResource(Res.string.cart_decrease))
-                    }
-                    Text("${spec.count}", modifier = Modifier.padding(horizontal = 6.dp))
-                    IconButton(onClick = onIncrease, modifier = Modifier.size(32.dp)) {
-                        Icon(Icons.Default.Add, stringResource(Res.string.cart_increase))
-                    }
-                }
             }
-            IconButton(onClick = onRemove) {
-                Icon(
-                    Icons.Default.Delete,
-                    contentDescription = stringResource(Res.string.common_delete),
-                )
+        }
+    }
+}
+
+@Composable
+private fun CartSpecRow(
+    cart: Cart,
+    spec: CartGoodsSpec,
+    selected: Boolean,
+    onSelectionChanged: () -> Unit,
+    onIncrease: () -> Unit,
+    onDecrease: () -> Unit,
+    onRemove: () -> Unit,
+) {
+    val image = spec.images?.firstOrNull()?.takeIf(String::isNotBlank) ?: cart.goodsMainPic
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Checkbox(
+            checked = selected,
+            onCheckedChange = { onSelectionChanged() },
+        )
+        AsyncImage(
+            model = image,
+            contentDescription = cart.goodsName,
+            modifier = Modifier.size(88.dp).clip(RoundedCornerShape(4.dp)),
+            contentScale = ContentScale.Crop,
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = spec.name.ifBlank { stringResource(Res.string.cart_default_spec) },
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(4.dp))
+                    .padding(horizontal = 4.dp, vertical = 2.dp),
+            )
+            Spacer(Modifier.size(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                PriceTextSmall(price = spec.price)
+                Spacer(Modifier.weight(1f))
+                IconButton(onClick = onDecrease, modifier = Modifier.size(30.dp)) {
+                    Icon(Icons.Default.Remove, stringResource(Res.string.cart_decrease))
+                }
+                Text("${spec.count}", modifier = Modifier.padding(horizontal = 4.dp))
+                IconButton(onClick = onIncrease, modifier = Modifier.size(30.dp)) {
+                    Icon(Icons.Default.Add, stringResource(Res.string.cart_increase))
+                }
+                IconButton(onClick = onRemove, modifier = Modifier.size(30.dp)) {
+                    Icon(Icons.Default.Delete, stringResource(Res.string.common_delete))
+                }
             }
         }
     }
