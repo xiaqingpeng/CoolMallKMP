@@ -6,13 +6,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -33,7 +31,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -43,7 +40,6 @@ import com.joker.coolmall.feature.common.viewmodel.SettingsViewModel
 import com.joker.coolmallkmp.core.data.local.ThemeColor
 import com.joker.coolmallkmp.core.data.local.ThemeMode
 import com.joker.coolmallkmp.core.di.AppContainerProvider
-import com.joker.coolmallkmp.core.ui.component.AppDivider
 import com.joker.coolmallkmp.core.ui.component.AppScaffold
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.component.AppListItem
@@ -301,31 +297,37 @@ private fun ThemeModeModal(
         visible = true,
         modalType = ModalType.BOTTOM,
         onDismiss = onDismiss,
+        containerColor = MaterialTheme.colorScheme.background,
+        indicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+        horizontalPadding = 16.dp,
+        skipPartiallyExpanded = false,
+        dragHandleVerticalPadding = 16.dp,
+        bottomContentPadding = 12.dp,
     ) {
         Text(
             text = stringResource(Res.string.settings_dark_mode),
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
         )
         Card {
             ThemeMode.entries.forEachIndexed { index, mode ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .selectable(
+                AppListItem(
+                    title = themeModeLabel(mode),
+                    showArrow = false,
+                    horizontalPadding = 16.dp,
+                    verticalPadding = 8.dp,
+                    showDivider = index != ThemeMode.entries.lastIndex,
+                    trailingContent = {
+                        RadioButton(
                             selected = selected == mode,
                             onClick = { onSelect(mode) },
-                            role = Role.RadioButton,
                         )
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(themeModeLabel(mode), modifier = Modifier.weight(1f))
-                    RadioButton(selected == mode, onClick = null)
-                }
-                if (index != ThemeMode.entries.lastIndex) {
-                    AppDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                }
+                    },
+                    onClick = { onSelect(mode) },
+                )
             }
         }
     }
@@ -341,33 +343,43 @@ private fun ThemeColorModal(
         visible = true,
         modalType = ModalType.BOTTOM,
         onDismiss = onDismiss,
+        containerColor = MaterialTheme.colorScheme.background,
+        indicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+        horizontalPadding = 16.dp,
+        skipPartiallyExpanded = false,
+        dragHandleVerticalPadding = 16.dp,
+        bottomContentPadding = 12.dp,
     ) {
         Text(
             text = stringResource(Res.string.settings_theme_color),
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
         )
         Card {
             ThemeColor.entries.forEachIndexed { index, color ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .selectable(
-                            selected = selected == color,
-                            onClick = { onSelect(color) },
-                            role = Role.RadioButton,
-                        )
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(themeColorLabel(color), modifier = Modifier.weight(1f))
-                    ThemeColorDot(color)
-                    Spacer(Modifier.size(12.dp))
-                    RadioButton(selected == color, onClick = null)
-                }
-                if (index != ThemeColor.entries.lastIndex) {
-                    AppDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                }
+                AppListItem(
+                    title = themeColorLabel(color),
+                    showArrow = false,
+                    horizontalPadding = 16.dp,
+                    verticalPadding = 8.dp,
+                    showDivider = index != ThemeColor.entries.lastIndex,
+                    trailingContent = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            ThemeColorDot(color)
+                            RadioButton(
+                                selected = selected == color,
+                                onClick = { onSelect(color) },
+                            )
+                        }
+                    },
+                    onClick = { onSelect(color) },
+                )
             }
         }
     }

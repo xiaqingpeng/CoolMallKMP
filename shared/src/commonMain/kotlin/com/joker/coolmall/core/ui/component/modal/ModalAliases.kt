@@ -16,10 +16,10 @@ fun Modal(
     dismissOnClickOutside: Boolean = true,
     content: @Composable ColumnScope.() -> Unit,
 ) = SharedModal(
-    visible,
-    modalType,
-    onDismiss,
-    dismissOnBackPress,
-    dismissOnClickOutside,
-    content,
+    visible = visible,
+    modalType = modalType,
+    onDismiss = onDismiss,
+    dismissOnBackPress = dismissOnBackPress,
+    dismissOnClickOutside = dismissOnClickOutside,
+    content = content,
 )

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,27 +30,35 @@ fun Modal(
     onDismiss: () -> Unit,
     dismissOnBackPress: Boolean = true,
     dismissOnClickOutside: Boolean = true,
+    containerColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.surface,
+    indicatorColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.outline.copy(alpha = 0.8f),
+    horizontalPadding: androidx.compose.ui.unit.Dp = 0.dp,
+    skipPartiallyExpanded: Boolean = true,
+    dragHandleVerticalPadding: androidx.compose.ui.unit.Dp = 12.dp,
+    bottomContentPadding: androidx.compose.ui.unit.Dp = 0.dp,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     if (!visible) return
     when (modalType) {
         ModalType.BOTTOM -> ModalBottomSheet(
             onDismissRequest = onDismiss,
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            sheetState = rememberModalBottomSheetState(
+                skipPartiallyExpanded = skipPartiallyExpanded,
+            ),
             shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = containerColor,
             dragHandle = {
                 Box(
                     modifier = androidx.compose.ui.Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 12.dp),
+                        .padding(vertical = dragHandleVerticalPadding),
                     contentAlignment = Alignment.Center,
                 ) {
                     Box(
                         modifier = androidx.compose.ui.Modifier
                             .size(40.dp, 4.dp)
                             .background(
-                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.18f),
+                                indicatorColor,
                                 RoundedCornerShape(2.dp),
                             ),
                     )
@@ -57,9 +66,17 @@ fun Modal(
             },
         ) {
             Column(
-                modifier = androidx.compose.ui.Modifier.navigationBarsPadding(),
-                content = content,
-            )
+                modifier = androidx.compose.ui.Modifier
+                    .navigationBarsPadding()
+                    .padding(horizontal = horizontalPadding),
+            ) {
+                content()
+                if (bottomContentPadding > 0.dp) {
+                    androidx.compose.foundation.layout.Spacer(
+                        androidx.compose.ui.Modifier.height(bottomContentPadding),
+                    )
+                }
+            }
         }
         ModalType.CENTER -> Dialog(
             onDismissRequest = onDismiss,
