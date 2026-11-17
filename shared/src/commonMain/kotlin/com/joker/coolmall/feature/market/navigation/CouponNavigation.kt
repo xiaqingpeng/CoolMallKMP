@@ -15,8 +15,12 @@ fun NavController.navigateToCouponList() {
 
 fun NavGraphBuilder.couponListScreen(
     onBack: () -> Unit,
+    onUseCoupon: (Long) -> Unit,
 ) {
     composable<CouponListRouteArgs> {
-        CouponListRoute(onBack = onBack)
+        CouponListRoute(
+            onBack = onBack,
+            onUseCoupon = onUseCoupon,
+        )
     }
 }

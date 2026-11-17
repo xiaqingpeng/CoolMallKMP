@@ -383,6 +383,9 @@ fun CoolMallApp() {
             )
             couponListScreen(
                 onBack = { navController.popBackStack() },
+                onUseCoupon = {
+                    navController.navigateToGoodsCategory()
+                },
             )
             footprintScreen(
                 onBack = { navController.popBackStack() },
