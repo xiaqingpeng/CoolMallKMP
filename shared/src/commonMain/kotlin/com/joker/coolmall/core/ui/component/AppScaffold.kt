@@ -68,7 +68,7 @@ fun AppScaffold(
                         }
                     },
                     actions = actions,
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
+                    colors = TopAppBarDefaults.topAppBarColors(),
                 )
             }
         },

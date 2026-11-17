@@ -42,7 +42,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.rememberBottomSheetState
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -85,9 +84,9 @@ import com.joker.coolmallkmp.feature.main.view.skeleton.HomeLoadingSkeleton
 import com.joker.coolmallkmp.feature.main.viewmodel.HomeUiState
 import com.joker.coolmallkmp.feature.main.viewmodel.HomeViewModel
 import coolmallkmp.shared.generated.resources.Res
-import coolmallkmp.shared.generated.resources.common_no_more
 import coolmallkmp.shared.generated.resources.coupon_list_title
 import coolmallkmp.shared.generated.resources.coupon_receive
+import coolmallkmp.shared.generated.resources.common_no_more
 import coolmallkmp.shared.generated.resources.home_all_goods
 import coolmallkmp.shared.generated.resources.home_flash_sale
 import coolmallkmp.shared.generated.resources.home_recommend
@@ -105,7 +104,7 @@ import org.jetbrains.compose.resources.stringResource
 /**
  * 首页路由：回调导航 + HomeViewModel（对齐 CoolMallKotlin 结构，去掉 Hilt/Navigator）
  */
-@Suppress("ParamsComparedByRef")
+@Suppress("ParamsComparedByRef", "ComposeUnstableParameter")
 @Composable
 fun HomeRoute(
     onGoodsClick: (Long) -> Unit = {},
@@ -133,9 +132,7 @@ fun HomeRoute(
     val pageData by viewModel.pageData.collectAsState()
     val listData by viewModel.listData.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()
-    val isLoadingMore by viewModel.isLoadingMore.collectAsState()
     val loadMoreState by viewModel.loadMoreState.collectAsState()
-    val hasMore by viewModel.hasMore.collectAsState()
     val couponModalVisible by viewModel.couponModalVisible.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -168,9 +165,7 @@ fun HomeRoute(
                 pageData = pageData,
                 listData = listData,
                 isRefreshing = isRefreshing,
-                isLoadingMore = isLoadingMore,
                 loadMoreState = loadMoreState,
-                hasMore = hasMore,
                 couponModalVisible = couponModalVisible,
                 snackbarHostState = snackbarHostState,
                 onGoodsClick = onGoodsClick,
@@ -190,14 +185,13 @@ fun HomeRoute(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Suppress("ComposeUnstableParameter")
 @Composable
 private fun HomeScreen(
     pageData: Home,
     listData: List<Goods>,
     isRefreshing: Boolean,
-    isLoadingMore: Boolean,
     loadMoreState: LoadMoreState,
-    hasMore: Boolean,
     couponModalVisible: Boolean,
     snackbarHostState: SnackbarHostState,
     onGoodsClick: (Long) -> Unit,
@@ -415,6 +409,7 @@ private fun HomeTopAppBar(
     )
 }
 
+@Suppress("ComposeUnstableParameter")
 @Composable
 private fun BannerSection(
     banners: List<Banner>,
@@ -501,6 +496,7 @@ private fun BannerIndicator(
     }
 }
 
+@Suppress("ComposeUnstableParameter")
 @Composable
 private fun CouponSection(
     coupons: List<Coupon>,
@@ -574,6 +570,7 @@ private fun HomeCouponHint(coupon: Coupon) {
     }
 }
 
+@Suppress("ComposeUnstableParameter")
 @Composable
 private fun CategorySection(
     categories: List<Category>,
@@ -636,6 +633,7 @@ private fun CategoryItem(
     }
 }
 
+@Suppress("ComposeUnstableParameter")
 @Composable
 private fun FlashSaleSection(
     goods: List<Goods>,
@@ -719,7 +717,9 @@ private fun CouponReceiveSheet(
     onDismiss: () -> Unit,
     onCouponReceive: (Coupon) -> Unit,
 ) {
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val sheetState = rememberBottomSheetState(
+        initialValue = SheetValue.Hidden,
+    )
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
