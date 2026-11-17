@@ -105,6 +105,7 @@ import org.jetbrains.compose.resources.stringResource
 /**
  * 首页路由：回调导航 + HomeViewModel（对齐 CoolMallKotlin 结构，去掉 Hilt/Navigator）
  */
+@Suppress("ParamsComparedByRef")
 @Composable
 fun HomeRoute(
     onGoodsClick: (Long) -> Unit = {},

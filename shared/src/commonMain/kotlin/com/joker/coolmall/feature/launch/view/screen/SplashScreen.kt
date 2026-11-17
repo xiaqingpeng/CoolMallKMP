@@ -36,6 +36,7 @@ import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.splash_brand
 import coolmallkmp.shared.generated.resources.splash_subtitle
 import coolmallkmp.shared.generated.resources.ic_logo
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -66,14 +67,18 @@ fun SplashRoute(
         }
     }
 
-    SplashScreen()
+    SplashScreen(onAnimationFinished = viewModel::onSplashAnimationFinished)
 }
 
 @Composable
-private fun SplashScreen() {
+private fun SplashScreen(
+    onAnimationFinished: () -> Unit,
+) {
     var started by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         started = true
+        delay(1200)
+        onAnimationFinished()
     }
 
     val offsetY by animateDpAsState(
@@ -131,7 +136,7 @@ private fun SplashScreen() {
                 Text(
                     text = stringResource(Res.string.splash_subtitle),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                 )
             }
             Spacer(modifier = Modifier.size(32.dp))

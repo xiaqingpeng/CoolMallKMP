@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.joker.coolmallkmp.core.data.local.GuidePreferences
 import com.joker.coolmallkmp.core.data.local.SplashPreferences
 import com.joker.coolmallkmp.core.data.repository.AuthRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
@@ -25,18 +24,39 @@ class SplashViewModel(
 
     private val _destination = MutableStateFlow<SplashDestination?>(null)
     val destination: StateFlow<SplashDestination?> = _destination.asStateFlow()
+    private var sessionRestored = false
+    private var animationFinished = false
 
     init {
         viewModelScope.launch {
             runCatching { authRepository.restoreSession() }
-            if (splashPreferences?.showSplash?.first() != false) {
-                delay(1200)
+            sessionRestored = true
+            if (splashPreferences?.showSplash?.first() == false) {
+                animationFinished = true
             }
-            _destination.value = if (guidePreferences.isGuideShown()) {
-                SplashDestination.Main
-            } else {
-                SplashDestination.Guide
-            }
+            navigateIfReady()
+        }
+    }
+
+    /**
+     * 由 Compose Splash 动画完成后调用。
+     *
+     * 登录态恢复和启动动画并行执行，但只有两者都完成后才进入下一页，
+     * 保持原项目固定的启动页展示节奏。
+     */
+    fun onSplashAnimationFinished() {
+        viewModelScope.launch {
+            animationFinished = true
+            navigateIfReady()
+        }
+    }
+
+    private suspend fun navigateIfReady() {
+        if (!sessionRestored || !animationFinished || _destination.value != null) return
+        _destination.value = if (guidePreferences.isGuideShown()) {
+            SplashDestination.Main
+        } else {
+            SplashDestination.Guide
         }
     }
 
