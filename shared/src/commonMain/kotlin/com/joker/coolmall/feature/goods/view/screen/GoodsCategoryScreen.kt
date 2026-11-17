@@ -31,6 +31,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items as columnItems
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -77,12 +83,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -189,7 +194,8 @@ fun GoodsCategoryRoute(
                                 .fillMaxWidth()
                                 .clip(CircleShape)
                                 .background(MaterialTheme.colorScheme.surfaceVariant)
-                                .padding(start = 14.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
+                                .height(42.dp)
+                                .padding(start = 14.dp, end = 4.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Icon(
@@ -282,11 +288,16 @@ fun GoodsCategoryRoute(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                CategoryFilterButton(
-                    selected = filtersVisible,
-                    onClick = viewModel::showFilters,
-                    leadingIcon = { Icon(Icons.Default.FilterList, null, modifier = Modifier.size(14.dp)) },
-                )
+                AnimatedVisibility(visible = !filtersVisible) {
+                    CategoryFilterButton(
+                        selected = false,
+                        onClick = viewModel::showFilters,
+                        leadingIcon = {
+                            Icon(Icons.Default.FilterList, null, modifier = Modifier.size(14.dp))
+                        },
+                        modifier = Modifier,
+                    )
+                }
                 Spacer(Modifier.width(8.dp))
                 CategoryFilterButton(
                     selected = sortType == GoodsSortType.COMPREHENSIVE,
@@ -382,8 +393,13 @@ fun GoodsCategoryRoute(
             }
         }
     }
-    if (filtersVisible) {
+    AnimatedVisibility(
+        visible = filtersVisible,
+        enter = fadeIn(animationSpec = tween(300)),
+        exit = fadeOut(animationSpec = tween(220)),
+    ) {
         FilterDialog(
+            visible = filtersVisible,
             categories = categories,
             filterUiState = filterUiState,
             selectedCategoryIds = selectedCategoryIds,
@@ -425,6 +441,7 @@ private fun CategoryFilterButton(
     leadingIcon: (@Composable () -> Unit)? = null,
     sortType: GoodsSortType? = null,
     sortState: GoodsSortState = GoodsSortState.NONE,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = Modifier
@@ -436,6 +453,7 @@ private fun CategoryFilterButton(
                     MaterialTheme.colorScheme.background
                 },
             )
+            .then(modifier)
             .clickable(onClick = onClick)
             .height(32.dp)
             .padding(horizontal = 14.dp),
@@ -478,6 +496,7 @@ private fun CategoryFilterButton(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun FilterDialog(
+    visible: Boolean,
     categories: List<com.joker.coolmallkmp.core.model.entity.Category>,
     filterUiState: GoodsCategoryFilterUiState,
     selectedCategoryIds: List<Long>,
@@ -491,13 +510,25 @@ private fun FilterDialog(
     var selected by remember(selectedCategoryIds) { mutableStateOf(selectedCategoryIds) }
     var min by remember(minPrice) { mutableStateOf(minPrice) }
     var max by remember(maxPrice) { mutableStateOf(maxPrice) }
-    Dialog(
-        onDismissRequest = onDismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false),
-    ) {
+    val panelScale by animateFloatAsState(
+        targetValue = if (visible) 1f else 0.92f,
+        animationSpec = tween(if (visible) 300 else 220),
+        label = "filter_panel_scale",
+    )
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        Spacer(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.scrim.copy(alpha = 0.5f))
+                .clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = onDismiss,
+                ),
+        )
         BoxWithConstraints(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .padding(16.dp),
         ) {
             val bottomInset = with(LocalDensity.current) {
@@ -507,7 +538,17 @@ private fun FilterDialog(
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .align(Alignment.Center)
                     .heightIn(max = minOf(680.dp, maxDialogHeight))
+                    .graphicsLayer {
+                        scaleX = panelScale
+                        scaleY = panelScale
+                    }
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() },
+                        onClick = {},
+                    )
                     .clip(RoundedCornerShape(16.dp)),
                 color = MaterialTheme.colorScheme.background,
                 tonalElevation = 6.dp,
@@ -689,8 +730,8 @@ private fun FilterDialog(
                 }
             }
         }
-        }
     }
+}
 }
 
 @Composable
@@ -702,7 +743,6 @@ private fun PriceInputField(
 ) {
     Box(
         modifier = modifier
-            .height(48.dp)
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.outline,
@@ -717,6 +757,9 @@ private fun PriceInputField(
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Number),
             singleLine = true,
+            textStyle = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onSurface,
+            ),
             decorationBox = { innerTextField ->
                 if (value.isEmpty()) {
                     Text(
@@ -741,11 +784,20 @@ private fun CategoryFilterChip(
     Row(
         modifier = Modifier
             .clip(CircleShape)
+            .border(
+                width = 1.dp,
+                color = if (selected) {
+                    MaterialTheme.colorScheme.primary
+                } else {
+                    MaterialTheme.colorScheme.outline
+                },
+                shape = CircleShape,
+            )
             .background(
                 if (selected) {
                     MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
                 } else {
-                    MaterialTheme.colorScheme.surfaceVariant
+                    MaterialTheme.colorScheme.surface
                 },
             )
             .clickable(onClick = onClick)

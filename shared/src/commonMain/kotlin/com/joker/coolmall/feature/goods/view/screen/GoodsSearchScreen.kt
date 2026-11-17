@@ -114,7 +114,8 @@ fun GoodsSearchRoute(
                             .fillMaxWidth()
                             .clip(CircleShape)
                             .background(MaterialTheme.colorScheme.surfaceVariant)
-                            .padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
+                            .height(42.dp)
+                            .padding(start = 16.dp, end = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
