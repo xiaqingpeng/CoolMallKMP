@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.width
 import com.joker.coolmallkmp.core.model.entity.Address
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.address_is_default

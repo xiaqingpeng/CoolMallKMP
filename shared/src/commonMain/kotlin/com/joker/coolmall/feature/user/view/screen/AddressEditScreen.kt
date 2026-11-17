@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -111,7 +112,7 @@ fun AddressEditRoute(
             Column(
                 modifier = Modifier
                     .padding(16.dp)
-                    .androidx.compose.foundation.layout.navigationBarsPadding(),
+                    .navigationBarsPadding(),
             ) {
                 AppButton(
                     text = stringResource(Res.string.common_save),
@@ -134,7 +135,7 @@ fun AddressEditRoute(
             ) {
                 CircularProgressIndicator()
             }
-            return@Scaffold
+            return@AppScaffold
         }
 
         Column(

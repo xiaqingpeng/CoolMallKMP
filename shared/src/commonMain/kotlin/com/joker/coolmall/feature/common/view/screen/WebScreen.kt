@@ -1,7 +1,6 @@
 package com.joker.coolmallkmp.feature.common.view.screen
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -66,6 +65,7 @@ fun WebRoute(
                                 text = { Text(stringResource(Res.string.web_menu_refresh)) },
                                 leadingIcon = { Icon(Icons.Default.Refresh, null) },
                                 onClick = {
+                                    progress = 0
                                     reloadToken++
                                     menuExpanded = false
                                 },
@@ -84,15 +84,11 @@ fun WebRoute(
             )
         },
     ) { padding ->
-        Column(
-            modifier = Modifier.fillMaxSize().padding(padding),
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding),
         ) {
-            if (progress in 1..99) {
-                LinearProgressIndicator(
-                    progress = { progress / 100f },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-            }
             PlatformWebPage(
                 url = url,
                 reloadToken = reloadToken,
@@ -104,6 +100,14 @@ fun WebRoute(
                 onProgressChange = { progress = it },
                 modifier = Modifier.fillMaxSize(),
             )
+
+            // 与原项目一致：进度条叠加在 WebView 顶部，不额外占用页面高度。
+            if (progress < 100) {
+                LinearProgressIndicator(
+                    progress = { progress / 100f },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
         }
     }
 }
