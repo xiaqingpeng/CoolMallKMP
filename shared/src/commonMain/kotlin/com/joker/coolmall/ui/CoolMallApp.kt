@@ -63,6 +63,7 @@ import com.joker.coolmallkmp.feature.launch.navigation.navigateFromGuideToMain
 import com.joker.coolmallkmp.feature.launch.navigation.navigateToMain
 import com.joker.coolmallkmp.feature.launch.navigation.splashScreen
 import com.joker.coolmallkmp.feature.main.navigation.mainScreen
+import com.joker.coolmallkmp.feature.main.model.MainTabRequest
 import com.joker.coolmallkmp.feature.market.navigation.couponListScreen
 import com.joker.coolmallkmp.feature.market.navigation.navigateToCouponList
 import com.joker.coolmallkmp.feature.order.navigation.backToMainFromOrder
@@ -444,6 +445,12 @@ fun CoolMallApp() {
                     navController.navigateToOrderConfirm()
                 },
                 onCommentsClick = navController::navigateToGoodsComments,
+                onLoginRequired = navController::navigateToLogin,
+                onChatClick = navController::navigateToChat,
+                onCartClick = {
+                    MainTabRequest.openCart()
+                    navController.popBackStack()
+                },
             )
             goodsCommentScreen(
                 onBack = { navController.popBackStack() },

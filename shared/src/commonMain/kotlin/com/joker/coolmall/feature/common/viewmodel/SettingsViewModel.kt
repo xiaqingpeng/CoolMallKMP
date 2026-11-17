@@ -20,14 +20,14 @@ class SettingsViewModel(
     val themeMode: StateFlow<ThemeMode> = themePreferences.themeMode
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.Companion.WhileSubscribed(5_000),
+            started = SharingStarted.WhileSubscribed(5_000),
             initialValue = ThemeMode.SYSTEM,
         )
     val themeColor: StateFlow<ThemeColor> = themePreferences.themeColor
-        .stateIn(viewModelScope, SharingStarted.Companion.WhileSubscribed(5_000), ThemeColor.DEFAULT)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ThemeColor.DEFAULT)
     val showSplash: StateFlow<Boolean> = (splashPreferences?.showSplash
         ?: flowOf(true))
-        .stateIn(viewModelScope, SharingStarted.Companion.WhileSubscribed(5_000), true)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
 
     fun setThemeMode(mode: ThemeMode) {
         viewModelScope.launch {

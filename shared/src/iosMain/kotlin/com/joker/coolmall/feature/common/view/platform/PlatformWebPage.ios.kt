@@ -71,12 +71,12 @@ actual fun PlatformWebPage(
                         onProgressChange(100)
                     }
                 }
-                NSURL(string = url)?.let { loadRequest(NSURLRequest.requestWithURL(it)) }
+                loadRequest(NSURLRequest.requestWithURL(NSURL(string = url)))
             }.also { webViewState.value = it }
         },
         update = { webView ->
             if (lastUrl.value != url || webView.URL?.absoluteString != url) {
-                NSURL(string = url)?.let { webView.loadRequest(NSURLRequest.requestWithURL(it)) }
+                NSURL(string = url).let { webView.loadRequest(NSURLRequest.requestWithURL(it)) }
                 lastUrl.value = url
             }
             if (lastReloadToken.value != reloadToken) {

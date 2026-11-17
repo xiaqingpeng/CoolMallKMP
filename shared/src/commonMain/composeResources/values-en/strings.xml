@@ -52,6 +52,11 @@
     <string name="goods_comment_title">Product reviews</string>
     <string name="goods_comment_empty">No reviews</string>
     <string name="goods_view_all_comments">View all</string>
+    <string name="goods_shipping_service">Shipping and service</string>
+    <string name="goods_shipping">Shipping</string>
+    <string name="goods_shipping_location">Available nationwide</string>
+    <string name="goods_service">Service</string>
+    <string name="goods_service_details">Authenticity · After-sales support</string>
     <string name="contributors_title">Contributors</string>
     <string name="contributors_empty">No contributors</string>
     <string name="contributors_signature_empty">Thanks to every contributor</string>

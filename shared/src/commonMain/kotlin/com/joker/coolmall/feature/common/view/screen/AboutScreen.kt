@@ -3,7 +3,6 @@ package com.joker.coolmallkmp.feature.common.view.screen
 import androidx.compose.animation.core.EaseOutCubic
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.RepeatMode
@@ -63,6 +62,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 import com.joker.coolmallkmp.core.di.AppContainerProvider
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
+import com.joker.coolmallkmp.core.util.PackageUtils
 import kotlinx.coroutines.delay
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.about_api_doc
@@ -104,6 +104,7 @@ import coolmallkmp.shared.generated.resources.about_version_code
 import coolmallkmp.shared.generated.resources.about_wechat_group
 import coolmallkmp.shared.generated.resources.app_name
 import coolmallkmp.shared.generated.resources.avatar
+import coolmallkmp.shared.generated.resources.contributors_title
 import coolmallkmp.shared.generated.resources.ic_logo
 import coolmallkmp.shared.generated.resources.me_about
 import org.jetbrains.compose.resources.painterResource
@@ -127,11 +128,7 @@ fun AboutRoute(
     val scrollFraction by remember {
         derivedStateOf { (scrollState.value / 220f).coerceIn(0f, 1f) }
     }
-    val heroAlpha by animateFloatAsState(
-        targetValue = if (ready) 1f - scrollFraction else 0f,
-        animationSpec = tween(800),
-        label = "about_hero_alpha",
-    )
+    val heroAlpha = if (ready) 1f - scrollFraction else 0f
     val heroOffset by animateDpAsState(
         targetValue = if (ready) 0.dp else 30.dp,
         animationSpec = tween(1000, easing = EaseOutCubic),
@@ -157,7 +154,11 @@ fun AboutRoute(
                         onWebClick("https://github.com/Joker-x-dev", "Joker.X")
                     },
                 )
-                AboutLink("贡献者", onClick = onContributorsClick, showDivider = false)
+                AboutLink(
+                    stringResource(Res.string.contributors_title),
+                    onClick = onContributorsClick,
+                    showDivider = false,
+                )
             }
             AboutSection(stringResource(Res.string.about_section_project)) {
                 AboutLink(stringResource(Res.string.about_github), stringResource(Res.string.about_github_url)) {
@@ -169,7 +170,7 @@ fun AboutRoute(
             }
             AboutSection(stringResource(Res.string.about_section_resources)) {
                 AboutLink(stringResource(Res.string.about_api_doc), stringResource(Res.string.about_api_doc_desc)) {
-                    onWebClick("https://coolmallkmp.apifox.cn", "API 文档")
+                    onWebClick("https://coolmall.apifox.cn", "API 文档")
                 }
                 AboutLink(stringResource(Res.string.about_demo_download), stringResource(Res.string.about_demo_download_desc)) {
                     onWebClick("https://www.pgyer.com/CoolMallKotlinProdRelease", "Demo 下载")
@@ -222,14 +223,19 @@ fun AboutRoute(
                 .graphicsLayer {
                     alpha = heroAlpha
                     translationY = heroOffset.toPx()
-                    scaleX = 1f - scrollFraction * .08f
-                    scaleY = 1f - scrollFraction * .08f
+                    scaleX = 1f - scrollFraction * .1f
+                    scaleY = 1f - scrollFraction * .1f
                 },
         ) {
             AboutHero(Modifier.fillMaxWidth())
         }
         CenterAlignedTopAppBar(
-            title = { Text(stringResource(Res.string.me_about), Modifier.graphicsLayer { alpha = scrollFraction }) },
+            title = {
+                Text(
+                    stringResource(Res.string.me_about),
+                    Modifier.graphicsLayer { alpha = scrollFraction },
+                )
+            },
             navigationIcon = {
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
@@ -376,10 +382,16 @@ private fun AboutHero(modifier: Modifier = Modifier) {
             }
         }
         Spacer(Modifier.height(24.dp))
-        Text(stringResource(Res.string.app_name), style = MaterialTheme.typography.displaySmall, fontWeight = FontWeight.Bold)
+        Text(
+            PackageUtils.appName(AppContainerProvider.appContext)
+                .ifBlank { stringResource(Res.string.app_name) },
+            style = MaterialTheme.typography.displaySmall,
+            fontWeight = FontWeight.Bold,
+        )
         Spacer(Modifier.height(8.dp))
         Text(
             "Version ${AppContainerProvider.versionName.ifBlank { "—" }}",
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
@@ -389,7 +401,12 @@ private fun AboutHero(modifier: Modifier = Modifier) {
 private fun AboutInfoCard() {
     Card(Modifier.fillMaxWidth()) {
         Column {
-            AboutInfoRow(stringResource(Res.string.about_app_name), stringResource(Res.string.app_name), showDivider = true)
+            AboutInfoRow(
+                stringResource(Res.string.about_app_name),
+                PackageUtils.appName(AppContainerProvider.appContext)
+                    .ifBlank { stringResource(Res.string.app_name) },
+                showDivider = true,
+            )
             AboutInfoRow(stringResource(Res.string.about_version), AppContainerProvider.versionName.ifBlank { "—" }, showDivider = true)
             AboutInfoRow(stringResource(Res.string.about_version_code), AppContainerProvider.versionCode.ifBlank { "—" }, showDivider = false)
         }
@@ -433,7 +450,8 @@ private fun AboutLink(
         if (showDivider) {
             HorizontalDivider(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                color = MaterialTheme.colorScheme.outlineVariant,
+                color = MaterialTheme.colorScheme.outline,
+                thickness = 0.5.dp,
             )
         }
     }
@@ -476,7 +494,8 @@ private fun AboutDeveloperLink(onClick: () -> Unit) {
         }
         HorizontalDivider(
             modifier = Modifier.padding(horizontal = 16.dp),
-            color = MaterialTheme.colorScheme.outlineVariant,
+            color = MaterialTheme.colorScheme.outline,
+            thickness = 0.5.dp,
         )
     }
 }
@@ -491,7 +510,8 @@ private fun AboutInfoRow(label: String, value: String, showDivider: Boolean) {
         if (showDivider) {
             HorizontalDivider(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                color = MaterialTheme.colorScheme.outlineVariant,
+                color = MaterialTheme.colorScheme.outline,
+                thickness = 0.5.dp,
             )
         }
     }

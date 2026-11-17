@@ -52,6 +52,11 @@
     <string name="goods_comment_title">商品评价</string>
     <string name="goods_comment_empty">暂无评价</string>
     <string name="goods_view_all_comments">查看全部</string>
+    <string name="goods_shipping_service">配送与服务</string>
+    <string name="goods_shipping">配送</string>
+    <string name="goods_shipping_location">全国可配送</string>
+    <string name="goods_service">服务</string>
+    <string name="goods_service_details">正品保障 · 售后服务</string>
     <string name="contributors_title">贡献者</string>
     <string name="contributors_empty">暂无贡献者</string>
     <string name="contributors_signature_empty">感谢每一位贡献者</string>

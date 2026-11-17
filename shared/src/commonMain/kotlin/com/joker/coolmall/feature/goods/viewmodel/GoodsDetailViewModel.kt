@@ -3,9 +3,11 @@ package com.joker.coolmallkmp.feature.goods.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joker.coolmallkmp.core.data.repository.CartRepository
+import com.joker.coolmallkmp.core.data.repository.CouponRepository
 import com.joker.coolmallkmp.core.data.repository.FootprintRepository
 import com.joker.coolmallkmp.core.data.repository.GoodsRepository
 import com.joker.coolmallkmp.core.data.repository.PageRepository
+import com.joker.coolmallkmp.core.session.AuthSession
 import com.joker.coolmallkmp.core.model.entity.GoodsDetail
 import com.joker.coolmallkmp.core.model.entity.GoodsSpec
 import com.joker.coolmallkmp.core.model.entity.SelectedGoods
@@ -38,6 +40,7 @@ class GoodsDetailViewModel(
     private val pageRepository: PageRepository,
     private val goodsRepository: GoodsRepository,
     private val cartRepository: CartRepository,
+    private val couponRepository: CouponRepository,
     private val footprintRepository: FootprintRepository,
 ) : ViewModel() {
 
@@ -61,6 +64,8 @@ class GoodsDetailViewModel(
 
     private val _message = MutableSharedFlow<UiMessage>(extraBufferCapacity = 1)
     val message: SharedFlow<UiMessage> = _message.asSharedFlow()
+    private val _loginRequired = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val loginRequired: SharedFlow<Unit> = _loginRequired.asSharedFlow()
 
     init {
         loadDetail()
@@ -101,6 +106,27 @@ class GoodsDetailViewModel(
 
     fun hideSpecModal() {
         _specModalVisible.value = false
+    }
+
+    fun receiveCoupon(couponId: Long) {
+        if (AuthSession.token.isBlank()) {
+            _loginRequired.tryEmit(Unit)
+            return
+        }
+        viewModelScope.launch {
+            runCatching { couponRepository.receiveCoupon(couponId) }
+                .onSuccess { response ->
+                    if (response.isSucceeded) {
+                        _message.emit(
+                            response.data?.takeIf { it.isNotBlank() }?.let(UiMessage::Raw)
+                                ?: UiMessage.Code(MessageCode.CouponReceiveSuccess),
+                        )
+                    } else {
+                        _message.emit(UiMessage.loadFailed(response.message, response.code))
+                    }
+                }
+                .onFailure { error -> _message.emit(UiMessage.network(error.message)) }
+        }
     }
 
     fun loadGoodsSpecs(force: Boolean = false) {

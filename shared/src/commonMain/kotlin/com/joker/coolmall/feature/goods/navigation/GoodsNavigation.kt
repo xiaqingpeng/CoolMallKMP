@@ -26,6 +26,9 @@ fun NavGraphBuilder.goodsDetailScreen(
     onBack: () -> Unit,
     onBuyNow: () -> Unit = {},
     onCommentsClick: (Long) -> Unit = {},
+    onLoginRequired: () -> Unit = {},
+    onChatClick: () -> Unit = {},
+    onCartClick: () -> Unit = {},
 ) {
     composable<GoodsDetailRouteArgs> { entry ->
         val args = entry.toRoute<GoodsDetailRouteArgs>()
@@ -34,6 +37,9 @@ fun NavGraphBuilder.goodsDetailScreen(
             onBack = onBack,
             onBuyNow = onBuyNow,
             onCommentsClick = onCommentsClick,
+            onLoginRequired = onLoginRequired,
+            onChatClick = onChatClick,
+            onCartClick = onCartClick,
         )
     }
 }

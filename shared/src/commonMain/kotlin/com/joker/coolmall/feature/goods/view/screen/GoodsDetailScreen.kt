@@ -11,14 +11,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -28,18 +32,24 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.SupportAgent
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
@@ -47,6 +57,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -93,6 +104,11 @@ import coolmallkmp.shared.generated.resources.goods_rating
 import coolmallkmp.shared.generated.resources.goods_select_spec
 import coolmallkmp.shared.generated.resources.goods_sold
 import coolmallkmp.shared.generated.resources.goods_spec
+import coolmallkmp.shared.generated.resources.goods_shipping
+import coolmallkmp.shared.generated.resources.goods_shipping_location
+import coolmallkmp.shared.generated.resources.goods_shipping_service
+import coolmallkmp.shared.generated.resources.goods_service
+import coolmallkmp.shared.generated.resources.goods_service_details
 import coolmallkmp.shared.generated.resources.goods_user_comments
 import coolmallkmp.shared.generated.resources.goods_view_all_comments
 import coolmallkmp.shared.generated.resources.me_user_fallback
@@ -105,6 +121,9 @@ fun GoodsDetailRoute(
     onBack: () -> Unit,
     onBuyNow: () -> Unit = {},
     onCommentsClick: (Long) -> Unit = {},
+    onLoginRequired: () -> Unit = {},
+    onChatClick: () -> Unit = {},
+    onCartClick: () -> Unit = {},
     viewModel: GoodsDetailViewModel = viewModel(
         key = "goods_detail_$goodsId",
         factory = viewModelFactory {
@@ -115,6 +134,7 @@ fun GoodsDetailRoute(
                     pageRepository = container.pageRepository,
                     goodsRepository = container.goodsRepository,
                     cartRepository = container.cartRepository,
+                    couponRepository = container.couponRepository,
                     footprintRepository = container.footprintRepository,
                 )
             }
@@ -131,52 +151,19 @@ fun GoodsDetailRoute(
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
+        viewModel.loginRequired.collect { onLoginRequired() }
+    }
+
+    LaunchedEffect(Unit) {
         viewModel.message.collect { msg ->
             snackbarHostState.showSnackbar(resolveUiMessageSuspend(msg))
         }
     }
 
     Scaffold(
-        topBar = {
-            CenterTopAppBar(
-                title = stringResource(Res.string.goods_detail_title),
-                showBackIcon = true,
-                onBackClick = onBack,
-            )
-        },
+        contentWindowInsets = ScaffoldDefaults.contentWindowInsets
+            .exclude(WindowInsets.statusBars),
         snackbarHost = { SnackbarHost(snackbarHostState) },
-        bottomBar = {
-            if (uiState is GoodsDetailUiState.Success) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                            .navigationBarsPadding()
-                        .padding(
-                            horizontal = SpacePaddingLarge,
-                            vertical = SpaceVerticalMedium,
-                        ),
-                    horizontalArrangement = Arrangement.spacedBy(SpaceHorizontalMedium),
-                ) {
-                    AppButtonBordered(
-                        text = stringResource(Res.string.goods_add_to_cart),
-                        onClick = viewModel::showSpecModal,
-                        modifier = Modifier.weight(1f),
-                        size = AppButtonSize.MEDIUM,
-                        enabled = !isAdding,
-                        fullWidth = true,
-                    )
-                    AppButton(
-                        text = stringResource(Res.string.goods_buy_now),
-                        onClick = viewModel::showSpecModal,
-                        modifier = Modifier.weight(1f),
-                        size = AppButtonSize.MEDIUM,
-                        style = AppButtonStyle.GRADIENT,
-                        enabled = !isAdding,
-                        fullWidth = true,
-                    )
-                }
-            }
-        }
     ) { padding ->
         when (val state = uiState) {
             GoodsDetailUiState.Loading -> {
@@ -199,6 +186,9 @@ fun GoodsDetailRoute(
                     onShowCouponModal = { couponsVisible = true },
                     onCommentsClick = { onCommentsClick(goodsId) },
                     onRefresh = viewModel::loadDetail,
+                    onBack = onBack,
+                    onChatClick = onChatClick,
+                    onCartClick = onCartClick,
                     modifier = Modifier.padding(padding),
                 )
                 if (specModalVisible) {
@@ -248,7 +238,7 @@ fun GoodsDetailRoute(
                                     CouponCard(
                                         coupon = coupon,
                                         mode = CouponCardMode.RECEIVE,
-                                        onActionClick = {},
+                                        onActionClick = { viewModel.receiveCoupon(coupon.id) },
                                     )
                                 }
                             }
@@ -268,16 +258,27 @@ private fun GoodsDetailScreen(
     onShowCouponModal: () -> Unit,
     onCommentsClick: () -> Unit,
     onRefresh: () -> Unit,
+    onBack: () -> Unit,
+    onChatClick: () -> Unit,
+    onCartClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val goods = detail.goodsInfo
-    RefreshLayout(
-        modifier = modifier.fillMaxSize(),
-        listState = rememberLazyListState(),
+    val listState = rememberLazyListState()
+    val topBarAlpha by remember {
+        derivedStateOf {
+            if (listState.firstVisibleItemIndex > 0) 1f
+            else (listState.firstVisibleItemScrollOffset / 260f).coerceIn(0f, 1f)
+        }
+    }
+    Box(modifier = modifier.fillMaxSize()) {
+      RefreshLayout(
+        modifier = Modifier.fillMaxSize(),
+        listState = listState,
         onRefresh = onRefresh,
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 132.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
+      ) {
         item {
             GoodsGallery(goods = goods)
         }
@@ -380,8 +381,136 @@ private fun GoodsDetailScreen(
             }
         }
         item {
+            AppCard(modifier = Modifier.fillMaxWidth()) {
+                Column {
+                    TitleWithLine(text = stringResource(Res.string.goods_shipping_service))
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        Text(
+                            text = stringResource(Res.string.goods_shipping),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Text(text = stringResource(Res.string.goods_shipping_location))
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        Text(
+                            text = stringResource(Res.string.goods_service),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Text(text = stringResource(Res.string.goods_service_details))
+                    }
+                }
+            }
+        }
+        item {
             Spacer(modifier = Modifier.height(120.dp))
         }
+      }
+
+      Row(
+          modifier = Modifier
+              .fillMaxWidth()
+              .background(
+                  if (topBarAlpha == 0f) Color.Transparent
+                  else MaterialTheme.colorScheme.surface.copy(alpha = topBarAlpha),
+              )
+              .statusBarsPadding()
+              .padding(horizontal = 12.dp, vertical = 8.dp),
+          horizontalArrangement = Arrangement.SpaceBetween,
+      ) {
+          DetailCircleButton(
+              imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+              contentDescription = stringResource(Res.string.common_back),
+              onClick = onBack,
+              filled = topBarAlpha == 0f,
+          )
+          DetailCircleButton(
+              imageVector = Icons.Default.Share,
+              contentDescription = null,
+              onClick = {},
+              filled = topBarAlpha == 0f,
+          )
+      }
+
+      Surface(
+          modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth(),
+          shadowElevation = 6.dp,
+          color = MaterialTheme.colorScheme.surface,
+      ) {
+          Row(
+              modifier = Modifier
+                  .fillMaxWidth()
+                  .navigationBarsPadding()
+                  .padding(horizontal = 12.dp, vertical = 8.dp),
+              verticalAlignment = Alignment.CenterVertically,
+          ) {
+              DetailQuickAction(Icons.Default.SupportAgent, "客服", onChatClick)
+              DetailQuickAction(Icons.Default.ShoppingCart, "购物车", onCartClick)
+              Spacer(Modifier.width(8.dp))
+              AppButtonBordered(
+                  text = stringResource(Res.string.goods_add_to_cart),
+                  onClick = onShowSpecModal,
+                  modifier = Modifier.weight(1f),
+                  size = AppButtonSize.MEDIUM,
+                  fullWidth = true,
+              )
+              Spacer(Modifier.width(8.dp))
+              AppButton(
+                  text = stringResource(Res.string.goods_buy_now),
+                  onClick = onShowSpecModal,
+                  modifier = Modifier.weight(1f),
+                  size = AppButtonSize.MEDIUM,
+                  style = AppButtonStyle.GRADIENT,
+                  fullWidth = true,
+              )
+          }
+      }
+    }
+}
+
+@Composable
+private fun DetailCircleButton(
+    imageVector: androidx.compose.ui.graphics.vector.ImageVector,
+    contentDescription: String?,
+    onClick: () -> Unit,
+    filled: Boolean,
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier
+            .size(38.dp)
+            .clip(CircleShape)
+            .background(if (filled) Color.Black.copy(alpha = 0.32f) else Color.Transparent),
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = contentDescription,
+            tint = if (filled) Color.White else MaterialTheme.colorScheme.onSurface,
+        )
+    }
+}
+
+@Composable
+private fun DetailQuickAction(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    label: String,
+    onClick: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .width(42.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .clickable(onClick = onClick)
+            .padding(vertical = 4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Icon(icon, contentDescription = label, modifier = Modifier.size(20.dp))
+        Text(label, style = MaterialTheme.typography.labelSmall, maxLines = 1)
     }
 }
 

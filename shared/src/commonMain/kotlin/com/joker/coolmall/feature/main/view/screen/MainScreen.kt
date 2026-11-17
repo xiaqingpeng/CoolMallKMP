@@ -18,6 +18,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
 import com.joker.coolmallkmp.feature.main.component.PlatformBottomNavIcon
 import com.joker.coolmallkmp.feature.main.model.TopLevelDestination
+import com.joker.coolmallkmp.feature.main.model.MainTabRequest
 import kotlinx.coroutines.launch
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.home_title
@@ -59,6 +62,14 @@ fun MainRoute(
 ) {
     val pagerState = rememberPagerState { TopLevelDestination.entries.size }
     val scope = rememberCoroutineScope()
+    val requestedDestination by MainTabRequest.requestedDestination.collectAsState()
+
+    LaunchedEffect(requestedDestination) {
+        requestedDestination?.let { destination ->
+            pagerState.animateScrollToPage(destination.ordinal)
+            MainTabRequest.consume()
+        }
+    }
 
     Scaffold(
         // 排除顶部状态栏边距，避免与子页 TopAppBar 双重 inset 导致顶栏被顶下

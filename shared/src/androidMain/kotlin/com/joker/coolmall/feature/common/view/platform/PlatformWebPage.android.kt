@@ -1,5 +1,6 @@
 package com.joker.coolmallkmp.feature.common.view.platform
 
+import android.annotation.SuppressLint
 import android.webkit.WebView
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
@@ -7,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
 actual fun PlatformWebPage(
     url: String,
