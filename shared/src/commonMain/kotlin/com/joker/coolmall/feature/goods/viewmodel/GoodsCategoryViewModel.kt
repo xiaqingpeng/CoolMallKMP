@@ -145,7 +145,7 @@ class GoodsCategoryViewModel(
     }
 
     fun resetFilters() {
-        _selectedCategoryIds.value = typeId?.let(::listOf).orEmpty()
+        _selectedCategoryIds.value = emptyList()
         _minPrice.value = ""
         _maxPrice.value = ""
         hideFilters()

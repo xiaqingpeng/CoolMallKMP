@@ -66,13 +66,11 @@ class GoodsSearchViewModel(
         }
     }
 
-    /** 记录历史；返回规范化关键词，空串返回 null。导航不依赖本地存储写入完成。 */
-    fun commitSearch(raw: String): String? {
+    /** 记录历史后返回规范化关键词，空串返回 null。 */
+    suspend fun commitSearch(raw: String): String? {
         val keyword = raw.trim()
         if (keyword.isEmpty()) return null
-        viewModelScope.launch {
-            searchHistoryRepository.add(keyword)
-        }
+        searchHistoryRepository.add(keyword)
         return keyword
     }
 

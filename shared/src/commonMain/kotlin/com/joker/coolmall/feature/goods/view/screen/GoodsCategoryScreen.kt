@@ -23,9 +23,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -48,6 +48,8 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ViewList
 import androidx.compose.material.icons.filled.GridView
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Button
@@ -91,6 +93,7 @@ import com.joker.coolmallkmp.core.ui.component.GoodsGridSkeleton
 import com.joker.coolmallkmp.core.ui.component.RefreshGridLayout
 import com.joker.coolmallkmp.core.ui.component.RefreshLayout
 import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.component.image.NetWorkImage
 import com.joker.coolmallkmp.core.ui.empty.EmptyData
 import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
 import coolmallkmp.shared.generated.resources.Res
@@ -174,7 +177,9 @@ fun GoodsCategoryRoute(
     Scaffold(
         topBar = {
             Column(
-                modifier = Modifier.statusBarsPadding(),
+                modifier = Modifier
+                    .statusBarsPadding()
+                    .background(MaterialTheme.colorScheme.surface),
             ) {
                 TopAppBar(
                     windowInsets = WindowInsets(0, 0, 0, 0),
@@ -196,8 +201,14 @@ fun GoodsCategoryRoute(
                             BasicTextField(
                                 value = searchText,
                                 onValueChange = { searchText = it },
-                                modifier = Modifier.weight(1f).padding(horizontal = 8.dp),
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(34.dp)
+                                    .padding(horizontal = 8.dp),
                                 singleLine = true,
+                                textStyle = MaterialTheme.typography.bodyMedium.copy(
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                ),
                                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                                 keyboardActions = KeyboardActions(
                                     onSearch = {
@@ -208,32 +219,28 @@ fun GoodsCategoryRoute(
                                     },
                                 ),
                                 decorationBox = { innerTextField ->
-                                    if (searchText.isBlank()) {
-                                        Text(
-                                            viewModel.routeTitle.ifBlank {
-                                                when {
-                                                    viewModel.listFeatured -> stringResource(Res.string.goods_list_flash)
-                                                    viewModel.listRecommend -> stringResource(Res.string.goods_list_recommend)
-                                                    else -> stringResource(Res.string.goods_list_default)
-                                                }
-                                            },
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        )
+                                    Box(
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentAlignment = Alignment.CenterStart,
+                                    ) {
+                                        if (searchText.isBlank()) {
+                                            Text(
+                                                viewModel.routeTitle.ifBlank {
+                                                    when {
+                                                        viewModel.listFeatured -> stringResource(Res.string.goods_list_flash)
+                                                        viewModel.listRecommend -> stringResource(Res.string.goods_list_recommend)
+                                                        else -> stringResource(Res.string.goods_list_default)
+                                                    }
+                                                },
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                            )
+                                        }
+                                        innerTextField()
                                     }
-                                    innerTextField()
                                 },
                             )
-                            if (searchText.isNotBlank()) {
-                                IconButton(
-                                    onClick = { searchText = "" },
-                                    modifier = Modifier.size(36.dp),
-                                ) {
-                                    Icon(Icons.Filled.Close, contentDescription = "清除", modifier = Modifier.size(18.dp))
-                                }
-                            }
-                            Text(
-                                text = "搜索",
-                                color = Color.White,
+                            Box(
                                 modifier = Modifier
                                     .clip(CircleShape)
                                     .background(MaterialTheme.colorScheme.primary)
@@ -246,8 +253,12 @@ fun GoodsCategoryRoute(
                                             }
                                         },
                                     )
-                                    .padding(horizontal = 18.dp, vertical = 8.dp),
-                            )
+                                    .height(34.dp)
+                                    .padding(horizontal = 18.dp),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Text(text = "搜索", color = Color.White)
+                            }
                         }
                     },
                     navigationIcon = {
@@ -255,6 +266,14 @@ fun GoodsCategoryRoute(
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = stringResource(Res.string.common_back),
+                            )
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = { isGrid = !isGrid }) {
+                            Icon(
+                                if (isGrid) Icons.Default.ViewList else Icons.Default.GridView,
+                                contentDescription = null,
                             )
                         }
                     },
@@ -278,24 +297,19 @@ fun GoodsCategoryRoute(
                 CategoryFilterButton(
                     selected = sortType == GoodsSortType.SALES,
                     onClick = { viewModel.cycleSort(GoodsSortType.SALES) },
-                    label = "销量${sortStateLabel(sortType, sortState)}",
+                    label = "销量",
+                    sortType = GoodsSortType.SALES,
+                    sortState = sortState,
                 )
                 Spacer(Modifier.width(8.dp))
                 CategoryFilterButton(
                     selected = sortType == GoodsSortType.PRICE,
                     onClick = { viewModel.cycleSort(GoodsSortType.PRICE) },
-                    label = "价格${sortStateLabel(sortType, sortState)}",
+                    label = "价格",
+                    sortType = GoodsSortType.PRICE,
+                    sortState = sortState,
                 )
                 Spacer(Modifier.weight(1f))
-                IconButton(onClick = { isGrid = !isGrid }) {
-                    Icon(
-                        if (isGrid) Icons.Default.ViewList else Icons.Default.GridView,
-                        contentDescription = null,
-                    )
-                }
-                IconButton(onClick = viewModel::refresh) {
-                    Icon(Icons.Default.Refresh, contentDescription = null)
-                }
                 }
             }
         }
@@ -403,15 +417,14 @@ private fun LoadMoreFooter(
     }
 }
 
-private fun sortStateLabel(type: GoodsSortType, state: GoodsSortState): String =
-    if (type == GoodsSortType.COMPREHENSIVE || state == GoodsSortState.NONE) "" else if (state == GoodsSortState.ASC) " ↑" else " ↓"
-
 @Composable
 private fun CategoryFilterButton(
     selected: Boolean,
     onClick: () -> Unit,
     label: String = "筛选",
     leadingIcon: (@Composable () -> Unit)? = null,
+    sortType: GoodsSortType? = null,
+    sortState: GoodsSortState = GoodsSortState.NONE,
 ) {
     Row(
         modifier = Modifier
@@ -435,6 +448,30 @@ private fun CategoryFilterButton(
             style = MaterialTheme.typography.bodyMedium,
             color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
         )
+        if (sortType != null) {
+            Column {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowUp,
+                    contentDescription = null,
+                    modifier = Modifier.size(12.dp),
+                    tint = if (selected && sortState == GoodsSortState.ASC) {
+                        MaterialTheme.colorScheme.primary
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                    },
+                )
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = null,
+                    modifier = Modifier.size(12.dp),
+                    tint = if (selected && sortState == GoodsSortState.DESC) {
+                        MaterialTheme.colorScheme.primary
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                    },
+                )
+            }
+        }
     }
 }
 
@@ -567,6 +604,7 @@ private fun FilterDialog(
                                             children.forEach { category ->
                                             CategoryFilterChip(
                                                 name = category.name,
+                                                imageUrl = category.pic,
                                                 selected = category.id in selected,
                                                 onClick = {
                                                     selected = if (category.id in selected) {
@@ -597,6 +635,7 @@ private fun FilterDialog(
                                             orphanCategories.forEach { category ->
                                                 CategoryFilterChip(
                                                     name = category.name,
+                                                    imageUrl = category.pic,
                                                     selected = category.id in selected,
                                                     onClick = {
                                                         selected = if (category.id in selected) {
@@ -623,14 +662,13 @@ private fun FilterDialog(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .navigationBarsPadding()
                             .padding(12.dp),
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                     ) {
                     com.joker.coolmallkmp.core.ui.component.AppButtonBordered(
                         text = "重置",
                         onClick = {
-                            selected = selectedCategoryIds
+                            selected = emptyList()
                             min = ""
                             max = ""
                             onReset()
@@ -696,6 +734,7 @@ private fun PriceInputField(
 @Composable
 private fun CategoryFilterChip(
     name: String,
+    imageUrl: String? = null,
     selected: Boolean,
     onClick: () -> Unit,
 ) {
@@ -713,6 +752,10 @@ private fun CategoryFilterChip(
             .padding(horizontal = 14.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        if (!imageUrl.isNullOrBlank()) {
+            NetWorkImage(model = imageUrl, size = 18.dp)
+            Spacer(Modifier.width(4.dp))
+        }
         Text(
             text = name,
             style = MaterialTheme.typography.bodyMedium,

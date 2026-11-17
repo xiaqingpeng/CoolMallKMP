@@ -1,40 +1,38 @@
-package com.joker.coolmallkmp.feature.goods.view.screen
-import com.joker.coolmallkmp.feature.goods.viewmodel.GoodsSearchViewModel
-import com.joker.coolmallkmp.feature.goods.viewmodel.*
+package com.joker.coolmall.feature.goods.view.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.ui.draw.clip
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -42,18 +40,23 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.joker.coolmallkmp.core.di.AppContainerProvider
-import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
 import com.joker.coolmallkmp.core.ui.component.SkeletonBlock
+import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
+import com.joker.coolmallkmp.feature.goods.viewmodel.GoodsSearchUiState
+import com.joker.coolmallkmp.feature.goods.viewmodel.GoodsSearchViewModel
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.common_back
 import coolmallkmp.shared.generated.resources.common_search
@@ -62,8 +65,10 @@ import coolmallkmp.shared.generated.resources.search_history
 import coolmallkmp.shared.generated.resources.search_history_clear
 import coolmallkmp.shared.generated.resources.search_no_keywords
 import coolmallkmp.shared.generated.resources.search_recommended
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
+@Suppress("ParamsComparedByRef")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun GoodsSearchRoute(
@@ -85,11 +90,14 @@ fun GoodsSearchRoute(
     val query by viewModel.query.collectAsState()
     val history by viewModel.history.collectAsState()
     val keyboard = LocalSoftwareKeyboardController.current
+    val scope = rememberCoroutineScope()
 
     fun performSearch(raw: String = query) {
-        viewModel.commitSearch(raw)?.let { keyword ->
-            keyboard?.hide()
-            onSearch(keyword)
+        scope.launch {
+            viewModel.commitSearch(raw)?.let { keyword ->
+                keyboard?.hide()
+                onSearch(keyword)
+            }
         }
     }
 
@@ -98,13 +106,15 @@ fun GoodsSearchRoute(
     Scaffold(
         topBar = {
             TopAppBar(
+                modifier = Modifier.statusBarsPadding(),
+                windowInsets = WindowInsets(0, 0, 0, 0),
                 title = {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(CircleShape)
                             .background(MaterialTheme.colorScheme.surfaceVariant)
-                            .padding(start = 14.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
+                            .padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
@@ -118,42 +128,47 @@ fun GoodsSearchRoute(
                             onValueChange = viewModel::updateQuery,
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(horizontal = 10.dp),
+                                .height(34.dp)
+                                .padding(horizontal = 8.dp),
                             singleLine = true,
+                            textStyle = MaterialTheme.typography.bodyMedium.copy(
+                                color = MaterialTheme.colorScheme.onSurface,
+                                textAlign = TextAlign.Start,
+                            ),
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                             keyboardActions = KeyboardActions(onSearch = { performSearch() }),
                             decorationBox = { innerTextField ->
-                                if (query.isBlank()) {
-                                    Text(
-                                        stringResource(Res.string.search_hint),
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    )
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(34.dp),
+                                    contentAlignment = Alignment.CenterStart,
+                                ) {
+                                    if (query.isBlank()) {
+                                        Text(
+                                            text = stringResource(Res.string.search_hint),
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                        )
+                                    }
+                                    innerTextField()
                                 }
-                                innerTextField()
                             },
                         )
-                        if (query.isNotBlank()) {
-                            IconButton(
-                                onClick = { viewModel.updateQuery("") },
-                                modifier = Modifier.size(40.dp),
-                            ) {
-                                Icon(
-                                    Icons.Filled.Close,
-                                    contentDescription = stringResource(Res.string.search_history_clear),
-                                modifier = Modifier.size(18.dp),
-                                )
-                            }
-                        }
-                        Text(
-                            text = stringResource(Res.string.common_search),
-                            color = Color.White,
+                        Box(
                             modifier = Modifier
                                 .clip(CircleShape)
                                 .background(MaterialTheme.colorScheme.primary)
                                 .clickable(enabled = canSearch, onClick = { performSearch() })
                                 .height(34.dp)
-                                .padding(horizontal = 24.dp),
-                        )
+                                .padding(horizontal = 20.dp),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text(
+                                text = stringResource(Res.string.common_search),
+                                color = Color.White,
+                            )
+                        }
                     }
                 },
                 navigationIcon = {
@@ -174,7 +189,7 @@ fun GoodsSearchRoute(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .padding(horizontal = 12.dp, vertical = 12.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
             if (history.isNotEmpty()) {
@@ -184,8 +199,7 @@ fun GoodsSearchRoute(
                 ) {
                     Text(
                         text = stringResource(Res.string.search_history),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
+                        style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier.weight(1f),
                     )
                     IconButton(onClick = viewModel::clearHistory) {
@@ -209,13 +223,12 @@ fun GoodsSearchRoute(
                 }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(if (history.isNotEmpty()) 4.dp else 0.dp))
             Text(
                 text = stringResource(Res.string.search_recommended),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.titleLarge,
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             when (val state = uiState) {
                 GoodsSearchUiState.Loading -> {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -271,9 +284,6 @@ private fun SearchKeywordTag(
             .clip(RoundedCornerShape(50))
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(50),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-        ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         Text(
