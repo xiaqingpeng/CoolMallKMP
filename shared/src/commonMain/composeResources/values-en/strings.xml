@@ -63,6 +63,12 @@
     <string name="common_confirm">Confirm</string>
     <string name="common_cancel">Cancel</string>
     <string name="common_loading">Loading…</string>
+    <string name="common_load_success">Load success</string>
+    <string name="common_load_error_retry">Load failed, tap to retry</string>
+    <string name="refresh_pull_down">Pull to refresh</string>
+    <string name="refresh_release">Release to refresh</string>
+    <string name="refresh_refreshing">Refreshing…</string>
+    <string name="refresh_complete">Refresh complete</string>
     <string name="common_save">Save</string>
     <string name="common_delete">Delete</string>
     <string name="common_edit">Edit</string>

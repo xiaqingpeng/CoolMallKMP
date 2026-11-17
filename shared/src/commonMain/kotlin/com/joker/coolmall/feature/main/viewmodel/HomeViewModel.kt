@@ -6,6 +6,7 @@ import com.joker.coolmallkmp.core.data.repository.AuthRepository
 import com.joker.coolmallkmp.core.data.repository.CouponRepository
 import com.joker.coolmallkmp.core.data.repository.GoodsRepository
 import com.joker.coolmallkmp.core.data.repository.PageRepository
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
 import com.joker.coolmallkmp.core.model.entity.Coupon
 import com.joker.coolmallkmp.core.model.entity.Goods
 import com.joker.coolmallkmp.core.model.entity.Home
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 sealed interface HomeUiState {
@@ -52,6 +54,9 @@ class HomeViewModel(
     private val _isLoadingMore = MutableStateFlow(false)
     val isLoadingMore: StateFlow<Boolean> = _isLoadingMore.asStateFlow()
 
+    private val _loadMoreState = MutableStateFlow(LoadMoreState.PullToLoad)
+    val loadMoreState: StateFlow<LoadMoreState> = _loadMoreState.asStateFlow()
+
     private val _hasMore = MutableStateFlow(true)
     val hasMore: StateFlow<Boolean> = _hasMore.asStateFlow()
 
@@ -66,7 +71,8 @@ class HomeViewModel(
     val loginRequired: SharedFlow<Unit> = _loginRequired.asSharedFlow()
 
     private var currentPage = 1
-    private val pageSize = 20
+    // CoolMallKotlin 首页通过 BaseNetWorkListViewModel 请求，每页实际使用 10 条。
+    private val pageSize = 10
     private val loadedGoods = mutableListOf<Goods>()
 
     init {
@@ -96,6 +102,11 @@ class HomeViewModel(
                 currentPage = 1
                 _listData.value = loadedGoods.toList()
                 _hasMore.value = home.goods.orEmpty().isNotEmpty()
+                _loadMoreState.value = if (_hasMore.value) {
+                    LoadMoreState.PullToLoad
+                } else {
+                    LoadMoreState.NoMore
+                }
                 _uiState.value = HomeUiState.Success
             }.onFailure { error ->
                 _isRefreshing.value = false
@@ -117,6 +128,7 @@ class HomeViewModel(
 
         viewModelScope.launch {
             _isLoadingMore.value = true
+            _loadMoreState.value = LoadMoreState.Loading
             val nextPage = currentPage + 1
             runCatching {
                 goodsRepository.getGoodsPage(
@@ -137,19 +149,30 @@ class HomeViewModel(
                 val list = pageData?.list.orEmpty()
                 if (list.isEmpty()) {
                     _hasMore.value = false
+                    _isLoadingMore.value = false
+                    _loadMoreState.value = LoadMoreState.NoMore
                     return@onSuccess
                 }
-                currentPage = nextPage
-                loadedGoods.addAll(list)
-                _listData.value = loadedGoods.toList()
                 val total = pageData?.pagination?.total
-                _hasMore.value = if (total != null) {
-                    loadedGoods.size < total
+                val nextHasMore = if (total != null) {
+                    loadedGoods.size + list.size < total
                 } else {
                     list.size >= pageSize
                 }
+                _hasMore.value = nextHasMore
+                _loadMoreState.value = LoadMoreState.Success
+                delay(400)
+                currentPage = nextPage
+                loadedGoods.addAll(list)
+                _listData.value = loadedGoods.toList()
+                _loadMoreState.value = if (_hasMore.value) {
+                    LoadMoreState.PullToLoad
+                } else {
+                    LoadMoreState.NoMore
+                }
             }.onFailure { error ->
                 _isLoadingMore.value = false
+                _loadMoreState.value = LoadMoreState.Error
                 _toastMessage.tryEmit(UiMessage.network(error.message))
             }
         }

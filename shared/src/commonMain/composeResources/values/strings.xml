@@ -63,6 +63,12 @@
     <string name="common_confirm">确认</string>
     <string name="common_cancel">取消</string>
     <string name="common_loading">加载中…</string>
+    <string name="common_load_success">加载成功</string>
+    <string name="common_load_error_retry">加载失败，点击重试</string>
+    <string name="refresh_pull_down">下拉刷新</string>
+    <string name="refresh_release">松开刷新</string>
+    <string name="refresh_refreshing">刷新中…</string>
+    <string name="refresh_complete">刷新完成</string>
     <string name="common_save">保存</string>
     <string name="common_delete">删除</string>
     <string name="common_edit">编辑</string>

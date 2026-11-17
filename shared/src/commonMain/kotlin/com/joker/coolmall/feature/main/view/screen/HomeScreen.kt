@@ -20,8 +20,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
@@ -30,12 +28,12 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -43,13 +41,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.VerticalDivider
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -59,34 +55,35 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil3.compose.AsyncImage
+import com.joker.coolmallkmp.core.common.base.state.LoadMoreState
 import com.joker.coolmallkmp.core.di.AppContainerProvider
 import com.joker.coolmallkmp.core.model.entity.Banner
 import com.joker.coolmallkmp.core.model.entity.Category
 import com.joker.coolmallkmp.core.model.entity.Coupon
 import com.joker.coolmallkmp.core.model.entity.Goods
 import com.joker.coolmallkmp.core.model.entity.Home
+import com.joker.coolmallkmp.core.ui.component.AppCard
+import com.joker.coolmallkmp.core.ui.component.AppListItem
 import com.joker.coolmallkmp.core.ui.component.CouponCard
 import com.joker.coolmallkmp.core.ui.component.CouponCardMode
-import com.joker.coolmallkmp.core.ui.component.AppDivider
-import com.joker.coolmallkmp.core.ui.component.AppCard
 import com.joker.coolmallkmp.core.ui.component.GoodsGridItem
 import com.joker.coolmallkmp.core.ui.component.GoodsListItem
-import com.joker.coolmallkmp.core.ui.component.AppListItem
+import com.joker.coolmallkmp.core.ui.component.LoadMore
 import com.joker.coolmallkmp.core.ui.component.PriceTextSmall
+import com.joker.coolmallkmp.core.ui.component.RefreshStaggeredGridLayout
 import com.joker.coolmallkmp.core.ui.component.TitleWithLine
 import com.joker.coolmallkmp.core.ui.empty.EmptyUiMessage
 import com.joker.coolmallkmp.core.ui.resolveUiMessageSuspend
+import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
 import com.joker.coolmallkmp.core.ui.theme.ShapeMedium
+import com.joker.coolmallkmp.feature.main.component.CommonScaffold
+import com.joker.coolmallkmp.feature.main.view.skeleton.HomeLoadingSkeleton
 import com.joker.coolmallkmp.feature.main.viewmodel.HomeUiState
 import com.joker.coolmallkmp.feature.main.viewmodel.HomeViewModel
-import com.joker.coolmallkmp.feature.main.view.skeleton.HomeLoadingSkeleton
-import com.joker.coolmallkmp.feature.main.component.CommonScaffold
-import kotlinx.coroutines.delay
 import coolmallkmp.shared.generated.resources.Res
 import coolmallkmp.shared.generated.resources.common_no_more
 import coolmallkmp.shared.generated.resources.coupon_list_title
@@ -101,6 +98,7 @@ import coolmallkmp.shared.generated.resources.ic_logo
 import coolmallkmp.shared.generated.resources.ic_search
 import coolmallkmp.shared.generated.resources.ic_time
 import coolmallkmp.shared.generated.resources.me_view_all
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -136,6 +134,7 @@ fun HomeRoute(
     val listData by viewModel.listData.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()
     val isLoadingMore by viewModel.isLoadingMore.collectAsState()
+    val loadMoreState by viewModel.loadMoreState.collectAsState()
     val hasMore by viewModel.hasMore.collectAsState()
     val couponModalVisible by viewModel.couponModalVisible.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -170,6 +169,7 @@ fun HomeRoute(
                 listData = listData,
                 isRefreshing = isRefreshing,
                 isLoadingMore = isLoadingMore,
+                loadMoreState = loadMoreState,
                 hasMore = hasMore,
                 couponModalVisible = couponModalVisible,
                 snackbarHostState = snackbarHostState,
@@ -196,6 +196,7 @@ private fun HomeScreen(
     listData: List<Goods>,
     isRefreshing: Boolean,
     isLoadingMore: Boolean,
+    loadMoreState: LoadMoreState,
     hasMore: Boolean,
     couponModalVisible: Boolean,
     snackbarHostState: SnackbarHostState,
@@ -215,22 +216,6 @@ private fun HomeScreen(
     // 对齐 CoolMallKotlin RefreshLayout(isGrid = true)：瀑布流 + 下拉刷新 + 顶栏联动
     val gridState = rememberLazyStaggeredGridState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    val pullToRefreshState = rememberPullToRefreshState()
-
-    val shouldLoadMore by remember {
-        derivedStateOf {
-            val lastVisible = gridState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
-            val total = gridState.layoutInfo.totalItemsCount
-            total > 0 && lastVisible >= total - 4
-        }
-    }
-
-    LaunchedEffect(shouldLoadMore, hasMore, isLoadingMore, isRefreshing) {
-        if (shouldLoadMore && hasMore && !isLoadingMore && !isRefreshing) {
-            onLoadMore()
-        }
-    }
-
     Box(modifier = Modifier.fillMaxSize()) {
         CommonScaffold(
             topBar = {
@@ -243,22 +228,19 @@ private fun HomeScreen(
             },
             scrollBehavior = scrollBehavior,
         ) { padding ->
-            PullToRefreshBox(
+            RefreshStaggeredGridLayout(
                 isRefreshing = isRefreshing,
                 onRefresh = onRefresh,
-                state = pullToRefreshState,
+                onLoadMore = onLoadMore,
+                loadMoreState = loadMoreState,
+                gridState = gridState,
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalItemSpacing = 8.dp,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding),
             ) {
-                LazyVerticalStaggeredGrid(
-                    columns = StaggeredGridCells.Fixed(2),
-                    state = gridState,
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalItemSpacing = 8.dp,
-                ) {
                     val banners = pageData.banner.orEmpty()
                     if (banners.isNotEmpty()) {
                         item(span = StaggeredGridItemSpan.FullLine) {
@@ -336,27 +318,12 @@ private fun HomeScreen(
                     }
 
                     item(span = StaggeredGridItemSpan.FullLine) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 12.dp),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            when {
-                                isLoadingMore -> {
-                                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
-                                }
-                                !hasMore && listData.isNotEmpty() -> {
-                                    Text(
-                                        text = stringResource(Res.string.common_no_more),
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    )
-                                }
-                            }
-                        }
+                        LoadMore(
+                            state = loadMoreState,
+                            modifier = Modifier.fillMaxWidth(),
+                            onRetry = onLoadMore,
+                        )
                     }
-                }
             }
         }
 
