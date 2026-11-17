@@ -13,6 +13,7 @@ kotlin {
 dependencies {
     implementation(project(":shared"))
 
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
 

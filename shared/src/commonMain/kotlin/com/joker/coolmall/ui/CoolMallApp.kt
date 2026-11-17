@@ -15,6 +15,8 @@ import coil3.compose.setSingletonImageLoaderFactory
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import com.joker.coolmallkmp.core.data.local.ThemeColor
 import com.joker.coolmallkmp.core.data.local.ThemeMode
+import com.joker.coolmallkmp.core.data.local.appLanguageSettings
+import com.joker.coolmallkmp.core.data.local.supportedAppLanguages
 import com.joker.coolmallkmp.core.di.AppContainerProvider
 import com.joker.coolmallkmp.core.network.Network
 import com.joker.coolmallkmp.core.ui.theme.coolMallDarkColorScheme
@@ -98,6 +100,8 @@ import com.joker.coolmallkmp.core.ui.theme.ColorDanger
 import com.joker.coolmallkmp.core.ui.theme.ColorPurple
 import com.joker.coolmallkmp.core.ui.theme.ColorSuccess
 import com.joker.coolmallkmp.core.ui.theme.PrimaryDefault
+import wang.harlon.appsettings.AppSettingsRoot
+import wang.harlon.appsettings.rememberAppSettings
 
 /**
  * CoolMall KMP 真正业务入口（对齐 netcloudmusic MyApp）
@@ -135,16 +139,24 @@ fun CoolMallApp() {
         coolMallLightColorScheme(primary)
     }
 
-    MaterialTheme(colorScheme = colorScheme) {
-        val navController = rememberNavController()
-        NavHost(
+    val appSettings = rememberAppSettings {
+        settings = appLanguageSettings
+        language {
+            languages = supportedAppLanguages
+        }
+    }
+
+    AppSettingsRoot(appSettings) {
+        MaterialTheme(colorScheme = colorScheme) {
+            val navController = rememberNavController()
+            NavHost(
             navController = navController,
             startDestination = Routes.SPLASH,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
             popEnterTransition = { EnterTransition.None },
             popExitTransition = { ExitTransition.None },
-        ) {
+            ) {
             splashScreen(
                 toGuide = navController::navigateToGuide,
                 toMain = navController::navigateToMain,
@@ -455,6 +467,7 @@ fun CoolMallApp() {
             goodsCommentScreen(
                 onBack = { navController.popBackStack() },
             )
+            }
         }
     }
 }

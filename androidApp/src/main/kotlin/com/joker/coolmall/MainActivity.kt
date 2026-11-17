@@ -2,17 +2,17 @@ package com.joker.coolmallkmp
 
 import android.os.Bundle
 import android.graphics.Color as AndroidColor
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.joker.coolmallkmp.core.platform.onVerificationNotificationPermissionResult
 import com.joker.coolmall.ui.CoolMallApp
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         enableEdgeToEdge(

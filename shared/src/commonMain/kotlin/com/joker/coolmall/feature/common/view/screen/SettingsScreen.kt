@@ -58,8 +58,6 @@ import coolmallkmp.shared.generated.resources.settings_cache_size
 import coolmallkmp.shared.generated.resources.settings_clear_cache
 import coolmallkmp.shared.generated.resources.settings_dark_mode
 import coolmallkmp.shared.generated.resources.settings_feedback
-import coolmallkmp.shared.generated.resources.settings_language
-import coolmallkmp.shared.generated.resources.settings_language_chinese
 import coolmallkmp.shared.generated.resources.settings_section_appearance
 import coolmallkmp.shared.generated.resources.settings_section_general
 import coolmallkmp.shared.generated.resources.settings_section_other
@@ -78,6 +76,8 @@ import coolmallkmp.shared.generated.resources.settings_theme_system
 import coolmallkmp.shared.generated.resources.settings_title
 import coolmallkmp.shared.generated.resources.user_agreement
 import org.jetbrains.compose.resources.stringResource
+import wang.harlon.appsettings.language.languageItem
+import wang.harlon.appsettings.ui.SettingsGroup
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -157,12 +157,11 @@ fun SettingsRoute(
                     stringResource(Res.string.settings_theme_color),
                     { showColorDialog = true },
                     trailing = { ThemeColorDot(themeColor) },
-                )
-                SettingsValueRow(
-                    title = stringResource(Res.string.settings_language),
-                    value = stringResource(Res.string.settings_language_chinese),
                     showDivider = false,
                 )
+            }
+            SettingsGroup {
+                languageItem()
             }
             SettingsSectionTitle(stringResource(Res.string.settings_section_privacy))
             SettingsCard {

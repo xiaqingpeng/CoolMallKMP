@@ -25,6 +25,8 @@ room = "3.0.3"
 sqlite = "2.7.1"
 ksp = "2.3.12"
 chucker = "4.3.1"
+appsettings = "0.2.1"
+multiplatformSettings = "1.3.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -70,6 +72,8 @@ androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.r
 androidx-room3-runtime = { module = "androidx.room3:room3-runtime", version.ref = "room" }
 androidx-room3-compiler = { module = "androidx.room3:room3-compiler", version.ref = "room" }
 chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
+appsettings-kmp = { module = "wang.harlon:appsettings-kmp", version.ref = "appsettings" }
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
